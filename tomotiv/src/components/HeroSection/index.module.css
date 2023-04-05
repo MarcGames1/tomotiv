@@ -1,0 +1,42 @@
+.heroSection{
+    width: calc(100vw - scrollbarWidth);
+    height: 100vmin;
+    z-index:-2;
+    background: linear-gradient(180deg, rgba(21,0,103,0) 52%, rgba(21,0,103,0.4067752100840336) 74%, rgba(21,0,103,0.9838060224089635) 100%);
+}
+
+.image{
+    display:block;
+    object-fit: cover;
+    z-index:-1;
+    weight:100%;
+    height:100%;
+width: 1200px;
+  height: 800px;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+}
+
+.content{ 
+    width: 560px;
+    height:auto fit;
+    display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 50px;
+  max-width: 560px;
+  overflow: visible;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 30;
+  /* position: absolute; */
+  border-radius: 0px 0px 0px 0px;
+  background-color: red;
+}
+
+.heading{
+
+  
+}

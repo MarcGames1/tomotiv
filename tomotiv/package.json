@@ -16,5 +16,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "twind": "^0.16.19"
+  },
+  "devDependencies": {
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.33"
   }
 }
