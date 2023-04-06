@@ -2,5 +2,10 @@
 html{
   font-family:'Manrope', sans-serif;
   background-color:#150067;
+  
   box-sizing: border-box;
+  scrollBehavior: smooth;
+}
+root{
+
 }

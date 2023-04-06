@@ -1,0 +1,15 @@
+.primary{
+    display:block;
+    width: 450px;
+    height: 450px;
+/* background: linear-gradient(135deg, #b175ff 0%, hsl(242, 100%, 54%) 100%); */
+background-color:red;
+z-index:3;
+border-radius: 24px 24px 24px 0px;
+align-content: center;
+flex-wrap: wrap;
+gap: 16;
+position: absolute;
+border: 1px solid rgba(255, 255, 255, 0);
+}
+  

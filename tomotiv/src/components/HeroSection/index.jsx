@@ -1,19 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from './index.module.css'
-import { typography } from '@/styles'
-const HeroSection = () => {
-  return (<>
-    <section className={styles.heroSection}>
-      <Image className={styles.image} fill src={'/assets/hero-image.png'} />
-      <div className={styles.content}>
-        <h1 className={`${styles.heading} ${typography.h1} `}>Ai Toate Motivele să reușești</h1>
-      </div>
-    </section>
-  <section className={styles.heroSection}>
+import HeroSectionBG from './background'
+import { typography } from '../../styles'
+import { tw } from 'twind'
+import { Button } from '../ux'
+import { IoIosTabletLandscape, IoIosTabletPortrait } from 'react-icons/io';
+import {GiTriangleTarget} from 'react-icons/gi'
 
-  </section>
-  </>
+const HeroSection = ({title, subtitle}) => {
+  const [hover, setHover] = useState(false);
+  return (
+    <>
+      <HeroSectionBG>
+        <div className={styles.content}>
+          <h1 className={`${tw('p-4')} ${typography.h1}`}>{title}</h1>
+          <p className={`${tw('p-4')} ${typography.p}`}>{subtitle}</p>
+          <div
+            className={tw('flex flex-row gap-5 items-center justify-around	')}
+          >
+            <Button
+              onMouseOver={(e) => {
+                e.preventDefault();
+                setHover(true);
+              }}
+              onMouseLeave={(e) => {
+                e.preventDefault();
+                setHover(false);
+              }}
+              className={`${tw('w-full')} ${styles.buttonPrimary}`}
+            >
+              {hover ? (
+                <IoIosTabletLandscape size={'2em'} color="black" />
+              ) : (
+                <IoIosTabletPortrait size={'2em'} color="black" />
+              )}{' '}
+              <span>text</span>
+            </Button>
+            <Button className={`${tw('w-full text-white')} ${styles.buttonSecondary}`}>
+              <GiTriangleTarget size={'2em'} color="#FF88AA" />
+
+              <span>Vezi video</span>
+            </Button>
+          </div>
+        </div>
+      </HeroSectionBG>
+    </>
   );
 }
 

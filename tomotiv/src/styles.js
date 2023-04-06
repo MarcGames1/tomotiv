@@ -5,5 +5,6 @@ export const colors = {
     
 }
 export const typography = {
-  h1: tw('font-extrabold text-5xl sm:text-xl leading-6	text-white		'),
+  h1: tw('font-extrabold text-6xl tracking-wider	 	text-white'),
+  p: tw('text-white tracking-widest leading-8'),
 };

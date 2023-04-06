@@ -1,42 +1,76 @@
 .heroSection{
-    width: calc(100vw - scrollbarWidth);
-    height: 100vmin;
-    z-index:-2;
-    background: linear-gradient(180deg, rgba(21,0,103,0) 52%, rgba(21,0,103,0.4067752100840336) 74%, rgba(21,0,103,0.9838060224089635) 100%);
+  width: calc(100dvw );
+  height: 100dvh;
+
 }
-
-.image{
-    display:block;
-    object-fit: cover;
-    z-index:-1;
-    weight:100%;
-    height:100%;
-width: 1200px;
-  height: 800px;
-  display: block;
-  overflow: hidden;
-  position: absolute;
-}
-
-.content{ 
-    width: 560px;
-    height:auto fit;
-    display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 50px;
-  max-width: 560px;
-  overflow: visible;
-  align-content: flex-start;
-  flex-wrap: nowrap;
-  gap: 30;
-  /* position: absolute; */
-  border-radius: 0px 0px 0px 0px;
-  background-color: red;
-}
-
-.heading{
-
+      
   
+
+.background {
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  top:0;
+  z-index:-2;
+  background-image: url('/assets/hero-image.png');
+  background: linear-gradient(183deg, rgba(21,0,103,0) 80%, #150067 100%) url('/assets/hero-image.png');;
+  object-fit: contain;
+  background-size: cover;
+  background-position: top center; 
+
 }
+   .content{
+    display:flex;
+  flex-direction: column;
+    margin:5%;
+    width: 90%;
+    height:fit-content;
+    /* border:2px solid white; */
+   }
+
+   
+ .buttonPrimary {
+  box-sizing: border-box;
+/* width: 40%; */
+  height: min-content; /* 50px */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 10px 10px 10px;
+  background: linear-gradient(135deg, #b175ff 0%, hsl(242, 100%, 54%) 100%);
+  overflow: visible;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 16;
+  color:white;
+  border-radius: 24px 24px 24px 0px;
+  border: 0px solid rgba(255, 255, 255, 0);
+}
+   
+
+.buttonSecondary {
+  box-sizing: border-box;
+  /* width: 40%; */
+  height: min-content; /* 50px */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 10px 10px 10px;
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: visible;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 16;
+  /* position: absolute; */
+  border-radius: 24px 24px 24px 0px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+    @media (min-width: 640px) { 
+      .content{
+        width: 40%;
+      }
+     }
