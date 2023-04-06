@@ -2,6 +2,7 @@ import HeroSection from '../components/HeroSection'
 import Page from '../components/Page'
 import React from 'react'
 import Section2 from '../components/Section2';
+import Section3 from '../components/section3';
 
 const Homepage = () => {
   return (
@@ -13,6 +14,7 @@ const Homepage = () => {
         title={'Ai Toate Motivele să reușești'}
       />
       <Section2 />
+      <Section3 />
       
     </Page>
   );

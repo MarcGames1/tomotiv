@@ -14,12 +14,14 @@ const HeroSection = ({title, subtitle}) => {
   return (
     <>
       <HeroSectionBG>
+        
+
         <div className={styles.content}>
           <h1 className={`${tw('p-4')} ${typography.h1}`}>{title}</h1>
           <p className={`${tw('p-4')} ${typography.p}`}>{subtitle}</p>
           <div
             className={tw('flex flex-row gap-5 items-center justify-around	')}
-          >
+            >
             <Button
               onMouseOver={(e) => {
                 e.preventDefault();
@@ -30,12 +32,12 @@ const HeroSection = ({title, subtitle}) => {
                 setHover(false);
               }}
               className={button.primary}
-            >
+              >
               {hover ? (
                 <IoIosTabletLandscape size={'2em'} color="black" />
-              ) : (
-                <IoIosTabletPortrait size={'2em'} color="black" />
-              )}{' '}
+                ) : (
+                  <IoIosTabletPortrait size={'2em'} color="black" />
+                  )}{' '}
               <span>Afla mai mult</span>
             </Button>
             <Button className={button.secondary}>
@@ -46,6 +48,7 @@ const HeroSection = ({title, subtitle}) => {
             
           </div>
         </div>
+                  
       </HeroSectionBG>
     </>
   );

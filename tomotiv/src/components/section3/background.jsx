@@ -1,9 +1,9 @@
 import React from 'react'
-
-const background = ({children}) => {
+import styles from './section3.module.css'
+const Background = ({children}) => {
   return (
-    <div>background</div>
+    <section className={styles.sectionBg}>{children}</section>
   )
 }
 
-export default background
+export default Background

@@ -1,0 +1,9 @@
+.sectionBg{
+    z-index:-2;
+    background: linear-gradient(183deg, rgba(21,0,103,0) 80%, #150067 100%);
+    object-fit: contain;
+    background-size: conver;
+    background-repeat: no-repeat;
+    background-position: bottom left; 
+    background-image: url('/assets/Section3Bg.png');
+}
