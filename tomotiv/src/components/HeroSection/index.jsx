@@ -5,6 +5,7 @@ import HeroSectionBG from './background'
 import { typography } from '../../styles'
 import { tw } from 'twind'
 import { Button } from '../ux'
+import { button } from '../../styles'
 import { IoIosTabletLandscape, IoIosTabletPortrait } from 'react-icons/io';
 import {GiTriangleTarget} from 'react-icons/gi'
 
@@ -28,20 +29,21 @@ const HeroSection = ({title, subtitle}) => {
                 e.preventDefault();
                 setHover(false);
               }}
-              className={`${tw('w-full')} ${styles.buttonPrimary}`}
+              className={button.primary}
             >
               {hover ? (
                 <IoIosTabletLandscape size={'2em'} color="black" />
               ) : (
                 <IoIosTabletPortrait size={'2em'} color="black" />
               )}{' '}
-              <span>text</span>
+              <span>Afla mai mult</span>
             </Button>
-            <Button className={`${tw('w-full text-white')} ${styles.buttonSecondary}`}>
+            <Button className={button.secondary}>
               <GiTriangleTarget size={'2em'} color="#FF88AA" />
 
               <span>Vezi video</span>
             </Button>
+            
           </div>
         </div>
       </HeroSectionBG>

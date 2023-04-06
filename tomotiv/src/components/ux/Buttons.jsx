@@ -5,13 +5,15 @@ const Button = ({
   children,
   onMouseLeave,
   onMouseOver = (e) => e,
-  className = '',
+  className = ''
 }) => {
+const defaultStyle = styles.buttonPrimary
+
   return (
     <button
-    onMouseLeave={onMouseLeave}
+      onMouseLeave={onMouseLeave}
       onMouseOver={onMouseOver}
-      className={className}
+      className={(className == '') ? styles.buttonPrimary : className}
       type={submit ? 'submit' : 'button'}
     >
       {children}
