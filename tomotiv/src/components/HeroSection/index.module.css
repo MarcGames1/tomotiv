@@ -1,5 +1,5 @@
 .heroSection{
-  width: calc(100dvw );
+  /* width: calc(100dvw ); */
   height: 100dvh;
 
 }
@@ -14,18 +14,21 @@
   z-index:-2;
   background-image: url('/assets/hero-image.png');
   background: linear-gradient(183deg, rgba(21,0,103,0) 80%, #150067 100%) url('/assets/hero-image.png');;
-  object-fit: contain;
+  object-fit: cover;
   background-size: cover;
   background-position: top center; 
+    background-attachment: fixed;
+
 
 }
    .content{
     display:flex;
-  flex-direction: column;
+    flex-direction: column;
     margin:5%;
     width: 90%;
     height:fit-content;
     /* border:2px solid white; */
+    background-attachment: fixed;
    }
 
    
