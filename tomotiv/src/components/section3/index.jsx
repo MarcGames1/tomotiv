@@ -3,41 +3,84 @@ import Background from './background'
 import { tw } from 'twind'
 import styles from './section3.module.css'
 import {IoMdWalk} from 'react-icons/io'
-import {typography} from '../../styles'
+import {button, colors, typography} from '../../styles'
+import Image from 'next/image'
+import { BsRocket } from 'react-icons/bs'
+import { Button } from '../ux'
 
 const Section3 = () => {
   return (
     <Background>
       <div
         className={`${styles.mainContainer} ${tw(
-          'h-screen grid  lg:grid-cols-3'
+          'h-screen grid gap-3 m-5 lg:my-28 lg:mx-20 lg:grid-cols-5'
         )}`}
       >
         <div
           className={`${styles.leftContainer} ${tw(
-            'lg:col-span-2	flex items-center'
+            'lg:col-span-3	flex flex-col gap-4 md:flex-row'
           )}`}
         >
-          <CardComponent
-            icon={<IoMdWalk size={'1em'} color="currentColor" />}
-            paragraf={
-              'Nu este nevoie să te încurci. Ai la dispoziție mentori care te pot ajuta să înțelegi mai bine orice legat de SEO,'
-            }
-            heading={'Mentori la dispoziția ta'}
-          >
-            {' '}
+          <div className={tw('w-full flex flex-col  justify-around gap-4')}>
+            <CardComponent
+              image={'/assets/s3Cards/school.jpg'}
+              imageHeight={300}
+            >
+              <GlassMessage
+                span1={<>12 Module</>}
+                span2={<>100% succes</>}
+                subtitlu={<>6 săptămâni</>}
+                titlu={<>Diploma Acreditata</>}
+              />
+            </CardComponent>
+            <CardComponent
+              image={'/assets/s3Cards/laptop.jpg'}
+              imageHeight={400}
+            >
+              <GlassMessage
+                span1={<>12 Module</>}
+                span2={<>100% succes</>}
+                subtitlu={<>6 săptămâni</>}
+                titlu={<>Diploma Acreditata</>}
+              />
+            </CardComponent>
+          </div>
+          <div className={tw('flex flex-col gap-4 justify-around	')}>
+            <CardComponent
+              paragraf={
+                'Nu este nevoie să te încurci. Ai la dispoziție mentori care te pot ajuta să înțelegi mai bine orice legat de SEO,'
+              }
+              heading={
+                <>
+                  <IoMdWalk size={'1em'} color="currentColor" />
+                  Mentori la dispoziția ta
+                </>
+              }
+            >
+              {' '}
+              <GlassMessage
+                titlu={<>Susținere</>}
+                subtitlu={'mai mult de 6 săptămâni'}
+                span1={'rămâi în comunitate'}
+                span2={'100% succes'}
+              />
+            </CardComponent>
+
             <GlassMessage
-              titlu={'Susținere'}
-              subtitlu={'mai mult de 6 săptămâni'}
-              span1={'rămâi în comunitate'}
+              titlu={<>Un nou skill</>}
+              subtitlu={'Ai șansa să devii Specialist SEO'}
+              span1={'6 săptămâni'}
               span2={'100% succes'}
             />
-          </CardComponent>
-          <GlassMessage />
+          </div>
         </div>
         <div
-          className={`${styles.rightContainer} ${tw('lg:col-span-1')}`}
-        ></div>
+          className={` ${tw('lg:col-span-2 self-center justify-around')} ${
+            styles.rightContainer
+          } `}
+        >
+          <RightSideComponent />
+        </div>
       </div>
     </Background>
   );
@@ -47,16 +90,17 @@ export default Section3
 
 
 
-const CardComponent = ({icon, heading, paragraf, children}) =>{
+const CardComponent = ({image, imageHeight, heading, paragraf, children}) =>{
 
   return (
     <div className={`${tw(` p-3`)} ${styles.GlassComponent}`}>
+      {image && <Image src={image} width={300} height={imageHeight} />}
       <h5
         className={` ${tw(
-          'flex text-white text-2xl	font-bold	my-3 text-center  items-center text-center '
+          'flex flex-row items-start  text-white sm:text-xl md:text-2xl	font-bold	my-3 text-center  items-center'
         )}`}
       >
-        {icon}
+        
         {heading}
       </h5>
       <p className={typography.p}>{paragraf}</p>
@@ -88,6 +132,28 @@ const GlassMessage = ({titlu, subtitlu, span1, span2}) =>{
           {span2}
         </span>
       </div>
+    </div>
+  );
+}
+
+
+const RightSideComponent = () =>{
+
+  return (
+    <div className={tw('m-3 flex items-center	justify-between	flex-col ')}>
+      <BsRocket size={'4em'} color={colors.accent} />
+      <h2 className={typography.h2}>De la ZERO la SUPER SEO.</h2>
+      <p className={typography.p2}>
+        Te ajutăm să îți dezvolți una din cele mai căutate abilități în Digital
+        Marketing. După cele 6 săpătmâni practice vei reuși să înțelegi, aplici
+        și să profesezi ca specialist SEO cu ajutorul unei diplome autorizate.{' '}
+      </p>
+      <Button className={`${button.secondary}`}>Descopera</Button>
+      <br />
+      <p className={typography.p2}>
+        Dezvoltă-ți abilitățile de digital marketing în cea mai bună perioadă a
+        erei digitale.
+      </p>
     </div>
   );
 }

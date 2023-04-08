@@ -3,7 +3,7 @@ import React from 'react'
 import { tw } from 'twind';
 import {BsFillPencilFill} from 'react-icons/bs'
 import styles from './card.module.css'
-import { typography } from '../../styles';
+import { colors, typography } from '../../styles';
 const Section2 = () => {
   return (
     <section>
@@ -27,9 +27,9 @@ const Section2 = () => {
         În doar 6 săptămâni poți ajunge Specialist SEO Autorizat
       </span>
       <div id='cardWrapper' className={tw('flex lg:flex-row w-10/12 flex-col gap-5 lg:w-4/6 content-center items-center m-auto')}>
-      <Card icon={<BsFillPencilFill size={'2em'} color='#FF8585'/>} header={'Înveți SEO DE LA ZERO'} content={'Indiferent de nivelul tău în SEO, îți sunt explicate de la zero toate informațiie de care ai nevoie.'} />
-      <Card icon={<BsFillPencilFill size={'2em'} color='#FF8585'/>} header={'Înveți SEO DE LA ZERO'} content={'Indiferent de nivelul tău în SEO, îți sunt explicate de la zero toate informațiie de care ai nevoie.'} />
-      <Card icon={<BsFillPencilFill size={'2em'} color='#FF8585'/>} header={'Înveți SEO DE LA ZERO'} content={'Indiferent de nivelul tău în SEO, îți sunt explicate de la zero toate informațiie de care ai nevoie.'} />
+      <Card icon={<BsFillPencilFill size={'2em'} color={colors.accent}/>} header={'Înveți SEO DE LA ZERO'} content={'Indiferent de nivelul tău în SEO, îți sunt explicate de la zero toate informațiie de care ai nevoie.'} />
+      <Card icon={<BsFillPencilFill size={'2em'} color={colors.accent}/>} header={'Înveți SEO DE LA ZERO'} content={'Indiferent de nivelul tău în SEO, îți sunt explicate de la zero toate informațiie de care ai nevoie.'} />
+      <Card icon={<BsFillPencilFill size={'2em'} color={colors.accent}/>} header={'Înveți SEO DE LA ZERO'} content={'Indiferent de nivelul tău în SEO, îți sunt explicate de la zero toate informațiie de care ai nevoie.'} />
       
       </div>
     </section>

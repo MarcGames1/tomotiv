@@ -2,7 +2,7 @@ import { tw } from "twind";
 import styles from './styles.module.css'
 
 export const colors = {
-    
+    accent: '#EE4444',
 }
 export const typography = {
   h1: tw('font-extrabold md:text-3xl lg:text-6xl tracking-wider	 	text-white'),
