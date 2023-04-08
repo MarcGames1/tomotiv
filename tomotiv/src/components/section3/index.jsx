@@ -21,10 +21,10 @@ const Section3 = () => {
             'lg:col-span-3	flex flex-col gap-4 md:flex-row'
           )}`}
         >
-          <div className={tw('w-full flex flex-col  justify-around gap-4')}>
+          <div className={tw('w-full flex flex-col z-0 justify-center gap-4')}>
             <CardComponent
               image={'/assets/s3Cards/school.jpg'}
-              imageHeight={300}
+              cardHeight={300}
             >
               <GlassMessage
                 span1={<>12 Module</>}
@@ -34,10 +34,13 @@ const Section3 = () => {
               />
             </CardComponent>
             <CardComponent
+            
+              leftRounded
               image={'/assets/s3Cards/laptop.jpg'}
-              imageHeight={400}
+              cardHeight={300}
             >
               <GlassMessage
+              
                 span1={<>12 Module</>}
                 span2={<>100% succes</>}
                 subtitlu={<>6 săptămâni</>}
@@ -45,8 +48,9 @@ const Section3 = () => {
               />
             </CardComponent>
           </div>
-          <div className={tw('flex flex-col gap-4 justify-around	')}>
+          <div className={tw('flex flex-col gap-4 justify-around	z-0')}>
             <CardComponent
+            cardHeight={400}
               paragraf={
                 'Nu este nevoie să te încurci. Ai la dispoziție mentori care te pot ajuta să înțelegi mai bine orice legat de SEO,'
               }
@@ -66,12 +70,25 @@ const Section3 = () => {
               />
             </CardComponent>
 
-            <GlassMessage
-              titlu={<>Un nou skill</>}
-              subtitlu={'Ai șansa să devii Specialist SEO'}
-              span1={'6 săptămâni'}
-              span2={'100% succes'}
-            />
+            <CardComponent cardHeight={200}>
+              <GlassMessage
+                titlu={<>Un nou skill</>}
+                subtitlu={'Ai șansa să devii Specialist SEO'}
+                span1={'6 săptămâni'}
+                span2={'100% succes'}
+              />
+            </CardComponent>
+            <CardComponent
+              image={'/assets/s3Cards/bust.webp'}
+              cardHeight={500}
+            >
+              <GlassMessage
+                titlu={<>Angajare Imediata</>}
+                subtitlu={'Posibilitatea de angajare oriunde '}
+                span1={'+pregatire interviu'}
+                span2={'100% succes'}
+              />
+            </CardComponent>
           </div>
         </div>
         <div
@@ -90,22 +107,43 @@ export default Section3
 
 
 
-const CardComponent = ({image, imageHeight, heading, paragraf, children}) =>{
+const CardComponent = ({
+  image = "" || undefined, 
+  cardHeight = NaN, 
+  heading =undefined, 
+  paragraf = <></> || undefined, 
+  children, 
+  leftRounded=false
+}) =>{
+
+const roundedR = 'rounded-tr-3xl'
+const roundedL = 'rounded-tl-3xl'
 
   return (
-    <div className={`${tw(` p-3`)} ${styles.GlassComponent}`}>
-      {image && <Image src={image} width={300} height={imageHeight} />}
+    <div
+      
+      className={`
+      ${tw(`z-0  ${cardHeight ? `h-[${cardHeight}px]` : 'h-full'} grid  items-center justify-items-center   p-3`)} 
+      ${styles.GlassComponent}
+      `}
+    >
+      {image && (
+        <Image
+          className={` ${tw(`${leftRounded ? roundedL : roundedR} rounded-b-3xl w-full h-full relative`)}`}
+          src={image}
+          fill
+        />
+      )}
       <h5
         className={` ${tw(
-          'flex flex-row items-start  text-white sm:text-xl md:text-2xl	font-bold	my-3 text-center  items-center'
+          'flex  flex-row items-start uppercase text-white sm:text-xl md:text-2xl	font-bold	my-3 text-center  items-center'
         )}`}
       >
-        
         {heading}
       </h5>
-      <p className={typography.p}>{paragraf}</p>
-      <br />
-      {children}
+      <p className={`${tw('')} ${typography.p}`}>{paragraf}</p>
+
+      <div className={tw('self-end w-full ')}>{children}</div>
     </div>
   );
 }
@@ -113,7 +151,7 @@ const CardComponent = ({image, imageHeight, heading, paragraf, children}) =>{
 const GlassMessage = ({titlu, subtitlu, span1, span2}) =>{
 
   return (
-    <div className={`${styles['roll-in-right']} ${tw(` p-3 flex flex-col w-full`)}  ${styles.message}`}>
+    <div className={` ${tw(` z-0 py-3 px-4  flex flex-col  w-full`)}  ${styles.message}`}>
       <span
         className={tw('block font-semibold uppercase text-center text-black')}
       >
@@ -127,7 +165,7 @@ const GlassMessage = ({titlu, subtitlu, span1, span2}) =>{
           {span1}{' '}
         </span>
         <span
-          className={`${tw('block font-semibold uppercase')} ${styles.span}`}
+          cla ssName={`${tw('block font-semibold uppercase')} ${styles.span}`}
         >
           {span2}
         </span>
@@ -140,7 +178,7 @@ const GlassMessage = ({titlu, subtitlu, span1, span2}) =>{
 const RightSideComponent = () =>{
 
   return (
-    <div className={tw('m-3 flex items-center	justify-between	flex-col ')}>
+    <div className={tw('m-3  flex items-center	justify-between	flex-col ')}>
       <BsRocket size={'4em'} color={colors.accent} />
       <h2 className={typography.h2}>De la ZERO la SUPER SEO.</h2>
       <p className={typography.p2}>
