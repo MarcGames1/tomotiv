@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 
 export const colors = {
     accent: '#EE4444',
+    blue: '#2A19FF'
 }
 export const typography = {
   h1: tw('font-extrabold md:text-3xl lg:text-6xl tracking-wider	 	text-white'),
@@ -11,6 +12,6 @@ export const typography = {
 };
 
 export const button = {
-  primary: `${tw('w-full')} ${styles.buttonPrimary}`,
-  secondary:`${tw('w-full text-white')} ${styles.buttonSecondary}`
+  primary: `${tw('')} ${styles.buttonPrimary}`,
+  secondary:`${tw(' text-white')} ${styles.buttonSecondary}`
 };

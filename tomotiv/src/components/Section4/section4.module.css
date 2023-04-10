@@ -1,0 +1,11 @@
+.background {
+    position: relative;
+    height: clamp(100vh, max-content);
+    
+    background-color: #070818;
+}
+
+.mainContainer {
+    height: inherit !important;
+    z-index:2;
+}

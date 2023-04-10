@@ -3,6 +3,9 @@ import Page from '../components/Page'
 import React from 'react'
 import Section2 from '../components/Section2';
 import Section3 from '../components/section3';
+import Section4 from '../components/Section4';
+
+
 
 const Homepage = () => {
   return (
@@ -15,6 +18,7 @@ const Homepage = () => {
       />
       <Section2 />
       <Section3 />
+      <Section4 />
       
     </Page>
   );

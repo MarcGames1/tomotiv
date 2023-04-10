@@ -13,15 +13,15 @@ const Section3 = () => {
     <Background>
       <div
         className={`${styles.mainContainer} ${tw(
-          'h-screen grid gap-3 m-5 lg:my-28 lg:mx-20 lg:grid-cols-5'
+          'py-52 h-screen grid gap-3   lg:mx-20 lg:grid-cols-5'
         )}`}
       >
         <div
           className={`${styles.leftContainer} ${tw(
-            'lg:col-span-3	flex flex-col gap-4 md:flex-row'
+            'lg:col-span-3 mb-40	flex flex-col gap-4 md:flex-row'
           )}`}
         >
-          <div className={tw('w-full flex flex-col z-0 justify-center gap-4')}>
+          <div className={tw('w-full flex flex-col justify-center gap-4')}>
             <CardComponent
               image={'/assets/s3Cards/school.jpg'}
               cardHeight={300}
@@ -40,7 +40,7 @@ const Section3 = () => {
               cardHeight={300}
             >
               <GlassMessage
-              
+                white
                 span1={<>12 Module</>}
                 span2={<>100% succes</>}
                 subtitlu={<>6 săptămâni</>}
@@ -48,7 +48,7 @@ const Section3 = () => {
               />
             </CardComponent>
           </div>
-          <div className={tw('flex flex-col gap-4 justify-around	z-0')}>
+          <div className={tw('flex flex-col gap-4 justify-around')}>
             <CardComponent
             cardHeight={400}
               paragraf={
@@ -70,14 +70,15 @@ const Section3 = () => {
               />
             </CardComponent>
 
-            <CardComponent cardHeight={200}>
+            
               <GlassMessage
+                white
                 titlu={<>Un nou skill</>}
                 subtitlu={'Ai șansa să devii Specialist SEO'}
                 span1={'6 săptămâni'}
                 span2={'100% succes'}
               />
-            </CardComponent>
+            
             <CardComponent
               image={'/assets/s3Cards/bust.webp'}
               cardHeight={500}
@@ -123,7 +124,7 @@ const roundedL = 'rounded-tl-3xl'
     <div
       
       className={`
-      ${tw(`z-0  ${cardHeight ? `h-[${cardHeight}px]` : 'h-full'} grid  items-center justify-items-center   p-3`)} 
+      ${tw(`  ${cardHeight ? `h-[${cardHeight}px]` : 'h-full'} grid  items-center justify-items-center   p-3`)} 
       ${styles.GlassComponent}
       `}
     >
@@ -148,24 +149,46 @@ const roundedL = 'rounded-tl-3xl'
   );
 }
 
-const GlassMessage = ({titlu, subtitlu, span1, span2}) =>{
+const GlassMessage = ({titlu, subtitlu, span1, span2, whiteBg = false}) =>{
 
   return (
-    <div className={` ${tw(` z-0 py-3 px-4  flex flex-col  w-full`)}  ${styles.message}`}>
+    <div
+      className={` ${tw(`  py-3 px-4  flex flex-col  w-full`)}  ${
+        styles.message
+      }`}
+    >
       <span
-        className={tw('block font-semibold uppercase text-center text-black')}
+        className={tw(
+          `block font-bold uppercase text-center ${
+            whiteBg ? 'text-gray-200' : 'text-gray-800	'
+          }`
+        )}
       >
         {titlu}
       </span>
-      <span className={`${styles.glassSubtitle}`}>{subtitlu} </span>
-      <div className={tw('flex w-full flex-row justify-around	bg-color-red')}>
-        <span
-          className={`${tw('block font-bold uppercase')} ${styles.span}`}
-        >
+      <span
+        className={tw(
+          `${
+            whiteBg ? 'text-gray-300' : 'text-gray-700'
+          } text-center font-semibold`
+        )}
+      >
+        {subtitlu}{' '}
+      </span>
+      <div
+        className={tw(
+          'flex w-full flex-row justify-around' + whiteBg
+            ? ' text-gray-400	'
+            : 'text-gray-400'
+        )}
+      >
+        <span className={`${tw('block font-bold uppercase text-blue-8  00	')}  `}>
           {span1}{' '}
         </span>
         <span
-          cla ssName={`${tw('block font-semibold uppercase')} ${styles.span}`}
+          className={`${tw('block font-semibold uppercase text-gray-300	')} ${
+            styles.span
+          }`}
         >
           {span2}
         </span>

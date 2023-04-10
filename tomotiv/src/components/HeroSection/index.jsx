@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import styles from './index.module.css'
 import HeroSectionBG from './background'
-import { colors, typography } from '../../styles'
+import { colors, typography, button } from '../../styles'
 import { tw } from 'twind'
-import { Button } from '../ux'
-import { button } from '../../styles'
+import { Button, PrimaryButton } from '../ux'
 import { IoIosTabletLandscape, IoIosTabletPortrait } from 'react-icons/io';
 import {GiTriangleTarget} from 'react-icons/gi'
 import { motion } from 'framer-motion';
@@ -45,24 +44,7 @@ const HeroSection = ({title, subtitle}) => {
             <div
               className={tw('flex flex-row gap-5 items-center justify-around	')}
             >
-              <Button
-                onMouseOver={(e) => {
-                  e.preventDefault();
-                  setHover(true);
-                }}
-                onMouseLeave={(e) => {
-                  e.preventDefault();
-                  setHover(false);
-                }}
-                className={button.primary}
-              >
-                {hover ? (
-                  <IoIosTabletLandscape size={'2em'} color="black" />
-                ) : (
-                  <IoIosTabletPortrait size={'2em'} color="black" />
-                )}{' '}
-                <span>Afla mai mult</span>
-              </Button>
+              <PrimaryButton />
               <Button className={button.secondary}>
                 <GiTriangleTarget size={'2em'} color={colors.accent} />
 
