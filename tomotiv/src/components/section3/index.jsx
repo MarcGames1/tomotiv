@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Background from './background'
 import { tw } from 'twind'
 import styles from './section3.module.css'
@@ -7,6 +7,7 @@ import {button, colors, typography} from '../../styles'
 import Image from 'next/image'
 import { BsRocket } from 'react-icons/bs'
 import { Button } from '../ux'
+import { AnimatedCircle } from '../decoratiuni'
 
 const Section3 = () => {
   return (
@@ -18,15 +19,16 @@ const Section3 = () => {
       >
         <div
           className={`${styles.leftContainer} ${tw(
-            'lg:col-span-3 mb-40	flex flex-col gap-4 md:flex-row'
+            'lg:col-span-3 mb-40	flex flex-col gap-4 md:p-0 p-10 md:flex-row'
           )}`}
         >
           <div className={tw('w-full flex flex-col justify-center gap-4')}>
             <CardComponent
               image={'/assets/s3Cards/school.jpg'}
-              cardHeight={300}
+              cardHeight={400}
             >
               <GlassMessage
+                whiteTheme={true}
                 span1={<>12 Module</>}
                 span2={<>100% succes</>}
                 subtitlu={<>6 săptămâni</>}
@@ -34,13 +36,12 @@ const Section3 = () => {
               />
             </CardComponent>
             <CardComponent
-            
               leftRounded
               image={'/assets/s3Cards/laptop.jpg'}
               cardHeight={300}
             >
               <GlassMessage
-                white
+                whiteTheme={true}
                 span1={<>12 Module</>}
                 span2={<>100% succes</>}
                 subtitlu={<>6 săptămâni</>}
@@ -48,9 +49,10 @@ const Section3 = () => {
               />
             </CardComponent>
           </div>
-          <div className={tw('flex flex-col gap-4 justify-around')}>
+          <div className={tw('flex flex-col gap-4 justify-center')}>
+            <AnimatedCircle styles={styles.roundWrapper} />
             <CardComponent
-            cardHeight={400}
+              cardHeight={300}
               paragraf={
                 'Nu este nevoie să te încurci. Ai la dispoziție mentori care te pot ajuta să înțelegi mai bine orice legat de SEO,'
               }
@@ -63,6 +65,7 @@ const Section3 = () => {
             >
               {' '}
               <GlassMessage
+                whiteTheme={true}
                 titlu={<>Susținere</>}
                 subtitlu={'mai mult de 6 săptămâni'}
                 span1={'rămâi în comunitate'}
@@ -70,20 +73,17 @@ const Section3 = () => {
               />
             </CardComponent>
 
-            
+            <GlassMessage
+              whiteTheme={true}
+              titlu={<>Un nou skill</>}
+              subtitlu={'Ai șansa să devii Specialist SEO'}
+              span1={'6 săptămâni'}
+              span2={'100% succes'}
+            />
+
+            <CardComponent image={'/assets/s3Cards/bust.webp'} cardHeight={300}>
               <GlassMessage
-                white
-                titlu={<>Un nou skill</>}
-                subtitlu={'Ai șansa să devii Specialist SEO'}
-                span1={'6 săptămâni'}
-                span2={'100% succes'}
-              />
-            
-            <CardComponent
-              image={'/assets/s3Cards/bust.webp'}
-              cardHeight={500}
-            >
-              <GlassMessage
+                whiteTheme={false }
                 titlu={<>Angajare Imediata</>}
                 subtitlu={'Posibilitatea de angajare oriunde '}
                 span1={'+pregatire interviu'}
@@ -92,11 +92,7 @@ const Section3 = () => {
             </CardComponent>
           </div>
         </div>
-        <div
-          className={` ${tw('lg:col-span-2 self-center justify-around')} ${
-            styles.rightContainer
-          } `}
-        >
+        <div className={` ${tw('lg:col-span-2  w-full h-full')}`}>
           <RightSideComponent />
         </div>
       </div>
@@ -149,7 +145,40 @@ const roundedL = 'rounded-tl-3xl'
   );
 }
 
-const GlassMessage = ({titlu, subtitlu, span1, span2, whiteBg = false}) =>{
+const GlassMessage = ({titlu, subtitlu, span1, span2, whiteTheme}) =>{
+
+  
+
+  const [stilTitlu, setStilTitlu] = useState('text-slate-50');
+  const [stilSubTitlu, setStilSubTitlu] = useState('text-slate-200');
+  const [stilSpan, setStilSpan] = useState('text-slate-300');
+
+
+  useEffect(() => {
+    if (whiteTheme === false) {
+      setStilTitlu(tw('text-stone-950'));
+      setStilSubTitlu(tw('text-stone-900'));
+      setStilSpan(tw('text-stone-800'));
+    } else {
+      setStilTitlu(tw('text-stone-50'));
+      setStilSubTitlu(tw('text-stone-200'));
+      setStilSpan (tw('text-stone-300	'));
+    }
+  }, []);
+  const messageStyles = {
+    titlu: {
+      white: tw('text-slate-950'),
+      black: tw('text-slate-50'),
+    },
+    subtitlu: {
+      white: 'text-slate-900',
+      black: 'text-slate-200',
+    },
+
+    span: { white: 'text-slate-800', black: 'text-slate-300	' },
+  };
+
+
 
   return (
     <div
@@ -158,38 +187,22 @@ const GlassMessage = ({titlu, subtitlu, span1, span2, whiteBg = false}) =>{
       }`}
     >
       <span
-        className={tw(
-          `block font-bold uppercase text-center ${
-            whiteBg ? 'text-gray-200' : 'text-gray-800	'
-          }`
-        )}
+        className={tw(`block font-bold uppercase text-center ${stilTitlu}`)}
       >
         {titlu}
       </span>
       <span
         className={tw(
-          `${
-            whiteBg ? 'text-gray-300' : 'text-gray-700'
-          } text-center font-semibold`
+          `${stilSubTitlu} text-center font-semibold`
         )}
       >
         {subtitlu}{' '}
       </span>
-      <div
-        className={tw(
-          'flex w-full flex-row justify-around' + whiteBg
-            ? ' text-gray-400	'
-            : 'text-gray-400'
-        )}
-      >
-        <span className={`${tw('block font-bold uppercase text-blue-8  00	')}  `}>
+      <div className={tw('flex w-full flex-row justify-around')}>
+        <span className={`${tw(`block font-bold uppercase ${stilSpan}`)}   `}>
           {span1}{' '}
         </span>
-        <span
-          className={`${tw('block font-semibold uppercase text-gray-300	')} ${
-            styles.span
-          }`}
-        >
+        <span className={`${tw(`block font-semibold uppercase ${stilSpan}`)} `}>
           {span2}
         </span>
       </div>
@@ -201,9 +214,13 @@ const GlassMessage = ({titlu, subtitlu, span1, span2, whiteBg = false}) =>{
 const RightSideComponent = () =>{
 
   return (
-    <div className={tw('m-3  flex items-center	justify-between	flex-col ')}>
-      <BsRocket size={'4em'} color={colors.accent} />
-      <h2 className={typography.h2}>De la ZERO la SUPER SEO.</h2>
+    <div
+      className={tw(
+        'm-3  flex		w-full h-1/2 text-center	 flex-col justify-around 	'
+      )}
+    >
+      <BsRocket className={tw('self-center')} size={'4em'} color={'#EE4444'} />
+      <h2 className={typography.s4heading}>De la ZERO la SUPER SEO.</h2>
       <p className={typography.p2}>
         Te ajutăm să îți dezvolți una din cele mai căutate abilități în Digital
         Marketing. După cele 6 săpătmâni practice vei reuși să înțelegi, aplici

@@ -5,7 +5,6 @@ const Background = ({children}) => {
  
   return (
     <section className={styles.background}>
-      Background
       <div
         className={styles.bground}
       ></div>
