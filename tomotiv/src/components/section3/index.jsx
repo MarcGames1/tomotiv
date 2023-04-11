@@ -25,7 +25,7 @@ const Section3 = () => {
           <div className={tw('w-full flex flex-col justify-center gap-4')}>
             <CardComponent
               image={'/assets/s3Cards/school.jpg'}
-              cardHeight={400}
+              
             >
               <GlassMessage
                 whiteTheme={true}
@@ -38,7 +38,7 @@ const Section3 = () => {
             <CardComponent
               leftRounded
               image={'/assets/s3Cards/laptop.jpg'}
-              cardHeight={300}
+              
             >
               <GlassMessage
                 whiteTheme={true}
@@ -52,13 +52,13 @@ const Section3 = () => {
           <div className={tw('flex flex-col gap-4 justify-center')}>
             <AnimatedCircle styles={styles.roundWrapper} />
             <CardComponent
-              cardHeight={300}
+              
               paragraf={
                 'Nu este nevoie să te încurci. Ai la dispoziție mentori care te pot ajuta să înțelegi mai bine orice legat de SEO,'
               }
               heading={
                 <>
-                  <IoMdWalk size={'1em'} color="currentColor" />
+                  <IoMdWalk size={'2em'} color="currentColor" />
                   Mentori la dispoziția ta
                 </>
               }
@@ -81,7 +81,7 @@ const Section3 = () => {
               span2={'100% succes'}
             />
 
-            <CardComponent image={'/assets/s3Cards/bust.webp'} cardHeight={300}>
+            <CardComponent image={'/assets/s3Cards/bust.webp'} cardHeight={600}>
               <GlassMessage
                 whiteTheme={false }
                 titlu={<>Angajare Imediata</>}
@@ -118,15 +118,24 @@ const roundedL = 'rounded-tl-3xl'
 
   return (
     <div
-      
       className={`
-      ${tw(`  ${cardHeight ? `h-[${cardHeight}px]` : 'h-full'} grid  items-center justify-items-center   p-3`)} 
+      ${tw(
+        `  ${
+          cardHeight
+            ? `w-full h-[${cardHeight}px]`
+            : 'sm:min-h-[300px]  min-h-[300px] h-full'
+        } grid  items-center justify-items-center   p-3`
+      )} 
       ${styles.GlassComponent}
       `}
     >
       {image && (
         <Image
-          className={` ${tw(`${leftRounded ? roundedL : roundedR} rounded-b-3xl w-full h-full relative`)}`}
+          className={` ${tw(
+            `${
+              leftRounded ? roundedL : roundedR
+            } rounded-b-3xl w-full h-full relative`
+          )}`}
           src={image}
           fill
         />
