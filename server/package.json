@@ -1,0 +1,31 @@
+{
+  "name": "tomo",
+  "version": "1.0.0",
+  "description": "tomo is a server for an elearning platform ",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -r esm server.js"
+  },
+  "author": "Alexandru Marcu",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.293.0",
+    "aws-sdk": "^2.1337.0",
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.0.3",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
+    "express-formidable": "^1.2.0",
+    "express-jwt": "^8.4.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "6.9.1",
+    "morgan": "^1.10.0",
+    "nanoid": "^3.0.0",
+    "query-string": "^5.1.1",
+    "slugify": "^1.6.6",
+    "stripe": "^11.16.0"
+  }
+}
