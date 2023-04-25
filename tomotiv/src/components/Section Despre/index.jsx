@@ -24,6 +24,6 @@ const DespreSection = () => {
 export default DespreSection
 
 
-const MembruEchipa = ({nume, imagine, socialM}) =>{
+const MembruEchipa = ({nume, imagine, socialM }) =>{
     return <div className={tw('container w-fit	h-fit	 ')}>test</div>;
 }
