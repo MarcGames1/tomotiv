@@ -3,7 +3,13 @@ import Navigation from './Navbar/Navigation'
 import Footer from './Footer/Footer'
 import { tw } from 'twind'
 import Head from 'next/head'
+import { motion, useScroll } from 'framer-motion';
+import styles from './Page.module.css'
 const Page = ({children}) => {
+  const { scrollYProgress } = useScroll();
+  
+  
+  
   return (
     <>
       <Head>
@@ -12,6 +18,10 @@ const Page = ({children}) => {
 
       <Navigation />
       <main>{children}</main>
+      <motion.div
+        className={styles.progressBar}
+        style={{ scaleX: scrollYProgress }}
+      />
       <Footer />
     </>
   );

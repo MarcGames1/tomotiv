@@ -1,5 +1,5 @@
-import withTwindApp from '@twind/next/app'
 import twindConfig from '../twind.config';
+import withTwindApp from '@twind/next/app'
 import '../styles/globals.css'
 
 

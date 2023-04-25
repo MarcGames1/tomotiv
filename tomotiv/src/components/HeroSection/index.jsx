@@ -45,11 +45,7 @@ const HeroSection = ({title, subtitle}) => {
               className={tw('flex flex-row gap-5 items-center justify-around	')}
             >
               <PrimaryButton />
-              <Button className={button.secondary}>
-                <GiTriangleTarget size={'2em'} color={colors.accent} />
-
-                <span>Vezi video</span>
-              </Button>
+             
             </div>
           </motion.div>
         </VisibilitySensor>

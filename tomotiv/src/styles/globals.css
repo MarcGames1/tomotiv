@@ -12,8 +12,9 @@ section{
   /* min-height: 100dvh; */
   height : auto;
 }
-root{
-
+:root{
+    --accent: #EE4444;
+    --blue: #2A19FF;
 }
 
 main{
