@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { IoIosTabletLandscape, IoIosTabletPortrait } from 'react-icons/io';
 import { button } from '../../styles';
-import Button from './buttons';
+import Button from './Button'
 const PrimaryButton = () => {
     const [hover, setHover] = useState(false);
 

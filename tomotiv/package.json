@@ -20,7 +20,6 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-visibility-sensor": "^5.1.1",
-    "tw-elements": "^1.0.0-beta2",
     "twind": "^0.16.19"
   },
   "devDependencies": {

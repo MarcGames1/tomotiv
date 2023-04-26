@@ -1,6 +1,5 @@
 const colors = require('tailwindcss/colors');
 export default {
-
   theme: {
     extend: {
       fontFamily: {
@@ -45,7 +44,7 @@ export default {
       },
     },
   },
-  plugins: [require('tw-elements/dist/plugin')],
+  
   purge: ['./**/*.tsx', './**/*.css'],
   future: {
     purgeLayersByDefault: true,
