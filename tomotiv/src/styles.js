@@ -16,3 +16,8 @@ export const button = {
   primary: `${tw('lg:py-4 px-2 p-4' )} ${styles.buttonPrimary}`,
   secondary:`${tw('px-2 p-4 text-white')} ${styles.buttonSecondary}`
 };
+
+export const responsive = {
+  hideOnMobile: `${tw('lg:py-4 px-2 p-4')}`,
+  showOnMobile: `${tw('lg:py-4 px-2 p-4')}`,
+};

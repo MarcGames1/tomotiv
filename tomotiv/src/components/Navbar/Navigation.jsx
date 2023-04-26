@@ -14,6 +14,10 @@ const menuItems = [
   {label: 'Contacteaza-ne', href: '/#contact'},
 ]
 
+
+
+
+
  const Navigation = () => {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -31,7 +35,8 @@ const menuItems = [
         <div onClick={toggleMenu}>
           <Hamburger active={showMenu} />
         </div>
-        <div>
+        {showMenu ? <MobileItems />  : null}
+        <div className={tw('hidden lg:block')}>
           {/* VIZIBIL PE DESKTOP ( DOAR Meniu + LOGO) */}
           <Image
             height={300}
@@ -40,7 +45,9 @@ const menuItems = [
           />
         </div>
         <div
-          className={tw('flex w-max gap-5	 flex-row items-center justify-between')}
+          className={tw(
+            'md:flex lg:flex w-max gap-5	 flex-row items-center justify-between hidden'
+          )}
         >
           {menuItems.map((item) => (
             <>
@@ -58,3 +65,17 @@ const menuItems = [
 
 
 export default Navigation
+
+
+const MobileItems = () =>{
+  return (
+    <div className={tw('flex flex-col  bg-inherit	lg:hidden')}>
+      {' '}
+      {menuItems.map((item) => (
+        <>
+          <Link href={item.href}>{item.label}</Link>
+        </>
+      ))}
+    </div>
+  );
+}
