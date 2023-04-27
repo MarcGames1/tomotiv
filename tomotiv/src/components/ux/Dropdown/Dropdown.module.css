@@ -1,0 +1,17 @@
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f1f1f1;
+  color: #000;
+  cursor: pointer;
+}
+
+.dropdown-arrow {
+  margin-left: auto;
+  transition: transform 0.2s ease-in-out;
+}
+
+.dropdown-container:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
