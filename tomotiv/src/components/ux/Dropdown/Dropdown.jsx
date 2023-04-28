@@ -14,7 +14,7 @@ function Dropdown({ children, label }) {
         {label} <span className={styles['dropdown-arrow']}>&#9660;</span>
       </div>
       {showMenu && (
-        <div className={styles['dropdown-content']}>
+        <div onMouseLeave={toggleMenu} className={styles['dropdown-content']}>
           {React.Children.map(children, (child, index) => (
             <div key={index} className={styles['dropdown-item']}>
               {child}
