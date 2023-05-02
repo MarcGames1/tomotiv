@@ -1,19 +1,58 @@
 .accordion {
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.accordionHeader {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .title {
-  cursor: pointer;
-  padding: 1rem;
-  font-weight: bold;
-  background-color: #f2f2f2;
+  margin: 0;
+  flex: 1;
+}
+
+.arrowRight {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #000;
+  margin-right: 10px;
+}
+
+.arrowDown {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000;
+  margin-right: 10px;
 }
 
 .content {
-  padding: 1rem;
-  display: none;
+  padding: 10px;
 }
 
-.active {
-  display: block;
+/* Color Palette */
+
+.title {
+  color: var(--black-color);
+}
+
+.accordionHeader {
+  background-color: var(--gray-color);
+  color: var(--white-color);
+}
+
+.arrowRight {
+  border-left-color: var(--black-color);
+}
+
+.arrowDown {
+  border-top-color: var(--black-color);
 }

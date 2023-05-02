@@ -21,6 +21,11 @@ section{
     --blueD20:#2214cc;
     --blueD60:#110a66;
     --blueD80:#080533;
+
+  
+  --black-color: #000;
+  --white-color: #fff;
+  --gray-color: #ccc;
 }
 
 main{

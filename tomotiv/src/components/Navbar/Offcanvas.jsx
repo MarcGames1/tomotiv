@@ -13,6 +13,10 @@ const Offcanvas = ({ show, close }) => {
     close();
   }
 
+  const offCanvasStopPropagation = (e) =>{
+    e.stopPropagation();
+  }
+
   console.log('OFFCANVAS SHOW STATE = ', show);
   console.log('OFFCANVAS SHOW STATE = ', close);
   return (
@@ -21,6 +25,7 @@ const Offcanvas = ({ show, close }) => {
       onClick={closeMenu}
     >
       <div
+        onClick={offCanvasStopPropagation}
         className={`${styles.offcanvas} ${show ? styles.active : ''} ${tw(
           'bg-white fixed top-0 bottom-0 right-0 p-5'
         )}`}

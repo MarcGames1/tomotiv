@@ -22,48 +22,54 @@ import { servicii, menuItems } from '../../dateStatice';
   };
 
   return (
-    <header className={`${styles.header} ${styles.sticky}`}>
-      <div
-        className={`${styles.mobileMenu} ${tw(
-          'w-full flex flex-row items-center justify-between'
-        )}`}
-      >
-        <div onClick={toggleMenu}>
-          <Hamburger active={showMenu} />
-        </div>
-        <Offcanvas show={showMenu} />
-        <div className={tw('hidden lg:block')}>
-          {showMenu && <Offcanvas show={showMenu} close={ setShowMenu(!showMenu)} />}
-          {/* VIZIBIL PE DESKTOP ( DOAR Meniu + LOGO) */}
-          <Image
-            height={300}
-            width={300}
-            src={'/assets/Logo/Horizontal - Color.svg'}
-          />
-        </div>
+    <>
+      <header className={`${styles.header} ${styles.sticky}`}>
         <div
-          className={tw(
-            'md:flex lg:flex w-max gap-5	 flex-row items-center justify-between hidden'
-          )}
+          className={`${styles.mobileMenu} ${tw(
+            'w-full flex flex-row items-center justify-between'
+          )}`}
         >
-          {menuItems.map((item) => (
-            <>
-              <Link href={item.href}>{item.label}</Link>
-            </>
-          ))}
-          <Dropdown label="Servicii">
-            {servicii.map((link, index) => (
-              <Link key={index} href={link.href}>
-                {link.label}
-              </Link>
+          <div
+            className={tw('lg:hidden md:block sm:block')}
+            onClick={toggleMenu}
+          >
+            <Hamburger active={showMenu} />
+          </div>
+
+          <div className={tw('hidden lg:block')}>
+            {/* VIZIBIL PE DESKTOP ( DOAR Meniu + LOGO) */}
+            <Image
+              height={300}
+              width={300}
+              src={'/assets/Logo/Horizontal - Color.svg'}
+            />
+          </div>
+          <div
+            className={tw(
+              'md:flex lg:flex w-max gap-5	 flex-row items-center justify-between hidden'
+            )}
+          >
+            {menuItems.map((item) => (
+              <>
+                <Link href={item.href}>{item.label}</Link>
+              </>
             ))}
-          </Dropdown>
+            <Dropdown label="Servicii">
+              {servicii.map((link, index) => (
+                <Link key={index} href={link.href}>
+                  {link.label}
+                </Link>
+              ))}
+            </Dropdown>
+          </div>
+          <Button className={`${button.secondary} ${tw('border-blue-800 	')}`}>
+            Inregistreaza-te
+          </Button>
         </div>
-        <Button className={`${button.secondary} ${tw('border-blue-800 	')}`}>
-          Inregistreaza-te
-        </Button>
-      </div>
-    </header>
+      </header>
+      {/* MOBILE MENU OFFCANVAS */}
+      <Offcanvas show={showMenu} close={toggleMenu} />
+    </>
   );
 };
 

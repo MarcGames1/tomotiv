@@ -1,33 +1,24 @@
 import React, { useState } from 'react';
 import styles from './Accordion.module.css';
 
-const Accordion = ({ items }) => {
-  const [activeIndex, setActiveIndex] = useState(null);
+const Accordion = (props) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const onTitleClick = (index) => {
-    setActiveIndex(index);
+  const toggleAccordion = () => {
+    setIsExpanded(!isExpanded);
   };
 
-  const renderedItems = items.map((item, index) => {
-    const active = index === activeIndex ? styles.active : '';
-
-    return (
-      <React.Fragment key={item.title}>
+  return (
+    <div className={styles.accordion}>
+      <div className={styles.accordionHeader} onClick={toggleAccordion}>
+        <h2 className={styles.title}>{props.title}</h2>
         <div
-          className={`${styles.title} ${active}`}
-          onClick={() => onTitleClick(index)}
-        >
-          <i className="dropdown icon"></i>
-          {item.title}
-        </div>
-        <div className={`${styles.content} ${active}`}>
-          <p>{item.content}</p>
-        </div>
-      </React.Fragment>
-    );
-  });
-
-  return <div className={styles.accordion}>{renderedItems}</div>;
+          className={isExpanded ? styles.arrowDown : styles.arrowRight}
+        ></div>
+      </div>
+      {isExpanded && <div className={styles.content}>{props.children}</div>}
+    </div>
+  );
 };
 
 export default Accordion;
