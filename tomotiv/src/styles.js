@@ -17,7 +17,10 @@ export const typography = {
   s4heading: tw('font-extrabold text-4xl md:text-3xl sm:text-3xl 	text-white'),
   p: tw('text-white lg:tracking-widest lg:leading-8'),
   p2: tw('text-white tracking-widest leading-6 text-center m-4'),
+
 };
+
+export const links = styles.links;
 
 export const button = {
   primary: `${tw('lg:py-4 px-2 p-4' )} ${styles.buttonPrimary}`,

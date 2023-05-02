@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { tw } from 'twind';
 import Link  from 'next/link';
 import styles from './Navigation.module.css';
-import {GiHamburgerMenu} from 'react-icons/gi'
-import { AiOutlineCloseSquare } from 'react-icons/ai'
 import { Button } from '../ux';
 import Hamburger from './Hamburger';
-import { colors, typography, button } from '../../styles';
+import { button, links } from '../../styles';
 import Image from 'next/image'
 import Dropdown from '../ux/Dropdown/Dropdown';
 import Offcanvas from './Offcanvas';
@@ -51,7 +49,7 @@ import { servicii, menuItems } from '../../dateStatice';
           >
             {menuItems.map((item) => (
               <>
-                <Link href={item.href}>{item.label}</Link>
+                <Link className={links} href={item.href}>{item.label}</Link>
               </>
             ))}
             <Dropdown label="Servicii">
@@ -77,15 +75,3 @@ import { servicii, menuItems } from '../../dateStatice';
 export default Navigation
 
 
-const MobileItems = () =>{
-  return (
-    <div className={tw('flex flex-col  bg-inherit	lg:hidden')}>
-      {' '}
-      {menuItems.map((item) => (
-        <>
-          <Link href={item.href}>{item.label}</Link>
-        </>
-      ))}
-    </div>
-  );
-}

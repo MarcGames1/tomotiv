@@ -33,3 +33,20 @@ transition:background-color border .5s ease;
     background-color: rgba(0, 0, 0, 1);
     border:#2563eb 1px solid;
 }
+
+
+
+.links {
+  color: white;
+}
+
+.links a {
+  color: inherit;
+  transition: color 0.3s ease-out;
+}
+
+.links:hover, .links:focus, .links:active {
+  color: var(--blueL20);
+  font-weight: bold;
+}
+

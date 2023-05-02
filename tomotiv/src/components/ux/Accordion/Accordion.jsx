@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Accordion.module.css';
-
-const Accordion = (props) => {
+import { button } from '../../../styles';
+const Accordion = ({title, children}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleAccordion = () => {
@@ -10,13 +10,13 @@ const Accordion = (props) => {
 
   return (
     <div className={styles.accordion}>
-      <div className={styles.accordionHeader} onClick={toggleAccordion}>
-        <h2 className={styles.title}>{props.title}</h2>
+      <div className={button.primary} onClick={toggleAccordion}>
+        <h2 className={styles.title}>{title}</h2>
         <div
           className={isExpanded ? styles.arrowDown : styles.arrowRight}
         ></div>
       </div>
-      {isExpanded && <div className={styles.content}>{props.children}</div>}
+      {isExpanded && <div className={styles.content}>{children}</div>}
     </div>
   );
 };
