@@ -38,7 +38,7 @@ import { servicii, menuItems } from '../../dateStatice';
           <Image
             height={300}
             width={300}
-            src={'./assets/Logo/Horizontal - Color.svg'}
+            src={'/assets/Logo/Horizontal - Color.svg'}
           />
         </div>
         <div
