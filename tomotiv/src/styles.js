@@ -2,9 +2,16 @@ import { tw } from "twind";
 import styles from './styles.module.css'
 
 export const colors = {
-    accent: '#EE4444',
-    blue: '#2A19FF',
-}
+  accent: '#EE4444',
+  blue: {
+    default: '#2A19FF',
+    dark20: '#2214cc',
+    dark60: '#110a66',
+    dark80: '#080533',
+    light20: '#5547ff',
+    light60: '#aaa3ff',
+  },
+};
 export const typography = {
   h1: tw('font-extrabold md:text-3xl lg:text-6xl tracking-wider	 	text-white'),
   s4heading: tw('font-extrabold text-4xl md:text-3xl sm:text-3xl 	text-white'),

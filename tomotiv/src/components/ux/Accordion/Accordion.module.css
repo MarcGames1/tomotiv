@@ -1,0 +1,19 @@
+.accordion {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.title {
+  cursor: pointer;
+  padding: 1rem;
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+.content {
+  padding: 1rem;
+  display: none;
+}
+
+.active {
+  display: block;
+}

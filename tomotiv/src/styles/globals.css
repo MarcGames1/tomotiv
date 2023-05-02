@@ -14,10 +14,28 @@ section{
 }
 :root{
     --accent: #EE4444;
+
     --blue: #2A19FF;
+    --blueL20:#5547ff;
+    --blueL60:#aaa3ff;
+    --blueD20:#2214cc;
+    --blueD60:#110a66;
+    --blueD80:#080533;
 }
 
 main{
   z-index:0;
 }
 
+.outlined {
+    outline: 3px red dotted;
+  }
+
+
+  /*   blue: {
+    default: '#2A19FF',
+    dark20:'#2214cc',
+    dark60: '#110a66',
+    light20: '#5547ff',
+    light60: '#aaa3ff',
+  }, */

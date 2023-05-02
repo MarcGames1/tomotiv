@@ -9,19 +9,8 @@ import Hamburger from './Hamburger';
 import { colors, typography, button } from '../../styles';
 import Image from 'next/image'
 import Dropdown from '../ux/Dropdown/Dropdown';
-
-const menuItems = [
-  {label: 'Despre Noi', href: '/#despre-noi'},
-  {label: 'Contacteaza-ne', href: '/#contact'},
-]
-
-const servicii = [
-  {label: 'Servicii Seo', href: '/servicii-seo'},
-  {label: 'CopyWriting', href: '/copywriting'},
-  {label: 'Creare Logo', href: '/creeare-logo'},
-  {label: 'Google Ads', href: '/google-ads'},
-  {label: 'Facebook Ads', href: '/facebook-ads'},
-]
+import Offcanvas from './Offcanvas';
+import { servicii, menuItems } from '../../dateStatice';
 
 
 
@@ -42,8 +31,9 @@ const servicii = [
         <div onClick={toggleMenu}>
           <Hamburger active={showMenu} />
         </div>
-        {showMenu ? <MobileItems /> : null}
+        <Offcanvas show={showMenu} />
         <div className={tw('hidden lg:block')}>
+          {showMenu && <Offcanvas show={showMenu} close={ setShowMenu(!showMenu)} />}
           {/* VIZIBIL PE DESKTOP ( DOAR Meniu + LOGO) */}
           <Image
             height={300}
@@ -61,14 +51,14 @@ const servicii = [
               <Link href={item.href}>{item.label}</Link>
             </>
           ))}
+          <Dropdown label="Servicii">
+            {servicii.map((link, index) => (
+              <Link key={index} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </Dropdown>
         </div>
-        <Dropdown label="Servicii">
-          {servicii.map((link, index) => (
-            <Link key={index} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </Dropdown>
         <Button className={`${button.secondary} ${tw('border-blue-800 	')}`}>
           Inregistreaza-te
         </Button>
