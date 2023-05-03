@@ -1,8 +1,10 @@
 .accordion {
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  min-height:50vh;
+  /* border: 1px solid #ccc; */
   border-radius: 5px;
   min-width: 300px;
+  z-index:10 ;
 
 }
 
@@ -12,6 +14,11 @@
   padding: 10px;
   cursor: pointer;
    min-width:300px;
+   position: relative;
+   width: auto;
+  z-index: inherit;
+
+   
 }
 
 .title {
@@ -39,9 +46,20 @@
 
 .content {
   padding: 10px;
+  position:relative;
+  z-index:calc(105);
+  min-width: 50%;
+  min-height: 50%;
+  bacgkround-color: rgba(0,0,0,0.7);
+  /* outline:2px solid red; */
+
+  
 }
 
 /* Color Palette */
+
+
+
 
 .title {
   color: var(--black-color);

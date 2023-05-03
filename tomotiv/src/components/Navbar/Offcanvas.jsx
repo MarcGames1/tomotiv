@@ -5,27 +5,12 @@ import { links } from '../../styles';
 import Accordion from '../ux/Accordion/Accordion';
 import { menuItems, servicii } from '../../dateStatice';
 import Image from 'next/image';
-import { SocialMedia } from '../../dateStatice';
+import SocialMediaIcons from '../ux/SocialMediaIcons/SocialMediaIcons';
 
 
 const Offcanvas = ({ show, close }) => {
 
-const socialMedia = new SocialMedia();
 
-// Utilizarea getterului pentru platforma LinkedIn
-const linkedin = socialMedia.linkedin;
-
-// Utilizarea getterului pentru platforma TikTok
-const tiktok = socialMedia.tiktok;
-
-// Utilizarea getterului pentru platforma Facebook
-const facebook = socialMedia.facebook;
-
-// Utilizarea getterului pentru platforma Instagram
-const instagram = socialMedia.instagram;
-
-// Utilizarea getterului pentru platforma YouTube
-const youtube = socialMedia.youtube;
 
   const closeMenu = ()=>{
     console.log('menuClosed')
@@ -36,8 +21,8 @@ const youtube = socialMedia.youtube;
     e.stopPropagation();
   }
 
-  console.log('OFFCANVAS SHOW STATE = ', show);
-  console.log('OFFCANVAS SHOW STATE = ', close);
+  // Object.entries(SocialMedia).map(item =>{console.log(item)})
+  
   return (
     <div
       className={`${show ? styles.overlay + ' ' + styles.active : ''}`}
@@ -49,37 +34,32 @@ const youtube = socialMedia.youtube;
           ' fixed top-0 bottom-0 right-0 p-5'
         )}`}
       >
-        <div className={tw('flex items-center justify-between mb-5')}>
+        <div className={tw('flex items-center  justify-between mb-5')}>
           <Image
             height={300}
             width={300}
             src={'/assets/Logo/Horizontal - Color.svg'}
           />
         </div>
-        <div className={tw('flex flex-col gap-3')}>
-          {menuItems.map((item) => (
-            <Link className={links} key={item.href} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
-          <Accordion title={'servicii'}>
-            {servicii.map((item) => (
-              <div className={links} key={item.href}>
-                <Link href={item.href}>{item.label}</Link>
-              </div>
+        <div className={tw('flex flex-col justify-around gap-3')}>
+          <div className={tw('flex flex-col gap-3')}>
+            {menuItems.map((item) => (
+              <Link className={links} key={item.href} href={item.href}>
+                {item.label}
+              </Link>
             ))}
-          </Accordion>
-        </div>
-        <div id="SocialMediaContainer">
-          {Object.keys(socialMedia).map((key) => {
-            const { label, href, smIcon } = socialMedia[key];
-            return (
-              <a href={href} key={key}>
-                {smIcon}
-                {label}
-              </a>
-            );
-          })}
+            <div>
+
+            <Accordion title={'servicii'}>
+              {servicii.map((item) => (
+                <div className={links} key={item.href}>
+                  <Link href={item.href}>{item.label}</Link>
+                </div>
+              ))}
+            </Accordion>
+              </div>
+          </div>
+          <SocialMediaIcons />
         </div>
       </div>
     </div>
@@ -87,3 +67,10 @@ const youtube = socialMedia.youtube;
 };
 
 export default Offcanvas;
+
+
+
+
+
+
+
