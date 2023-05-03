@@ -15,3 +15,34 @@ export const servicii = [
 ];
 
 
+export const autori = {
+  laura: {
+    poza: '',
+    nume: '',
+    prenume: '',
+    functie: '',
+
+    contact: {
+      email: '',
+      facebook: '',
+      instagram: '',
+      tikTok: '',
+      website:''
+    },
+  },
+
+  alex: {
+    poza: '',
+    nume: '',
+    prenume: '',
+    functie: '',
+
+    contact: {
+      email: '',
+      facebook: '',
+      instagram: '',
+      tikTok: '',
+      website:''
+    },
+  },
+};
