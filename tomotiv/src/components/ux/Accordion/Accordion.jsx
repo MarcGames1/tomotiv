@@ -9,7 +9,7 @@ const Accordion = ({title, children}) => {
   };
 
   return (
-    <div className={styles.accordion}>
+    <div className={styles.accordion }>
       <div className={button.primary} onClick={toggleAccordion}>
         <h2 className={styles.title}>{title}</h2>
         <div
