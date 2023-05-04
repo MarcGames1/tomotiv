@@ -25,7 +25,7 @@ const DespreSection = () => {
       >
         Echipa din spatele proiectului Tomotiv{' '}
       </span>
-      <div className={tw('container  w-full h-full flex items-center my-3 px-10 gap-3 justify-center')}>
+      <div className={tw('container  flex flex-col  lg:flex-row  my-3 px-10 gap-5 ')}>
        
         
         <MembruEchipa props={alex} />
