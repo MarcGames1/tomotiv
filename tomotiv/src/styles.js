@@ -14,11 +14,14 @@ export const colors = {
 };
 export const typography = {
   h1: tw('font-extrabold md:text-3xl lg:text-6xl tracking-wider	 	text-white'),
+  cardHeading: tw('font-extrabold md:text-2xl lg:text-3xl tracking-wider	 	text-white'),
   s4heading: tw('font-extrabold text-4xl md:text-3xl sm:text-3xl 	text-white'),
   p: tw('text-white lg:tracking-widest lg:leading-8'),
   p2: tw('text-white tracking-widest leading-6 text-center m-4'),
-
 };
+
+
+
 
 export const links = styles.links;
 

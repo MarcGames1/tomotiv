@@ -36,7 +36,7 @@ const SocialMedia = {
 const SocialMediaIcons = ({
   withLabel = false,
   iconSize = '2em',
-  iconColor = colors.accent,
+  iconColor = colors.accent
 }) => {
 
 
@@ -49,7 +49,7 @@ const SocialMediaIcons = ({
       {Object.values(SocialMedia).map((data) => {
         const { label, href, smIcon: Icon } = data;
         return (
-          <a className="dotted" href={href} key={label}>
+          <a href={href} key={label}>
             {withLabel ? label : null}
             <Icon size={iconSize} color={iconColor} />
           </a>

@@ -17,32 +17,35 @@ export const servicii = [
 
 export const autori = {
   laura: {
-    poza: '',
-    nume: '',
-    prenume: '',
-    functie: '',
+    poza: '/assets/echipa/Alex_Profil.png',
+    nume: 'Iaurum',
+    prenume: 'Laura',
+    functie: 'Social Media Specialist',
 
     contact: {
-      email: '',
+      email: 'laura@tomotiv.ro',
+      linkedin:'',
       facebook: '',
       instagram: '',
       tikTok: '',
-      website:''
+      website: 'htpps://crela.ro/',
     },
   },
 
   alex: {
-    poza: '',
-    nume: '',
-    prenume: '',
-    functie: '',
+    poza: '/assets/echipa/Alex_Profil.png',
+    nume: 'Marcu',
+    prenume: 'Alexandru',
+    functie: 'Functie',
 
     contact: {
-      email: '',
-      facebook: '',
-      instagram: '',
-      tikTok: '',
-      website:''
+      email: 'alexandru@tomotiv.ro',
+      linkedin:'',
+      facebook:
+        'https://www.facebook.com/people/Marcu-Alexandru-Web-Developer-si-Specialist-SEO/100070084327195/',
+      instagram: 'https://www.instagram.com/george.marcu2/',
+      tikTok:'https://www.tiktok.com/@alexandrumarcu912',
+      website: 'https://marweb.ro/',
     },
   },
 };
