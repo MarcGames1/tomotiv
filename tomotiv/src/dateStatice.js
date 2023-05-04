@@ -28,7 +28,7 @@ export const autori = {
       facebook: '',
       instagram: '',
       tikTok: '',
-      website: 'htpps://crela.ro/',
+      website: 'https://crela.ro/',
     },
   },
 

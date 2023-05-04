@@ -25,7 +25,7 @@ const DespreSection = () => {
       >
         Echipa din spatele proiectului Tomotiv{' '}
       </span>
-      <div className={tw('container  w-full h-full flex items-center gap-3 justify-center')}>
+      <div className={tw('container  w-full h-full flex items-center my-3 px-10 gap-3 justify-center')}>
        
         
         <MembruEchipa props={alex} />
@@ -52,7 +52,7 @@ const MembruEchipa = ({props}) =>{
     return (
       <div
         className={`${tw(
-          'container  flex flex-col gap-3 justify-center items-center	justify-items-center'
+          'container bg-blue-900 p-10 flex flex-col gap-3 justify-center items-center	justify-items-center'
         )} 'dotted'`}
       >
         <Image
@@ -70,19 +70,19 @@ const MembruEchipa = ({props}) =>{
           </Link>
           <div className={styles.functie}>{functie}</div>
           <div className={styles.contact}>
-            <a href={contact.linkedin}>
+            <a target='_blank' href={contact.linkedin}>
               <ImLinkedin2 color={colors.accent} size={'2em'} />
             </a>
-            <a href={contact.facebook}>
+            <a target='_blank' href={contact.facebook}>
               <CiFacebook color={colors.accent} size={'2em'} />
             </a>
-            <a href={contact.instagram}>
+            <a target='_blank' href={contact.instagram}>
               <CiInstagram color={colors.accent} size={'2em'} />
             </a>
-            <a href={contact.tikTok}>
+            <a target='_blank' href={contact.tikTok}>
               <FaTiktok color={colors.accent} size={'2em'} />
             </a>
-            <a href={contact.website}>
+            <a target='_blank' href={contact.website}>
               <TbWorldWww color={colors.accent} size={'2em'} />
             </a>
           </div>
