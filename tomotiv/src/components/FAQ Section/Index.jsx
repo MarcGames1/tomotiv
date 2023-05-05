@@ -49,9 +49,9 @@ const config = {
 
 const FAQSection = () => {
   return (
-    <section className={tw('bg-black')}>
+    <section className={tw('bg-black flex justify-center w-full')}>
       {/* <h2 className={typography.s4heading}>Intrebari Frecvente</h2> */}
-      <div>
+      <div className={tw('w-3/4' )}>
         <Faq data={data} styles={styles} config={config} />
       </div>
     </section>
