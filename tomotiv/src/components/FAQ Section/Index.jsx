@@ -1,7 +1,9 @@
 import Faq from 'react-faq-component';
+import { colors, typography } from '../../styles';
+import { tw } from 'twind';
 
 const data = {
-  title: 'FAQ (How it works)',
+  title: 'Intrebari Frecvente',
   rows: [
     {
       title: 'Lorem ipsum dolor sit amet,',
@@ -30,24 +32,25 @@ const data = {
 };
 
 const styles = {
-  // bgColor: 'white',
-  titleTextColor: 'blue',
-  rowTitleColor: 'blue',
-  // rowContentColor: 'grey',
+  bgColor: 'black',
+  titleTextColor: 'white',
+  rowTitleColor: 'white',
+  arrowColor: colors.accent,
+  rowContentColor: 'grey',
   // arrowColor: "red",
 };
 
 const config = {
-  // animate: true,
-  // arrowIcon: "V",
-  // tabFocus: true
+  animate: true,
+//   arrowIcon: "V",
+  tabFocus: true
 };
 
 
 const FAQSection = () => {
   return (
-    <section>
-      <h2>Intrebari Frecvente</h2>
+    <section className={tw('bg-black')}>
+      {/* <h2 className={typography.s4heading}>Intrebari Frecvente</h2> */}
       <div>
         <Faq data={data} styles={styles} config={config} />
       </div>
