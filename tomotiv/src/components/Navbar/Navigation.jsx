@@ -36,11 +36,13 @@ import { servicii, menuItems } from '../../dateStatice';
 
           <div className={tw('hidden lg:block')}>
             {/* VIZIBIL PE DESKTOP ( DOAR Meniu + LOGO) */}
+            <Link href={'/'}>
             <Image
               height={300}
               width={300}
               src={'/assets/Logo/Horizontal - Color.svg'}
-            />
+              />
+              </Link>
           </div>
           <div
             className={tw(
