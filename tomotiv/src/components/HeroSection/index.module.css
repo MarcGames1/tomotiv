@@ -38,7 +38,7 @@
    
 
 
-    @media (min-width: 640px) { 
+    @media (min-width: 768px) { 
       .content{
         width: 40%;
       }
@@ -58,3 +58,6 @@
    background-repeat: repeat-y;
 }
      }
+
+
+     

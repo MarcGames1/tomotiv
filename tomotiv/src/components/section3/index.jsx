@@ -235,7 +235,7 @@ const RightSideComponent = () =>{
         Marketing. După cele 6 săpătmâni practice vei reuși să înțelegi, aplici
         și să profesezi ca specialist SEO cu ajutorul unei diplome autorizate.{' '}
       </p>
-      <Button className={`${button.secondary}`}>Descopera</Button>
+      <Button className={`${button.secondary} `}>Descopera</Button>
       <br />
       <p className={typography.p2}>
         Dezvoltă-ți abilitățile de digital marketing în cea mai bună perioadă a

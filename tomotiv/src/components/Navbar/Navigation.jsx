@@ -23,7 +23,7 @@ import { servicii, menuItems } from '../../dateStatice';
     <>
       <header className={`${styles.header} ${styles.sticky}`}>
         <div
-          className={`${styles.mobileMenu} ${tw(
+          className={`${styles.nav} ${tw(
             'w-full flex flex-row items-center justify-between'
           )}`}
         >

@@ -29,8 +29,7 @@
 .bg{
     position: absolute;
 z-index: 0;
-  width: 300px;
-  height: 300px;
+
    
     /* left:100px; */
     bottom: 10px;
@@ -45,3 +44,15 @@ z-index: 0;
         bottom: -100px;
     }
  }
+
+@media (min-width: 768px) { 
+    .bg{
+        width: 100dvw;
+        height: auto;
+    }
+ }
+ @media (min-width: 1024px) {     
+    .bg{
+        width: 50dvw;
+        height: auto;
+    } }

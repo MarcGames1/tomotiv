@@ -1,5 +1,6 @@
 .buttonPrimary, .buttonSecondary {
-height: min-content; /* 50px */
+/*  */
+
 display: flex;
 flex-direction: row;
 justify-content: center;
