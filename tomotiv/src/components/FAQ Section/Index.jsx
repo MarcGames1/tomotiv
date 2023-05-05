@@ -3,7 +3,7 @@ import { colors, typography } from '../../styles';
 import { tw } from 'twind';
 
 const data = {
-  title: 'Intrebari Frecvente',
+  title: <div className={tw('text-center block w-full')}>Intrebari Frecvente</div>,
   rows: [
     {
       title: 'Lorem ipsum dolor sit amet,',
@@ -52,7 +52,7 @@ const FAQSection = () => {
     <section className={tw('bg-black flex justify-center w-full')}>
       {/* <h2 className={typography.s4heading}>Intrebari Frecvente</h2> */}
       <div className={tw('w-3/4' )}>
-        <Faq data={data} styles={styles} config={config} />
+        <Faq  data={data} styles={styles} config={config} />
       </div>
     </section>
   );

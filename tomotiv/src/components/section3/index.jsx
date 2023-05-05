@@ -138,6 +138,10 @@ const roundedL = 'rounded-tl-3xl'
           )}`}
           src={image}
           fill
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'top',
+          }}
         />
       )}
       <h5
