@@ -13,7 +13,7 @@ section{
   height : auto;
 }
 :root{
-    --accent: #EE4444;
+   --accent: #EE4444;
 
     --blue: #2A19FF;
     --blueL20:#5547ff;
@@ -25,7 +25,7 @@ section{
   
   --black-color: #000;
   --white-color: #fff;
-  --gray-color: #ccc;
+  --gray-color: #ccc; 
 }
 
 main{
@@ -44,3 +44,4 @@ main{
     light20: '#5547ff',
     light60: '#aaa3ff',
   }, */
+

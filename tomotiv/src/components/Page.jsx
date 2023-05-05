@@ -9,7 +9,7 @@ const Page = ({children}) => {
   const { scrollYProgress } = useScroll();
   
   
-  
+  console.log("SCROOLL => ",scrollYProgress);
   return (
     <>
       <Head>
@@ -18,10 +18,13 @@ const Page = ({children}) => {
 
       <Navigation />
       <main>{children}</main>
-      <motion.div
-        className={styles.progressBar}
-        style={{ scaleX: scrollYProgress }}
-      />
+      {(scrollYProgress !== 0 && scrollYProgress !== 100) ? (
+        <motion.div
+          className={styles.progressBar}
+          style={{ scaleX: scrollYProgress }}
+          
+        />
+      ) : null}
       <Footer />
     </>
   );
