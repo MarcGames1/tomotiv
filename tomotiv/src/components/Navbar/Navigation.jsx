@@ -12,6 +12,8 @@ import Offcanvas from './Offcanvas';
 import { servicii, menuItems } from '../../dateStatice';
 import { useRouter } from 'next/router';
 import { Context } from '../../context';
+import axios from 'axios';
+import { Logout } from '../../helpers/actions';
 
 
  const Navigation = () => {
@@ -19,13 +21,15 @@ import { Context } from '../../context';
 
   const { state, dispatch } = useContext(Context);
   const { user } = state;
-   const router = useRouter
+   
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
+
+  
   return (
     <>
       <header className={`${styles.header} ${styles.sticky}`}>
@@ -44,12 +48,12 @@ import { Context } from '../../context';
           <div className={tw('hidden lg:block')}>
             {/* VIZIBIL PE DESKTOP ( DOAR Meniu + LOGO) */}
             <Link href={'/'}>
-            <Image
-              height={300}
-              width={300}
-              src={'/assets/Logo/Horizontal - Color.svg'}
+              <Image
+                height={300}
+                width={300}
+                src={'/assets/Logo/Horizontal - Color.svg'}
               />
-              </Link>
+            </Link>
           </div>
           <div
             className={tw(
@@ -58,7 +62,9 @@ import { Context } from '../../context';
           >
             {menuItems.map((item) => (
               <>
-                <Link className={links} href={item.href}>{item.label}</Link>
+                <Link className={links} href={item.href}>
+                  {item.label}
+                </Link>
               </>
             ))}
             <Dropdown label="Servicii">
@@ -69,8 +75,11 @@ import { Context } from '../../context';
               ))}
             </Dropdown>
           </div>
-         {user ? <LoggedUserButtons user={user}/> : <UnloggedUserButtons />
-          }
+          {user ? (
+            <LoggedUserButtons dispatch={dispatch} user={user} />
+          ) : (
+            <UnloggedUserButtons />
+          )}
         </div>
       </header>
       {/* MOBILE MENU OFFCANVAS */}
@@ -101,16 +110,29 @@ const UnloggedUserButtons = () =>{
 }
 
 
-const LoggedUserButtons = ({user}) =>{
+const LoggedUserButtons = ({user, dispatch}) =>{
+
+  
+const router = useRouter();
+
   return (
     <>
       <span className={typography.p2}>Salutare, {user.nume}</span>
       <Button className={`${button.primary} ${tw('border-blue-800 	')}`}>
         Vezi Cursurile tale
       </Button>
-      <Button className={`${button.secondary} ${tw('border-blue-800 	')}`}>
+      <a
+        onClick={async (e) => {
+          e.preventDefault();
+          console.log('DELOGARE CLICKED')
+          dispatch({ type: 'LOGOUT' });
+          router.push('/');
+          Logout();
+        }}
+        className={`${button.secondary} ${tw('border-blue-800 	')}`}
+      >
         Delogare
-      </Button>
+      </a>
     </>
   );
 }

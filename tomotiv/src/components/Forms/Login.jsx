@@ -116,7 +116,7 @@ const LogInForm = () => {
           type="submit"
         >
           {!loading && 'TRIMITE'}
-          {loading && <LoadingSpinner color={colors.crelaRoz} message="" />}
+          {loading && <>... Loading Spinner ... </>}
         </button>
       </form>
       <p>Ti-ai uitat Parola?</p><Link href="/reset-password">Reseteaza-ti Parola</Link>
