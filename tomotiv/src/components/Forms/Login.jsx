@@ -4,7 +4,7 @@ import { tw } from 'twind';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 // import { LoadingSpinner } from '..';
-
+import LoadingSpinner  from '../ux/Spinner/Spinner';
 
 
 import { formStyles, colors } from '../../styles';
@@ -59,7 +59,7 @@ const LogInForm = () => {
       // save in localstorage
       window.localStorage.setItem('user', JSON.stringify(data))
       // redirect
-      router.push('/user')
+      router.push('/')
 
       toast.success('Te-ai logat cu succes');
       setLoading(false);
@@ -116,7 +116,7 @@ const LogInForm = () => {
           type="submit"
         >
           {!loading && 'TRIMITE'}
-          {loading && <>... Loading Spinner ... </>}
+          {loading && <LoadingSpinner color={colors.accent} message='...'  />}
         </button>
       </form>
       <p>Ti-ai uitat Parola?</p><Link href="/reset-password">Reseteaza-ti Parola</Link>

@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { tw } from 'twind';
 import { colors } from '../../styles';
 import { formStyles, typography } from '../../styles';
+import LoadingSpinner from '../ux/Spinner/Spinner';
 
 // import { LoadingSpinner } from '..';
 
@@ -119,7 +120,7 @@ import { formStyles, typography } from '../../styles';
             disabled={loading || !email}
           >
             {loading ? (
-              <LoadingSpinner color={colors.crelaRoz} message="" />
+              <LoadingSpinner color={colors.accent} message="..." />
             ) : (
               'Submit'
             )}
