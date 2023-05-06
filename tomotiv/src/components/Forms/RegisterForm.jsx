@@ -2,13 +2,13 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import { tw } from 'twind'
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { LoadingSpinner } from '..';
+// import { LoadingSpinner } from '..';
 
 
-import { colors } from '@/helpers/styles';
-import { form as formStyles } from '@/helpers/styles'
+
+import { formStyles, colors } from '../../styles'
 import { useRouter } from 'next/router';
-import { Context } from '@/context';
+import { Context } from '../../context/';
 const RegisterForm = () => {
 
 const sendData = async () => {
@@ -117,7 +117,7 @@ const {state : {user} } = useContext(Context)
         <button disabled={!nume || !email || !password  || loading} className={formStyles.button} type="submit">
           
           {!loading && ("TRIMITE")}
-          {loading && (<LoadingSpinner color={colors.crelaRoz} message="" />)}
+          {/* {loading && (<LoadingSpinner color={colors.crelaRoz} message="" />)} */}
         </button>
         
   

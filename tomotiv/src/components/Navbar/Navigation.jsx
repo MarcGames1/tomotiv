@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { tw } from 'twind';
 import Link  from 'next/link';
+
 import styles from './Navigation.module.css';
 import { Button } from '../ux';
 import Hamburger from './Hamburger';
-import { button, links } from '../../styles';
+import { button, links, typography } from '../../styles';
 import Image from 'next/image'
 import Dropdown from '../ux/Dropdown/Dropdown';
 import Offcanvas from './Offcanvas';
 import { servicii, menuItems } from '../../dateStatice';
 import { useRouter } from 'next/router';
-
+import { Context } from '../../context';
 
 
  const Navigation = () => {
+
+
+  const { state, dispatch } = useContext(Context);
+  const { user } = state;
    const router = useRouter
   const [showMenu, setShowMenu] = useState(false);
 
@@ -64,11 +69,8 @@ import { useRouter } from 'next/router';
               ))}
             </Dropdown>
           </div>
-          <Link href={'inscrie-te'}>
-          <Button className={`${button.secondary} ${tw('border-blue-800 	')}`}>
-            Inregistreaza-te
-          </Button>
-          </Link>
+         {user ? <LoggedUserButtons user={user}/> : <UnloggedUserButtons />
+          }
         </div>
       </header>
       {/* MOBILE MENU OFFCANVAS */}
@@ -81,3 +83,34 @@ import { useRouter } from 'next/router';
 export default Navigation
 
 
+const UnloggedUserButtons = () =>{
+  return (
+    <>
+      <Link href={'/sign-up'}>
+        <Button className={`${button.primary} ${tw('border-blue-800 	')}`}>
+          Inregistreaza-te
+        </Button>
+      </Link>
+      <Link href={'/sign-in'}>
+        <Button className={`${button.secondary} ${tw('border-blue-800 	')}`}>
+          Logheaza-te
+        </Button>
+      </Link>
+    </>
+  );
+}
+
+
+const LoggedUserButtons = ({user}) =>{
+  return (
+    <>
+      <span className={typography.p2}>Salutare, {user.nume}</span>
+      <Button className={`${button.primary} ${tw('border-blue-800 	')}`}>
+        Vezi Cursurile tale
+      </Button>
+      <Button className={`${button.secondary} ${tw('border-blue-800 	')}`}>
+        Delogare
+      </Button>
+    </>
+  );
+}

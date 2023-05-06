@@ -2,13 +2,13 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
-import { Context } from '@/context';
+import { Context } from '../../context';
 import { useRouter } from 'next/router';
 import { tw } from 'twind';
-import { colors } from '@/helpers/styles';
-import { form as formStyles, typography } from '@/helpers/styles';
+import { colors } from '../../styles';
+import { formStyles, typography } from '../../styles';
 
-import { LoadingSpinner } from '..';
+// import { LoadingSpinner } from '..';
 
  const FoggotPassword = () => {
   const [email, setEmail] = useState('');

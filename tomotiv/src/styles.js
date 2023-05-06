@@ -20,7 +20,12 @@ export const typography = {
   p2: tw('text-white tracking-widest leading-6 text-center m-4'),
 };
 
-
+export const formStyles = {
+  form: tw('bg-blue-D80 flex flex-col justify-center'),
+  label: tw('text-white tracking-widest leading-6 text-center m-4'),
+  input: tw('m-4 h-6 p-4 '),
+  button: `${tw('lg:py-4 px-2 p-4')} ${styles.buttonPrimary}`,
+};
 
 
 export const links = styles.links;

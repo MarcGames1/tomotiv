@@ -3,12 +3,12 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import { tw } from 'twind';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { LoadingSpinner } from '..';
+// import { LoadingSpinner } from '..';
 
-import { colors } from '@/helpers/styles';
-import { form as formStyles } from '@/helpers/styles';
 
-import { Context } from '@/context';
+
+import { formStyles, colors } from '../../styles';
+import { Context } from '../../context';
 import Link from 'next/link';
 
 const LogInForm = () => {
