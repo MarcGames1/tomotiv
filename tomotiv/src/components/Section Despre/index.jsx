@@ -16,7 +16,7 @@ const { alex, laura} = autori
 
 const DespreSection = () => {
   return (
-    <section className={tw('flex flex-col items-center gap-3')}>
+    <section id='despre-noi' className={tw('flex flex-col items-center gap-3')}>
       <h2 className={typography.p}>
         Fa Cunostinta cu Noi
       </h2>

@@ -9,10 +9,12 @@ import Image from 'next/image'
 import Dropdown from '../ux/Dropdown/Dropdown';
 import Offcanvas from './Offcanvas';
 import { servicii, menuItems } from '../../dateStatice';
+import { useRouter } from 'next/router';
 
 
 
  const Navigation = () => {
+   const router = useRouter
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -62,9 +64,11 @@ import { servicii, menuItems } from '../../dateStatice';
               ))}
             </Dropdown>
           </div>
+          <Link href={'inscrie-te'}>
           <Button className={`${button.secondary} ${tw('border-blue-800 	')}`}>
             Inregistreaza-te
           </Button>
+          </Link>
         </div>
       </header>
       {/* MOBILE MENU OFFCANVAS */}
