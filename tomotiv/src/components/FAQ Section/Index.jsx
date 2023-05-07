@@ -2,7 +2,7 @@ import Faq from 'react-faq-component';
 import { colors, typography } from '../../styles';
 import { tw } from 'twind';
 
-const data = {
+const defaultData = {
   title: <div className={tw('text-center block w-full')}>Intrebari Frecvente</div>,
   rows: [
     {
@@ -47,15 +47,15 @@ const config = {
 };
 
 
-const FAQSection = () => {
+const FAQSection = ({ data = defaultData }) => {
   return (
     <section className={tw('bg-black flex justify-center w-full')}>
       {/* <h2 className={typography.s4heading}>Intrebari Frecvente</h2> */}
-      <div className={tw('w-3/4' )}>
-        <Faq  data={data} styles={styles} config={config} />
+      <div className={tw('w-3/4')}>
+        <Faq data={data} styles={styles} config={config} />
       </div>
     </section>
   );
-}
+};
 
 export default FAQSection

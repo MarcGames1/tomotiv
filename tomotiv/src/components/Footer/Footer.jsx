@@ -48,6 +48,7 @@ const Footer = () => (
             />
           ))}
         </ul>
+        <a href="mailto:contact@tomotiv.ro" className={links}>contact@tomotiv.ro</a>
       </div>
 
       <div>

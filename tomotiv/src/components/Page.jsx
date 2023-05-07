@@ -5,6 +5,7 @@ import { tw } from 'twind'
 import Head from 'next/head'
 import { motion, useScroll } from 'framer-motion';
 import styles from './Page.module.css'
+import ContactForm from './Forms/ContactForm'
 const Page = ({children}) => {
   const { scrollYProgress } = useScroll();
   

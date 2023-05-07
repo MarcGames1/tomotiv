@@ -49,6 +49,7 @@ transition:background-color border .5s ease;
 
 .links {
   color: white;
+  cursor: pointer;
 }
 
 .links a {
