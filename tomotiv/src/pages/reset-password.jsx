@@ -3,7 +3,7 @@ import { tw } from "twind";
 import Page from "../components/Page";
 import { typography, links } from "../styles";
 import FoggotPassword from "../components/Forms/FoggotPassword";
-import Head from "next/head";
+
 
 const ResetPassword = () => {
   return (
