@@ -7,7 +7,7 @@ import Section3 from '../components/section3';
 import Section4 from '../components/Section4';
 import Offcanvas from '../components/Navbar/Offcanvas';
 import FAQSection from '../components/FAQ Section/Index';
-
+import ScroolAnimated from '../components/ScroolAnimated/ScroolAnimated';
 
 
 const Homepage = () => {
@@ -22,13 +22,11 @@ const Homepage = () => {
 
       {/* Renuntam la watch Video - facem popup cu video  */}
       {/* SECTIUNE DESPRE NOI  */}
-      <DespreSection />
-      <Section2 />
-      <Section3 />
-      <Section4 />
-      <FAQSection />
-     
-      
+      <ScroolAnimated.Up children={<DespreSection />} />
+      <ScroolAnimated.Left children={<Section2 />} />
+      <ScroolAnimated.Right children={<Section3 />} />
+      <ScroolAnimated.Left children={<Section4 />} />
+      <ScroolAnimated.Right children={<FAQSection />} />
     </Page>
   );
 }

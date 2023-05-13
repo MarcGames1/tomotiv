@@ -62,7 +62,7 @@ const Provider = ({children}) => {
                  console.log('/401 error > logout');
                  dispatch({ type: 'LOGOUT' });
                  window.localStorage.removeItem('user');
-                 router.push('/login');
+                 router.push('/sign-in');
                })
                .catch((err) => {
                  console.log('AXIOS INTERCEPTORS ERR', err);

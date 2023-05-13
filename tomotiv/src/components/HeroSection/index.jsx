@@ -37,6 +37,7 @@ const HeroSection = ({title, subtitle}) => {
               x: [100, 0],
             }}
             exit={{ y: -10, opacity: 0 }}
+            viewport={{ once: true }}
             className={styles.content}
           >
             <h1 className={`${tw('p-4')} ${typography.h1}`}>{title}</h1>
@@ -45,7 +46,6 @@ const HeroSection = ({title, subtitle}) => {
               className={tw('flex flex-row gap-5 items-center justify-around	')}
             >
               <PrimaryButton />
-             
             </div>
           </motion.div>
         </VisibilitySensor>

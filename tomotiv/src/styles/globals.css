@@ -9,6 +9,7 @@ html{
   scroll-behavior: smooth;
   background-color:#150067;
   font-family:'Manrope', sans-serif;
+  color: #fff;
 
   /* width: calc(100vw - (100vw - 100%)); */
 }
