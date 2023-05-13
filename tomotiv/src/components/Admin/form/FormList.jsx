@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { tw } from 'twind';
-import FormItem from './FormItem.jsx';
-
+import FormItemComponent from './FormItemComponent';
 
 const statusOptions = [
   { value: 'Nou', label: 'Nou' },
@@ -28,33 +27,33 @@ const FormList = ({ forms }) => {
     }));
   };
 
-  const cardWrapperClass = tw`flex flex-col p-4 border rounded-lg shadow-md`;
-  const cardTitleClass = tw`font-bold text-lg`;
-  const cardButtonClass = tw`text-base p-1.5 rounded-lg focus:outline-none hover:opacity-75 transition-opacity duration-200 ease-in-out`;
-  const editButtonClass = tw`${cardButtonClass} text-blue-500 hover:text-blue-600`;
-  const deleteButtonClass = tw`${cardButtonClass} text-red-500 hover:text-red-600`;
-  const detailWrapperClass = tw`flex flex-col space-y-2`;
-  const detailItemClass = tw`flex items-center`;
+  const cardWrapperClass = tw(`flex flex-col p-4 border rounded-lg shadow-md`);
+  const cardTitleClass = tw(`font-bold text-lg`);
+  const cardButtonClass = tw(`text-base p-1.5 rounded-lg focus:outline-none hover:opacity-75 transition-opacity duration-200 ease-in-out`);
+  const editButtonClass = tw(`${cardButtonClass} text-blue-500 hover:text-blue-600`);
+  const deleteButtonClass = tw(`${cardButtonClass} text-red-500 hover:text-red-600`);
+  const detailWrapperClass = tw(`flex flex-col space-y-2`);
+  const detailItemClass = tw(`flex items-center`);
 
   return (
-    <div className="flex flex-col w-full max-w-lg space-y-4">
+    <div className={tw('flex flex-col w-full max-w-lg space-y-4')}>
       {forms.map((form) => (
-        <>
-        <FormItem
-          key={form._id}
-          form={form}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          handleStatusChange={handleStatusChange}
-          statusOptions={statusOptions}
-          cardWrapperClass={cardWrapperClass}
-          cardTitleClass={cardTitleClass}
-          detailWrapperClass={detailWrapperClass}
-          detailItemClass={detailItemClass}
-          editButtonClass={editButtonClass}
-          deleteButtonClass={deleteButtonClass}
+        <div key={form._id}>
+          <FormItemComponent
+            key={form._id}
+            form={form}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            handleStatusChange={handleStatusChange}
+            statusOptions={statusOptions}
+            cardWrapperClass={cardWrapperClass}
+            cardTitleClass={cardTitleClass}
+            detailWrapperClass={detailWrapperClass}
+            detailItemClass={detailItemClass}
+            editButtonClass={editButtonClass}
+            deleteButtonClass={deleteButtonClass}
           />
-          </>
+        </div>
       ))}
     </div>
   );

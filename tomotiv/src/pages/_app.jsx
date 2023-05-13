@@ -1,4 +1,6 @@
+import React from 'react';
 import twindConfig from '../twind.config';
+
 import withTwindApp from '@twind/next/app'
 import '../styles/globals.css'
 import { Provider } from '../context';

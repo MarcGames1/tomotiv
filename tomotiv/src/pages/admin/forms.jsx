@@ -4,7 +4,7 @@ import useApi from '../../hooks/useApi';
 import axios from 'axios';
 import useUserRole from '../../hooks/useUserRole';
 import Navigation from '../../components/Admin/Navigation';
-import FormList from '../../components/Admin/form/FormList';
+import FormList from '../../components/Admin/Form/FormList';
 
 const Forms = () => {
   const [selectedForms, setSelectedForms] = useState([]);
