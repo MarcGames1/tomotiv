@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { FaUsers, FaBookOpen, FaClipboardList } from 'react-icons/fa';
 import Link from 'next/link';
 import { tw } from 'twind';
@@ -10,6 +10,8 @@ const Navigation = () => {
    const {
      state: { user },
    } = useContext(Context);
+
+
 
   return (
     <nav
@@ -58,6 +60,6 @@ const Navigation = () => {
       </div>
     </nav>
   );
-};
+  }
 
 export default Navigation;

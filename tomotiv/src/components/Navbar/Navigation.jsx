@@ -16,6 +16,23 @@ import axios from 'axios';
 import { Logout } from '../../helpers/actions';
 
 
+   const roleBasedRouting = (role =[]) => {
+     switch (role[role.length - 1]) {
+       case 'admin':
+         return '/admin';
+         break;
+       case 'Instructor':
+         return '/instructor';
+         break;
+       case 'Subscriber':
+         return '/subscriber';
+         break;
+
+       default:
+         throw new Error(`Invalid role: ${role}`);
+     }
+   };
+
  const Navigation = () => {
 
 
@@ -29,6 +46,9 @@ import { Logout } from '../../helpers/actions';
   };
 
 
+
+
+   
   
   return (
     <>
@@ -117,14 +137,16 @@ const router = useRouter();
 
   return (
     <>
-      <span className={typography.p2}>Salutare, {user.nume}</span>
+      <span className={typography.p2}>
+        Salutare, <Link href={roleBasedRouting(user?.role)}>{user.nume}</Link>
+      </span>
       <Button className={`${button.primary} ${tw('border-blue-800 	')}`}>
         Vezi Cursurile tale
       </Button>
       <a
         onClick={async (e) => {
           e.preventDefault();
-          console.log('DELOGARE CLICKED')
+          console.log('DELOGARE CLICKED');
           dispatch({ type: 'LOGOUT' });
           router.push('/');
           Logout();

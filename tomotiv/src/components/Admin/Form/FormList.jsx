@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { tw } from 'twind';
-import FormItemComponent from './formItemComponent';
+import FormItemComponent from './FormItemComponent';
 import { deleteButtonClass } from './formStyles';
 import ApiClient from '../../../Classes/ApiClient';
 const FormList = ({ forms }) => {

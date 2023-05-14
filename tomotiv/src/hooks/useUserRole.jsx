@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 
 const useUserRole = (role) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+
+  const router = useRouter();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +40,16 @@ const useUserRole = (role) => {
   }, [role]);
 
   const ok = data !== null && data.ok;
+
+  if(!ok){
+    return <div>NU ai acces aici</div>
+  }
+  // Verificam daca utilizatorul are rolul necesar
+  if (typeof window !== 'undefined' && !ok) {
+    
+    // Facem redirect catre pagina principala
+    router.push('/');
+  }
 
   return { ok, data, loading };
 };

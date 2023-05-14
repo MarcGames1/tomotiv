@@ -3,6 +3,7 @@ import useApi from '../../hooks/useApi';
 import useUserRole from '../../hooks/useUserRole';
 import Navigation from '../../components/Admin/Navigation';
 import FormList from '../../components/Admin/Form/FormList'
+import AdminRoutes from '../../routes/Admin';
 const Forms = () => {
   const [selectedForms, setSelectedForms] = useState([]);
   const { userData } = useUserRole('Admin');
@@ -35,18 +36,18 @@ const Forms = () => {
   }
 
   return (
-    <>
+    <AdminRoutes>
       <Navigation user={userData} />
       <div className="container mx-auto my-4">
         <h1 className="text-2xl font-bold mb-4 ">Manage Forms</h1>
-        
+
         {forms && (
           <>
-           <FormList forms={forms} />
+            <FormList forms={forms} />
           </>
         )}
       </div>
-    </>
+    </AdminRoutes>
   );}
 
 export default Forms
