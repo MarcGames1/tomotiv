@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { tw } from 'twind';
 import FormItemComponent from './FormItemComponent';
-import axios from 'axios'
 import { deleteButtonClass } from './formStyles';
-import useDeleteApi from '../../../hooks/useDeleteApi';
 import ApiClient from '../../../Classes/ApiClient';
 const FormList = ({ forms }) => {
 
