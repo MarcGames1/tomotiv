@@ -22,11 +22,21 @@ const Homepage = () => {
 
       {/* Renuntam la watch Video - facem popup cu video  */}
       {/* SECTIUNE DESPRE NOI  */}
-      <ScroolAnimated.Up children={<DespreSection />} />
-      <ScroolAnimated.Left children={<Section2 />} />
-      <ScroolAnimated.Right children={<Section3 />} />
-      <ScroolAnimated.Left children={<Section4 />} />
-      <ScroolAnimated.Right children={<FAQSection />} />
+      <ScroolAnimated.Up>
+        <DespreSection />
+      </ScroolAnimated.Up>
+      <ScroolAnimated.Left>
+        <Section2 />
+      </ScroolAnimated.Left>
+      <ScroolAnimated.Right>
+        <Section3 />
+      </ScroolAnimated.Right>
+      <ScroolAnimated.Left>
+        <Section4 />
+      </ScroolAnimated.Left>
+      <ScroolAnimated.Right>
+        <FAQSection />
+      </ScroolAnimated.Right>
     </Page>
   );
 }
