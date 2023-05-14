@@ -56,12 +56,12 @@ const Provider = ({children}) => {
          let res = error.response;
          if (res.status === 401 && res.config && !res.config.__isRetryRequest) {
            return new Promise((resolve, reject) => {
+             window.localStorage.removeItem('user');
              axios
                .get('/api/logout')
                .then((data) => {
                  console.log('/401 error > logout');
                  dispatch({ type: 'LOGOUT' });
-                 window.localStorage.removeItem('user');
                  router.push('/sign-in');
                })
                .catch((err) => {

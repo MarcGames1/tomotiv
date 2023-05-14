@@ -23,7 +23,10 @@ export const typography = {
 export const formStyles = {
   form: tw('bg-blue-D80 flex flex-col justify-center'),
   label: tw('text-white tracking-widest leading-6 text-center m-4'),
-  input: tw('m-4 h-6 p-4 '),
+  input: tw('m-4 h-6 m-4 p-4 bg-red'),
+  textArea: tw(
+    'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-72	'
+  ),
   button: `${tw('lg:py-4 px-2 p-4')} ${styles.buttonPrimary}`,
 };
 

@@ -24,8 +24,8 @@ const formSchema = new Schema(
       required: true,
     },
     status: {
-      type: [String],
-      default: ['Nou'],
+      type: String,
+      default: 'Nou',
     enum: ['Nou', 'Asteapta raspuns de la noi', 'Asteptam raspuns de la el', 'Rezolvat'],
     },
   },

@@ -1,57 +1,57 @@
 import React, { useState } from 'react';
 import { tw } from 'twind';
 import FormItemComponent from './FormItemComponent';
-
-const statusOptions = [
-  { value: 'Nou', label: 'Nou' },
-  { value: 'Asteapta raspuns de la noi', label: 'Asteapta raspuns de la noi' },
-  { value: 'Asteptam raspuns de la el', label: 'Asteptam raspuns de la el' },
-  { value: 'Rezolvat', label: 'Rezolvat' },
-];
+import axios from 'axios'
+import { deleteButtonClass } from './formStyles';
+import useDeleteApi from '../../../hooks/useDeleteApi';
+import ApiClient from '../../../Classes/ApiClient';
 const FormList = ({ forms }) => {
-  const [selectedForm, setSelectedForm] = useState(null);
 
-  const handleEdit = (form) => {
-    setSelectedForm(form);
-  };
+  const [selectedForms, setSelectedForms] = useState([]);
+  const [isSelected, setIsSelected] = useState(false)
+  
+  const api = new ApiClient(process.env.NEXT_PUBLIC_API);
 
-  const handleDelete = (formId) => {
-    // Delete form with the given ID from the backend API
-    // Update state to reflect the deleted form
-  };
+ const handleSelect = (formId) => {
+   if (selectedForms.includes(formId)) {
+     setSelectedForms(selectedForms.filter((id) => id !== formId));
+   } else {
+     setSelectedForms([...selectedForms, formId]);
+   }
+ };
 
-  const handleStatusChange = (selectedOption) => {
-    setSelectedForm((prevState) => ({
-      ...prevState,
-      status: selectedOption.value,
-    }));
-  };
+const deleteSelectedForms = async () => {
+  try {
+    const response = await api.delete('/contact-forms/delete-all', {
+      data: { selectedForms },
+    });
+    console.log(response.data);
+    setSelectedForms([]);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  const cardWrapperClass = tw(`flex flex-col p-4 border rounded-lg shadow-md`);
-  const cardTitleClass = tw(`font-bold text-lg`);
-  const cardButtonClass = tw(`text-base p-1.5 rounded-lg focus:outline-none hover:opacity-75 transition-opacity duration-200 ease-in-out`);
-  const editButtonClass = tw(`${cardButtonClass} text-blue-500 hover:text-blue-600`);
-  const deleteButtonClass = tw(`${cardButtonClass} text-red-500 hover:text-red-600`);
-  const detailWrapperClass = tw(`flex flex-col space-y-2`);
-  const detailItemClass = tw(`flex items-center`);
 
-  return (
+ 
+
+  
+   return (
     <div className={tw('flex flex-col w-full max-w-lg space-y-4')}>
+      <div className="flex items-center justify-between">
+        <h2>Forms</h2>
+        {selectedForms.length > 0 && (
+          <button className={deleteButtonClass} onClick={e =>{deleteSelectedForms()}}>
+            Delete Selected Forms
+          </button>
+        )}
+      </div>
       {forms.map((form) => (
         <div key={form._id}>
           <FormItemComponent
             key={form._id}
             form={form}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            handleStatusChange={handleStatusChange}
-            statusOptions={statusOptions}
-            cardWrapperClass={cardWrapperClass}
-            cardTitleClass={cardTitleClass}
-            detailWrapperClass={detailWrapperClass}
-            detailItemClass={detailItemClass}
-            editButtonClass={editButtonClass}
-            deleteButtonClass={deleteButtonClass}
+            handleSelect={handleSelect}
           />
         </div>
       ))}
