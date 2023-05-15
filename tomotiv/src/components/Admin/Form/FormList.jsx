@@ -3,9 +3,13 @@ import { tw } from 'twind';
 import FormItemComponent from './FormItemComponent';
 import { deleteButtonClass } from './formStyles';
 import ApiClient from '../../../Classes/ApiClient';
-import useApi from '../../../hooks/useApi';
 
-const FormList = ({ forms, setisUiUpdated = () => {} }) => {
+const FormList = ({
+  forms = [],
+  updateFormList = () => {},
+  setisUiUpdated = () => {},
+ 
+}) => {
   const [selectedForms, setSelectedForms] = useState([]);
 
   const api = new ApiClient(process.env.NEXT_PUBLIC_API);
@@ -17,7 +21,8 @@ const FormList = ({ forms, setisUiUpdated = () => {} }) => {
       });
       console.log(response.data);
       setSelectedForms([]);
-      setisUiUpdated(false);
+    updateFormList(await api.get('/contact-forms')); 
+      
     } catch (error) {
       console.error(error);
     }
@@ -46,7 +51,10 @@ const FormList = ({ forms, setisUiUpdated = () => {} }) => {
             form={form}
             selectedForms={selectedForms}
             setSelectedForms={setSelectedForms}
-          />
+            updateFormList={updateFormList}
+           
+            />
+
         </div>
       ))}
     </div>

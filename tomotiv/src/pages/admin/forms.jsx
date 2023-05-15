@@ -10,13 +10,19 @@ const Forms = () => {
   
   const { userData } = useUserRole('Admin');
   const { data: forms, loading, success ,refetch} = useApi('/api/contact-forms');
-  const [formList, setFormList] = useState(forms || [])
-  const [isUiUpdated , setisUiUpdated] = useState(true)
+  const [formList, setFormList] = useState([])
+  
+
+
+  const updateFormList =(forms)=>{
+    setFormList(forms);
+   
+  }
 useEffect(() => {
-  refetch()
-  setFormList(forms);
-  setisUiUpdated(true)
-}, [isUiUpdated]);
+  updateFormList(forms)
+  // refetch();
+}, [success]);
+
 
 
   if (loading) {
@@ -35,7 +41,11 @@ useEffect(() => {
 
         {forms && (
           <>
-            <FormList forms={forms} setisUiUpdated={setisUiUpdated} />
+            <FormList
+              forms={formList}
+              updateFormList={setFormList}
+              
+            />
           </>
         )}
       </div>

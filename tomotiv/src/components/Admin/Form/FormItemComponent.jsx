@@ -9,6 +9,12 @@ import {
   detailWrapperClass,
   detailItemClass,
 } from './formStyles';
+import ApiClient from '../../../Classes/ApiClient';
+
+
+  const api = new ApiClient(process.env.NEXT_PUBLIC_API);
+
+
 
  const FormItemComponent = ({
    form = {
@@ -19,21 +25,31 @@ import {
      status: [],
    },
    selectedForms = [],
-   setSelectedForms = function (form) { return }
+   setSelectedForms = function (form) {
+     return;
+   },
+   updateFormList = () => {},
  }) => {
+   const handleCheckboxChange = (formId) => {
+     if (selectedForms.includes(formId)) {
+       // Deselectare - ștergere din listă
+       setSelectedForms(selectedForms.filter((id) => id !== formId));
+     } else {
+       // Selectare - adăugare în listă
+       setSelectedForms([...selectedForms, formId]);
+     }
+   };
 
-
-  
-const handleCheckboxChange = (formId) => {
-  if (selectedForms.includes(formId)) {
-    // Deselectare - ștergere din listă
-    setSelectedForms(selectedForms.filter((id) => id !== formId));
-  } else {
-    // Selectare - adăugare în listă
-    setSelectedForms([...selectedForms, formId]);
-  }
-};
-
+   const handleDelete = async (formId) => {
+     try {
+       const { msg } = await api
+         .delete(`/admin/contact-forms/${formId}`)
+          updateFormList(await api.get('/contact-forms')) 
+        
+     } catch (error) {
+       console.log(error);
+     }
+   };
 
    const statusOptions = [
      { value: 'Nou', label: 'Nou' },
@@ -45,7 +61,6 @@ const handleCheckboxChange = (formId) => {
      { value: 'Rezolvat', label: 'Rezolvat' },
    ];
 
-
    return (
      <>
        <div className={cardWrapperClass}>
@@ -55,7 +70,8 @@ const handleCheckboxChange = (formId) => {
              <input
                className={tw('default:ring-2')}
                type="checkbox"
-               onChange={() => handleCheckboxChange(form._id)} />
+               onChange={() => handleCheckboxChange(form._id)}
+             />
              <button
                className={deleteButtonClass}
                onClick={() => handleDelete(form._id)}
@@ -84,9 +100,7 @@ const handleCheckboxChange = (formId) => {
                defaultValue={statusOptions.find(
                  (option) => option.value === form.status
                )}
-               onChange={(value) => {
-                
-               }}
+               onChange={(value) => {}}
                options={statusOptions}
              />
            </div>
