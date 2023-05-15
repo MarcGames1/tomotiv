@@ -44,13 +44,15 @@ export const createForm = async (req, res) => {
 }
     const form = new Form({ nume, email, content, phone, status });
     await form.save();
+    
     res.status(200).json({ ok: true });
   } catch (error) {
     res.status(502).send(error.message);
   }
-
-  res.json(req.body);
+  
 };
+
+
 
 export const readAllForms = async (req, res) => {
 

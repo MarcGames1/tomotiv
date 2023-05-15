@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
 import Select from 'react-select';
 import {tw} from 'twind';
-import {MdModeEdit} from 'react-icons/md'
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import {
   cardWrapperClass,
   cardTitleClass,
-  cardButtonClass,
   deleteButtonClass,
   detailWrapperClass,
   detailItemClass,
@@ -20,17 +18,22 @@ import {
      content: '',
      status: [],
    },
-   
-   handleSelect = () =>{}
+   selectedForms = [],
+   setSelectedForms = function (form) { return }
  }) => {
 
-const [isSelected, setIsSelected] = useState(false)
-  
 
-const selectForm = (formId) =>{
-  setIsSelected(!isSelected)
-  handleSelect(formId);
-}
+  
+const handleCheckboxChange = (formId) => {
+  if (selectedForms.includes(formId)) {
+    // Deselectare - ștergere din listă
+    setSelectedForms(selectedForms.filter((id) => id !== formId));
+  } else {
+    // Selectare - adăugare în listă
+    setSelectedForms([...selectedForms, formId]);
+  }
+};
+
 
    const statusOptions = [
      { value: 'Nou', label: 'Nou' },
@@ -52,9 +55,7 @@ const selectForm = (formId) =>{
              <input
                className={tw('default:ring-2')}
                type="checkbox"
-               checked={isSelected}
-               onChange={() => selectForm(form._id)}
-             />
+               onChange={() => handleCheckboxChange(form._id)} />
              <button
                className={deleteButtonClass}
                onClick={() => handleDelete(form._id)}
@@ -84,9 +85,7 @@ const selectForm = (formId) =>{
                  (option) => option.value === form.status
                )}
                onChange={(value) => {
-                 handleStatusChange(value);
-                 setSelectedForm(form._id); //
-                 console.log(value, form._id);
+                
                }}
                options={statusOptions}
              />

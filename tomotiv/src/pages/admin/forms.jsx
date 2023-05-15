@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import useApi from '../../hooks/useApi';
 import useUserRole from '../../hooks/useUserRole';
 import Navigation from '../../components/Admin/Navigation';
@@ -7,27 +7,17 @@ import AdminRoutes from '../../routes/AdminRoutes';
 
 
 const Forms = () => {
-  const [selectedForms, setSelectedForms] = useState([]);
+  
   const { userData } = useUserRole('Admin');
-  const { data: forms, loading, success, refetch } = useApi('/api/contact-forms');
- 
+  const { data: forms, loading, success ,refetch} = useApi('/api/contact-forms');
+  const [formList, setFormList] = useState(forms || [])
+  const [isUiUpdated , setisUiUpdated] = useState(true)
+useEffect(() => {
+  refetch()
+  setFormList(forms);
+  setisUiUpdated(true)
+}, [isUiUpdated]);
 
-  const handleCheckboxChange = (e, id) => {
-    const isChecked = e.target.checked;
-    if (isChecked) {
-      setSelectedForms([...selectedForms, id]);
-    } else {
-      setSelectedForms(selectedForms.filter((formId) => formId !== id));
-    }
-  };
-
-  const handleDeleteForms = async () => {
-    await callApi({
-      data: {
-        ids: selectedForms,
-      },
-    });
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -45,7 +35,7 @@ const Forms = () => {
 
         {forms && (
           <>
-            <FormList forms={forms} />
+            <FormList forms={forms} setisUiUpdated={setisUiUpdated} />
           </>
         )}
       </div>
