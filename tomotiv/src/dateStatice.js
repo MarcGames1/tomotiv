@@ -17,7 +17,7 @@ export const servicii = [
 
 export const autori = {
   laura: {
-    poza: '/assets/echipa/Alex_Profil.png',
+    poza: '/assets/echipa/Laura_Profil.png',
     nume: 'Iaurum',
     prenume: 'Laura',
     functie: 'Social Media Specialist',
