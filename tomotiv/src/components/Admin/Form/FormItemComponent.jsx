@@ -51,6 +51,16 @@ import ApiClient from '../../../Classes/ApiClient';
      }
    };
 
+   const handleStatusChange = async (status) => {
+     try {
+       await api.put(`/admin/contact-forms/${form._id}`, { status });
+       // Actualizăm formularul în lista de forme
+       updateFormList(await api.get('/contact-forms'));
+     } catch (error) {
+       console.log(error);
+     }
+   };
+
    const statusOptions = [
      { value: 'Nou', label: 'Nou' },
      {
@@ -100,7 +110,7 @@ import ApiClient from '../../../Classes/ApiClient';
                defaultValue={statusOptions.find(
                  (option) => option.value === form.status
                )}
-               onChange={(value) => {}}
+               onChange={(value) => { handleStatusChange(value.value)}}
                options={statusOptions}
              />
            </div>
