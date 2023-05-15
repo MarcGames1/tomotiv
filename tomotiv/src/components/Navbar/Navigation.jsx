@@ -18,7 +18,7 @@ import { Logout } from '../../helpers/actions';
 
    const roleBasedRouting = (role =[]) => {
      switch (role[role.length - 1]) {
-       case 'admin':
+       case 'Admin':
          return '/admin';
          break;
        case 'Instructor':
@@ -29,6 +29,7 @@ import { Logout } from '../../helpers/actions';
          break;
 
        default:
+        console.log(role[role.length - 1]);
          throw new Error(`Invalid role: ${role}`);
      }
    };

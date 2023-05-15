@@ -3,7 +3,9 @@ import useApi from '../../hooks/useApi';
 import useUserRole from '../../hooks/useUserRole';
 import Navigation from '../../components/Admin/Navigation';
 import FormList from '../../components/Admin/Form/FormList'
-import AdminRoutes from '../../routes/Admin';
+import AdminRoutes from '../../routes/AdminRoutes';
+
+
 const Forms = () => {
   const [selectedForms, setSelectedForms] = useState([]);
   const { userData } = useUserRole('Admin');
