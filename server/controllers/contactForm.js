@@ -1,6 +1,13 @@
 import { createSendEmailCommand, getParams } from '../AwsEmailHelper/Index';
 import Form from '../models/form';
 import { ValidateFormFields } from './helpers';
+import { SESClient, CloneReceiptRuleSetCommand } from '@aws-sdk/client-ses';
+import { awsConfig } from '../awsConfig/awsConfig';
+
+
+const client = new SESClient(awsConfig);
+
+
 export const sendTestEmail = async (req, res) => {
   const params = {
     Source: process.env.EMAIL_FROM,
@@ -36,15 +43,51 @@ export const sendTestEmail = async (req, res) => {
 };
 
 export const createForm = async (req, res) => {
+
+  
   try {
     const { nume, email, phone, content, status } = req.body;
+    const params = getParams(
+      [
+        'george.marcu20@gmail.com',
+        'alexandru@tomotiv.ro',
+        'laura.iaurum20@gmail.com',
+        'laura@tomotiv.ro',
+      ],
+      `TOMOTIV - ${nume} a completat formularul`,
+      `<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Formular de contact</title>
+  </head>
+  <body>
+    <h1>Formular de contact</h1>
+    <p><strong>Nume:</strong> ${nume}</p>
+    <p><strong>E-mail:</strong> ${email}</p>
+    <p><strong>Telefon:</strong> ${phone}</p>
+    <p><strong>Mesaj:</strong></p>
+    <p>${content}</p>
+    <p><strong>Statut:</strong> ${status}</p>
+  </body>
+</html>`
+    );
     const errors = ValidateFormFields(nume, email,phone, content );
     if (errors.length > 0) {
     return res.status(400).json({ errors });
 }
     const form = new Form({ nume, email, content, phone, status });
     await form.save();
-    
+    //trimite email catre noi
+
+    const emailFormular = createSendEmailCommand(params)
+    try {
+      const emailSend = await client.send(emailFormular);
+      console.log(emailSent);
+      res.json({ ok: true });
+    } catch (error) {
+      console.error(error.message);
+    }
+
     res.status(200).json({ ok: true });
   } catch (error) {
     res.status(502).send(error.message);
