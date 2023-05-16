@@ -17,13 +17,13 @@ const useUserRole = (role) => {
         let res;
         switch (role) {
           case 'Admin':
-            res = await axios.get('/api/current-admin');
+            res = await axios.get(`${process.env.API}/current-admin`);
             break;
           case 'Instructor':
-            res = await axios.get('/api/current-instructor');
+            res = await axios.get(`${process.env.API}/current-instructor`);
             break;
           case 'Subscriber':
-            res = await axios.get('/api/current-user');
+            res = await axios.get(`${process.env.API}/current-user`);
             break;
           default:
             throw new Error(`Invalid role: ${role}`);
