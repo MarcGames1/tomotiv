@@ -8,39 +8,6 @@ import { awsConfig } from '../awsConfig/awsConfig';
 const client = new SESClient(awsConfig);
 
 
-export const sendTestEmail = async (req, res) => {
-  const params = {
-    Source: process.env.EMAIL_FROM,
-    Destination: { ToAddresses: ['george.marcu20@gmail.com'] },
-    ReplyToAddresses: [process.env.EMAIL_FROM],
-    Message: {
-      Body: {
-        Html: {
-          Charset: 'UTF-8',
-          Data: `
-                <html>
-                <h1>Reset password link </h1>
-                <p>Foloseste acest Link pentru resetarea parolei</p>
-                </html>
-                `,
-        },
-      },
-      Subject: {
-        Charset: 'UTF-8',
-        Data: `Link Resetare Parola`,
-      },
-    },
-  };
-
-  const sendEmailCommand = createSendEmailCommand(params);
-  try {
-    const emailSent = await client.send(sendEmailCommand);
-    console.log(emailSent);
-    res.json({ ok: true });
-  } catch (error) {
-    console.error(error.message);
-  }
-};
 
 export const createForm = async (req, res) => {
 
@@ -51,7 +18,7 @@ export const createForm = async (req, res) => {
       [
         'george.marcu20@gmail.com',
         'alexandru@tomotiv.ro',
-        'laura.iaurum20@gmail.com',
+        'laura.iaurum28@gmail.com',
         'laura@tomotiv.ro',
       ],
       `TOMOTIV - ${nume} a completat formularul`,
