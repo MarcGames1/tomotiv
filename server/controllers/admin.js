@@ -13,3 +13,42 @@ export const currentAdmin = async (req, res) => {
     console.log(err);
   }
 };
+
+
+export const listUsers = async (req, res) => {
+  try {
+    const users = await User.find().select(
+      'nume email role createdAt updatedAt'
+    );
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+};
+
+export const updateRole = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { role } = req.body;
+
+    const user = await User.findByIdAndUpdate(userId, { role }, { new: true });
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+};
+
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    await User.findByIdAndDelete(userId);
+    res.json({ message: 'User deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+};

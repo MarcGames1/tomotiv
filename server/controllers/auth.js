@@ -107,41 +107,7 @@ export const currentUser = async( req, res) =>{
     }
 }
 
-export const sendTestEmail = async( req, res) =>{
 
-    const params = {
-      Source: process.env.EMAIL_FROM,
-      Destination: { ToAddresses: ['george.marcu20@gmail.com'] },
-      ReplyToAddresses: [process.env.EMAIL_FROM],
-      Message:{
-        Body:{
-            Html:{
-                Charset: 'UTF-8',
-                Data: `
-                <html>
-                <h1>Reset password link </h1>
-                <p>Foloseste acest Link pentru resetarea parolei</p>
-                </html>
-                `
-            }
-        },
-        Subject: {
-            Charset: 'UTF-8',
-                Data: `Link Resetare Parola`
-        }
-      }
-    };
- 
-const sendEmailCommand = createSendEmailCommand( params );
-    try {
-          const emailSent = await client.send(sendEmailCommand);
-          console.log(emailSent);
-            res.json({ ok: true });
-    
-    } catch (error) {
-        console.error(error.message)
-    }
-}
 
 export const forgotPassword =async (req, res) =>{
     try {
