@@ -67,7 +67,7 @@ export const login = async (req, res) => {
         //send token in cookie\
         res.cookie("token" ,token, {
             httpOnly: true,
-            // secure:true // cu HTTPS
+            secure:true // cu HTTPS
         })
         
         // send user JSON Response to client
