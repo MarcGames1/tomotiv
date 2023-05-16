@@ -58,7 +58,7 @@ const Provider = ({children}) => {
            return new Promise((resolve, reject) => {
              window.localStorage.removeItem('user');
              axios
-               .get('/api/logout')
+               .get(`${process.env.API}/logout`)
                .then((data) => {
                  console.log('/401 error > logout');
                  dispatch({ type: 'LOGOUT' });
@@ -76,7 +76,9 @@ const Provider = ({children}) => {
 
       useEffect(() => {
         const getCsrfToken = async () => {
-          const { data } = await axios.get('/api/csrf-token');
+          const { data } = await axios.get(
+            `${process.env.NEXT_PUBLIC_API}/csrf-token`
+          );
           // console.log("CSRF", data);
           axios.defaults.headers['X-CSRF-Token'] = data.csrfToken;
         };
