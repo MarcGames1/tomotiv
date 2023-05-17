@@ -1,7 +1,7 @@
 import User from "../models/user";
 import { hashPassword, comparePassword } from "../utils/auth";
 import jwt from 'jsonwebtoken'
-
+require('dotenv').config();
 import { nanoid } from 'nanoid';
 
 import { SESClient, CloneReceiptRuleSetCommand } from '@aws-sdk/client-ses';
@@ -52,11 +52,22 @@ export const login = async (req, res) => {
         if(!user) return res.status(400).send("UUtilizatorul nu exista")
 
         // verificam parola 
-        const match = await comparePassword(password, user.password)
+        const match = await comparePassword(password, user.password).then(console.log('password matched'))
         if(!match) return res.status(400).send('Utilizator negasit sau Parola Gresita')
         // Creaza JWT
-        const token = jwt.sign({_id: user.id}, process.env.JWT_SECRET, {expiresIn:'7d',})
-
+        try {
+          const token = jwt.sign({ _id: user.id }, process.env.JWT_SECRET, {
+            expiresIn: '7d',
+          });
+          console.log('TOKEN CREAT', token);
+          //send token in cookie\
+          res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, // cu HTTPS
+          });
+        } catch (error) {
+            console.log('ERROR => ',error)
+        }
         //return user and token to client exclude hashedpassword
 
         user.password = undefined;
@@ -64,11 +75,7 @@ export const login = async (req, res) => {
         
         
         
-        //send token in cookie\
-        res.cookie("token" ,token, {
-            httpOnly: true,
-            secure:true // cu HTTPS
-        })
+       
         
         // send user JSON Response to client
         res.json(user);
