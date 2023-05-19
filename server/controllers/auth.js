@@ -49,7 +49,7 @@ export const login = async (req, res) => {
         
         // verifica daca in DB exista un User cu adresa de email din req.body
         const user = await User.findOne({email}).exec();
-        if(!user) return res.status(400).send("UUtilizatorul nu exista")
+        if(!user) return res.status(400).send("Utilizatorul nu exista")
 
         // verificam parola 
         const match = await comparePassword(password, user.password).then(console.log('password matched'))
@@ -63,7 +63,7 @@ export const login = async (req, res) => {
           //send token in cookie\
           res.cookie('token', token, {
             httpOnly: true,
-            secure: true, // cu HTTPS
+            // secure: true, // cu HTTPS 
           });
         } catch (error) {
             console.log('ERROR => ',error)

@@ -1,5 +1,7 @@
 const colors = require('tailwindcss/colors');
 export default {
+  content: ['./src/pages/**/*.{ts,tsx,jsx}', './public/**/*.html'],
+  plugins: [require('flowbite/plugin')],
   theme: {
     extend: {
       colors: {

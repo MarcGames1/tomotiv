@@ -35,6 +35,7 @@ const useUserRole = (role) => {
             throw new Error(`Invalid role: ${role}`);
         }
         setData(res.data);
+        console.log(res.data);
       } catch (error) {
         console.error(error);
         setData(null);
