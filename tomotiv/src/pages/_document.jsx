@@ -5,6 +5,16 @@ export default function Document() {
   return (
     <Html className="scroll-smooth" lang="ro">
       <Head>
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css"
+          rel="stylesheet"
+        />
+        {/* <Script
+          id="flowbite-script"
+          defer
+          strategy="afterInteractive"
+          src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"
+        ></Script> */}
         <Script
           id="gtm-script"
           defer

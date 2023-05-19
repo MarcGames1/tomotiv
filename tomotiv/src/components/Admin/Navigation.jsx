@@ -35,11 +35,11 @@ const Navigation = () => {
           </li>
           <li className={tw`mr-6`}>
             <Link
-              href="/admin/courses"
+              href="/admin/cursuri"
               className={tw`text-gray-400 hover:text-white flex items-center`}
             >
               <FaBookOpen className={tw`mr-2`} />
-              Courses
+              Cursuri
             </Link>
           </li>
           <li className={tw`mr-6`}>
@@ -48,7 +48,7 @@ const Navigation = () => {
               className={tw`text-gray-400 hover:text-white flex items-center`}
             >
               <FaClipboardList className={tw`mr-2`} />
-              Forms
+              Formulare
             </Link>
           </li>
           <li>

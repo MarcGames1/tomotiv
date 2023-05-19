@@ -1,9 +1,8 @@
 import React, { useState , useEffect} from 'react';
 import useApi from '../../hooks/useApi';
 import useUserRole from '../../hooks/useUserRole';
-import Navigation from '../../components/Admin/Navigation';
 import FormList from '../../components/Admin/Form/FormList'
-import AdminRoutes from '../../routes/AdminRoutes';
+import AdminLayout from '../../components/Admin/AdminLayout'
 
 
 const Forms = () => {
@@ -34,22 +33,18 @@ useEffect(() => {
   }
 
   return (
-    <AdminRoutes>
-      <Navigation user={userData} />
+    <AdminLayout>
+      
       <div className="container mx-auto my-4">
         <h1 className="text-2xl font-bold mb-4 ">Manage Forms</h1>
 
         {forms && (
           <>
-            <FormList
-              forms={formList}
-              updateFormList={setFormList}
-              
-            />
+            <FormList forms={formList} updateFormList={setFormList} />
           </>
         )}
       </div>
-    </AdminRoutes>
+    </AdminLayout>
   );}
 
 export default Forms

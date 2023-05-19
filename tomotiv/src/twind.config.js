@@ -1,8 +1,49 @@
 const colors = require('tailwindcss/colors');
 export default {
-  content: ['./src/pages/**/*.{ts,tsx,jsx}', './public/**/*.html'],
+  content: [
+    './node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+    './node_modules/flowbite/**/*.js',
+    './node_modules/flowbite-react/**/*.js',
+    './src/pages/**/*.{ts,tsx,jsx}',
+    './public/**/*.html',
+  ],
   plugins: [require('flowbite/plugin')],
+  safelist: [
+    'w-64',
+    'w-1/2',
+    'rounded-l-lg',
+    'rounded-r-lg',
+    'bg-gray-200',
+    'grid-cols-4',
+    'grid-cols-7',
+    'h-6',
+    'leading-6',
+    'h-9',
+    'leading-9',
+    'shadow-lg',
+  ],
+  darkMode: 'class',
+  variants: {
+    fill: [],
+    extend: {
+      borderColor: ['focus-visible'],
+      opacity: ['disabled'],
+    },
+  },
   theme: {
+    colors: {
+      black: colors.black,
+      red: colors.red,
+      gray: colors.gray,
+      blue: colors.blue,
+      white: colors.white,
+      gray: colors.gray,
+      emerald: colors.emerald,
+      indigo: colors.indigo,
+      yellow: colors.yellow,
+      slate: colors.slate,
+      stone: colors.stone,
+    },
     extend: {
       colors: {
         transparent: 'transparent',
