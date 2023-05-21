@@ -1,11 +1,4 @@
 
-
-export const menuItems = [
-  { label: 'Despre Noi', href: '/despre/' },
-  { label: 'Contacteaza-ne', href: '/contact' },
-  { label: 'Curs SEO', href: '/curs-seo' },
-];
-
 export const servicii = [
   { label: 'Servicii Seo', href: '/servicii/servicii-seo' },
   { label: 'Promovare Google Ads', href: '/servicii/google-ads' },
