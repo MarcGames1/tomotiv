@@ -15,8 +15,8 @@ const Navigation = () => {
   
   const args = {normal: true, compact: 'md', vertical: false, horizontal: true};
   return (
-    <div className="  flex  bg-base-100 p-4 items-center justify-center gap-2 font-sans">
-      <Navbar {...args}>
+    <div className=" z-50 flex  bg-base-100 p-4 items-center justify-center gap-2 font-sans">
+      <Navbar>
         <Navbar.Start>
           {/* DROPDOWN SE AFISEAZA DOAR PE MOBIL  */}
           <Dropdown>
@@ -80,8 +80,8 @@ const Navigation = () => {
                 Curs Seo
               </NavigationLink>
               <Menu.Item tabIndex={0}>
-                <a>
-                  Servicii
+                <a className="justify-between">
+                  Serviciii
                   <svg
                     className="fill-current"
                     xmlns="http://www.w3.org/2000/svg"
@@ -92,9 +92,9 @@ const Navigation = () => {
                     <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                   </svg>
                 </a>
-                <Menu className="p-2 bg-base-100">
-                  {servicii.map((serviciu) => (
-                    <NavigationLink key={serviciu.href} href={serviciu.href}>
+                <Menu className="z-50 p-2 bg-base-100">
+                  {servicii.map((serviciu, idx) => (
+                    <NavigationLink key={idx} href={serviciu.href}>
                       {serviciu.label}
                     </NavigationLink>
                   ))}

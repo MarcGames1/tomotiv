@@ -1,3 +1,5 @@
+import React from "react";
+import Image from "next/image";
 
 export const servicii = [
   { label: 'Servicii Seo', href: '/servicii/servicii-seo' },
@@ -6,6 +8,85 @@ export const servicii = [
   { label: 'CopyWriting', href: '/servicii/copywriting' },
   { label: 'Creare Logo', href: '/servicii/creare-logo' },
   { label: 'Promovare Social Media', href: '/servicii/promovare-social-media' },
+];
+
+
+export const carouselData = [
+  {
+    titlu: (
+      <>
+        {' '}
+        <h1 className="text-7xl font-bold">
+          Ai Toate Motivele sa <span className="text-primary">reusesti</span>
+        </h1>
+      </>
+    ),
+    subtitlu: (
+      <>
+        <p className="py-6">
+          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+          excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
+          id nisi.
+        </p>
+      </>
+    ),
+    svg: (
+      <>
+        {' '}
+        <Image fill src={'/svg/carousel1.svg'} />
+      </>
+    ),
+  },
+  {
+    titlu: (
+      <>
+        {' '}
+        <h1 className="text-7xl font-bold">
+          Ai Toate Motivele sa <span className="text-primary">reusesti</span>
+        </h1>
+      </>
+    ),
+    subtitlu: (
+      <>
+        <p className="py-6">
+          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+          excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
+          id nisi.
+        </p>
+      </>
+    ),
+    svg: (
+      <>
+        {' '}
+        <Image fill src={'/svg/carousel1.svg'} />
+      </>
+    ),
+  },
+  {
+    titlu: (
+      <>
+        {' '}
+        <h1 className="text-7xl font-bold">
+          Ai Toate Motivele sa <span className="text-primary">reusesti</span>
+        </h1>
+      </>
+    ),
+    subtitlu: (
+      <>
+        <p className="py-6">
+          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+          excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
+          id nisi.
+        </p>
+      </>
+    ),
+    svg: (
+      <>
+        {' '}
+        <Image fill src={'/svg/carousel1.svg'} />
+      </>
+    ),
+  },
 ];
 
 

@@ -3,5 +3,16 @@
 @tailwind utilities;
 
 html{
-    background-color: var(--n)
+    background-color: var(--n);
+    scrool-behavior:smooth;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
 }
