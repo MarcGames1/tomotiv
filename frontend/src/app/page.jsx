@@ -3,11 +3,14 @@ import SectiuneGri from '@/components/SectiuneGri'
 import SectiuneAlba from '@/components/LayoutComponents/SectiuneAlba';
 import Card1 from '@/components/LayoutComponents/cardSectionComponents/Card1/Card1';
 import {IoIosPeople} from 'react-icons/io'
-import GridColsd10 from '@/components/LayoutComponents/cardSectionComponents/GridColsd10';
+import GridColsd10 from '@/components/GridColsd10';
 import Sectiune3Card from '@/components/LayoutComponents/cardSectionComponents/sectiune3Card';
 import CardContainer from '@/components/LayoutComponents/cardSectionComponents/CardContainer';
+import Page from './PageLayout';
+
 export default function Home() {
-  return (
+  return (<Page>
+
     <main className="">
       <SectiuneAlba margin="mr-20 ml-10">
         <HeroCarousel />
@@ -36,24 +39,24 @@ export default function Home() {
             Valorile Companiei
           </h2>
         </div>
-        <Sectiune3Card className={'my-5'}>
-          <CardContainer idx={2}>
+        <Sectiune3Card className={' my-5 gap-3 '}>
+          <CardContainer idx={1}>
             <Card1
               p={
                 ' Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis dignissimos'
               }
               heading={'Onestitate'}
-            >
+              >
               <IoIosPeople className="text-primary" size={'5em'} />
             </Card1>
           </CardContainer>
-          <CardContainer idx={5}>
+          <CardContainer idx={4}>
             <Card1
               p={
                 ' Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis dignissimos'
               }
               heading={'Onestitate'}
-            >
+              >
               <IoIosPeople className="text-primary" size={'5em'} />
             </Card1>
           </CardContainer>
@@ -63,7 +66,7 @@ export default function Home() {
                 ' Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis dignissimos'
               }
               heading={'Onestitate'}
-            >
+              >
               <IoIosPeople className="text-primary" size={'5em'} />
             </Card1>
           </CardContainer>
@@ -72,5 +75,6 @@ export default function Home() {
 
 
     </main>
+              </Page>
   );
 }

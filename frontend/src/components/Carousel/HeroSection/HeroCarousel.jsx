@@ -34,9 +34,11 @@ export const Bulinute = () => {
   return (
     <div className="z-50 text-primary bg-base-100 flex justify-center w-full py-2 gap-2">
       {carouselData.map((d, idx) =>{
-        return <a href={'#item' + idx} className={anchorStyle}>
-          &bull;
-        </a>;
+        return (
+          <a key={'itemLink' + idx} href={'#item' + idx} className={anchorStyle}>
+            &bull;
+          </a>
+        );
       })}
       
     </div>

@@ -1,8 +1,8 @@
 import React from 'react'
 
-const SectiuneAlba = ({children, margin="ml-20 "}) => {
+const SectiuneAlba = ({children, className ='',}) => {
   return (
-    <div className={`bg-primary ${margin}`}>{children}</div>
+    <div className={`bg-base-100 ${className} `}>{children}</div>
   )
 }
 

@@ -1,6 +1,7 @@
+'use client';
 import { useReducer, createContext, useEffect } from "react";
 import axios from "axios";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 
 
@@ -30,11 +31,11 @@ const rootReducer = ( state, action) =>{
 //context provider
 
 const Provider = ({children}) => {
-    
+  
+  const router = useRouter()
     
     const [state, dispatch] = useReducer( rootReducer, initialState)
 
-    const router = useRouter()
 
 
       useEffect(() => {

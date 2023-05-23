@@ -16,7 +16,7 @@ const GridColsd10 = ({children, cols=10}) => {
   
   return (
     <div
-      className={`grid grid-cols-${checknumberOfColumns(cols)}  items-center mx-10`}
+      className={`grid grid-flow-row md:grid-flow-col px-10 gap-5`}
     >
       {children}
     </div>
