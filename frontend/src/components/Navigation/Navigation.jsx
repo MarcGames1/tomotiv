@@ -1,21 +1,26 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import SwitchTheme from './SwitchTheme';
 import { Navbar, Dropdown, Button, Menu } from 'react-daisyui';
 import Link from 'next/link';
 
+import LoggedUserButtons from './LoggedUserButtons';
 
 import { servicii } from '@/dateStatice';
+
+import { Context } from '../../context';
 
 const Navigation = () => {
   //  const matches = useMediaQuery('(min-width: 768px)');
 
+const { state, dispatch } = useContext(Context);
+const { user } = state;
   
   const args = {normal: true, compact: 'md', vertical: false, horizontal: true};
   return (
-    <div className=" z-50 flex  bg-base-100 p-4 items-center justify-center gap-2 font-sans">
-      <Navbar>
+    <div className="  flex   bg-base-100 p-4 items-center justify-center gap-2 font-sans">
+      <Navbar className="">
         <Navbar.Start>
           {/* DROPDOWN SE AFISEAZA DOAR PE MOBIL  */}
           <Dropdown>
@@ -102,9 +107,16 @@ const Navigation = () => {
             </Menu>
           </div>
           <div className="gap-3 flex">
-            <Button className="btn-primary text-neutral">
-              Inregistreaza-te
-            </Button>
+            <>
+              {user ? (
+                <LoggedUserButtons dispatch={dispatch} user={user} />
+              ) : (
+                <Button className="btn-primary text-neutral">
+                  Inregistreaza-te
+                </Button>
+              )}
+            </>
+            
             <SwitchTheme />
           </div>
         </Navbar.End>

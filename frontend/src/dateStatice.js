@@ -33,7 +33,7 @@ export const carouselData = [
     svg: (
       <>
         {' '}
-        <Image fill src={'/svg/carousel1.svg'} />
+        <Image alt="Imagine Carusel 1" fill src={'/svg/carousel1.svg'} />
       </>
     ),
   },
@@ -58,7 +58,7 @@ export const carouselData = [
     svg: (
       <>
         {' '}
-        <Image fill src={'/svg/carousel1.svg'} />
+        <Image alt="Imagine Carusel 2" fill src={'/svg/carousel1.svg'} />
       </>
     ),
   },
@@ -83,7 +83,7 @@ export const carouselData = [
     svg: (
       <>
         {' '}
-        <Image fill src={'/svg/carousel1.svg'} />
+        <Image alt="Imagine Carusel 3" fill src={'/svg/carousel1.svg'} />
       </>
     ),
   },

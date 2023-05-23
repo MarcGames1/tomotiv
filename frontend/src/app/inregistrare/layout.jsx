@@ -1,7 +1,5 @@
 // import './globals.css';
-import { Inter } from 'next/font/google';
-import Script from 'next/script';
-import InregistrareComponent from './inregistrareComponent';
+import Page from '../PageLayout';
 
 
 
@@ -12,10 +10,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return (<>
-    <InregistrareComponent>{children}</InregistrareComponent>
-  </>
-    );
+  return (
+    <>
+      <Page>
+        <div>{children}</div>
+      </Page>
+    </>
+  );
   }
     
 

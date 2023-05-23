@@ -2,6 +2,9 @@
 client/node_modules/
 client/.next
 client/.env.local
+frontend/.env
+frontend/.env.local
+frontend/node_modules
 client/.env
 server/node_modules/
 server/.env

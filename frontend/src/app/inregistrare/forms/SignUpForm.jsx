@@ -1,14 +1,15 @@
 'use client';
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useEffect ,useContext, useRef } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-
+import {Link as DasyLink} from 'react-daisyui';
 import { useRouter } from 'next/navigation';
 import { Input, InputGroup } from 'react-daisyui';
 
 import { Context } from '@/context';
 
 import ApiClient from '@/Classes/ApiClient'
+import Link from 'next/link';
 
 const SignUpForm = () => {
   const [nume, setNume] = useState('');
@@ -53,6 +54,7 @@ const SignUpForm = () => {
       });
 
       console.log('res => ', res);
+      console.log('caught:::', JSON.stringify(response, null, 2));
       if (res) {
         data = res.data; // update the data variable with the response data
       }
@@ -64,7 +66,8 @@ const SignUpForm = () => {
       try {
         setLoading(true);
         await console.log(data);
-        if(data?.name =='AxiosError'){
+        if(data?.message){
+
           toast.error(data.message)
           formHandler.reset()
           throw new Error(data.message)
@@ -88,6 +91,13 @@ const SignUpForm = () => {
     bordered: true,
     color: 'secondary',
   };
+
+   useEffect(() => {
+     if (user !== null) {
+       router.push('/');
+     }
+   }, [user]);
+
   return (
     <>
       <form
@@ -130,6 +140,13 @@ const SignUpForm = () => {
         >
           Inregistreaza-te!
         </button>
+
+        <div className="block m-auto prose  text-secondary">
+          Ai deja cont? Logeaza-te{' '}
+          <Link className="link link-primary" href={'/login'}>
+            aici
+          </Link>{' '}
+        </div>
       </form>
     </>
   );
