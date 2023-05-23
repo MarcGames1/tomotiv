@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import SwitchTheme from './SwitchTheme';
-import { useMediaQuery } from 'usehooks-ts';
 import { Navbar, Dropdown, Button, Menu } from 'react-daisyui';
 import Link from 'next/link';
 

@@ -6,8 +6,9 @@ import {IoIosPeople} from 'react-icons/io'
 import GridColsd10 from '@/components/GridColsd10';
 import Sectiune3Card from '@/components/LayoutComponents/cardSectionComponents/sectiune3Card';
 import CardContainer from '@/components/LayoutComponents/cardSectionComponents/CardContainer';
-import SignInForm from './forms/signInForm';
-import SignUpForm from './forms/signUpForm';
+import SignInForm from './forms/SignInForm';
+import SignUpForm from './forms/SignUpForm';
+
 export default function Inregistrare() {
   return (
     <main className="">
