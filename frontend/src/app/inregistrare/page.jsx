@@ -11,17 +11,14 @@ import SignUpForm from './forms/SignUpForm';
 
 export default function Inregistrare() {
   return (
-    <main className="">
-      <GridColsd10 cols={8}>
-        <SectiuneAlba className="grid-col-span-3 prose">
+    <main className=" w-full">
+      
+        <SectiuneAlba className="block w-full p-5 mx-auto prose">
           <h1 className="text-center m-6 ">Inregistrare</h1>
-          <SignInForm />
-        </SectiuneAlba>
-        <SectiuneAlba className="grid-col-span-3 prose">
-          <h1 className="text-center m-6 ">Autentificare</h1>
           <SignUpForm />
+          <span className='prose-h2 text-secondary'>Ai deja cont? </span>
         </SectiuneAlba>
-      </GridColsd10>
+        
     </main>
   );
 }
