@@ -27,12 +27,7 @@ const SignInForm = () => {
 
   const api = new ApiClient(process.env.NEXT_PUBLIC_API);
   const formHandler = {
-    parola: (e) => {
-      setPassword(e.target.value);
-    },
-    email: (e) => {
-      setEmail(e.target.value);
-    },
+   
     reset: () => {
       setEmail(null);
       setPassword(null);
@@ -41,16 +36,16 @@ const SignInForm = () => {
     },
 
     sendData: async () => {
-      let data = {};
-      const res = await api.post(`/login`, {
-        password,
-        email,
-      });
+      const { data } = await api.post('/login', { password, email });
 
-      console.log('res => ', res);
-      if (res) {
-        data = res.data; // update the data variable with the response data
+      if (data) {
+        console.log('res => ', data);
+        return data;
+        // update the data variable with the response data
+      } else {
+        throw new Error('Ce PLM nu merge? ');
       }
+
       return data;
     },
     submit: async (e) => {
@@ -87,20 +82,28 @@ const SignInForm = () => {
       <form
         onSubmit={formHandler.submit}
         ref={formRef}
+        autoComplete="off"
         className="flex flex-col items-center"
       >
         <div className="form-control w-full max-w-xs">
-          <label className="label">
+          <label htmlFor="email" className="label">
             <span className="label-text">Adresa de Email</span>
           </label>
-          <Input name="nume" type="email" {...inputArgs} />
+          <Input
+            required
+            onInput={(e) => setEmail(e.target.value.toLowerCase())}
+            name="email"
+            type="email"
+            {...inputArgs}
+          />
         </div>
         <div className="form-control w-full max-w-xs">
-          <label className="label">
+          <label gtmlFor="password" className="label">
             <span className="label-text">Parola </span>
           </label>
           <Input
-            onInput={formHandler.parola}
+            required
+            onInput={(e) => setPassword(e.target.value.toLowerCase())}
             name="password"
             type="password"
             {...inputArgs}

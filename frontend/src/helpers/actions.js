@@ -1,7 +1,9 @@
 import { toast } from 'react-hot-toast';
 import ApiClient from '@/Classes/ApiClient';
 
-const api = new ApiClient(process.env.API)
+const serverApi = process.env.NODE_PUBLIC_API || process.env.API
+
+const api = new ApiClient(serverApi)
 
 export const Logout = async () => {
   window.localStorage.removeItem('user');

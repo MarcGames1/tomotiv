@@ -120,7 +120,7 @@ const SignUpForm = () => {
           <label className="label">
             <span className="label-text">Adresa de Email</span>
           </label>
-          <Input name="nume" type="email" {...inputArgs} />
+          <Input onInput={formHandler.email} name="email" type="email" {...inputArgs} />
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
