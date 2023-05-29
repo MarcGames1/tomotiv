@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import SwitchTheme from './SwitchTheme';
 import { Navbar, Dropdown, Button, Menu } from 'react-daisyui';
 import Link from 'next/link';

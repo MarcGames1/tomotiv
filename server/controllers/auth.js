@@ -53,7 +53,7 @@ export const login = async (req, res) => {
 
         // verificam parola 
         const match = await comparePassword(password, user.password).then(console.log('password matched'))
-        if(!match) return res.status(400).send('Utilizator negasit sau Parola Gresita')
+        if(  !match) return res.status(400).send('Utilizator negasit sau Parola Gresita')
         // Creaza JWT
         try {
           const token = jwt.sign({ _id: user.id }, process.env.JWT_SECRET, {
@@ -160,7 +160,7 @@ export const resetPassword = async (req, res) =>{
           },
           {
             password: hashedPassword,
-            passwordResetCode: "",
+            passwordResetCode: undefined,
           }
         ).exec();
         res.json({ ok:true });

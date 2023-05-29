@@ -1,10 +1,9 @@
 'use client';
 import React, { useState, useContext, useRef } from 'react';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 // import { Link as DasyLink } from 'react-daisyui';
 import { useRouter } from 'next/navigation';
-import { Input, InputGroup } from 'react-daisyui';
+import { Input } from 'react-daisyui';
 
 import { Context } from '@/context';
 
@@ -33,28 +32,30 @@ const SignInForm = () => {
       setPassword(null);
       setLoading(false);
       formRef.current.reset();
+      console.log('Form has been reset');
     },
 
     sendData: async () => {
-      const { data } = await api.post('/login', { password, email });
-
-      if (data) {
-        console.log('res => ', data);
-        return data;
-        // update the data variable with the response data
-      } else {
-        throw new Error('Ce PLM nu merge? ');
-      }
-
-      return data;
+      const data  = await api.post('/login', { password, email });
+      console.log('SEND DATA METHOD Returned =>', await data)
+      return await data;
     },
+
+          
     submit: async (e) => {
       e.preventDefault();
+       console.log('FORMREF DATA ->',formRef.current)
+
+    
       try {
         setLoading(true);
         const data = await formHandler.sendData();
+          if (data?.error) {
+            toast.error(data.error);
+            return;
+          } 
         console.log('data => ', data);
-        dispatch({ type: 'LOGIN', payload: data });
+       dispatch({ type: 'LOGIN', payload: data });
         // save in localstorage
         window.localStorage.setItem('user', JSON.stringify(data));
         // redirect
@@ -62,7 +63,7 @@ const SignInForm = () => {
 
         toast.success('Te-ai logat cu succes');
         setLoading(false);
-        formHandler.reset();
+        
       } catch (error) {
         if (error) {
           toast.error(error.message);
@@ -91,19 +92,25 @@ const SignInForm = () => {
           </label>
           <Input
             required
-            onInput={(e) => setEmail(e.target.value.toLowerCase())}
+            onInput={(e) => {
+              setEmail(e.target.value.toLowerCase()) 
+              console.log('Email Changed,', email)
+            }}
             name="email"
             type="email"
             {...inputArgs}
           />
         </div>
         <div className="form-control w-full max-w-xs">
-          <label gtmlFor="password" className="label">
+          <label htmlFor="password" className="label">
             <span className="label-text">Parola </span>
           </label>
           <Input
             required
-            onInput={(e) => setPassword(e.target.value.toLowerCase())}
+            onInput={(e) => {
+              setPassword(e.target.value)
+              console.log('Password Changed,', password)
+            }}
             name="password"
             type="password"
             {...inputArgs}

@@ -46,7 +46,7 @@ const SignUpForm = () => {
     
     sendData: async () => {
       
-      let data = {};
+    
       const res = await api.post(`/register`, {
         nume,
         password,
@@ -54,11 +54,9 @@ const SignUpForm = () => {
       });
 
       console.log('res => ', res);
-      console.log('caught:::', JSON.stringify(response, null, 2));
-      if (res) {
-        data = res.data; // update the data variable with the response data
-      }
-      return data;
+      console.log('caught:::', JSON.stringify(res, null, 2));
+      
+      return res;
     },
     submit: async (e) => {
       e.preventDefault();

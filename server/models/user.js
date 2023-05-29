@@ -33,9 +33,9 @@ const userSchema = new Schema(
       enum: ['Subscriber', 'Instructor', 'Admin'],
     },
     passwordResetCode: {
-      data: String,
+      data: String || undefined,
 
-      default: '',
+      
     },
     stripe_account_id: '',
     stripe_seller: {},
