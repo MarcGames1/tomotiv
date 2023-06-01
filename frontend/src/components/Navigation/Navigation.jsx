@@ -111,12 +111,14 @@ const { user } = state;
               {user ? (
                 <LoggedUserButtons dispatch={dispatch} user={user} />
               ) : (
-                <Button className="btn-primary text-neutral">
-                  Inregistreaza-te
-                </Button>
+                <Link href="/login">
+                  <Button className="btn-primary text-neutral">
+                    Contul Tau
+                  </Button>
+                </Link>
               )}
             </>
-            
+
             <SwitchTheme />
           </div>
         </Navbar.End>
