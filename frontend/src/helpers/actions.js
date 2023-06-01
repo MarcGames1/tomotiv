@@ -1,9 +1,9 @@
 import { toast } from 'react-hot-toast';
 import ApiClient from '@/Classes/ApiClient';
 
-const serverApi = process.env.NODE_PUBLIC_API || process.env.API
+const serverApi = process.env.NEXT_PUBLIC_API
 
-const api = new ApiClient(serverApi)
+const api = new ApiClient(serverApi);
 
 export const Logout = async () => {
   window.localStorage.removeItem('user');
@@ -14,3 +14,8 @@ export const Logout = async () => {
     toast.error(error.message);
   }
 };
+
+export const Login = async (email, password) => {
+  const data = await api.post('/login', { password, email });
+  return data
+}

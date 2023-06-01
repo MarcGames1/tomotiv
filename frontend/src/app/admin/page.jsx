@@ -6,11 +6,11 @@ import { IoIosPeople } from 'react-icons/io';
 import GridColsd10 from '@/components/GridColsd10';
 import Sectiune3Card from '@/components/LayoutComponents/cardSectionComponents/sectiune3Card';
 import CardContainer from '@/components/LayoutComponents/cardSectionComponents/CardContainer';
-import Page from './PageLayout';
+
 
 export default function Home() {
   return (
-    <Page>
+    
       <main className="">
         <SectiuneAlba margin="mr-20 ml-10">
           <HeroCarousel />
@@ -75,6 +75,6 @@ export default function Home() {
           </Sectiune3Card>
         </SectiuneGri>
       </main>
-    </Page>
+    
   );
 }

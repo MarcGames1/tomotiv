@@ -1,10 +1,5 @@
-import './globals.css';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
-import { Toaster } from 'react-hot-toast';
 
-import Page from '@/app/PageLayout';
-import ContextComponent from './ContextComponent';
 
 const inter = Inter({ subsets: ['latin'] });
 

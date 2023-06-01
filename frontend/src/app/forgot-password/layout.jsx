@@ -1,4 +1,3 @@
-// import './globals.css';
 
 import Page from "../PageLayout";
 import SectiuneAlba from '@/components/LayoutComponents/SectiuneAlba';

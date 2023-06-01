@@ -4,11 +4,11 @@ import toast from 'react-hot-toast';
 // import { Link as DasyLink } from 'react-daisyui';
 import { useRouter } from 'next/navigation';
 import { Input } from 'react-daisyui';
-
 import { Context } from '@/context';
 
 import ApiClient from '@/Classes/ApiClient';
 import Link from 'next/link';
+import { Login } from '@/helpers/actions';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -32,19 +32,21 @@ const SignInForm = () => {
       setPassword(null);
       setLoading(false);
       formRef.current.reset();
-      console.log('Form has been reset');
+     
     },
 
     sendData: async () => {
-      const data  = await api.post('/login', { password, email });
-      console.log('SEND DATA METHOD Returned =>', await data)
-      return await data;
+      // const data  = await api.post('/login', { password, email });
+      // console.log('SEND DATA METHOD Returned =>', await data)
+      // return await data;
+      
+      return await Login(email, password)
     },
 
           
     submit: async (e) => {
       e.preventDefault();
-       console.log('FORMREF DATA ->',formRef.current)
+     
 
     
       try {
@@ -54,16 +56,22 @@ const SignInForm = () => {
             toast.error(data.error);
             return;
           } 
-        console.log('data => ', data);
-       dispatch({ type: 'LOGIN', payload: data });
-        // save in localstorage
-        window.localStorage.setItem('user', JSON.stringify(data));
-        // redirect
-        router.push('/');
-
-        toast.success('Te-ai logat cu succes');
-        setLoading(false);
-        
+         else if(data && data?._id){
+            console.log('data => ', data);
+            dispatch({ type: 'LOGIN', payload: data });
+            
+            // save in localstorage
+            window.localStorage.setItem('user', JSON.stringify(data));
+            // redirect
+            router.push('/');
+            
+            toast.success('Te-ai logat cu succes');
+            setLoading(false);
+          }
+          else{
+            toast.error("EROARE!")
+          }
+            
       } catch (error) {
         if (error) {
           toast.error(error.message);
