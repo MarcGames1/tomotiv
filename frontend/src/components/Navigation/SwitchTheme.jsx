@@ -9,13 +9,17 @@ const SwitchTheme = () => {
   //toggles the theme
   const toggleTheme = () => {
     setTheme(theme === 'tomotiv' ? 'night' : 'tomotiv');
+    localStorage.setItem('theme', theme);
   };
 
   //modify data-theme attribute on document.body when theme changes
   useEffect(() => {
     const body = document.body;
     body.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }, [theme]);
+
+
 
   return (
     <button className="btn btn-circle" onClick={toggleTheme}>

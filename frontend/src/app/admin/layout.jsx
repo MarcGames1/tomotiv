@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
-
+import AdminNavbar from './adminComponents/Navbar';
+import '../../app/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -9,12 +10,15 @@ export const metadata = {
   robots:'noindex, follow'
 };
 
-export default function RootLayout({ children }) {
+export default function Layout({ children }) {
   return (
      
-      <body data-theme="tomotiv" className="bg-neutral">
-      <RootComponent>{children}</RootComponent>
-      </body>
+      
+      <>
+      <AdminNavbar />
+      {children}
+      </>
+      
   
   );
 }
