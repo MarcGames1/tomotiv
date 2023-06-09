@@ -16,7 +16,7 @@ export const carouselData = [
     titlu: (
       <>
         {' '}
-        <h1 className="text-7xl font-bold">
+        <h1 className="md:text-5xl lg:text-7xl font-bold">
           Ai Toate Motivele sa <span className="text-primary">reusesti</span>
         </h1>
       </>
@@ -41,7 +41,7 @@ export const carouselData = [
     titlu: (
       <>
         {' '}
-        <h1 className="text-7xl font-bold">
+        <h1 className="md:text-5xl lg:text-7xl font-bold">
           Ai Toate Motivele sa <span className="text-primary">reusesti</span>
         </h1>
       </>
@@ -66,7 +66,7 @@ export const carouselData = [
     titlu: (
       <>
         {' '}
-        <h1 className="text-7xl font-bold">
+        <h1 className="md:text-5xl text-7xl font-bold">
           Ai Toate Motivele sa <span className="text-primary">reusesti</span>
         </h1>
       </>

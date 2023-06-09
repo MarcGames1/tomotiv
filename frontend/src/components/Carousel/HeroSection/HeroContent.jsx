@@ -7,13 +7,13 @@ import { Hero, Artboard, Button } from 'react-daisyui';
 const HeroContent = ({titlu = <></>, subtitlu=<></>, svg =<></>}) => {
 
   return (
-    <div className="grid bg-base-100 z-10 grid-cols-6 justify-center gap-4">
-      <Hero className=" z-10 col-start-2 col-span-3">
+    <div className="min-h-96 pl-20	leading-loose flex bg-base-100 z-10 justify-items-center w-full  justify-center gap-4">
+      <Hero className="flex-0 z-10">
         <Hero.Overlay className=" z-10 bg-opacity-60" />
         <Hero.Content className=" z-10 bg-base-100 text-left">
           <div className="max-w z-10">
-           {titlu}
-          {subtitlu}
+            {titlu}
+            {subtitlu}
 
             <Button className="text-base-100" color="primary">
               Afla Mai Multe
@@ -21,9 +21,7 @@ const HeroContent = ({titlu = <></>, subtitlu=<></>, svg =<></>}) => {
           </div>
         </Hero.Content>
       </Hero>
-      <div className="z-10 col-span-2 relative">
-       {svg}
-      </div>
+      <div className=" z-10 w-full relative">{svg}</div>
     </div>
   );
 }
