@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useContext } from 'react';
-import SwitchTheme from './SwitchTheme';
 import { Navbar, Dropdown, Button, Menu } from 'react-daisyui';
 import Link from 'next/link';
 
@@ -119,7 +118,7 @@ const { user } = state;
               )}
             </>
 
-            <SwitchTheme />
+           
           </div>
         </Navbar.End>
       </Navbar>

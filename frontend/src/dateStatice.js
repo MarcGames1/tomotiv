@@ -24,9 +24,9 @@ export const carouselData = [
     subtitlu: (
       <>
         <p className="py-6">
-          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-          excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-          id nisi.
+          Nu îți promitem îmbogățiri peste noapte, însă te asigurăm că atât
+          serviciile cât și cursurile noastre te vor face să știi cum să îți
+          monetizezi pasiunile pentru a îți atinge obiectivele.
         </p>
       </>
     ),
@@ -49,9 +49,9 @@ export const carouselData = [
     subtitlu: (
       <>
         <p className="py-6">
-          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-          excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-          id nisi.
+          Nu îți promitem îmbogățiri peste noapte, însă te asigurăm că atât
+          serviciile cât și cursurile noastre te vor face să știi cum să îți
+          monetizezi pasiunile pentru a îți atinge obiectivele.
         </p>
       </>
     ),
@@ -74,9 +74,9 @@ export const carouselData = [
     subtitlu: (
       <>
         <p className="py-6">
-          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-          excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-          id nisi.
+          Nu îți promitem îmbogățiri peste noapte, însă te asigurăm că atât
+          serviciile cât și cursurile noastre te vor face să știi cum să îți
+          monetizezi pasiunile pentru a îți atinge obiectivele.
         </p>
       </>
     ),
