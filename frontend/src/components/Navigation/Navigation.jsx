@@ -3,7 +3,7 @@
 import React, { useContext } from 'react';
 import { Navbar, Dropdown, Button, Menu } from 'react-daisyui';
 import Link from 'next/link';
-
+import Image from 'next/image';
 import LoggedUserButtons from './LoggedUserButtons';
 
 import { servicii } from '@/dateStatice';
@@ -71,10 +71,10 @@ const { user } = state;
             </Dropdown.Menu>
           </Dropdown>
           <Link href={'/'} className="btn btn-ghost normal-case text-xl">
-            Tomotiv
+           <Image width={103} height={32} src='./svg/logo.svg' />
           </Link>
         </Navbar.Start>
-        <Navbar.End>
+        <Navbar.Center>
           <div className="hidden lg:flex">
             <Menu horizontal className="p-0">
               <NavigationLink href={'/'}>Acasa</NavigationLink>
@@ -105,12 +105,15 @@ const { user } = state;
               </Menu.Item>
             </Menu>
           </div>
+        </Navbar.Center>
+        <Navbar.End>
+
           <div className="gap-3 flex">
             <>
               {user ? (
                 <LoggedUserButtons dispatch={dispatch} user={user} />
-              ) : (
-                <Link href="/login">
+                ) : (
+                  <Link href="/login">
                   <Button className="btn-primary text-neutral">
                     Contul Tau
                   </Button>
@@ -120,7 +123,7 @@ const { user } = state;
 
            
           </div>
-        </Navbar.End>
+              </Navbar.End>
       </Navbar>
     </div>
   );

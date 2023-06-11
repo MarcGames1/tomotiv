@@ -124,3 +124,11 @@ export const autori = {
     },
   },
 };
+// aici punem linkurile de social media
+export const socialMedia ={
+  instagram: 'https://www.instagram.com',
+  facebook: 'https://www.facebook.com',
+  youtube: 'https://www.youtube.com',
+  tikTok:'https://www.tiktok.com',
+  linkedin: 'https://www.linkedin.com',
+}
