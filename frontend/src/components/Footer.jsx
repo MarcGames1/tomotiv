@@ -11,7 +11,7 @@ import {
 } from 'react-icons/ai';
 import {FaTiktok} from 'react-icons/fa'
 import Image from 'next/image';
-import { socialMedia } from '@/dateStatice';
+import { socialMedia, servicii } from '@/dateStatice';
 
 
 const PageFooter = () => {
@@ -39,34 +39,23 @@ const PageFooter = () => {
       </div>
 
       <div>
-        <Footer.Title>Services</Footer.Title>
-        <Link href={''} className="link link-hover">
-          Branding
-        </Link>
-        <Link href={''} className="link link-hover">
-          Design
-        </Link>
-        <Link href={''} className="link link-hover">
-          Marketing
-        </Link>
-        <Link href={''} className="link link-hover">
-          Advertisement
-        </Link>
+        <Footer.Title>Servicii</Footer.Title>
+        {servicii.map(serviciu =>{
+          return <Link className="link link-hover" href={serviciu.href}>
+            {serviciu.label}
+          </Link>;
+        })}
+        
       </div>
       <div>
         <Footer.Title>Company</Footer.Title>
-        <Link href={''} className="link link-hover">
-          About us
+        <Link href={'/despre-noi'} className="link link-hover">
+          Despre Noi
         </Link>
-        <Link href={''} className="link link-hover">
+        <Link href={'/contact'} className="link link-hover">
           Contact
         </Link>
-        <Link href={''} className="link link-hover">
-          Jobs
-        </Link>
-        <Link href={''} className="link link-hover">
-          Press kit
-        </Link>
+
       </div>
       <div>
         <Footer.Title>Legal</Footer.Title>
