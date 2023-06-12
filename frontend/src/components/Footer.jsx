@@ -41,7 +41,7 @@ const PageFooter = () => {
       <div>
         <Footer.Title>Servicii</Footer.Title>
         {servicii.map(serviciu =>{
-          return <Link className="link link-hover" href={serviciu.href}>
+          return <Link key={serviciu.label} className="link link-hover" href={serviciu.href}>
             {serviciu.label}
           </Link>;
         })}
