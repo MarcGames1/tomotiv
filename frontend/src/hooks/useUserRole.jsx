@@ -33,7 +33,7 @@ const useUserRole = (role) => {
             throw new Error(`Invalid role: ${role}`);
         }
         setData(res.data);
-        console.log(res.data);
+        
       } catch (error) {
         console.error(error);
         setData(null);
@@ -46,6 +46,13 @@ const useUserRole = (role) => {
 
   const ok = data !== null && data.ok;
 
+     if (loading) {
+       return (
+         <div>
+           <span className="loading loading-dots loading-xs"></span>
+         </div>
+       );
+     }
   if (!ok) {
     return <div>NU ai acces aici</div>;
   }

@@ -10,6 +10,10 @@ import ApiClient from '@/Classes/ApiClient';
 import Link from 'next/link';
 import { Login } from '@/helpers/actions';
 
+const API_ROUTE = process.env.NEXT_PUBLIC_API;
+
+
+
 const SignInForm = () => {
   const router = useRouter();
   const [email, setEmail] = useState(null);
@@ -24,7 +28,7 @@ const SignInForm = () => {
 
   const formRef = useRef(null); // referința către elementul form
 
-  const api = new ApiClient(process.env.NEXT_PUBLIC_API);
+  const api = new ApiClient(API_ROUTE);
   const formHandler = {
    
     reset: () => {
