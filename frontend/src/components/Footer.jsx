@@ -18,7 +18,7 @@ const PageFooter = () => {
   return (
     <Footer className="bg-secondary  p-10 text-base-100">
       <div>
-        <Image src={'/svg/logoD.svg'} width={118} height={44} />
+        <Image alt='Tomotiv Logo' src={'/svg/logoD.svg'} width={118} height={44} />
         <div className='flex gap-5 items-center'>
           <a href={socialMedia.facebook}>
             <AiOutlineFacebook size={'2em'} />

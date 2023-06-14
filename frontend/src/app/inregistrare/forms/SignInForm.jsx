@@ -129,7 +129,7 @@ const SignInForm = () => {
           type="submit"
           className="btn btn-primary text-base-100 m-5"
         >
-          Inregistreaza-te!
+          Logheaza-te!
         </button>
 
         <div className="block m-auto prose  text-secondary">

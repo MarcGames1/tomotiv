@@ -1,8 +1,11 @@
-import { Inter } from 'next/font/google';
+'use client'
+import React, {useEffect, useState, } from 'react';
 import AdminNavbar from './adminComponents/Navbar';
-import '../../app/globals.css';
+import '../../app/globals.css'
+import useUserRole from '@/context/useUserRole';
+import { useRouter } from 'next/navigation';
 
-const inter = Inter({ subsets: ['latin'] });
+
 
 export const metadata = {
   title: 'Admin Panel',
@@ -10,15 +13,31 @@ export const metadata = {
   robots:'noindex, follow'
 };
 
+ 
+
 export default function Layout({ children }) {
-  return (
+
+const {ok, data, loading} = useUserRole('Admin')
+ const router = useRouter()
+
+   
+ 
+    
+ 
+   if (!ok) {
      
-      
+     console.log(ok, data, loading)
+     return <>Nu ai rol de administrator</>;
+     
+   } 
+   if( ok) {
+    return (
       <>
-      <AdminNavbar />
-      {children}
+        <AdminNavbar />
+        {children}
       </>
-      
-  
-  );
-}
+      )
+    }
+
+  }
+
