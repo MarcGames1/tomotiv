@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import ApiClient from '@/Classes/ApiClient';
+import CourseCard from '../adminComponents/CourseCard';
 
 
 const apiPath = process.env.NEXT_PUBLIC_API;
@@ -14,7 +15,7 @@ const getCoursesList = async () =>{
       throw new Error('Failed to fetch data');
     }
     console.log(courses)
-    return courses.json()
+    return courses
 
   } catch(err) {
     console.log(err);
@@ -23,18 +24,21 @@ const getCoursesList = async () =>{
 }
 
 const Cursuri = async () => {
-  const [courses, setCourses] = useState([])
+
+  const courses = await Promise.all( await getCoursesList());
+  
  
-  useEffect( () =>{
-    
- setCourses(getCoursesList())
-  }, [])
+  
  
   
   return (
     <>
       <div>cursuri</div>
       <Link href={'/admin/cursuri/creaza-curs/'}>Adauga Curs</Link>
+      { courses.map(c =>{
+        console.log(c)
+        return <CourseCard key={c._id} name={c.name} slug={c.slug} image={c?.image} published={c.published} />
+      })}
     </>
   );
 };
