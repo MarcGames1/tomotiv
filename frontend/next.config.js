@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['placeholder.pics'],
+    domains: ['placeholder.pics', 'marwebelearning.s3.eu-west-3.amazonaws.com'],
   },
- 
 };
 
 module.exports = nextConfig
