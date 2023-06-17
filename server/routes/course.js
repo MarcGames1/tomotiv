@@ -35,9 +35,9 @@ import {
   markCompleted,
   listCompleted,
   markIncomplete,
-  addModule,
-  updateModule,
-  removeModule,
+  addLessonInModule,
+  updateLessonInModule,
+  removeLessonInModule,
 } from '../controllers/course';
 
 
@@ -74,9 +74,14 @@ router.put("/course/lesson/:slug/:instructorId", requireSignin,isInstructor, upd
 router.put('/course/:slug/:lessonId', requireSignin, isInstructor, removeLesson);
 
 // `/api/course/module/${slug}/${course.instructor._id}`,
-router.post("/course/module/:slug/:instructorId", requireSignin,isInstructor, addModule);
-router.put("/course/module/:slug/:instructorId", requireSignin,isInstructor, updateModule);
-router.put("/module/:slug/:moduleId", requireSignin,isInstructor, removeModule);
+router.post("/course/:slug/:moduleId/:instructorId", requireSignin,isInstructor, addLessonInModule);
+router.put(
+  '/course/module/:slug/:instructorId',
+  requireSignin,
+  isInstructor,
+  updateLessonInModule
+);
+router.put("/module/:slug/:moduleId", requireSignin,isInstructor, removeLessonInModule);
 
 router.get('/check-enrollment/:courseId', requireSignin, checkEnrollment);
 

@@ -557,33 +557,54 @@ export const markIncomplete = async (req, res) => {
   }
 };
 
-export const createCourseCategory = async (req, res) => {
+
+
+export const addLessonInModule = async (req, res) => {
+
   try {
-    
-  } catch (error) {
-    console.error(error.message);
+    const { slug, moduleId ,instructorId } = req.params;
+    const { title, content, video } = req.body;
+
+    if (req.auth._id != instructorId) {
+      return res.status(400).send('Unauthorized');
+    }
+
+    const course = await Course.findOne({ slug });
+
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
+
+    const newLesson = {
+      title,
+      content,
+      video,
+      slug: slugify(title),
+      module: course.modules.find((module) => module._id.equals(moduleId))._id,
+    };
+
+    const updatedCourse = await Course.findOneAndUpdate(
+      { slug },
+      {
+        $push: { lessons: newLesson },
+      },
+      { new: true }
+    )
+      .populate('instructor', '_id name')
+      .exec();
+
+    const updatedModuleIndex = updatedCourse.modules.findIndex((module) => module._id.equals(newLesson.module));
+    updatedCourse.modules[updatedModuleIndex].lessons.push(newLesson._id);
+
+    await updatedCourse.save();
+
+    res.json(updatedCourse);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send('Add lesson failed');
   }
-}
+};
 
-export const addModule = async (req, res) => {
+export const updateLessonInModule = async () => {};
+export const removeLessonInModule = async () => {};
 
-}
-
-export const updateModule = async (req, res) => {
-  console.log("UPDATE MODULE", req.body);
-}
-
-
-export const removeModule = async (req, res) => {
-   const { slug, moduleId } = req.params;
-   const course = await Course.findOne({ slug }).exec();
-   if (req.auth._id != course.instructor) {
-     return res.status(400).send('Unauthorized');
-   }
-
-   const deletedModule = await Course.findByIdAndUpdate(course._id, {
-     $pull: { modules: { _id: moduleId } },
-   }).exec();
-
-   res.json({ ok: true });
-}
