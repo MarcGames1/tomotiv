@@ -2,11 +2,12 @@
 import React, { useState, useRef } from 'react';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineDelete, AiOutlineBook } from 'react-icons/ai';
 import ApiClient from '@/Classes/ApiClient';
 import Resizer from 'react-image-file-resizer';
 import {toast} from 'react-hot-toast'
 import Image from 'next/image';
+import CourseModule from '../../componenteAdministrareCurs/CourseModule';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API )
 const buttonList = [
   ['undo', 'redo'],
@@ -24,7 +25,7 @@ const buttonList = [
 const EditCourseForm = (props) => {
   const [courseData, setCourseData] = useState(props);
    const [image, setImage] = useState(
-     { Location: props?.image?.Location } || {
+     {  ...props?.image} || {
        Location: '/svg/placeholder 300x300.svg',
      }
    );
@@ -42,30 +43,15 @@ const EditCourseForm = (props) => {
     setCourseData({ ...courseData, paid: e.target.checked });
   };
 
-  const handleAddModule = (e) => {
+
+  const saveCourseHandler = async (e) => {
     e.preventDefault()
-    const newModule = {
-      title: '', // denumirea modulului
-      lessons: [], // array-ul de lecții
-    };
-
-    setCourseData({
-      ...courseData,
-      modules: [...courseData.modules, newModule],
-    });
-    console.log(courseData)
-  };
-
-  const saveCourseHandler = (e) => {
-    api.put(`/course/${props.slug}`, {...courseData})
+    await api.put(`/course/${props.slug}`, courseData)
   }
   const handleAddImage = (e) => {
     if(!e.target.files[0]) return;
      let file = e.target.files[0];
      console.log(e.target.files[0]);
-     
-    
-     
      // resize
      Resizer.imageFileResizer(file, 720, 500, 'JPEG', 100, 0, async (uri) => {
        try {
@@ -78,6 +64,7 @@ const EditCourseForm = (props) => {
          setCourseData({...courseData, image: {...data}})
          console.log('IMAGE UPLOADED Course Data----> courseData,', courseData,  )       
          setLoading(false);
+        await api.put(`/course/${props.slug}`, courseData)
        } catch (err) {
          console.log(err);
           setLoading(false);
@@ -88,24 +75,27 @@ const EditCourseForm = (props) => {
   const handleRemoveImage = async (e) => {
     e.preventDefault()
  try {
-     const res = await api.post('/course/remove-image', { image });
      setImage({ Location: '/svg/placeholder 300x300.svg' });
-     setCourseData({ ...courseData, image: undefined });
+     setCourseData({
+       ...courseData,
+       image: {
+         Location: '/svg/placeholder 300x300.svg',
+       },
+     });
+     
      imageUploadInputRef.current.file = ''
+      await api.put(`/course/${props.slug}`, courseData.image={
+       Location: '/svg/placeholder 300x300.svg',
+     });
  } catch (error) {
   console.error(error) 
  }
   }
  
  
-  const handleRemoveModule = (e, index) => {
-    e.preventDefault()
-    const updatedModules = [...courseData.modules];
-    updatedModules.splice(index, 1);
-    setCourseData({ ...courseData, modules: updatedModules });
-  };
 
-  return (
+  return (<>
+    <pre>{JSON.stringify(courseData,"", 3)} </pre>
     <form>
       <div className="form-control">
         <label className="label">
@@ -119,27 +109,29 @@ const EditCourseForm = (props) => {
             value={courseData.name}
             onChange={handleChange}
             className="input input-bordered"
-          />
+            />
         </label>
       </div>
-      <div className="container flex items-center">
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">
-              Adauga Imagine reprezentativa pentru curs
-            </span>
-          </label>
-          <label className="input-group">
-            <span>Imagine</span>
-            <input
-              type="file"
-              name="file"
-              ref={imageUploadInputRef}
-              onChange={handleAddImage}
-              className="file-input file-input-bordered w-full max-w-xs"
-            />
-          </label>
-        </div>
+      <div className="container flex items-center min-h-[300px]">
+        {image != undefined &&image.Location === '/svg/placeholder 300x300.svg' && (
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">
+                Adauga Imagine reprezentativa pentru curs
+              </span>
+            </label>
+            <label className="input-group">
+              <span>Imagine</span>
+              <input
+                type="file"
+                name="file"
+                ref={imageUploadInputRef}
+                onChange={handleAddImage}
+                className="file-input file-input-bordered w-full max-w-xs"
+                />
+            </label>
+          </div>
+        )}
 
         <div className="m-10 form-control">
           <Image
@@ -147,7 +139,7 @@ const EditCourseForm = (props) => {
             width={300}
             height={300}
             src={image.Location}
-          />
+            />
           {image.Location !== '/svg/placeholder 300x300.svg' && (
             <button onClick={handleRemoveImage} className="btn btn-accent">
               Sterge Imaginea
@@ -167,7 +159,7 @@ const EditCourseForm = (props) => {
           onChange={(content) =>
             setCourseData({ ...courseData, description: content })
           }
-        />
+          />
       </div>
       <div className="form-control">
         <label className="label cursor-pointer">
@@ -178,7 +170,7 @@ const EditCourseForm = (props) => {
             checked={courseData.paid}
             onChange={handleTogglePaid}
             className="checkbox"
-          />
+            />
         </label>
       </div>
       {courseData.paid && (
@@ -194,7 +186,7 @@ const EditCourseForm = (props) => {
               value={courseData.price}
               onChange={handleChange}
               className="input input-bordered"
-            />
+              />
           </label>
         </div>
       )}
@@ -210,37 +202,15 @@ const EditCourseForm = (props) => {
             value={courseData.category}
             onChange={handleChange}
             className="input input-bordered"
-          />
+            />
         </label>
       </div>
-      <div className="form-control flex flex-row">
-        <div className="container">
-          {courseData.modules.map((module, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                value={module.title}
-                onChange={(e) => {
-                  const updatedModules = [...courseData.modules];
-                  updatedModules[index].title = e.target.value;
-                  setCourseData({ ...courseData, modules: updatedModules });
-                }}
-                className="input input-bordered"
-              />
-              <button onClick={(e) => handleRemoveModule(e, index)}>
-                <AiOutlineDelete />
-              </button>
-            </div>
-          ))}
-        </div>
-        <button className="btn btn-secondary" onClick={handleAddModule}>
-          Adaugă modul
-        </button>
-      </div>
+      <CourseModule courseData={courseData} setCourseData={setCourseData} />
       <button className="btn btn-primary" onClick={saveCourseHandler}>
         Salveaza Cursul
       </button>
     </form>
+              </>
   );
 };
 

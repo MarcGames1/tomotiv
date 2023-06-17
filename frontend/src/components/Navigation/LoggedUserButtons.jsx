@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from 'react-daisyui'
 
-import { Logout } from '@/helpers/actions';
+import 
+ { Logout } from '@/helpers/actions';
 
 const LoggedUserButtons = ({dispatch, user}) => {
 

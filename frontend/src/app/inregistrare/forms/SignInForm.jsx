@@ -6,11 +6,11 @@ import { useRouter } from 'next/navigation';
 import { Input } from 'react-daisyui';
 import { Context } from '@/context';
 
-import ApiClient from '@/Classes/ApiClient';
+
 import Link from 'next/link';
 import { Login } from '@/helpers/actions';
 
-const API_ROUTE = process.env.NEXT_PUBLIC_API;
+
 
 
 
@@ -28,7 +28,7 @@ const SignInForm = () => {
 
   const formRef = useRef(null); // referința către elementul form
 
-  const api = new ApiClient(API_ROUTE);
+  
   const formHandler = {
    
     reset: () => {
@@ -43,8 +43,13 @@ const SignInForm = () => {
       // const data  = await api.post('/login', { password, email });
       // console.log('SEND DATA METHOD Returned =>', await data)
       // return await data;
+      try {
+        return await Login(email, password)
+        
+      } catch (error) {
+        console.log(error)
+      }
       
-      return await Login(email, password)
     },
 
           

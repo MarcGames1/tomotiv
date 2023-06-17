@@ -26,6 +26,10 @@ const lessonSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    module: {
+      type: ObjectId,
+      ref: 'Module  ',
+    },
   },
   { timestamps: true }
 );

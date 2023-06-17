@@ -60,18 +60,23 @@ router.post('/course/video-remove/:instructorId', requireSignin, removeVideo);
 
 
 // publish unpublish
-router.put('/course/publish/:courseId', requireSignin, publishCourse);
-router.put('/course/unpublish/:courseId', requireSignin, unpublishCourse);
+router.put(
+  '/course/publish/:courseId', 
+  requireSignin,
+  isInstructor,
+  publishCourse
+);
+router.put('/course/unpublish/:courseId', requireSignin, isInstructor, unpublishCourse);
 
 // `/api/course/lesson/${slug}/${course.instructor._id}`,
-router.post("/course/lesson/:slug/:instructorId", requireSignin, addLesson);
-router.put("/course/lesson/:slug/:instructorId", requireSignin, updateLesson);
-router.put("/course/:slug/:lessonId", requireSignin, removeLesson);
+router.post("/course/lesson/:slug/:instructorId", requireSignin,isInstructor, addLesson);
+router.put("/course/lesson/:slug/:instructorId", requireSignin,isInstructor, updateLesson);
+router.put('/course/:slug/:lessonId', requireSignin, isInstructor, removeLesson);
 
 // `/api/course/module/${slug}/${course.instructor._id}`,
-router.post("/course/module/:slug/:instructorId", requireSignin, addModule);
-router.put("/course/module/:slug/:instructorId", requireSignin, updateModule);
-router.put("/module/:slug/:moduleId", requireSignin, removeModule);
+router.post("/course/module/:slug/:instructorId", requireSignin,isInstructor, addModule);
+router.put("/course/module/:slug/:instructorId", requireSignin,isInstructor, updateModule);
+router.put("/module/:slug/:moduleId", requireSignin,isInstructor, removeModule);
 
 router.get('/check-enrollment/:courseId', requireSignin, checkEnrollment);
 

@@ -34,10 +34,10 @@ const Cursuri = async () => {
   return (
     <>
       <div>cursuri</div>
-      <Link href={'/admin/cursuri/creaza-curs/'}>Adauga Curs</Link>
+      <Link className='btn btn-primary' href={'/admin/cursuri/creaza-curs/'}>Adauga Curs</Link>
       { courses.map(c =>{
         console.log(c)
-        return <CourseCard key={c._id} name={c.name} slug={c.slug} image={c?.image} published={c.published} />
+        return <CourseCard key={c._id} {...c} name={c.name} slug={c.slug} image={c?.image} published={c.published} />
       })}
     </>
   );
