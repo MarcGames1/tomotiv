@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 import { AiOutlineDelete, AiOutlineBook } from 'react-icons/ai';
 import CourseModule from '../../../componenteAdministrareCurs/CourseModule';
-
+import { saveCourseHandler } from '../../../helpersAdministrareCurs';
 
 
 const EditCourseModulesAndLessons = (props) => {
@@ -35,6 +35,14 @@ const EditCourseModulesAndLessons = (props) => {
   return (
     <>
       <CourseModule courseData={courseData} setCourseData={setCourseData} />
+      <button
+        className="btn btn-primary"
+        onClick={(e) => {
+          saveCourseHandler(e, props.slug, courseData);
+        }}
+      >
+        Salveaza Cursul
+      </button>
     </>
   );
 }

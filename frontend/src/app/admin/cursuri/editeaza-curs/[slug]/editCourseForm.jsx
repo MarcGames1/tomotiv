@@ -8,19 +8,9 @@ import Resizer from 'react-image-file-resizer';
 import {toast} from 'react-hot-toast'
 import Image from 'next/image';
 import CourseModule from '../../componenteAdministrareCurs/CourseModule';
+import CourseDescriptionEditor from '../../componenteAdministrareCurs/CourseDescriptionEditor';
+import { saveCourseHandler } from '../../helpersAdministrareCurs';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API )
-const buttonList = [
-  ['undo', 'redo'],
-  ['fontSize', 'formatBlock'],
-  ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
-  ['removeFormat'],
-  ['fontColor', 'hiliteColor'],
-  ['outdent', 'indent'],
-  ['align', 'horizontalRule', 'list', 'table'],
-  ['link'],
-  ['fullScreen', 'showBlocks', 'codeView'],
-  ['preview'],
-];
 
 const EditCourseForm = (props) => {
   const [courseData, setCourseData] = useState(props);
@@ -44,10 +34,12 @@ const EditCourseForm = (props) => {
   };
 
 
-  const saveCourseHandler = async (e) => {
-    e.preventDefault()
-    await api.put(`/course/${props.slug}`, courseData)
-  }
+  // const saveCourseHandler = async (e) => {
+  //   e.preventDefault()
+  //   await api.put(`/course/${props.slug}`, courseData)
+  // }
+
+  
   const handleAddImage = (e) => {
     if(!e.target.files[0]) return;
      let file = e.target.files[0];
@@ -94,123 +86,118 @@ const EditCourseForm = (props) => {
  
  
 
-  return (<>
-    <pre>{JSON.stringify(courseData,"", 3)} </pre>
-    <form>
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Titlu Curs</span>
-        </label>
-        <label className="input-group">
-          <span>Titlu Curs</span>
-          <input
-            type="text"
-            name="name"
-            value={courseData.name}
-            onChange={handleChange}
-            className="input input-bordered"
+  return (
+    <>
+      <pre>{JSON.stringify(courseData, '', 3)} </pre>
+      <form>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Titlu Curs</span>
+          </label>
+          <label className="input-group">
+            <span>Titlu Curs</span>
+            <input
+              type="text"
+              name="name"
+              value={courseData.name}
+              onChange={handleChange}
+              className="input input-bordered"
             />
-        </label>
-      </div>
-      <div className="container flex items-center min-h-[300px]">
-        {image != undefined &&image.Location === '/svg/placeholder 300x300.svg' && (
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">
-                Adauga Imagine reprezentativa pentru curs
-              </span>
-            </label>
-            <label className="input-group">
-              <span>Imagine</span>
-              <input
-                type="file"
-                name="file"
-                ref={imageUploadInputRef}
-                onChange={handleAddImage}
-                className="file-input file-input-bordered w-full max-w-xs"
-                />
-            </label>
-          </div>
-        )}
-
-        <div className="m-10 form-control">
-          <Image
-            className="m-5"
-            width={300}
-            height={300}
-            src={image.Location}
-            />
-          {image.Location !== '/svg/placeholder 300x300.svg' && (
-            <button onClick={handleRemoveImage} className="btn btn-accent">
-              Sterge Imaginea
-            </button>
-          )}
+          </label>
         </div>
-      </div>
-      <div className="form-control">
-        <SunEditor
-          setOptions={{
-            height: 200,
-            buttonList,
-          }}
-          height="50%"
-          lang={'ro'}
-          setContents={courseData.description}
+        <div className="container flex items-center min-h-[300px]">
+          {image != undefined &&
+            image.Location === '/svg/placeholder 300x300.svg' && (
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">
+                    Adauga Imagine reprezentativa pentru curs
+                  </span>
+                </label>
+                <label className="input-group">
+                  <span>Imagine</span>
+                  <input
+                    type="file"
+                    name="file"
+                    ref={imageUploadInputRef}
+                    onChange={handleAddImage}
+                    className="file-input file-input-bordered w-full max-w-xs"
+                  />
+                </label>
+              </div>
+            )}
+
+          <div className="m-10 form-control">
+            <Image
+              className="m-5"
+              width={300}
+              height={300}
+              src={image.Location}
+            />
+            {image.Location !== '/svg/placeholder 300x300.svg' && (
+              <button onClick={handleRemoveImage} className="btn btn-accent">
+                Sterge Imaginea
+              </button>
+            )}
+          </div>
+        </div>
+        <CourseDescriptionEditor
           onChange={(content) =>
             setCourseData({ ...courseData, description: content })
           }
-          />
-      </div>
-      <div className="form-control">
-        <label className="label cursor-pointer">
-          <span className="label-text">Curs Platit? </span>
-          <input
-            type="checkbox"
-            name="paid"
-            checked={courseData.paid}
-            onChange={handleTogglePaid}
-            className="checkbox"
-            />
-        </label>
-      </div>
-      {courseData.paid && (
+          content={courseData.description}
+        />
+        
         <div className="form-control">
-          <label className="label">
-            <span className="label-text">Pretul Cursului</span>
-          </label>
-          <label className="input-group">
-            <span>Pretul Cursului</span>
+          <label className="label cursor-pointer">
+            <span className="label-text">Curs Platit? </span>
             <input
-              type="number"
-              name="price"
-              value={courseData.price}
-              onChange={handleChange}
-              className="input input-bordered"
-              />
+              type="checkbox"
+              name="paid"
+              checked={courseData.paid}
+              onChange={handleTogglePaid}
+              className="checkbox"
+            />
           </label>
         </div>
-      )}
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Categorie</span>
-        </label>
-        <label className="input-group">
-          <span>Categorie</span>
-          <input
-            type="text"
-            name="category"
-            value={courseData.category}
-            onChange={handleChange}
-            className="input input-bordered"
+        {courseData.paid && (
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Pretul Cursului</span>
+            </label>
+            <label className="input-group">
+              <span>Pretul Cursului</span>
+              <input
+                type="number"
+                name="price"
+                value={courseData.price}
+                onChange={handleChange}
+                className="input input-bordered"
+              />
+            </label>
+          </div>
+        )}
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Categorie</span>
+          </label>
+          <label className="input-group">
+            <span>Categorie</span>
+            <input
+              type="text"
+              name="category"
+              value={courseData.category}
+              onChange={handleChange}
+              className="input input-bordered"
             />
-        </label>
-      </div>
-      <CourseModule courseData={courseData} setCourseData={setCourseData} />
-      <button className="btn btn-primary" onClick={saveCourseHandler}>
-        Salveaza Cursul
-      </button>
-    </form>
-              </>
+          </label>
+        </div>
+        <CourseModule courseData={courseData} setCourseData={setCourseData} />
+        <button className="btn btn-primary" onClick={e =>{saveCourseHandler(e, props.slug, courseData);}}>
+          Salveaza Cursul
+        </button>
+      </form>
+    </>
   );
 };
 
