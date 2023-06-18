@@ -9,6 +9,7 @@
   "author": "Alexandru Marcu",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.347.0",
     "@aws-sdk/client-ses": "^3.293.0",
     "aws-sdk": "^2.1337.0",
     "bcrypt": "^5.1.0",

@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['placeholder.pics', 'marwebelearning.s3.eu-west-3.amazonaws.com'],
+    domains: ['placeholder.pics', 'localhost'],
+    path: '/',
   },
 };
 

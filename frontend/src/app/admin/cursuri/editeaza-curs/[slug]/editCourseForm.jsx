@@ -1,8 +1,6 @@
 'use client'
-import React, { useState, useRef } from 'react';
-import SunEditor from 'suneditor-react';
+import React, { useState, useRef, useEffect } from 'react';
 import 'suneditor/dist/css/suneditor.min.css';
-import { AiOutlineDelete, AiOutlineBook } from 'react-icons/ai';
 import ApiClient from '@/Classes/ApiClient';
 import Resizer from 'react-image-file-resizer';
 import {toast} from 'react-hot-toast'
@@ -10,18 +8,37 @@ import Image from 'next/image';
 import CourseModule from '../../componenteAdministrareCurs/CourseModule';
 import CourseDescriptionEditor from '../../componenteAdministrareCurs/CourseDescriptionEditor';
 import { saveCourseHandler } from '../../helpersAdministrareCurs';
+import { config } from '@/dateStatice';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API )
+const imageDeleteRequest = new ApiClient(config.imageApi);
+
+const placeHolderImage = '/svg/placeholder 300x300.svg';
 
 const EditCourseForm = (props) => {
   const [courseData, setCourseData] = useState(props);
    const [image, setImage] = useState(
-     {  ...props?.image} || {
-       Location: '/svg/placeholder 300x300.svg',
-     }
+     {  ...props?.image} || {}
+     
    );
+
+
    const [preview, setPreview] = useState('');
    const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
    const [loading, setLoading] = useState(false)
+
+   const updateImageToServer = async () =>{
+   return await api.put(`/course/${props.slug}`, courseData);
+   
+   }
+
+   useEffect(() => {
+     console.log('Course Data:', courseData);
+     setCourseData(updateImageToServer());
+     console.log('Image:', image);
+      
+       
+   }, [courseData]);
+
 
    const imageUploadInputRef = useRef()
   const handleChange = (e) => {
@@ -40,23 +57,31 @@ const EditCourseForm = (props) => {
   // }
 
   
-  const handleAddImage = (e) => {
+  const handleAddImage = async (e) => {
+    e.preventDefault()
     if(!e.target.files[0]) return;
      let file = e.target.files[0];
      console.log(e.target.files[0]);
      // resize
      Resizer.imageFileResizer(file, 720, 500, 'JPEG', 100, 0, async (uri) => {
        try {
-         let  data  = await api.post('/course/upload-image', {
+         let data = await api.post('/course/upload-image', {
            image: uri,
-         } );
-         console.log('IMAGE UPLOADED', data);
-         // set image in the state
-         setImage({...data});
-         setCourseData({...courseData, image: {...data}})
-         console.log('IMAGE UPLOADED Course Data----> courseData,', courseData,  )       
+         });
+
+        
+         const { Bucket, Key } = data;
+          setImage({ Bucket, Key });
+          
+          setCourseData({
+            ...courseData,
+            image: { Bucket, Key }, // Actualizează cheia image cu obiectul format din Bucket și Key
+          });
+               
+          console.log(courseData)
+          await updateImageToServer()
          setLoading(false);
-        await api.put(`/course/${props.slug}`, courseData)
+     
        } catch (err) {
          console.log(err);
           setLoading(false);
@@ -67,18 +92,13 @@ const EditCourseForm = (props) => {
   const handleRemoveImage = async (e) => {
     e.preventDefault()
  try {
-     setImage({ Location: '/svg/placeholder 300x300.svg' });
-     setCourseData({
-       ...courseData,
-       image: {
-         Location: '/svg/placeholder 300x300.svg',
-       },
-     });
-     
+   setImage({});
+   setCourseData({
+     ...courseData, image: {},
+    });
+    await imageDeleteRequest.delete(`/${image.Key}`);
+    await updateImageToServer()
      imageUploadInputRef.current.file = ''
-      await api.put(`/course/${props.slug}`, courseData.image={
-       Location: '/svg/placeholder 300x300.svg',
-     });
  } catch (error) {
   console.error(error) 
  }
@@ -106,38 +126,61 @@ const EditCourseForm = (props) => {
           </label>
         </div>
         <div className="container flex items-center min-h-[300px]">
-          {image != undefined &&
-            image.Location === '/svg/placeholder 300x300.svg' && (
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">
-                    Adauga Imagine reprezentativa pentru curs
-                  </span>
-                </label>
-                <label className="input-group">
-                  <span>Imagine</span>
-                  <input
-                    type="file"
-                    name="file"
-                    ref={imageUploadInputRef}
-                    onChange={handleAddImage}
-                    className="file-input file-input-bordered w-full max-w-xs"
-                  />
-                </label>
-              </div>
-            )}
+          {image?.Key == undefined && (
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">
+                  Adauga Imagine reprezentativa pentru curs
+                </span>
+              </label>
+              <label className="input-group">
+                <span>Imagine</span>
+                <input
+                  type="file"
+                  name="file"
+                  ref={imageUploadInputRef}
+                  onChange={handleAddImage}
+                  className="file-input file-input-bordered w-full max-w-xs"
+                />
+              </label>
+            </div>
+          )}
 
           <div className="m-10 form-control">
-            <Image
-              className="m-5"
-              width={300}
-              height={300}
-              src={image.Location}
-            />
-            {image.Location !== '/svg/placeholder 300x300.svg' && (
-              <button onClick={handleRemoveImage} className="btn btn-accent">
-                Sterge Imaginea
-              </button>
+            {image?.Key ? (
+              <>
+                <img
+                  className="m-5"
+                  width={300}
+                  height={300}
+                  src={`${config.imageApi}/${image.Key}`}
+                  alt={image.Key}
+                />
+                <button onClick={handleRemoveImage} className="btn btn-accent">
+                  Sterge Imaginea
+                </button>
+              </>
+            ) : (
+              <div
+                onClick={() => imageUploadInputRef.current.click()}
+                className="m-5"
+                style={{
+                  width: '300px',
+                  height: '300px',
+                  backgroundColor: '#DEDEDE',
+                  border: '2px solid #555555',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'column',
+                  fontSize: '18px',
+                  fontFamily: 'monospace, sans-serif',
+                  color: '#555555',
+                  cursor: 'pointer',
+                }}
+              >
+                Adaugă o imagine
+              </div>
             )}
           </div>
         </div>
@@ -147,7 +190,7 @@ const EditCourseForm = (props) => {
           }
           content={courseData.description}
         />
-        
+
         <div className="form-control">
           <label className="label cursor-pointer">
             <span className="label-text">Curs Platit? </span>
@@ -193,7 +236,12 @@ const EditCourseForm = (props) => {
           </label>
         </div>
         <CourseModule courseData={courseData} setCourseData={setCourseData} />
-        <button className="btn btn-primary" onClick={e =>{saveCourseHandler(e, props.slug, courseData);}}>
+        <button
+          className="btn btn-primary"
+          onClick={(e) => {
+            saveCourseHandler(e, props.slug, courseData);
+          }}
+        >
           Salveaza Cursul
         </button>
       </form>

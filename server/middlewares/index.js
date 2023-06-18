@@ -1,6 +1,7 @@
 import  {expressjwt}  from 'express-jwt';
 
 import User from '../models/user';
+import { config } from '../config/config';
 // import Course from '../models/course';
 
 export const requireSignin =   expressjwt({
@@ -80,3 +81,14 @@ export const freeEnrollment = async (req, res) => {
     return res.status(400).send("Enrollment create failed");
   }
 };
+
+
+// check if req is comming from the allowed host list
+export const checkAllowedHostNames = async (req, res, next)=>{
+  console.log("Checking HostNames" , req.hostname)
+  if(!config.allowedHosts.includes(req.hostname)){
+    res.status(505).send('Unauthorised')
+  }
+
+  next()
+}

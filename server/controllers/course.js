@@ -1,4 +1,11 @@
-import AWS from 'aws-sdk';
+import AWS from 'aws-sdk'; // de sters\
+import {
+  PutObjectCommand,
+  DeleteObjectCommand,
+  GetObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3';
+
 import slugify from 'slugify';
 import { readFileSync } from 'fs';
 import User from '../models/user';
@@ -9,8 +16,15 @@ import Course from '../models/course';
 import { nanoid } from 'nanoid';
 
 import { awsConfig } from '../awsConfig/awsConfig';
-const S3 = new AWS.S3(awsConfig);
+const S3 = new AWS.S3(awsConfig); // de sters pt ca mergem pe sdk v3
 
+const client = new S3Client({
+  region: 'eu-west-3',
+  credentials: {
+    accessKeyId: awsConfig.accessKeyId,
+    secretAccessKey: awsConfig.secretAccessKey,
+  },
+});
 
 // helper functions
 const deleteVideo = (Bucket, Key) => {
@@ -26,8 +40,7 @@ const deleteVideo = (Bucket, Key) => {
         console.log(err);
         res.sendStatus(400);
       }
-      console.log("video Deleted => ",data);
-      
+      console.log('video Deleted => ', data);
     });
   } catch (err) {
     console.log(err);
@@ -37,41 +50,61 @@ const deleteVideo = (Bucket, Key) => {
 /// Helper functions END //
 
 export const uploadImage = async (req, res) => {
- try {
-   const { image } = req.body;
-    console.log(req.body)
-   if (!image) {
-     return res.status(400).send('No Image');
-   }
-   const base64Data = new Buffer.from(
-     image.replace(/^data:image\/\w+;base64,/, ''),
-     'base64'
-   );
+  try {
+    const { image } = req.body;
+    console.log(req.body);
+    if (!image) {
+      return res.status(400).send('No Image');
+    }
+    const base64Data = new Buffer.from(
+      image.replace(/^data:image\/\w+;base64,/, ''),
+      'base64'
+    );
 
-   const type = image.split(';')[0].split('/')[1];
+    const type = image.split(';')[0].split('/')[1];
 
-   // image params
-   const params = {
-     Bucket: 'marwebelearning',
-     Key: `${nanoid()}.${type}`,
-     Body: base64Data,
-     ACL: 'public-read',
-     ContentEncoding: 'base64',
-     ContentType: `image/${type}`,
-   };
+    // image params
+    const params = {
+      Bucket: 'marwebelearning',
+      Key: `${nanoid()}.${type}`,
+      Body: base64Data,
+      ACL: 'private',
+      ContentEncoding: 'base64',
+      ContentType: `image/${type}`,
+    };
 
-   // upload to s3
-   S3.upload(params, (err, data) => {
-     if (err) {
-       console.log(err);
-       return res.sendStatus(400);
-     }
-     console.log(data);
-     res.send(data);
-   });
- } catch (error) {
+    // upload to s3 v2
+    //  S3.upload(params, (err, data) => {
+    //    if (err) {
+    //      console.log(err);
+    //      return res.sendStatus(400);
+    //    }
+    //    console.log(data);
+    //    res.send(data);
+    //  });
+    // Upload to S3 v3
+    const putComand = new PutObjectCommand({...params});
+    
+    try {
+      const response = await client.send(putComand, (err, data) => {
+        if (err){
+           console.log(err);
+           return res.sendStatus(400);
+        }
+
+       if(data.$metadata.httpStatusCode == 200){
+      
+        res.send({ Bucket: params.Bucket, Key: params.Key });
+       }
+        
+        
+      });
+          } catch (err) {
+      console.error(err);
+    }
+  } catch (error) {
     res.send(error.message);
- }
+  }
 };
 
 export const removeImage = async (req, res) => {
@@ -117,7 +150,6 @@ export const create = async (req, res) => {
     return res.status(400).send('Course create failed. Try again.');
   }
 };
-
 
 export const read = async (req, res) => {
   try {
@@ -196,8 +228,6 @@ export const removeVideo = async (req, res) => {
   }
 };
 
-
-
 export const addLesson = async (req, res) => {
   try {
     const { slug, instructorId } = req.params;
@@ -225,11 +255,11 @@ export const addLesson = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    console.log("REQ BODY -> ",req.body);
+    
     const { slug } = req.params;
-    console.log(req.body.image);
+    console.log("IMAGE receved in body",req.body.image);
     const course = await Course.findOne({ slug }).exec();
-    console.log("COURSE FOUND => ", course);
+    console.log('COURSE FOUND => ', course);
     if (req.auth._id != course.instructor) {
       return res.status(400).send('Unauthorized');
     }
@@ -237,7 +267,7 @@ export const update = async (req, res) => {
     const updated = await Course.findOneAndUpdate({ slug }, req.body, {
       new: true,
     }).exec();
-
+    console.log('UPDATED COURSE ', updated);
     res.json(updated);
   } catch (err) {
     console.log(err);
@@ -287,7 +317,6 @@ export const updateLesson = async (req, res) => {
       { 'lessons._id': _id },
       {
         $set: {
-          
           'lessons.$.title': title,
           'lessons.$.content': content,
           'lessons.$.video': video,
@@ -320,8 +349,6 @@ export const publishCourse = async (req, res) => {
       { new: true }
     ).exec();
 
- 
-
     res.json(updated);
   } catch (err) {
     console.log(err);
@@ -351,9 +378,7 @@ export const unpublishCourse = async (req, res) => {
 };
 
 export const courses = async (req, res) => {
-  const all = await Course.find()
-    .populate('instructor', '_id name')
-    .exec();
+  const all = await Course.find().populate('instructor', '_id name').exec();
   res.json(all);
 };
 export const publishedCourses = async (req, res) => {
@@ -557,12 +582,9 @@ export const markIncomplete = async (req, res) => {
   }
 };
 
-
-
 export const addLessonInModule = async (req, res) => {
-
   try {
-    const { slug, moduleId ,instructorId } = req.params;
+    const { slug, moduleId, instructorId } = req.params;
     const { title, content, video } = req.body;
 
     if (req.auth._id != instructorId) {
@@ -593,7 +615,9 @@ export const addLessonInModule = async (req, res) => {
       .populate('instructor', '_id name')
       .exec();
 
-    const updatedModuleIndex = updatedCourse.modules.findIndex((module) => module._id.equals(newLesson.module));
+    const updatedModuleIndex = updatedCourse.modules.findIndex((module) =>
+      module._id.equals(newLesson.module)
+    );
     updatedCourse.modules[updatedModuleIndex].lessons.push(newLesson._id);
 
     await updatedCourse.save();
@@ -607,4 +631,3 @@ export const addLessonInModule = async (req, res) => {
 
 export const updateLessonInModule = async () => {};
 export const removeLessonInModule = async () => {};
-

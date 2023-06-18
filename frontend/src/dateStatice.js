@@ -1,6 +1,12 @@
 import React from "react";
 import Image from "next/image";
 
+export const config = {
+  imageApi: 'http://localhost:8000/api/image',
+};
+
+
+
 export const servicii = [
   { label: 'Servicii Seo', href: '/servicii/servicii-seo' },
   { label: 'Promovare Google Ads', href: '/servicii/google-ads' },
