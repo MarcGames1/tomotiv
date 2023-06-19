@@ -31,14 +31,20 @@ const EditCourseForm = (props) => {
    
    }
 
-   useEffect(() => {
-     console.log('Course Data:', courseData);
-     setCourseData(updateImageToServer());
-     console.log('Image:', image);
-      
-       
-   }, [courseData]);
+  useEffect(() => {
+    const updateCourseData = async () => {
+      try {
+        console.log('Course Data:', courseData);
+        await api.put(`/course/${props.slug}`, courseData);
+        console.log('Image:', image);
+      } catch (error) {
+        // Gestionarea erorilor în timpul cererii către server
+        console.error(error);
+      }
+    };
 
+    updateCourseData();
+  }, []);
 
    const imageUploadInputRef = useRef()
   const handleChange = (e) => {

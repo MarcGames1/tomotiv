@@ -4,18 +4,19 @@ import EditCourseForm from './editCourseForm';
 import Link from 'next/link';
 
 
-const api = new ApiClient(process.env.API);
+const api = process.env.API;
 
 const getCourseData = async (slug) => {
-  try {
-    const data = await api.get(`/course/${slug}`);
-    if (!data) {
-      return;
-    }
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+ try {
+   const res = await fetch(`${api}/course/${slug}`);
+   if (!res.ok) {
+     throw new Error('Failed to fetch course data');
+   }
+   const data = await res.json();
+   return data;
+ } catch (error) {
+   console.log(error);
+ }
 };
 const page = async ({ params: {slug} }) => {
   const courseData = await getCourseData(slug);

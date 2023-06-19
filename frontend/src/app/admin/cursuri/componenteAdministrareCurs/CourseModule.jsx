@@ -1,7 +1,17 @@
-import React from 'react';
+'use client'
+import React, {useState, useEffect} from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 const CourseModule = ({ courseData, setCourseData }) => {
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() =>{
+    if(typeof(courseData.modules) === 'undefined') return
+    setLoading(false)
+  },
+    [courseData])
+
   const handleAddModule = (e) => {
     e.preventDefault();
     const newModule = {
@@ -22,11 +32,13 @@ const CourseModule = ({ courseData, setCourseData }) => {
     updatedModules.splice(index, 1);
     setCourseData({ ...courseData, modules: updatedModules });
   };
-
+if(loading){
+  return <div>loading</div>
+}
   return (
     <div className="form-control flex flex-row">
       <div className="container">
-        {courseData.modules.map((module, index) => (
+        {loading && courseData.modules.map((module, index) => (
           <div key={index}>
             <input
               type="text"

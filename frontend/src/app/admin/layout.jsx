@@ -1,9 +1,7 @@
-'use client'
-import React, {useEffect, useState, } from 'react';
-import AdminNavbar from './adminComponents/Navbar';
+
+import React from 'react';
 import '../../app/globals.css'
-import useUserRole from '@/hooks/useUserRole';
-import { useRouter } from 'next/navigation';
+import AdminRoute from './adminRoute';
 
 
 
@@ -17,32 +15,9 @@ export const metadata = {
 
 export default function Layout({ children }) {
 
-const {ok, data, loading} = useUserRole('Admin')
- const router = useRouter()
-
-   console.log( "DATAAAA =>",data)
- 
-   if (loading) {
-     return (
-       <div>
-         <span className="loading loading-dots loading-xs"></span>
-       </div>
-     );
-   }
-   if (!ok) {
-     return <div>NU ai acces aici</div>;
-   }
- 
-  
-   if( ok) {
-     console.log(ok, data, loading);
-    return (
-      <>
-        <AdminNavbar />
-        {children}
-      </>
-      )
-    }
+return <AdminRoute>
+  {children}
+</AdminRoute>
 
   }
 
