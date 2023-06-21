@@ -4,8 +4,8 @@ function Mobile2() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="616"
-      height="606"
+      width="300"
+      height="400"
       fill="none"
       viewBox="0 0 308 303"
     >

@@ -1,8 +1,9 @@
+'use client'
 import React, {useState} from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 import ApiClient from '@/Classes/ApiClient';
-
+import { config } from '@/dateStatice';
 const api = new ApiClient(
   'http://localhost:3000/api' || process.env.NEXT_PUBLIC_API
 );
@@ -29,15 +30,15 @@ const CourseCard = ({
     <>
       <div className="card w-96 bg-base-100 shadow-xl">
         {image && (
-          <figure>
-            <Image
+          
+            <img
               className="h-auto m-5"
-              src={image.Location}
+              src={`${config.imageApi}/${image.Key}`}
+              alt={image.Key}
               height={300}
-              width={'300'}
-              alt={name}
+              width={300}
             />
-          </figure>
+          
         )}
         <div className="card-body">
           <h2 className="card-title">{name}</h2>

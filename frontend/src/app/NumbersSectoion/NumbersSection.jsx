@@ -6,8 +6,8 @@ import Hands from '@/components/svg/Hands';
 const NumbersSection = () => {
   return (
     <div className="bg-base-100 w-screen flex flex-col sm:flex-row md:flex-row">
-      <div className=" prose   m-10 basis-1/2">
-        <h2>
+      <div className=" prose self-center p-5  my-10 ">
+        <h2 className="">
           Investim în <span className="text-primary">educația românilor</span>
         </h2>
         <p>
@@ -16,26 +16,26 @@ const NumbersSection = () => {
           digital.
         </p>
       </div>
-      <div className="flex flex-row flex-wrap   items-center ">
+      <div className="grid grid-cols-2 gap-5 py-5 items-center ">
         <IconAndNumber
-          icon={<IoIosPeople size={'5em'} className="text-primary" />}
+          icon={<IoIosPeople size={'3em'} className="text-primary" />}
           number={'2 028'}
           text={'de români educați'}
         />
         <IconAndNumber
           icon={
-            <Hands className={'text-primary'} width={'5em'} height={'5em'} />
+            <Hands className={'text-primary'} width={'3em'} height={'3em'} />
           }
           number={'46 328'}
           text={'de oameni în comunitate'}
         />
         <IconAndNumber
-          icon={<TbHandClick size={'5em'} className="text-primary" />}
+          icon={<TbHandClick size={'3em'} className="text-primary" />}
           number={'828 867'}
           text={'de mulțumiri'}
         />
         <IconAndNumber
-          icon={<BsCreditCard size={'5em'} className="text-primary" />}
+          icon={<BsCreditCard size={'3em'} className="text-primary" />}
           number={'1 926 436'}
           text={'de reușite împreună cu dumneavoastră.'}
         />
@@ -48,7 +48,7 @@ export default NumbersSection
 
 const IconAndNumber = ({icon, number, text}) =>{
     return (
-      <div className="flex basis-6/12 md:p-10 sm:p-10	lg:gap-10 items-center ">
+      <div className="flex gap-5 md:p-10 sm:p-10 py-4	lg:gap-10 items-center ">
         {icon}
         <div>
           <span className="font-bold text-xl">{number}</span>

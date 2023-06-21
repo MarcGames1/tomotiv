@@ -1,21 +1,22 @@
-'use client'
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ApiClient from '@/Classes/ApiClient';
 import CourseCard from '../adminComponents/CourseCard';
+import AdaugaCurs from './componenteAdministrareCurs/AdaugaCurs';
+import CoursesCardsLoader from './componenteAdministrareCurs/CoursesCardsLoader';
 
 
-const apiPath = process.env.NEXT_PUBLIC_API;
-const api = new ApiClient(apiPath)
+const api = process.env.NEXT_PUBLIC_API;
+
 
 const getCoursesList = async () =>{
   try{
-    const courses = await api.get('/courses');
-    if (!courses) {
+    const res = await fetch(`${api}/courses`);
+    if (!res) {
       throw new Error('Failed to fetch data');
     }
-    console.log(courses)
-    return courses
+    const data = await res.json();
+    return data;
 
   } catch(err) {
     console.log(err);
@@ -24,8 +25,8 @@ const getCoursesList = async () =>{
 }
 
 const Cursuri = async () => {
-
-  const courses = await Promise.all( await getCoursesList());
+  const data = await getCoursesList();
+  const [courses] = await Promise.all([data]);
   
  
   
@@ -34,11 +35,8 @@ const Cursuri = async () => {
   return (
     <>
       <div>cursuri</div>
-      <Link className='btn btn-primary' href={'/admin/cursuri/creaza-curs/'}>Adauga Curs</Link>
-      { courses.map(c =>{
-        console.log(c)
-        return <CourseCard key={c._id} {...c} name={c.name} slug={c.slug} image={c?.image} published={c.published} />
-      })}
+      <AdaugaCurs />
+     <CoursesCardsLoader />
     </>
   );
 };
