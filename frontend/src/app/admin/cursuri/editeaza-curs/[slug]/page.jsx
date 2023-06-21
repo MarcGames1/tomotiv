@@ -29,7 +29,7 @@ const page = async ({ params: {slug} }) => {
       <h1>Editeaza Cursul {slug}</h1>
       
       <EditCourseForm  {...course}/>
-      <Link href={`admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii`} className='btn btn-accent'>Editeaza modulele si lectiile</Link>
+      <Link href={`/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii`} className='btn btn-accent'>Editeaza modulele si lectiile</Link>
     </>
   );
 };

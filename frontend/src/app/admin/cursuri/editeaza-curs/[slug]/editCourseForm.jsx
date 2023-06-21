@@ -17,7 +17,7 @@ const placeHolderImage = '/svg/placeholder 300x300.svg';
 const EditCourseForm = (props) => {
   const [courseData, setCourseData] = useState(props);
    const [image, setImage] = useState(
-     {  ...props?.image} || {}
+     {  ...courseData?.image} || {}
      
    );
 
