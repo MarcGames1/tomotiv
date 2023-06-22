@@ -1,14 +1,23 @@
 'use client'
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { AiOutlineDelete, AiOutlineBook } from 'react-icons/ai';
 import CourseModule from '../../../componenteAdministrareCurs/CourseModule';
 import { saveCourseHandler } from '../../../helpersAdministrareCurs';
 import Link from 'next/link';
+import { CourseDataContext } from '@/app/admin/context/CourseDataContext';
 
+const EditCourseModulesAndLessons = () => {
 
-const EditCourseModulesAndLessons = (props) => {
-
-     const [courseData, setCourseData] = useState(props);
+     const {
+       courseData,
+       setCourseData,
+       isLoading,
+       error,
+       setSlug,
+       slug,
+       handleSaveCourse,
+       updateCourseData,
+     } = useContext(CourseDataContext);
   // Handlers
   const handleAddModule = (e) => {
     e.preventDefault();
@@ -31,6 +40,14 @@ const EditCourseModulesAndLessons = (props) => {
     setCourseData({ ...courseData, modules: updatedModules });
   };
 
+
+if (isLoading) {
+  return <div>Loading...</div>;
+}
+
+if (error) {
+  return <div>Error: {error.message}</div>;
+}
 
 
   return (

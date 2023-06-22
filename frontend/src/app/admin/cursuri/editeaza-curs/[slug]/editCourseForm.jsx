@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import 'suneditor/dist/css/suneditor.min.css';
 import ApiClient from '@/Classes/ApiClient';
 import Resizer from 'react-image-file-resizer';
@@ -12,10 +12,19 @@ import { config } from '@/dateStatice';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API )
 const imageDeleteRequest = new ApiClient(config.imageApi);
 
-const placeHolderImage = '/svg/placeholder 300x300.svg';
+import { CourseDataContext } from '@/app/admin/context/CourseDataContext';
 
-const EditCourseForm = (props) => {
-  const [courseData, setCourseData] = useState(props);
+const EditCourseData = (props) => {
+   const {
+     courseData,
+     setCourseData,
+     slug,
+     setSlug,
+     isLoading,
+     error,
+     handleSaveCourse,
+     updateCourseData,
+   } = useContext(CourseDataContext);
    const [image, setImage] = useState(
      {  ...courseData?.image} || {}
      
@@ -26,25 +35,14 @@ const EditCourseForm = (props) => {
    const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
    const [loading, setLoading] = useState(false)
 
-   const updateImageToServer = async () =>{
-   return await api.put(`/course/${props.slug}`, courseData);
    
-   }
 
   useEffect(() => {
-    const updateCourseData = async () => {
-      try {
-        console.log('Course Data:', courseData);
-        await api.put(`/course/${props.slug}`, courseData);
-        console.log('Image:', image);
-      } catch (error) {
-        // Gestionarea erorilor în timpul cererii către server
-        console.error(error);
-      }
-    };
+    setSlug(props.slug);
+    updateCourseData(slug)
+  }, [props.slug]);
 
-    updateCourseData();
-  }, []);
+    
 
    const imageUploadInputRef = useRef()
   const handleChange = (e) => {
@@ -85,7 +83,7 @@ const EditCourseForm = (props) => {
           });
                
           console.log(courseData)
-          await updateImageToServer()
+          await handleSaveCourse()
          setLoading(false);
      
        } catch (err) {
@@ -111,9 +109,16 @@ const EditCourseForm = (props) => {
   }
  
  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
   return (
     <>
+    
       <pre>{JSON.stringify(courseData, '', 3)} </pre>
       <form>
         <div className="form-control">
@@ -245,7 +250,7 @@ const EditCourseForm = (props) => {
         <button
           className="btn btn-primary"
           onClick={(e) => {
-            saveCourseHandler(e, props.slug, courseData);
+            saveCourseHandler(e, slug, courseData);
           }}
         >
           Salveaza Cursul
@@ -255,4 +260,4 @@ const EditCourseForm = (props) => {
   );
 };
 
-export default EditCourseForm;
+export default EditCourseData

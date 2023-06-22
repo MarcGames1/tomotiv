@@ -1,22 +1,10 @@
 
 
 import React from 'react';
-import ApiClient from '@/Classes/ApiClient';
 import AddLessonForm from './AddLessonForm';
+import { getCourseData } from '@/app/admin/cursuri/helpersAdministrareCurs';
 
-const api = new ApiClient(process.env.API);
 
-const getCourseData = async (slug) => {
-  try {
-    const data = await api.get(`/course/${slug}`);
-    if (!data) {
-      return;
-    }
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
 const page = async ({ params: { slug, id } }) => {
   const courseData = await getCourseData(slug);
   const [course] = await Promise.all([courseData]);
