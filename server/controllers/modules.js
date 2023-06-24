@@ -1,5 +1,6 @@
 import Course from '../models/course';
 import Module from '../models/modules'
+import Lesson from '../models/lesson';
 // Create a module within a course
 export const createModule = async (req, res) => {
   try {
@@ -13,10 +14,11 @@ export const createModule = async (req, res) => {
     }
 
     const module = await new Module({ title, lessons });
+   await module.save()
     course.modules.push(module);
     await course.save();
 
-    res.status(201).json(module);
+    res.status(201).json(course);
   } catch (error) {
     res.status(500).json({ error: 'Failed to create module' });
   }
@@ -52,7 +54,7 @@ export const updateModule = async (req, res) => {
 
 export const deleteModule = async (req, res) => {
   try{
-const { moduleId } = req.body._id;
+const {slug, moduleId } = req.params;
 const result = await Module.findOneAndRemove({ _id: moduleId });
 if (result) {
   console.log('Document deleted successfully');

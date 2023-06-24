@@ -154,8 +154,9 @@ export const create = async (req, res) => {
 export const read = async (req, res) => {
   try {
     const course = await Course.findOne({ slug: req.params.slug })
-      .populate('instructor', '_id name')
+      .populate('instructor', '_id, nume, prenume')
       .populate('modules') // Populează câmpul 'modules'
+      .populate('lessons') // Populează câmpul 'lessons'
       .exec();
     res.json(course);
   } catch (err) {

@@ -6,6 +6,7 @@ const moduleSchema = new mongoose.Schema(
     title: {
       type: String,
       trim: true,
+      Unique: true,
       minlength: 3,
       maxlength: 320,
       required: true,

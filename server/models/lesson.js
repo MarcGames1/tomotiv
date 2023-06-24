@@ -13,9 +13,10 @@ const lessonSchema = new mongoose.Schema(
     slug: {
       type: String,
       lowercase: true,
+      unique: true,
     },
     content: {
-      type: {},
+      type: String,
       minlength: 200,
     },
     video: {},
@@ -25,7 +26,7 @@ const lessonSchema = new mongoose.Schema(
     },
     module: {
       type: ObjectId,
-      ref: 'Module  ',
+      ref: 'Module',
     },
   },
   { timestamps: true }

@@ -5,7 +5,6 @@ import ApiClient from '@/Classes/ApiClient';
 import Resizer from 'react-image-file-resizer';
 import {toast} from 'react-hot-toast'
 import useCourseData from '@/app/admin/adminHooks/useCourseData';
-import CourseModule from '../../componenteAdministrareCurs/CourseModule';
 import CourseDescriptionEditor from '../../componenteAdministrareCurs/CourseDescriptionEditor';
 import { config } from '@/dateStatice';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API )
@@ -223,7 +222,7 @@ const EditCourseForm = ({slug}) => {
             />
           </label>
         </div>
-        <CourseModule courseData={courseData} />
+        
         <button
           className="btn btn-primary"
           onClick={(e) => {
