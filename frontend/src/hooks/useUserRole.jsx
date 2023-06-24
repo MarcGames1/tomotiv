@@ -1,14 +1,16 @@
 'use client'
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-
+import { Logout } from '@/helpers/actions';
+import { Context } from '@/context';
 
 const useUserRole = (role) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const { state, dispatch } = useContext(Context);
   
-
+const router = useRouter()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,6 +56,9 @@ const useUserRole = (role) => {
        );
      }
   if (!ok) {
+     dispatch({ type: 'LOGOUT' });
+     router.push('/');
+     Logout();
     return <div>NU ai acces aici</div>;
   }
   // Verificam daca utilizatorul are rolul necesar

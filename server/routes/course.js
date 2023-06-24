@@ -11,10 +11,9 @@ import {
   isAdmin,
 } from '../middlewares';
 
+import { uploadImage, removeImage } from '../controllers/courseImages';
 //controllers
 import {
-  uploadImage,
-  removeImage,
   create,
   read,
   uploadVideo,
@@ -45,15 +44,15 @@ router.get('/courses',requireSignin,isAdmin, courses);
 router.get('/publishedCourses', publishedCourses);
 
 //images
-router.post('/course/upload-image', uploadImage);
-router.post('/course/remove-image', removeImage);
+router.post('/course/upload-image',requireSignin, isInstructor, uploadImage);
+router.post('/course/remove-image', requireSignin, isInstructor, removeImage);
 
 
 //course routes
 router.post('/course', requireSignin, isInstructor, create);
-router.put('/course/:slug', requireSignin, update);
+router.put('/course/:slug', requireSignin, isInstructor, update);
 
-router.get( '/course/:slug', read)
+router.get( '/course/:slug',requireSignin, read)
 
 router.post('/course/video-upload/:instructorId',requireSignin, formidable(), uploadVideo);
 router.post('/course/video-remove/:instructorId', requireSignin, removeVideo);

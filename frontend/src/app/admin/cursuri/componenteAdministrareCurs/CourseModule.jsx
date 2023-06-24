@@ -1,15 +1,23 @@
 'use client'
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
+import ApiClient from '@/Classes/ApiClient';
 
-const CourseModule = ({ courseData, setCourseData }) => {
+const api = new ApiClient(process.env.NEXT_PUBLIC_API);
+
+const postModule = async (slug, module) =>{
+   const res = await api.post(`/courses/${slug}/modules`, module)
+   return res
+}
+
+const removeModule = async () =>{
+  
+}
+const CourseModule = ({ courseData }) => {
 
   const [loading, setLoading] = useState(true)
-  const [newModule, setNewModule] = useState({
-      title: '', // denumirea modulului
-      lessons: [], // array-ul de lecții
-    })
-  
+  const [newModuleName, setNewModuleName] = useState(' ')
+  const {slug} = courseData
 
   useEffect(() =>{
     if(typeof(courseData.modules) === 'undefined') return
@@ -17,25 +25,14 @@ const CourseModule = ({ courseData, setCourseData }) => {
   },
     [courseData])
 
-
-    const setNewModuleName = (name) =>{
-      setNewModule({...newModule, title: name})
-    }
-    const inputRef = useRef()
-  const handleAddModule = (e) => {
+  const handleAddModule = async (e) => {
     e.preventDefault();
-
     const newModule = {
-      title: inputRef.current.value, // denumirea modulului
+      title: newModuleName, // denumirea modulului
       lessons: [], // array-ul de lecții
     };
-    inputRef.current.value = '';
 
-    setCourseData({
-      ...courseData,
-      modules: [...courseData.modules, newModule],
-    });
-    console.log(courseData);
+    postModule(slug, newModule)
   };
 
   const handleRemoveModule = (e, index) => {
@@ -77,19 +74,17 @@ if(loading){
             </div>
           ))}
       </div>
-      <input
-        ref={inputRef}
-        onChange={(e) => {
-          e.preventDefault();
-          setNewModuleName(e.target.value);
-        }}
-        type="text"
-        placeholder="Type here"
-        className="input input-bordered w-full max-w-xs"
-      />
-      <button className="btn btn-secondary" onClick={handleAddModule}>
-        Adaugă modul
-      </button>
+      <div className="form-control flex flex-row gap-5">
+        <input
+          type="text"
+          placeholder="Denumire Modul"
+          className="input input-bordered input-primary w-full max-w-xs"
+          onChange={e =>{setNewModuleName(e.target.value)}}
+        />
+        <button className="btn btn-secondary" onClick={handleAddModule}>
+          Adaugă modul
+        </button>
+      </div>
     </div>
   );
 };

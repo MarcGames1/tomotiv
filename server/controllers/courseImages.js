@@ -1,5 +1,6 @@
-import { S3Client, GetObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, GetObjectCommand, DeleteObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { awsConfig } from '../awsConfig/awsConfig';
+import { nanoid } from 'nanoid';
 const client = new S3Client({
   region: 'eu-west-3',
   credentials: {
@@ -29,7 +30,55 @@ export const getImage = async (req, res) => {
   }
 };
 
-export const deleteImage = async (req, res) => {
+export const uploadImage = async (req, res) => {
+  try {
+    const { image } = req.body;
+    console.log(req.body);
+    if (!image) {
+      return res.status(400).send('No Image');
+    }
+    const base64Data = new Buffer.from(
+      image.replace(/^data:image\/\w+;base64,/, ''),
+      'base64'
+    );
+
+    const type = image.split(';')[0].split('/')[1];
+
+    // image params
+    const params = {
+      Bucket: 'marwebelearning',
+      Key: `${nanoid()}.${type}`,
+      Body: base64Data,
+      ACL: 'private',
+      ContentEncoding: 'base64',
+      ContentType: `image/${type}`,
+    };
+
+    
+    const putComand = new PutObjectCommand({ ...params });
+
+    try {
+      const response = await client.send(putComand, (err, data) => {
+        if (err) {
+          console.log(err);
+          return res.sendStatus(400);
+        }
+        console.log(response)
+
+        if (data.$metadata.httpStatusCode == 200) {
+          res.send({ Bucket: params.Bucket, Key: params.Key });
+        }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+
+export const removeImage = async (req, res) => {
   try {
     const { key } = req.params;
    

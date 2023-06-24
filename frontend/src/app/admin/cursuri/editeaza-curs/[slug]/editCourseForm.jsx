@@ -1,10 +1,11 @@
 'use client'
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import 'suneditor/dist/css/suneditor.min.css';
 import ApiClient from '@/Classes/ApiClient';
 import Resizer from 'react-image-file-resizer';
 import {toast} from 'react-hot-toast'
 import Image from 'next/image';
+import useCourseData from '@/app/admin/adminHooks/useCourseData';
 import CourseModule from '../../componenteAdministrareCurs/CourseModule';
 import CourseDescriptionEditor from '../../componenteAdministrareCurs/CourseDescriptionEditor';
 import { saveCourseHandler } from '../../helpersAdministrareCurs';
@@ -12,21 +13,14 @@ import { config } from '@/dateStatice';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API )
 const imageDeleteRequest = new ApiClient(config.imageApi);
 
-import { CourseDataContext } from '@/app/admin/context/CourseDataContext';
+const placeHolderImage = '/svg/placeholder 300x300.svg';
 
-const EditCourseData = (props) => {
-   const {
-     courseData,
-     setCourseData,
-     slug,
-     setSlug,
-     isLoading,
-     error,
-     handleSaveCourse,
-     updateCourseData,
-   } = useContext(CourseDataContext);
+const EditCourseForm = ({slug}) => {
+ const { courseData, saveCourseState, getCourseData, isLoading, error } =
+   useCourseData(slug);
+  const [isCourseUpdated, setisCourseUpdated] = useState(true);
    const [image, setImage] = useState(
-     {  ...courseData?.image} || {}
+     courseData?.image || {}
      
    );
 
@@ -35,23 +29,21 @@ const EditCourseData = (props) => {
    const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
    const [loading, setLoading] = useState(false)
 
+   const updateImageToServer = async () =>{
+   return await api.put(`/course/${slug}`, courseData);
    
+   }
 
-  useEffect(() => {
-    setSlug(props.slug);
-    updateCourseData(slug)
-  }, [props.slug]);
-
-    
+  
 
    const imageUploadInputRef = useRef()
   const handleChange = (e) => {
     const { name, value } = e.target; 
-    setCourseData({ ...courseData, [name]: value });
+    saveCourseState({ ...courseData, [name]: value });
   };
 
   const handleTogglePaid = (e) => {
-    setCourseData({ ...courseData, paid: e.target.checked });
+    saveCourseState({ ...courseData, paid: e.target.checked });
   };
 
 
@@ -75,21 +67,21 @@ const EditCourseData = (props) => {
 
         
          const { Bucket, Key } = data;
-          setImage({ Bucket, Key });
-          
-          setCourseData({
+         await updateImageToServer()
+         await saveCourseState({
             ...courseData,
             image: { Bucket, Key }, // Actualizează cheia image cu obiectul format din Bucket și Key
           });
+          setImage({ Bucket, Key });
+          getCourseData(slug)
                
           console.log(courseData)
-          await handleSaveCourse()
          setLoading(false);
      
        } catch (err) {
          console.log(err);
           setLoading(false);
-         toast('Image upload failed. Try later.');
+         toast(err.message);
        }
      });
   }
@@ -97,9 +89,10 @@ const EditCourseData = (props) => {
     e.preventDefault()
  try {
    setImage({});
-   setCourseData({
-     ...courseData, image: {},
-    });
+   saveCourseState({
+     ...courseData,
+     image: {},
+   });
     await imageDeleteRequest.delete(`/${image.Key}`);
     await updateImageToServer()
      imageUploadInputRef.current.file = ''
@@ -108,17 +101,10 @@ const EditCourseData = (props) => {
  }
   }
  
- 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+ if(isLoading || error) {return <>...</>}
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
   return (
     <>
-    
       <pre>{JSON.stringify(courseData, '', 3)} </pre>
       <form>
         <div className="form-control">
@@ -197,7 +183,7 @@ const EditCourseData = (props) => {
         </div>
         <CourseDescriptionEditor
           onChange={(content) =>
-            setCourseData({ ...courseData, description: content })
+            saveCourseState({ ...courseData, description: content })
           }
           content={courseData.description}
         />
@@ -246,11 +232,12 @@ const EditCourseData = (props) => {
             />
           </label>
         </div>
-        <CourseModule courseData={courseData} setCourseData={setCourseData} />
+        <CourseModule courseData={courseData} />
         <button
           className="btn btn-primary"
           onClick={(e) => {
-            saveCourseHandler(e, slug, courseData);
+            e.preventDefault();
+            saveCourseState(courseData);
           }}
         >
           Salveaza Cursul
@@ -260,4 +247,4 @@ const EditCourseData = (props) => {
   );
 };
 
-export default EditCourseData
+export default EditCourseForm;

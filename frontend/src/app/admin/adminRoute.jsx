@@ -26,10 +26,13 @@ const AdminRoute = ({ children }) => {
     console.log(ok, data, loading);
     return (
       <>
+      
         <AdminNavbar />
         {children}
+      
       </>
     );
+
   }
 };
 
