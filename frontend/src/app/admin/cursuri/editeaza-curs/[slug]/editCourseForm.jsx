@@ -1,26 +1,23 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import 'suneditor/dist/css/suneditor.min.css';
 import ApiClient from '@/Classes/ApiClient';
 import Resizer from 'react-image-file-resizer';
 import {toast} from 'react-hot-toast'
-import Image from 'next/image';
 import useCourseData from '@/app/admin/adminHooks/useCourseData';
 import CourseModule from '../../componenteAdministrareCurs/CourseModule';
 import CourseDescriptionEditor from '../../componenteAdministrareCurs/CourseDescriptionEditor';
-import { saveCourseHandler } from '../../helpersAdministrareCurs';
 import { config } from '@/dateStatice';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API )
 const imageDeleteRequest = new ApiClient(config.imageApi);
 
-const placeHolderImage = '/svg/placeholder 300x300.svg';
 
 const EditCourseForm = ({slug}) => {
  const { courseData, saveCourseState, getCourseData, isLoading, error } =
    useCourseData(slug);
   const [isCourseUpdated, setisCourseUpdated] = useState(true);
    const [image, setImage] = useState(
-     courseData?.image || {}
+     {...courseData?.image} || {}
      
    );
 
@@ -45,12 +42,6 @@ const EditCourseForm = ({slug}) => {
   const handleTogglePaid = (e) => {
     saveCourseState({ ...courseData, paid: e.target.checked });
   };
-
-
-  // const saveCourseHandler = async (e) => {
-  //   e.preventDefault()
-  //   await api.put(`/course/${props.slug}`, courseData)
-  // }
 
   
   const handleAddImage = async (e) => {
@@ -123,7 +114,7 @@ const EditCourseForm = ({slug}) => {
           </label>
         </div>
         <div className="container flex items-center min-h-[300px]">
-          {image?.Key == undefined && (
+          {courseData?.image?.Key == undefined && (
             <div className="form-control">
               <label className="label">
                 <span className="label-text">
@@ -144,14 +135,14 @@ const EditCourseForm = ({slug}) => {
           )}
 
           <div className="m-10 form-control">
-            {image?.Key ? (
+            {courseData?.image?.Key ? (
               <>
                 <img
                   className="m-5"
                   width={300}
                   height={300}
-                  src={`${config.imageApi}/${image.Key}`}
-                  alt={image.Key}
+                  src={`${config.imageApi}/${courseData?.image?.Key}`}
+                  alt={courseData?.image?.Key}
                 />
                 <button onClick={handleRemoveImage} className="btn btn-accent">
                   Sterge Imaginea

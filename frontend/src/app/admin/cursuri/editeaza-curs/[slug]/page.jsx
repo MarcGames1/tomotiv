@@ -2,9 +2,7 @@ import React from 'react';
 
 import EditCourseForm from './editCourseForm';
 import Link from 'next/link';
-import ApiClient from '@/Classes/ApiClient';
 
-const api = new ApiClient(process.env.API);
 const page = async ({ params: {slug} }) => {
 
 

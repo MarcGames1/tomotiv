@@ -4,11 +4,12 @@ import { AiOutlineDelete, AiOutlineBook } from 'react-icons/ai';
 import CourseModule from '../../../componenteAdministrareCurs/CourseModule';
 import { saveCourseHandler } from '../../../helpersAdministrareCurs';
 import Link from 'next/link';
+import useCourseData from '@/app/admin/adminHooks/useCourseData';
 
+const EditCourseModulesAndLessons = ({slug}) => {
 
-const EditCourseModulesAndLessons = (props) => {
-
-     const [courseData, setCourseData] = useState(props);
+     const { courseData, saveCourseState, getCourseData, isLoading, error } =
+       useCourseData(slug);
   // Handlers
   const handleAddModule = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const EditCourseModulesAndLessons = (props) => {
       lessons: [], // array-ul de lecții
     };
 
-    setCourseData({
+    saveCourseState({
       ...courseData,
       modules: [...courseData.modules, newModule],
     });
@@ -28,14 +29,17 @@ const EditCourseModulesAndLessons = (props) => {
     e.preventDefault();
     const updatedModules = [...courseData.modules];
     updatedModules.splice(index, 1);
-    setCourseData({ ...courseData, modules: updatedModules });
+    saveCourseState({ ...courseData, modules: updatedModules });
   };
 
 
-
+if (isLoading || error) {
+  return <>...</>;
+}
   return (
     <>
-      <CourseModule courseData={courseData} setCourseData={setCourseData} />
+      <pre>{JSON.stringify(courseData, '', 3)}</pre>
+      <CourseModule courseData={courseData} setCourseData={saveCourseState} />
       <button
         className="btn btn-primary"
         onClick={(e) => {
@@ -61,7 +65,7 @@ const EditCourseModulesAndLessons = (props) => {
           <div className="ml-2">
             <Link
               className="btn btn-info"
-            href={`/admin/cursuri/editeaza-curs/${props.slug}/editeaza-module-lectii/${module._id}`}
+              href={`/admin/cursuri/editeaza-curs/${props.slug}/editeaza-module-lectii/${module._id}`}
             >
               Editeaza Modulul
             </Link>

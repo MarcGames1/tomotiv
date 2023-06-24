@@ -20,15 +20,14 @@ const getCourseData = async (slug) => {
   }
 };
 const page = async ({ params: { slug } }) => {
-  const courseData = await getCourseData(slug);
-  const [course] = await Promise.all([courseData]);
+
 
 
   return (
     <>
-      <h1>Editeaza Modulele si Lectiile pentru cursul {courseData.name}</h1>
-      <pre>{JSON.stringify(course, '', 3)}</pre>
-      <EditCourseModulesAndLessons {...course} />
+      <h1>Editeaza Modulele si Lectiile pentru cursul {slug}</h1>
+      
+      <EditCourseModulesAndLessons slug={slug} />
     </>
   );
 };
