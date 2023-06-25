@@ -3,6 +3,7 @@ import Image from "next/image";
 
 export const config = {
   imageApi: 'http://localhost:8000/api/image',
+  videoApi: 'http://localhost:8000/api/video'
 };
 
 

@@ -11,7 +11,7 @@ const router = express.Router();
 
 // Create a lesson within a module
 router.post(
-  '/modules/:moduleId/lessons',
+  '/:courseSlug/modules/:moduleId/lessons',
   requireSignin,
   isInstructor,
   createLesson
@@ -19,7 +19,7 @@ router.post(
 
 // Update a lesson within a module
 router.put(
-  '/modules/:moduleId/lessons/:lessonId',
+  '/:courseId/modules/:moduleId/lessons/:lessonId',
   requireSignin,
   isInstructor,
   updateLesson
@@ -27,7 +27,7 @@ router.put(
 
 // Read a single lesson within a module
 router.get(
-  '/modules/:moduleId/lessons/:lessonId',
+  '/:courseId/modules/:moduleId/lessons/:lessonId',
   requireSignin,
   isInstructor,
   getLesson
@@ -35,7 +35,7 @@ router.get(
 
 // Read all lessons within a module
 router.get(
-  '/modules/:moduleId/lessons',
+  '/:courseId//modules/:moduleId/lessons',
   requireSignin,
   isInstructor,
   getAllLessons
