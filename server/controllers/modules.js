@@ -79,14 +79,16 @@ export const getModule = async (req, res) => {
       return res.status(404).json({ error: 'Course not found' });
     }
 
-    const module = course.modules.id(moduleId);
+    const module = await Module.findById(moduleId).populate('lessons');
 
     if (!module) {
       return res.status(404).json({ error: 'Module not found' });
     }
 
+    console.log('DATE MODUL ', module)
     res.json(module);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to fetch module' });
   }
 };

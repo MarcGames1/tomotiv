@@ -1,9 +1,7 @@
 import React from 'react';
 import ApiClient from '@/Classes/ApiClient';
 import Link from 'next/link';
-import AddLessonForm from './AddLessonTitleAndContent';
-
-const api = new ApiClient(process.env.API);
+import ListLessonsInModule from './listLessonsInModule';
 
 
 const page = async ({ params: { slug, id } }) => {
@@ -21,6 +19,7 @@ const page = async ({ params: { slug, id } }) => {
       {/* <AddLessonForm
         
       /> */}
+      <ListLessonsInModule slug={slug} id={id} />
     </>
   );
 };

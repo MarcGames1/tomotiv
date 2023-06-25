@@ -4,6 +4,7 @@ import {
   updateLesson,
   getLesson,
   getAllLessons,
+  deleteLesson,
 } from '../controllers/lessons';
 import { isInstructor, requireSignin } from '../middlewares';
 
@@ -23,6 +24,13 @@ router.put(
   requireSignin,
   isInstructor,
   updateLesson
+);
+// Delete a lesson within a module
+router.delete(
+  '/:slug/:moduleId/lessons/:lessonId',
+  requireSignin,
+  isInstructor,
+  deleteLesson
 );
 
 // Read a single lesson within a module

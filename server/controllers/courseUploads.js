@@ -99,7 +99,14 @@ export const removeObject = async (req, res) => {
   }
 };
 
-
+//functie ajutatoare pentru a sterge video daca stergem lectia
+export const removeFromBucket = async (key) =>{
+   const command = new DeleteObjectCommand({
+     Bucket: 'marwebelearning',
+     Key: key,
+   });
+   await client.send(command);
+}
 
 export const uploadVideo = async (req, res) => {
   try {

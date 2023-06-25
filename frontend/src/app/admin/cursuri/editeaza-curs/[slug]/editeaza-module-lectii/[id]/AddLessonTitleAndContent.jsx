@@ -2,33 +2,30 @@
 import React,  {useState} from 'react'
 import CourseDescriptionEditor from '@/app/admin/cursuri/componenteAdministrareCurs/CourseDescriptionEditor'
 const AddLessonTitleAndContent = ({lessonData, setLessonData, children}) => {
-const [lessonTitle, setLessonTitle] =useState(lessonData?.title)
-const [lessonContent, setLesonContent] =useState(lessonData?.content)
+const [currentLessonData, setCurrentLessonData] = useState(lessonData)
 
 const handleTitleChange = e =>{
-  setLessonTitle(e.target.value)
-  setLessonData({...lessonData, title: e.target.value})
+ 
+  setCurrentLessonData({ ...currentLessonData, title: e.target.value });
+  setLessonData(currentLessonData)
 }
 
-const handleContentChange = content =>{
-setLesonContent(content)
-setLessonData({...lessonData, content: content})
-}
+
   return (
     <>
       <input
-        onInput={handleTitleChange}
+        onChange={handleTitleChange}
         type="text"
         placeholder="Titlu Lectie"
         className="input w-full max-w-xs"
       />
       {children}
       <CourseDescriptionEditor
-        onChange={(content) =>{
-          setLesonContent(content);
-          setLessonData({ ...lessonData, content: content })
-        }        }
-        content={lessonContent}
+        onChange={(content) => {
+          setCurrentLessonData({ ...currentLessonData, content: content });
+          setCurrentLessonData({ ...currentLessonData, content: content });
+        }}
+        content={currentLessonData?.content}
       />
     </>
   );
