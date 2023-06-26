@@ -19,14 +19,14 @@ const page = async () => {
      const data = await getData();
 
 
-     if(Array.isArray(data)  && data?.length <= 0){
+     if(!Array.isArray(data)  && data?.length <= 0){
       return <>No courses yet</>
      }
   return (
     <Page>
         <pre>{JSON.stringify(data, '', 3)}</pre>
       <div>Cursuri</div>
-      {data.map(course =>{
+      {data && data.map(course =>{
         return <CourseCard key={course._id} {...course} />;
       })}
     </Page>
