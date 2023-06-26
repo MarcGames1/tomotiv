@@ -85,8 +85,6 @@ const FoggotPassword = () => {
    
   return (
     <>
-      <h1>Forgot Password</h1>
-
       <form
         className={`flex flex-col items-center`}
         ref={formRef}
@@ -161,9 +159,9 @@ const FoggotPassword = () => {
           disabled={loading || !email}
         >
           {loading ? (
-           <span>Loading ... </span>
+            <span className="loading loading-dots loading-lg"></span>
           ) : (
-            'Submit'
+            'Actualizeaza Parola'
           )}
         </button>
       </form>

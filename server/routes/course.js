@@ -52,7 +52,7 @@ router.post('/course/remove-image', requireSignin, isInstructor, removeObject);
 router.post('/course', requireSignin, isInstructor, create);
 router.put('/course/:slug', requireSignin, isInstructor, update);
 
-router.get( '/course/:slug',requireSignin, read)
+router.get( '/course/:slug', read)
 
 router.post('/course/video-upload/:instructorId',requireSignin, formidable(), uploadVideo);
 router.post('/course/video-remove/:instructorId', requireSignin, removeVideo);

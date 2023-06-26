@@ -1,27 +1,15 @@
-import  {expressjwt}  from 'express-jwt';
+require('dotenv/config');
+import { expressjwt } from 'express-jwt';
 
 import User from '../models/user';
 import { config } from '../config/config';
 // import Course from '../models/course';
 
-export const requireSignin = (req, res, next) => {
-  expressjwt({
-    getToken: (req, res) => req.cookies.token,
-    secret: process.env.JWT_SECRET,
-    algorithms: ['HS256'],
-  })(req, res, (err) => {
-    if (err) {
-      if (err.name === 'UnauthorizedError') {
-        // Tratați eroarea de neautorizare aici
-        return res.status(401).json({ error: 'Unauthorized' });
-      }
-      // Tratați alte erori JWT aici (opțional)
-      return res.status(500).json({ error: 'Internal Server Error' });
-    }
-    // Continuați cu următorul middleware sau rută
-    next();
-  });
-};
+export const requireSignin = expressjwt({
+  getToken: (req, res) => req.cookies.token,
+  secret: process.env.JWT_SECRET,
+  algorithms: ['HS256'],
+})
 
 export const isInstructor = async (req, res, next) => {
   try {
@@ -85,22 +73,21 @@ export const freeEnrollment = async (req, res) => {
     ).exec();
     console.log(result);
     res.json({
-      message: "Congratulations! You have successfully enrolled",
+      message: 'Congratulations! You have successfully enrolled',
       course,
     });
   } catch (err) {
-    console.log("free enrollment err", err);
-    return res.status(400).send("Enrollment create failed");
+    console.log('free enrollment err', err);
+    return res.status(400).send('Enrollment create failed');
   }
 };
 
-
 // check if req is comming from the allowed host list
-export const checkAllowedHostNames = async (req, res, next)=>{
-  console.log("Checking HostNames" , req.hostname)
-  if(!config.allowedHosts.includes(req.hostname)){
-    res.status(505).send('Unauthorised')
+export const checkAllowedHostNames = async (req, res, next) => {
+  console.log('Checking HostNames', req.hostname);
+  if (!config.allowedHosts.includes(req.hostname)) {
+    res.status(505).send('Unauthorised');
   }
 
-  next()
-}
+  next();
+};

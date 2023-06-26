@@ -30,8 +30,12 @@ try{
 
     //hash password
     const hashedPassword = await hashPassword(password);
-
-    const user = new User({ nume, email, password: hashedPassword });
+    const lowercaseEmail = email.toLowerCase();
+    const user = new User({
+      nume,
+      email: lowercaseEmail,
+      password: hashedPassword,
+    });
     await user.save();
 
     console.log('saved USER', user)
@@ -46,9 +50,9 @@ try{
 export const login = async (req, res) => {
     try {
         const {email, password} = req.body
-        
+        const lowercaseEmail = email.toLowerCase();
         // verifica daca in DB exista un User cu adresa de email din req.body
-        const user = await User.findOne({email}).exec();
+        const user = await User.findOne({ email: lowercaseEmail }).exec();
         if(!user) return res.status(400).send("Utilizatorul nu exista")
 
         // verificam parola 
@@ -104,7 +108,7 @@ export const currentUser = async( req, res) =>{
           const user = await User.findById(req.auth._id)
             .select('-password')
             .exec();
-          
+          console.log('current user', user)
           return res.json({ ok: true });
     } catch (error) {
          console.log(error);

@@ -108,7 +108,7 @@ const { user } = state;
         </Navbar.Center>
         <Navbar.End>
 
-          <div className="gap-3 flex">
+          <div className="gap-3 flex items-center justify-items-center">
             <>
               {user ? (
                 <LoggedUserButtons dispatch={dispatch} user={user} />

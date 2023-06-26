@@ -43,9 +43,9 @@ const LoggedUserButtons = ({dispatch, user}) => {
       <span className={''}>
         Salutare, <Link href={rolebasedHref}>{user.nume}</Link>
       </span>
-      <Button color='primary' className={``}>
+      <Link href={'/cursuri-utilizator'}  className={`btn btn-primary`}>
         Vezi Cursurile tale
-      </Button>
+      </Link>
       <a
         onClick={async (e) => {
           e.preventDefault();

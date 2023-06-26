@@ -143,7 +143,7 @@ const SignInForm = () => {
 
         <div className="block m-auto prose  text-secondary">
           Nu ai cont?{' '}
-          <Link className="link link-primary" href={'/login'}>
+          <Link className="link link-primary" href={'/inregistrare'}>
             Inregistreaza-te!
           </Link>{' '}
         </div>
