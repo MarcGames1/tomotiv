@@ -1,20 +1,17 @@
 import React from 'react'
 import Page from '../PageLayout'
 import CourseCard from '@/components/CourseCard/CourseCard';
-
-
+import ApiClient from '@/Classes/ApiClient';
+const api = new ApiClient(process.env.API);
 async function getData() {
-  const res = await fetch(`${process.env.API}/publishedCourses`);
+  const res = await api.get(`/publishedCourses`);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
   // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data');
-  }
 
-  return res.json();
+
+  return res
 }
  
 
