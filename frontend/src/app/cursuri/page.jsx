@@ -22,8 +22,10 @@ const page = async () => {
      const data = await getData();
 
 
+     if(data.length <= 0){
+      return <>No courses yet</>
+     }
   return (
-    
     <Page>
         <pre>{JSON.stringify(data, '', 3)}</pre>
       <div>Cursuri</div>
