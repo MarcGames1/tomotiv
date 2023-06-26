@@ -4,7 +4,7 @@ import ApiClient from '@/Classes/ApiClient';
 
 const api = new ApiClient(process.env.API);
 // /user-courses
-// export const revalidate = 3600; 
+// export const revalidate = 3600;
 async function getData() {
   const res = await api.get(`/user-courses`);
   console.log(res)

@@ -24,16 +24,13 @@ const UploadVideoForm = ({lessonData, setLessonData}) => {
     state: { user },
   } = useContext(Context);
 
-if(!user) {
-  Logout();
-  return<>Logged Out</>
-}
+
 
   const userId = user._id;
   const videoInputRef = useRef();
   const [progress, setProgress] = useState(0);
 
-  const [video, setVideo] = useState(lessonData.video || undefined);
+  const [video, setVideo] = useState(lessonData?.video || undefined);
   const handleUpload = async (e) => {
    try {
      const file = e.target.files[0];
@@ -67,7 +64,10 @@ if(!user) {
      }
 
   }
-
+if (!user) {
+  Logout();
+  return <>Logged Out</>;
+}
   return (
     <>
       <div className="artboard artboard-horizontal phone-3">
@@ -102,9 +102,9 @@ if(!user) {
               height="100%"
               url={`${config.videoApi}/${video.Key}`}
             />
-            <buton onClick={handleDeleteVideo} className="btn btn-error">
+            <button onClick={handleDeleteVideo} className="btn btn-error">
               Sterge Video
-            </buton>
+            </button>
           </>
         )}
       </div>
