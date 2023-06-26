@@ -16,6 +16,7 @@ router.get(
   getImage
 );
 router.delete('/image/:key', checkAllowedHostNames, requireSignin, isInstructor, removeObject);
+router.delete('/video/:key', checkAllowedHostNames, requireSignin, isInstructor, removeObject);
 
 router.get(
   '/video/:key',

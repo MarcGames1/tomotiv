@@ -6,7 +6,7 @@
 import Lesson from '../models/lesson';
 import Course from '../models/course';
 import Module from '../models/modules';
-import { removeFromBucket } from './courseUploads';
+import { removeFromBucket, removeObject } from './courseUploads';
 import slugify from 'slugify';
 
 export const createLesson = async (req, res) => {
@@ -58,20 +58,66 @@ export const createLesson = async (req, res) => {
   }
 };
 
-export const updateLesson = async (req, res) => {};
-export const getLesson = async (req, res) => {};
+export const updateLesson = async (req, res) => {
+try {
+    const {courseSlug, moduleId, lessonId } = req.params
+  const {title, content, video} = req.body
+  const course = await Course.findOne({ slug }).select('instructor').exec();
+  if (req.auth._id != course.instructor) {
+      return res.status(400).send('Unauthorized');
+    }
+const lesson = await Lesson.findById(lessonId)
+if(lesson.video){
+  removeFromBucket(lesson.video.Key)
+  console.log('Previous video removed from bucket')
+  await updateLesson(req, res)
+}
+  const updated = await Lesson.findByIdAndUpdate(lessonId,{
+      title,
+      slug: slugify(title.toLowerCase()),
+      content,
+      video,
+      free_preview,}, {new: true}).exec()
+
+  res.json(updated);
+} catch (error) {
+    console.log(err);
+    return res.status(400).send(err.message);
+}
+};
+export const getLesson = async (req, res) => {
+  try {
+    const { lessonId } = req.params;
+    const lesson = await Lesson.findById(lessonId);
+
+    if (!lesson) {
+      return res.status(404).json({ message: 'Lesson not found' });
+    }
+
+    res.status(200).json({ lesson });
+  } catch (error) {
+    console.error('Error retrieving lesson:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 export const getAllLessons = async (req, res) => {};
 
 
 export const deleteLesson = async (req, res) => {
     const {lessonId} = req.params
 try {
-        const lesson = await Lesson.findById(lessonId);
-        if (lesson && lesson.video) {
-          removeFromBucket(lesson.video.Key);
-        }
-        await Lesson.findByIdAndDelete(lessonId);
-        res.status(200).send({Message: 'Lesson deleted successfully'})
+  const lesson = await Lesson.findById(lessonId);
+  if (lesson && lesson.video) {
+    removeFromBucket(lesson.video.Key);
+  }
+  await Lesson.findByIdAndDelete(lessonId);
+  // Actualizează documentul course și elimină id-ul lectiei din array-ul modules
+  await Course.updateOne(
+    { modules: { $elemMatch: { lessons: lessonId } } },
+    { $pull: { 'modules.$.lessons': lessonId } }
+  );
+  res.status(200).send({ Message: 'Lesson deleted successfully' });
 } catch (error) {
     console.error(error)
 }

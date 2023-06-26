@@ -20,3 +20,17 @@ export const getCourseData = async (slug) => {
     console.log(error);
   }
 };
+
+export const getLessonData = async ( moduleId, lessonId) => {
+try {
+  const data = await api.get(
+    `/${moduleId}/lessons/${lessonId}`
+  );
+  if (!data) {
+    return;
+  }
+  return data;
+} catch (error) {
+  console.log(error);
+}
+}

@@ -1,6 +1,8 @@
 import Course from '../models/course';
 import Module from '../models/modules'
 import Lesson from '../models/lesson';
+import { removeFromBucket } from './courseUploads';
+
 // Create a module within a course
 export const createModule = async (req, res) => {
   try {
@@ -53,18 +55,34 @@ export const updateModule = async (req, res) => {
 };
 
 export const deleteModule = async (req, res) => {
-  try{
-const {slug, moduleId } = req.params;
-const result = await Module.findOneAndRemove({ _id: moduleId });
-if (result) {
-  console.log('Document deleted successfully');
-  res.status(200).json({message: "Module Deleted"})
-} else {
-  console.log('Document not found');
-}
-  
+  try {
+    const { slug, moduleId } = req.params;
+
+    // Găsește modulul care urmează să fie șters
+    const module = await Module.findOne({ _id: moduleId });
+
+    if (!module) {
+      return res.status(404).json({ error: 'Module not found' });
+    }
+
+    // Șterge video-urile asociate fiecărei lectii din modul, dacă există
+    for (const lessonId of module.lessons) {
+      const lesson = await Lesson.findById(lessonId);
+
+      if (lesson && lesson.video) {
+       await removeFromBucket(lesson.video.Key);
+      }
+    }
+
+    // Șterge modulul și lectiile asociate
+    await Module.findByIdAndRemove(moduleId);
+    await Lesson.deleteMany({ module: moduleId });
+
+    console.log('Module and associated lessons deleted successfully');
+    res.status(200).json({ message: 'Module and associated lessons deleted' });
   } catch (error) {
-    console.error('Error deleting document:', error);
+    console.error('Error deleting module:', error);
+    res.status(500).json({ error: 'Failed to delete module' });
   }
 };
 

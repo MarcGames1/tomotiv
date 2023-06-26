@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import ApiClient from '@/Classes/ApiClient';
+import Link from 'next/link';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API);
 
 const ListLessonsInModule = ({ slug, id }) => {
@@ -46,20 +47,20 @@ useEffect(() => {
     <div>
       {moduleData && (
         <div>
-            <pre>{JSON.stringify(moduleData, '', 3)}</pre>
+          <pre>{JSON.stringify(moduleData, '', 3)}</pre>
           <h1>{moduleData.title}</h1>
-          
+
           <ul>
             {moduleData.lessons.map((lesson) => (
               <li key={lesson._id}>
                 {lesson.title} LESSON ID {lesson._id}
-                <button
+                <Link
+                  href={`/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii/${id}/editeaza-lectie/${lesson._id}`}
                   className="btn btn-info"
                   icon={<AiOutlineEdit />}
-                  onClick={() => handleEditLesson(lesson._id)}
                 >
                   Edit
-                </button>
+                </Link>
                 <button
                   className="btn btn-error"
                   icon={<AiOutlineDelete />}

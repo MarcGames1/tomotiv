@@ -9,7 +9,7 @@ const AdminRoute = ({ children }) => {
   const { ok, data, loading } = useUserRole('Admin');
   const router = useRouter();
 
-  console.log('DATAAAA =>', data);
+  
 
   if (loading) {
     return (

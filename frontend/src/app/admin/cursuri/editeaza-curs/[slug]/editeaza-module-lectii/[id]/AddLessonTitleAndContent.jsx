@@ -1,15 +1,24 @@
 'use client'
-import React,  {useState} from 'react'
-import CourseDescriptionEditor from '@/app/admin/cursuri/componenteAdministrareCurs/CourseDescriptionEditor'
-const AddLessonTitleAndContent = ({lessonData, setLessonData, children}) => {
-const [currentLessonData, setCurrentLessonData] = useState(lessonData)
+import React, { useEffect, useState } from 'react';
+import CourseDescriptionEditor from '@/app/admin/cursuri/componenteAdministrareCurs/CourseDescriptionEditor';
 
-const handleTitleChange = e =>{
- 
-  setCurrentLessonData({ ...currentLessonData, title: e.target.value });
-  setLessonData(currentLessonData)
-}
+const AddLessonTitleAndContent = ({ lessonData, setLessonData, children }) => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
+  useEffect(() => {
+    if (title !== '' && content !== '') {
+      setLessonData({ ...lessonData, title, content });
+    }
+  }, [title, content]);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleContentChange = (content) => {
+    setContent(content);
+  };
 
   return (
     <>
@@ -18,17 +27,15 @@ const handleTitleChange = e =>{
         type="text"
         placeholder="Titlu Lectie"
         className="input w-full max-w-xs"
+        value={title}
       />
       {children}
       <CourseDescriptionEditor
-        onChange={(content) => {
-          setCurrentLessonData({ ...currentLessonData, content: content });
-          setCurrentLessonData({ ...currentLessonData, content: content });
-        }}
-        content={currentLessonData?.content}
+        onChange={handleContentChange}
+        content={content}
       />
     </>
   );
-}
+};
 
-export default AddLessonTitleAndContent
+export default AddLessonTitleAndContent;

@@ -20,7 +20,7 @@ router.post(
 
 // Update a lesson within a module
 router.put(
-  '/:courseId/modules/:moduleId/lessons/:lessonId',
+  '/:slug/modules/:moduleId/lessons/:lessonId',
   requireSignin,
   isInstructor,
   updateLesson
@@ -35,7 +35,7 @@ router.delete(
 
 // Read a single lesson within a module
 router.get(
-  '/:courseId/modules/:moduleId/lessons/:lessonId',
+  '/:moduleId/lessons/:lessonId',
   requireSignin,
   isInstructor,
   getLesson

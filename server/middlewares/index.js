@@ -4,12 +4,24 @@ import User from '../models/user';
 import { config } from '../config/config';
 // import Course from '../models/course';
 
-export const requireSignin =   expressjwt({
-  getToken: (req, res) => req.cookies.token,
-  secret: process.env.JWT_SECRET,
-  algorithms: ['HS256'],
-  
-});
+export const requireSignin = (req, res, next) => {
+  expressjwt({
+    getToken: (req, res) => req.cookies.token,
+    secret: process.env.JWT_SECRET,
+    algorithms: ['HS256'],
+  })(req, res, (err) => {
+    if (err) {
+      if (err.name === 'UnauthorizedError') {
+        // Tratați eroarea de neautorizare aici
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+      // Tratați alte erori JWT aici (opțional)
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    // Continuați cu următorul middleware sau rută
+    next();
+  });
+};
 
 export const isInstructor = async (req, res, next) => {
   try {
