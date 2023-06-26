@@ -19,7 +19,7 @@ const page = async () => {
      const data = await getData();
 
 
-     if(data.length <= 0){
+     if(Array.isArray(data)  && data?.length <= 0){
       return <>No courses yet</>
      }
   return (
