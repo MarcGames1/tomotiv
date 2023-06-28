@@ -22,14 +22,13 @@ const LessonViewComponent = ({course}) => {
       className=" p-2 flex justify-around w-full"
     >
       <main className="  w-3/4">
-        
         {currentLesson ? (
           <LessonVideoAndDescription currentLesson={currentLesson} />
         ) : (
           <Placeholder />
         )}
       </main>
-      <aside className="sticky top-10 h-full w-1/4 bg-base-200">
+      <aside className="sticky top-10 overflow-y-auto h-[95vh] w-1/4 bg-base-200">
         <LessonModulesSidebar
           currentLesson={currentLesson}
           modules={modules}
