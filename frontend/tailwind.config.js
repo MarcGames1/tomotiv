@@ -7,6 +7,11 @@ module.exports = {
   ],
   darkMode: 'class',
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  theme:{
+   fontFamily: {
+    'sans': [ 'Inter', 'sans-serif']
+   }
+  },
   daisyui: {
     themes: [
       {

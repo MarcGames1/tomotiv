@@ -1,11 +1,11 @@
 import React from 'react';
-import SunEditor from 'suneditor-react';
+import SunEditor, { buttonList as defaultButtonList } from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 
 const CourseDescriptionEditor = ({ content, onChange }) => {
   const buttonList = [
     ['undo', 'redo'],
-    ['fontSize', 'formatBlock'],
+    ['font','fontSize', 'formatBlock'],
     ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
     ['removeFormat'],
     ['fontColor', 'hiliteColor'],
@@ -15,13 +15,13 @@ const CourseDescriptionEditor = ({ content, onChange }) => {
     ['fullScreen', 'showBlocks', 'codeView'],
     ['preview'],
   ];
-
   return (
     <div className="form-control">
       <SunEditor
         setOptions={{
           height: 200,
           buttonList,
+          defaultStyle: 'font-family: Inter; font-size:20px;'
         }}
         height="50%"
         lang={'ro'}

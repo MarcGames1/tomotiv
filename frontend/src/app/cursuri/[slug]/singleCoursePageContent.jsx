@@ -85,19 +85,24 @@ const checkEnrollment = async () => {
      
   return (
     <>
-      <div>singleCoursePageContent</div>
+      <div>Aici o sa fie Pagina de Vanzare Curs, O sa contina si Descrierea Cursului ( cred ) Putem face fie template fie pagina unica </div>
+      
 
-      <button
-        className="btn btn-primary"
-        disabled={loading}
-        onClick={paid ? handlePaidEnrollment : handleFreeEnrollment}
-      >
-        {user
-          ? enrolled.status
-            ? 'Vezi Cursul'
-            : 'Inscrie-te'
-          : 'Logheaza-te pentru a te inscrie'}
-      </button>
+      {enrolled.status ? (
+        <></>
+      ) : (
+        <button
+          className="btn btn-primary"
+          disabled={loading}
+          onClick={paid ? handlePaidEnrollment : handleFreeEnrollment}
+        >
+          {user
+            ? enrolled.status
+              ? 'Vezi Cursul'
+              : 'Inscrie-te'
+            : 'Logheaza-te pentru a te inscrie'}
+        </button>
+      )}
     </>
   );
 }

@@ -156,7 +156,13 @@ export const read = async (req, res) => {
     const course = await Course.findOne({ slug: req.params.slug })
       .populate('instructor', '_id nume')
       .populate('modules') // Populează câmpul 'modules'
-      .populate('lessons') // Populează câmpul 'lessons'
+      .populate({
+        path: 'modules',
+        populate: {
+          path: 'lessons',
+        },
+      })
+      // .populate('lessons') // Populează câmpul 'lessons'
       .exec();
     res.json(course);
   } catch (err) {
@@ -400,6 +406,14 @@ export const checkEnrollment = async (req, res) => {
   for (let i = 0; i < length; i++) {
     ids.push(user.courses[i].toString());
   }
+  // return course only if enrollemnt status is true
+
+  
+    if(!ids.includes(courseId)){ 
+      res.json({ status: ids.includes(courseId) });
+    }
+  
+
   res.json({
     status: ids.includes(courseId),
     course: await Course.findById(courseId).exec(),

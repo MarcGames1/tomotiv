@@ -5,9 +5,9 @@ const Layout = ({ children }) => {
   return (
     
     <>
-    <UserRoute>
+    
       <>{children}</>
-    </UserRoute>
+    
 
     </>
   );

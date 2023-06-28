@@ -1,9 +1,8 @@
 import React from 'react';
 import Page from '@/app/PageLayout';
 import CourseCard from '@/components/CourseCard/CourseCard';
-import SingleCoursePageContent from './singleCoursePageContent';
+import SingleCourse from './singleCourse';
 import ApiClient from '@/Classes/ApiClient';
-
 
 const api = new ApiClient(process.env.API);
 
@@ -21,16 +20,14 @@ async function getData(slug) {
   return res;
 }
 
-const page = async ({params:{slug}}) => {
-  const data = await getData(slug);
-  const [course] = await Promise.all([data])
+const page = async ({ params: { courseSlug } }) => {
+  const data = await getData(courseSlug);
+  const [course] = await Promise.all([data]);
 
   return (
     <Page>
       
-      <h1>Cursul {course.name}</h1>
-    <SingleCoursePageContent course={course} />
-      
+      <SingleCourse  course={course} />
     </Page>
   );
 };

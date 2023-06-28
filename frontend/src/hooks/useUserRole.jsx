@@ -18,17 +18,20 @@ const router = useRouter()
         switch (role) {
           case 'Admin':
             res = await axios.get(
-              `${process.env.NEXT_PUBLIC_API}/current-admin`
+              `${process.env.NEXT_PUBLIC_API}/current-admin`,
+              { withCredentials: true }
             );
             break;
           case 'Instructor':
             res = await axios.get(
-              `${process.env.NEXT_PUBLIC_API}/current-instructor`
+              `${process.env.NEXT_PUBLIC_API}/current-instructor`,
+              { withCredentials: true }
             );
             break;
           case 'Subscriber':
             res = await axios.get(
-              `${process.env.NEXT_PUBLIC_API}/current-user`
+              `${process.env.NEXT_PUBLIC_API}/current-user`,
+              { withCredentials: true }
             );
             break;
           default:
@@ -55,7 +58,7 @@ const router = useRouter()
          </div>
        );
      }
-  if (!ok) {
+  if (!loading && !ok) {
      dispatch({ type: 'LOGOUT' });
      router.push('/');
      Logout();

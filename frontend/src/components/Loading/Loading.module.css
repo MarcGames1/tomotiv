@@ -1,0 +1,35 @@
+.loadingContainer {
+  display: grid;
+  place-items: center;
+  height: 80vh;
+}
+
+.loadingDots {
+  display: flex;
+  align-items: center;
+}
+
+.loadingDot {
+  width: 10px;
+  height: 10px;
+  background-color: #000;
+  border-radius: 50%;
+  margin: 0 4px;
+  opacity: 0.3;
+  animation: loadingAnimation 1s infinite;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+}

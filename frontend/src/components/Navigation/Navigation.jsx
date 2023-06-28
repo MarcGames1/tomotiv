@@ -71,7 +71,7 @@ const { user } = state;
             </Dropdown.Menu>
           </Dropdown>
           <Link href={'/'} className="btn btn-ghost normal-case text-xl">
-           <Image alt='Tomotiv Logo' width={103} height={32} src='./svg/logo.svg' />
+           <Image alt='Tomotiv Logo' width={103} height={32} src='/svg/logo.svg' />
           </Link>
         </Navbar.Start>
         <Navbar.Center>

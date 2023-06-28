@@ -11,7 +11,6 @@ const router = express.Router();
 router.get(
   '/image/:key',
   checkAllowedHostNames,
-  requireSignin,
   getImage
 );
 router.delete('/image/:key', checkAllowedHostNames, requireSignin, isInstructor, removeObject);
