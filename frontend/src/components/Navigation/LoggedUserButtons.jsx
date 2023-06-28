@@ -39,8 +39,8 @@ const LoggedUserButtons = ({dispatch, user}) => {
 
 
   return (
-    <div className="self-center flex gap-3 flex-1">
-      <span className={''}>
+    <div className="justify-self-center flex gap-3 flex-1">
+      <span className={'btn bg-transparent '}>
         Salutare, <Link href={rolebasedHref}>{user.nume}</Link>
       </span>
       <Link href={'/cursuri-utilizator'}  className={`btn btn-primary`}>
