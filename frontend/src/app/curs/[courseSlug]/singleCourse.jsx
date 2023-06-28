@@ -37,7 +37,7 @@ if(!enrolled.status){
 }
   return (
     <>
-      <LessonViewComponent course={course}/>
+      {course ? <LessonViewComponent course={course}/> : <><Loading /></>}
     </>
       
   );
