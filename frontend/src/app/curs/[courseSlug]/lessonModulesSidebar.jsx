@@ -37,6 +37,7 @@ const SingleModule =({module, currentLesson ,setCurrentLesson}) =>{
         <div className="collapse-content">
           <ul className="menu join menu-lg bg-secondary text-secondary-content  w-full">
             {module.lessons.map((lesson) => <SingleLessonElement 
+            key={lesson._id}
             currentLesson={currentLesson} 
             lesson={lesson} 
             setCurrentLesson={setCurrentLesson}
