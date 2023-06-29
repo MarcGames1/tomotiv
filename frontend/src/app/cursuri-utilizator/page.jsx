@@ -9,7 +9,7 @@ const api = new ApiClient(process.env.NEXT_PUBLIC_API);
 // /user-courses
 export const revalidate = 3600;
 
-const page = () => {
+const Page = () => {
   const { ok, data, loading } = useUserRole('Subscriber');
   const [userCourses, setUserCourses] = useState([]);
 
@@ -41,4 +41,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
