@@ -22,9 +22,6 @@ const SingleModule =({module, currentLesson ,setCurrentLesson}) =>{
 
     
 
-    const handleLessonClick = (lesson) =>{
-        setCurrentLesson(lesson)
-    }
         
 
 
@@ -39,31 +36,38 @@ const SingleModule =({module, currentLesson ,setCurrentLesson}) =>{
         
         <div className="collapse-content">
           <ul className="menu join menu-lg bg-secondary text-secondary-content  w-full">
-            {module.lessons.map((lesson) => {
-              const [isActive, setIsActive] = useState(false);
-              useEffect(() => {
-                if (lesson._id === currentLesson._id) {
-                  setIsActive(true);
-                } else {
-                  setIsActive(false);
-                }
-              }, [currentLesson._id]);
-              return (
-                <li
-                  key={lesson._id}
-                  className={`join-item text-center btn btn-secondary ${
-                    isActive ? 'btn-active' : null
-                  }`}
-                  onClick={() => {
-                    handleLessonClick(lesson);
-                  }}
-                >
-                  {lesson.title}
-                </li>
-              );
-            })}
+            {module.lessons.map((lesson) => <SingleLessonElement 
+            currentLesson={currentLesson} 
+            lesson={lesson} 
+            setCurrentLesson={setCurrentLesson}
+            />) }
           </ul>
         </div>
       </div>
     );
 }
+
+
+const SingleLessonElement = ({ lesson, currentLesson, setCurrentLesson }) => {
+  const [isActive, setIsActive] = useState(false);
+  useEffect(() => {
+    if (lesson._id === currentLesson._id) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [currentLesson._id]);
+  return (
+    <li
+      key={lesson._id}
+      className={`join-item text-center btn btn-secondary ${
+        isActive ? 'btn-active' : null
+      }`}
+      onClick={() => {
+        setCurrentLesson(lesson);
+      }}
+    >
+      {lesson.title}
+    </li>
+  );
+};
