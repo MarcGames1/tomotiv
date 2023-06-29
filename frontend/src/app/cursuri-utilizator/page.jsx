@@ -35,7 +35,7 @@ const Page = () => {
     <>
       <pre>{JSON.stringify(userCourses, '', 3)}</pre>
       {userCourses.map(course =>{
-        return <UserCourseCard {...course}   />
+        return <UserCourseCard key={course._id} {...course}   />
       })}
     </>
   );
