@@ -32,7 +32,9 @@ const EditCourseForm = ({slug}) => {
 
   
 
-   const imageUploadInputRef = useRef()
+  const imageUploadInputRef = useRef()
+
+
   const handleChange = (e) => {
     const { name, value } = e.target; 
     saveCourseState({ ...courseData, [name]: value });
@@ -107,6 +109,21 @@ const EditCourseForm = ({slug}) => {
               type="text"
               name="name"
               value={courseData.name}
+              onChange={handleChange}
+              className="input input-bordered"
+            />
+          </label>
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Titlu Curs</span>
+          </label>
+          <label className="input-group">
+            <span>Link Grup Facebook</span>
+            <input
+              type="text"
+              name="facebookGroup"
+              value={courseData.facebookGroup}
               onChange={handleChange}
               className="input input-bordered"
             />
@@ -222,7 +239,7 @@ const EditCourseForm = ({slug}) => {
             />
           </label>
         </div>
-        
+
         <button
           className="btn btn-primary"
           onClick={(e) => {

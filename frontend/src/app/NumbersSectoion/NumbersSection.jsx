@@ -16,7 +16,7 @@ const NumbersSection = () => {
           digital.
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-5 py-5 items-center ">
+      <div className="grid grid-cols-2 gap-5 py-5 px-2 items-center ">
         <IconAndNumber
           icon={<IoIosPeople size={'3em'} className="text-primary" />}
           number={'2 028'}

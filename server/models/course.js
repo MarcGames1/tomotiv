@@ -12,6 +12,12 @@ const courseSchema = new mongoose.Schema(
       maxlength: 320,
       required: true,
     },
+  
+    facebookGroup: {
+      type: String,
+      trim: true,
+      minlength: 3,
+    },
     slug: {
       type: String,
       lowercase: true,

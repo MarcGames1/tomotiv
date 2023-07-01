@@ -18,7 +18,8 @@ const { user } = state;
   
   const args = {normal: true, compact: 'md', vertical: false, horizontal: true};
   return (
-    <div className="  flex   bg-base-100 p-4 items-center justify-center gap-2 font-sans">
+<>
+    <div className="  flex   bg-base-100 items-center justify-center gap-2">
       <Navbar className="">
         <Navbar.Start>
           {/* DROPDOWN SE AFISEAZA DOAR PE MOBIL  */}
@@ -71,7 +72,12 @@ const { user } = state;
             </Dropdown.Menu>
           </Dropdown>
           <Link href={'/'} className="btn btn-ghost normal-case text-xl">
-           <Image alt='Tomotiv Logo' width={103} height={32} src='/svg/logo.svg' />
+            <Image
+              alt="Tomotiv Logo"
+              width={103}
+              height={32}
+              src="/svg/logo.svg"
+            />
           </Link>
         </Navbar.Start>
         <Navbar.Center>
@@ -107,25 +113,24 @@ const { user } = state;
           </div>
         </Navbar.Center>
         <Navbar.End>
-
           <div className="gap-3 ">
             <>
               {user ? (
                 <LoggedUserButtons dispatch={dispatch} user={user} />
-                ) : (
-                  <Link href="/login">
+              ) : (
+                <Link href="/login">
                   <Button className="btn-primary text-neutral">
                     Contul Tau
                   </Button>
                 </Link>
               )}
             </>
-
-           
           </div>
-              </Navbar.End>
+        </Navbar.End>
       </Navbar>
     </div>
+      <UserBasedNavigation dispatch={dispatch} user={user} />
+      </>
   );
 };
 
@@ -138,3 +143,17 @@ const NavigationLink = ({href, tabindex = undefined, children=undefined}) => {
     </Menu.Item>
   );
 };
+
+
+
+const UserBasedNavigation = ({user, dispatch}) =>{
+
+  if(!user){ return}
+
+return(
+
+  <Navbar.Start>
+    <LoggedUserButtons dispatch={dispatch} user={user} />
+  </Navbar.Start>
+    )
+}
