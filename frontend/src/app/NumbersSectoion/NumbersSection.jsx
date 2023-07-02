@@ -5,7 +5,7 @@ import {TbHandClick} from 'react-icons/tb'
 import Hands from '@/components/svg/Hands';
 const NumbersSection = () => {
   return (
-    <div className="bg-base-100 w-screen flex flex-col sm:flex-row md:flex-row">
+    <div className="bg-base-100 flex flex-col sm:flex-row md:flex-row">
       <div className=" prose self-center p-5  my-10 ">
         <h2 className="">
           Investim în <span className="text-primary">educația românilor</span>

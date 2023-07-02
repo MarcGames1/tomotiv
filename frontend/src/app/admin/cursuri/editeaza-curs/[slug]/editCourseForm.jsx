@@ -7,6 +7,7 @@ import {toast} from 'react-hot-toast'
 import useCourseData from '@/app/admin/adminHooks/useCourseData';
 import CourseDescriptionEditor from '../../componenteAdministrareCurs/CourseDescriptionEditor';
 import { config } from '@/dateStatice';
+import { useRouter } from 'next/navigation';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API )
 const imageDeleteRequest = new ApiClient(config.imageApi);
 
@@ -24,6 +25,7 @@ const EditCourseForm = ({slug}) => {
    const [preview, setPreview] = useState('');
    const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
    const [loading, setLoading] = useState(false)
+   const router = useRouter()
 
    const updateImageToServer = async () =>{
    return await api.put(`/course/${slug}`, courseData);
@@ -34,7 +36,16 @@ const EditCourseForm = ({slug}) => {
 
   const imageUploadInputRef = useRef()
 
-
+ const handleDeleteCourse = async () =>{
+  try{
+    const res = await api.delete(`/course/${slug}`)
+    toast(res.message)
+    router.push('/admin')
+  } catch (error){
+  console.log(error)    
+  toast.error(error.message)
+  }
+ }
   const handleChange = (e) => {
     const { name, value } = e.target; 
     saveCourseState({ ...courseData, [name]: value });
@@ -248,6 +259,15 @@ const EditCourseForm = ({slug}) => {
           }}
         >
           Salveaza Cursul
+        </button>
+        <button
+          className="btn btn-outline btn-error"
+          onClick={(e) => {
+            e.preventDefault();
+            handleDeleteCourse();
+          }}
+        >
+          Sterge Cursul
         </button>
       </form>
     </>

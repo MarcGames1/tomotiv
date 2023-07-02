@@ -34,13 +34,19 @@ const userSchema = new Schema(
     },
     passwordResetCode: {
       data: String || undefined,
-
-      
     },
     stripe_account_id: '',
     stripe_seller: {},
     stripeSession: {},
-    courses: [{ type: ObjectId, ref: "Course" }],
+    courses: [{ type: ObjectId, ref: 'Course' }],
+    progress: {
+      coursesStatus: [
+        { type: ObjectId, ref: 'Course' },
+        { type: ObjectId, ref: 'Module' },
+        { type: ObjectId, ref: 'Lesson' },
+       { videoStatus: {},}
+      ],
+    },
   },
   { timestamps: true }
 );

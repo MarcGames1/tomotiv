@@ -78,7 +78,7 @@ const initialState = {
       });
       setValues({ ...initialState });
       toast('Great! Now you can start adding lessons');
-      router.push('/instructor');
+      router.push('/admin/cursuri');
     } catch (err) {
       toast(err.message);
     }
@@ -86,7 +86,7 @@ const initialState = {
 
   return (
     <>
-      <div>
+      <div className="p-10">
         <h1>Crează un curs nou</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-control	">
@@ -97,9 +97,9 @@ const initialState = {
               className="input"
               type="text"
               id="name"
-              name="name"
+              onInput={handleChange}
               value={values.name}
-              onChange={handleChange}
+              name="name"
               required
             />
           </div>
@@ -120,7 +120,6 @@ const initialState = {
               setContents={values.description}
               onChange={(content) =>
                 setValues({ ...values, description: content })
-               
               }
             />
           </div>
@@ -147,40 +146,7 @@ const initialState = {
               required
             />
           </div>
-          <div className="form-control">
-            <label className="label" htmlFor="category">
-              Categorie:
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="category"
-              name="category"
-              value={values.category}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="image">
-              Imagine:
-            </label>
-            <input
-              className="input"
-              type="file"
-              id="image"
-              name="image"
-              accept="image/*"
-              onChange={handleImage}
-              required
-            />
-            {preview && (
-              <img  src={preview} alt="Preview" style={{ width: '200px' }} />
-            )}
-            {uploadButtonText === 'Upload Image' ? null : (
-              <button onClick={handleImageRemove}>Remove Image</button>
-            )}
-          </div>
+
           <button className="btn btn-primary" type="submit">
             Crează cursul
           </button>

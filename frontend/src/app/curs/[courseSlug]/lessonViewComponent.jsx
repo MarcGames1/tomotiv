@@ -23,7 +23,12 @@ const LessonViewComponent = ({course}) => {
     >
       <main className="  w-3/4">
         {currentLesson ? (
-          <LessonVideoAndDescription currentLesson={currentLesson} />
+          <LessonVideoAndDescription
+            modules={modules}
+            setCurrentModules={setModules}
+            setCurrentLesson={setCurrentLesson}
+            currentLesson={currentLesson}
+          />
         ) : (
           <Placeholder />
         )}

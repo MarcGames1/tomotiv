@@ -2,10 +2,7 @@ import './globals.css';
 
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
-import { Toaster } from 'react-hot-toast';
-
-import Page from '@/app/PageLayout';
-import ContextComponent from './ContextComponent';
+import Head from 'next/head';
 import RootComponent from './rootComponent';
 const inter = Inter({ subsets: ['latin'] });
 
@@ -45,6 +42,10 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         ></link>
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+<link rel="manifest" href="/favicon/site.webmanifest" />
       </head>
       <body data-theme="tomotiv" className="bg-neutral">
         <noscript

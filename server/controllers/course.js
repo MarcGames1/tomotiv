@@ -9,6 +9,10 @@ import {
 import slugify from 'slugify';
 import { readFileSync } from 'fs';
 import User from '../models/user';
+import Lesson from '../models/lesson'
+import Module from '../models/modules';
+import { removeFromBucket } from './courseUploads';
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 import Course from '../models/course';
@@ -280,6 +284,48 @@ export const update = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(400).send(err.message);
+  }
+};
+
+export const deleteCourse = async (req, res) => {
+  try {
+    const course = await Course.findOne({ slug: req.params.slug })
+      .populate('modules')
+      .populate({
+        path: 'modules',
+        populate: {
+          path: 'lessons',
+        },
+      });
+
+    if (course.modules && course.modules.length >= 1) {
+      for (const module of course.modules) {
+        if (module.lessons && module.lessons.length >= 1) {
+          for (const lesson of module.lessons) {
+            if (lesson.video && lesson.video.Key) {
+              await removeFromBucket(lesson.video.Key);
+            }
+
+            await Lesson.findByIdAndDelete(lesson._id);
+            console.log('Removed lesson:', lesson);
+          }
+        }
+        await Module.findByIdAndDelete(module._id);
+        console.log('Removed module:', module);
+      }
+    }
+
+     if (course.image && course.image.Key) {
+       await removeFromBucket(course.image.Key);
+     }
+    await course.remove();
+
+    res.status(200).json({ message: 'Cursul a fost șters cu succes.' });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: 'A apărut o eroare la ștergerea cursului.' });
   }
 };
 
@@ -598,52 +644,3 @@ export const markIncomplete = async (req, res) => {
   }
 };
 
-export const addLessonInModule = async (req, res) => {
-  try {
-    const { slug, moduleId, instructorId } = req.params;
-    const { title, content, video } = req.body;
-
-    if (req.auth._id != instructorId) {
-      return res.status(400).send('Unauthorized');
-    }
-
-    const course = await Course.findOne({ slug });
-
-    if (!course) {
-      return res.status(404).send('Course not found');
-    }
-
-    const newLesson = {
-      title,
-      content,
-      video,
-      slug: slugify(title),
-      module: course.modules.find((module) => module._id.equals(moduleId))._id,
-    };
-
-    const updatedCourse = await Course.findOneAndUpdate(
-      { slug },
-      {
-        $push: { lessons: newLesson },
-      },
-      { new: true }
-    )
-      .populate('instructor', '_id name')
-      .exec();
-
-    const updatedModuleIndex = updatedCourse.modules.findIndex((module) =>
-      module._id.equals(newLesson.module)
-    );
-    updatedCourse.modules[updatedModuleIndex].lessons.push(newLesson._id);
-
-    await updatedCourse.save();
-
-    res.json(updatedCourse);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).send('Add lesson failed');
-  }
-};
-
-export const updateLessonInModule = async () => {};
-export const removeLessonInModule = async () => {};

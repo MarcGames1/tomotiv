@@ -13,7 +13,6 @@ const lessonSchema = new mongoose.Schema(
     slug: {
       type: String,
       lowercase: true,
-      unique: true,
     },
     content: {
       type: String,

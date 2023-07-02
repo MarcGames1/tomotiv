@@ -16,7 +16,7 @@ import { uploadImage, removeObject, uploadVideo } from '../controllers/courseUpl
 import {
   create,
   read,
- 
+  deleteCourse,
   removeVideo,
   addLesson,
   update,
@@ -34,9 +34,6 @@ import {
   markCompleted,
   listCompleted,
   markIncomplete,
-  addLessonInModule,
-  updateLessonInModule,
-  removeLessonInModule,
 } from '../controllers/course';
 
 
@@ -53,6 +50,7 @@ router.post('/course', requireSignin, isInstructor, create);
 router.put('/course/:slug', requireSignin, isInstructor, update);
 
 router.get( '/course/:slug', read)
+router.delete('/course/:slug', requireSignin, isAdmin, deleteCourse);
 
 router.post('/course/video-upload/:instructorId',requireSignin, formidable(), uploadVideo);
 router.post('/course/video-remove/:instructorId', requireSignin, removeVideo);
@@ -72,15 +70,8 @@ router.post("/course/lesson/:slug/:instructorId", requireSignin,isInstructor, ad
 router.put("/course/lesson/:slug/:instructorId", requireSignin,isInstructor, updateLesson);
 router.put('/course/:slug/:lessonId', requireSignin, isInstructor, removeLesson);
 
-// `/api/course/module/${slug}/${course.instructor._id}`,
-router.post("/course/:slug/:moduleId/:instructorId", requireSignin,isInstructor, addLessonInModule);
-router.put(
-  '/course/module/:slug/:instructorId',
-  requireSignin,
-  isInstructor,
-  updateLessonInModule
-);
-router.put("/module/:slug/:moduleId", requireSignin,isInstructor, removeLessonInModule);
+
+
 
 router.get('/check-enrollment/:courseId', requireSignin, checkEnrollment);
 
