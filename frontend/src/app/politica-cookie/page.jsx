@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react'
-import TermeniSiConditii from './TermeniSiConditii';
+import PoliticaCookie from './PoliticaCookie';
 import Page from '../PageLayout';
 
 
@@ -10,7 +10,7 @@ import Page from '../PageLayout';
 const page = () => {
   return (
     <Page>
-   <TermeniSiConditii  />
+   <PoliticaCookie  />
     </Page>
 
   );

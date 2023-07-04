@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-
+import Link from "next/link";
 export const config = {
   imageApi: `${process.env.NEXT_PUBLIC_IMAGES}/image`,
   videoApi: `${process.env.NEXT_PUBLIC_IMAGES}/video`,
@@ -139,3 +139,17 @@ export const socialMedia ={
   tikTok:'https://www.tiktok.com',
   linkedin: 'https://www.linkedin.com',
 }
+
+export const dateLegale = {
+  brand:'Tomotiv',
+  site: <Link href={'https://tomotiv.ro/'}>tomotiv.ro</Link>,
+  dateFirma: {
+    nume: <>SPEEDY BIKES SRL</>,
+    sediuSocial: <>Str. ZAHARIA STANCU, nr.6F,bl. 16 et.3, ap.306</>,
+    regCom: <>J08/2387/2019 </>,
+    cui: <>41397812</>,
+    cont: <>RO67 BREL 0002 0035 9868 0100, deschis la Libra Bank</>,
+    reprezentant: <>Marcu Alexandru, in calitate de administrator</>,
+    email: 'contact@tomotiv.ro',
+  },
+};

@@ -1,11 +1,10 @@
-'use client'
-import React, {useState, useEffect} from 'react'
-import CourseDescriptionEditor from '../admin/cursuri/componenteAdministrareCurs/CourseDescriptionEditor';
+import React from 'react'
 import Link from 'next/link';
+import { dateLegale } from '@/dateStatice';
+const TermeniSiConditii = () => {
 
-const TermeniSiConditii = ({site, dateFirma}) => {
-
-    const [content, setContent] = useState(undefined)
+    const { site, dateFirma, brand } = dateLegale;
+   
 
 
   return (
@@ -19,7 +18,7 @@ const TermeniSiConditii = ({site, dateFirma}) => {
           ”Contractul”), precum și de restul documentelor menționate în
           prezentul document, fiind aplicabile tuturor utilizatorilor, fie
           persoane fizice sau juridice, a site-ului {site} (denumit în
-          continuare Site-ul sau platforma TOMOTIV), cu excepția cazului în care
+          continuare Site-ul sau platforma {brand}), cu excepția cazului în care
           se prevede altfel în prezentul document.
         </p>
         <p>
@@ -169,7 +168,7 @@ const TermeniSiConditii = ({site, dateFirma}) => {
           1. Obiectul Contractului îl reprezintă prestarea de servicii digitale
           și/sau furnizarea de bunuri cu conținut digital, constând în cursuri
           educaționale și de formare, de către Prestator din gama de produse
-          prezentate pe platforma Tomotiv sau prin alte mijloace sau canale de
+          prezentate pe platforma {brand} sau prin alte mijloace sau canale de
           comunicare, Beneficiarului, în schimbul unui preț, pe bază de comandă
           respectiv înscriere în conformitate cu clauzele prevăzute în prezentul
           contract.{' '}
@@ -191,7 +190,7 @@ const TermeniSiConditii = ({site, dateFirma}) => {
           conținutului digital/serviciilor digitale la data la care conținutul
           digital/serviciul digital devine accesibil pentru Beneficiar respectiv
           prin activarea contului de Utilizator pentru accesul pe platforma
-          Tomotiv, iar achitarea prețului reprezintă acordul expres al
+          {brand}, iar achitarea prețului reprezintă acordul expres al
           Beneficiarului de începere a furnizării Serviciilor digitale.
         </p>
         <p>
@@ -831,7 +830,7 @@ const TermeniSiConditii = ({site, dateFirma}) => {
           destinate strict pentru a fi utilizate de Beneficiar.
         </p>
         <p>
-          6.2.5. Să nu aducă atingere imaginii Edukiwi, participanților sau
+          6.2.5. Să nu aducă atingere imaginii {brand}, participanților sau
           autorului și să respecte dreptul de proprietate intelectuală și
           confidențialitatea informațiilor și datelor la care are acces în baza
           prezentului Contract.

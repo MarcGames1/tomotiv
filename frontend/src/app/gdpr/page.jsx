@@ -1,8 +1,6 @@
-import Link from 'next/link';
 import React from 'react'
-import TermeniSiConditii from './TermeniSiConditii';
+import GDPR from './GDPR';
 import Page from '../PageLayout';
-
 
 
 
@@ -10,7 +8,7 @@ import Page from '../PageLayout';
 const page = () => {
   return (
     <Page>
-   <TermeniSiConditii  />
+   <GDPR />
     </Page>
 
   );

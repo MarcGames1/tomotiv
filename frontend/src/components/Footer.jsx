@@ -1,7 +1,6 @@
 'use client';
 import React from 'react'
 import Link from 'next/link'
-
 import { Footer } from 'react-daisyui'
 import {
   AiOutlineInstagram,
@@ -11,7 +10,7 @@ import {
 } from 'react-icons/ai';
 import {FaTiktok} from 'react-icons/fa'
 import Image from 'next/image';
-import { socialMedia, servicii } from '@/dateStatice';
+import { socialMedia, servicii, dateLegale } from '@/dateStatice';
 
 
 const PageFooter = () => {
@@ -41,6 +40,9 @@ const PageFooter = () => {
             <AiOutlineLinkedin size={'2em'} />
           </a>
         </div>
+        <a href={`mailto:${dateLegale.dateFirma.email}`}>
+          <span>{dateLegale.dateFirma.email}</span>
+        </a>
       </div>
 
       <div>
@@ -65,17 +67,32 @@ const PageFooter = () => {
         <Link href={'/contact'} className="link link-hover">
           Contact
         </Link>
+        <Link
+          className="w-[250px] h-[60px]"
+          rel="nofollow"
+          target="_blank"
+          href={'https://anpc.ro/ce-este-sal/'}
+        >
+          <Image alt="SAL" src={'/anpc/SAL.svg'} width={250} height={60} />
+        </Link>
+        <Link
+          rel="nofollow"
+          target="_blank"
+          href={'https://ec.europa.eu/consumers/odr'}
+        >
+          <Image alt="SOL" src={'/anpc/SOL.svg'} width={250} height={60} />
+        </Link>
       </div>
       <div>
         <Footer.Title>Legal</Footer.Title>
         <Link href={'/termeni-conditii'} className="link link-hover">
           Termene si Conditii
         </Link>
-        <Link href={''} className="link link-hover">
-          Privacy policy
+        <Link href={'/gdpr'} className="link link-hover">
+          GDPR
         </Link>
-        <Link href={''} className="link link-hover">
-          Cookie policy
+        <Link href={'/politica-cookie'} className="link link-hover">
+          Politica Cookie
         </Link>
       </div>
     </Footer>
