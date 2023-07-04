@@ -41,10 +41,7 @@ const userSchema = new Schema(
     courses: [{ type: ObjectId, ref: 'Course' }],
     progress: {
       coursesStatus: [
-        { type: ObjectId, ref: 'Course' },
-        { type: ObjectId, ref: 'Module' },
-        { type: ObjectId, ref: 'Lesson' },
-       { videoStatus: {},}
+        { type: ObjectId, ref: 'CourseStatus' },
       ],
     },
   },

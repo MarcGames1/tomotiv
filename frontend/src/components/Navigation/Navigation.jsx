@@ -91,7 +91,7 @@ const { user } = state;
                 </NavigationLink>
                 <Menu.Item tabIndex={0}>
                   <a className="justify-between">
-                    Serviciii
+                    Servicii
                     <svg
                       className="fill-current"
                       xmlns="http://www.w3.org/2000/svg"

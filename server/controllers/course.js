@@ -439,7 +439,7 @@ export const publishedCourses = async (req, res) => {
   const all = await Course.find({ published: true })
     .populate('instructor', '_id name')
     .exec();
-  res.json(all);
+  return res.json(all);
 };
 
 export const checkEnrollment = async (req, res) => {
@@ -456,11 +456,11 @@ export const checkEnrollment = async (req, res) => {
 
   
     if(!ids.includes(courseId)){ 
-      res.json({ status: ids.includes(courseId) });
+     return res.json({ status: ids.includes(courseId) });
     }
   
 
-  res.json({
+  return res.json({
     status: ids.includes(courseId),
     course: await Course.findById(courseId).exec(),
   });
