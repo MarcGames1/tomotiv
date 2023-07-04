@@ -18,8 +18,13 @@ const PageFooter = () => {
   return (
     <Footer className="bg-secondary  p-10 text-base-100">
       <div>
-        <Image alt='Tomotiv Logo' src={'/svg/logoD.svg'} width={118} height={44} />
-        <div className='flex gap-5 items-center'>
+        <Image
+          alt="Tomotiv Logo"
+          src={'/svg/logoD.svg'}
+          width={118}
+          height={44}
+        />
+        <div className="flex gap-5 items-center">
           <a href={socialMedia.facebook}>
             <AiOutlineFacebook size={'2em'} />
           </a>
@@ -40,12 +45,17 @@ const PageFooter = () => {
 
       <div>
         <Footer.Title>Servicii</Footer.Title>
-        {servicii.map(serviciu =>{
-          return <Link key={serviciu.label} className="link link-hover" href={serviciu.href}>
-            {serviciu.label}
-          </Link>;
+        {servicii.map((serviciu) => {
+          return (
+            <Link
+              key={serviciu.label}
+              className="link link-hover"
+              href={serviciu.href}
+            >
+              {serviciu.label}
+            </Link>
+          );
         })}
-        
       </div>
       <div>
         <Footer.Title>Company</Footer.Title>
@@ -55,12 +65,11 @@ const PageFooter = () => {
         <Link href={'/contact'} className="link link-hover">
           Contact
         </Link>
-
       </div>
       <div>
         <Footer.Title>Legal</Footer.Title>
-        <Link href={''} className="link link-hover">
-          Terms of use
+        <Link href={'/termeni-conditii'} className="link link-hover">
+          Termene si Conditii
         </Link>
         <Link href={''} className="link link-hover">
           Privacy policy
