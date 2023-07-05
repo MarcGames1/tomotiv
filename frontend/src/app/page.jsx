@@ -135,9 +135,8 @@ export default function Home() {
         <HeadingAndCta
           heading={
             <>
-            Vocea <span className="text-primary">Tomotiv</span> sunteți
-              dumneavoastră.
-            
+              Vocea <span className="text-primary">Tomotiv</span>{' '}
+              sunteți dumneavoastră.
             </>
           }
           button={<button className="btn btn-primary">Contacteaza-ne</button>}

@@ -17,7 +17,7 @@ const StripeSuccess = ({id}) => {
   const successRequest = async () => {
     const { data } = await axios.get(`/api/stripe-success/${id}`);
     console.log("SUCCESS REQ DATA", data);
-    router.push(`/user/course/${data.course.slug}`);
+    router.push(`/curs/${data.course.slug}`);
   };
 
   return (

@@ -21,8 +21,8 @@ const getCoursesList = async () =>{
 }
 
 const CoursesCardsLoader = async () => {
-
-    const courses = await Promise.all(await getCoursesList());
+    const cList = await getCoursesList()
+    const courses = await Promise.all(await cList);
 
 
       return (
