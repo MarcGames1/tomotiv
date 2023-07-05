@@ -4,25 +4,26 @@ import ApiClient from '@/Classes/ApiClient';
 import CourseCard from '../../adminComponents/CourseCard';
 const apiPath = process.env.NEXT_PUBLIC_API;
 const api = new ApiClient(apiPath);
+const apiP = `${process.env.NEXT_PUBLIC_API}/courses`
 
-
+export const revalidate = 10;
 
 const getCoursesList = async () =>{
   try{
-    const courses = await api.get('/courses');
+    const courses = await fetch(apiP, { next: { revalidate: 60 } });
     if (!courses) {
       throw new Error('Failed to fetch data');
     }
     console.log(courses)
-    return courses
+    return courses.json()
   } catch(err) {
     console.log(err);
   }
 }
-
 const CoursesCardsLoader = async () => {
-    const cList = await getCoursesList()
-    const courses = await Promise.all(await cList);
+
+    const courses = await getCoursesList()
+    
 
 
       return (
