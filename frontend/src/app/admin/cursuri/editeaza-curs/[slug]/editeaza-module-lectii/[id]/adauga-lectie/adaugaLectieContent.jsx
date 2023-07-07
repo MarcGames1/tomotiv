@@ -24,7 +24,7 @@ try {
     toast.error(error.message)
 }  
 router.push(
-  `/admin/crsuri/editeaza-curs/${slug}/editeaza-module-lectii/${moduleId}`
+  `/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii/${moduleId}`
 );
 }
   return (

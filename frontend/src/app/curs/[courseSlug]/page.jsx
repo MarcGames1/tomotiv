@@ -1,15 +1,13 @@
 import React from 'react';
 import Page from '@/app/PageLayout';
-import CourseCard from '@/components/CourseCard/CourseCard';
 import SingleCourse from './singleCourse';
 import ApiClient from '@/Classes/ApiClient';
 
 const api = new ApiClient(process.env.API);
 
-async function getData(slug) {
+async function getCourseData(slug) {
   const res = await api.get(`/course/${slug}`);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+  
 
   // Recommendation: handle errors
   if (res.error) {
@@ -20,9 +18,10 @@ async function getData(slug) {
   return res;
 }
 
+
 const page = async ({ params: { courseSlug } }) => {
-  const data = await getData(courseSlug);
-  const [course] = await Promise.all([data]);
+  const CourseData = await getCourseData(courseSlug);
+  const [course] = await Promise.all([CourseData]);
 
   return (
     <Page>

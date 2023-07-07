@@ -20,6 +20,8 @@ import Course from '../models/course';
 import { nanoid } from 'nanoid';
 
 import { awsConfig } from '../awsConfig/awsConfig';
+import CourseProgress from '../models/courseProgress';
+import course from '../models/course';
 const S3 = new AWS.S3(awsConfig); // de sters pt ca mergem pe sdk v3
 
 const client = new S3Client({
@@ -459,10 +461,35 @@ export const checkEnrollment = async (req, res) => {
      return res.json({ status: ids.includes(courseId) });
     }
   
+    //
 
+    
+    // try and find courseProgress
+    const course = await Course.findById(courseId);
+    const TryGetCourseProgress = async () =>{
+      return await CourseProgress.findOne({user: user._id, course: course._id})
+    }
+    if(await TryGetCourseProgress() === null || undefined ){
+      console.log('STATUS is NULL OR UNDEFINED ');
+      const status = new CourseProgress({
+        user: user._id,
+        course: course._id,
+        progress: {
+          modules: {
+            allModules: course.modules,
+            finishedModules: [],
+          },
+          lessons: { allLessons: course.lessons, finishedLessons: []},
+        },
+      });
+      status.save()
+    }
+const status  = await TryGetCourseProgress()
+console.log('STATUS',status)
   return res.json({
     status: ids.includes(courseId),
     course: await Course.findById(courseId).exec(),
+    status
   });
 };
 

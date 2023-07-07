@@ -21,7 +21,7 @@ const SingleCourse = ({course}) => {
        console.log('CHECK ENROLLMENT', data);
        setEnrolled(data);
        
-        console.log(course)
+      
      };
      useEffect(() => {
        if (user && course) checkEnrollment();
@@ -37,7 +37,7 @@ if(!enrolled.status){
 }
   return (
     <>
-      {course ? <LessonViewComponent course={course}/> : <><Loading /></>}
+      {course ? <LessonViewComponent courseId={course._id}  course={course}/> : <><Loading /></>}
     </>
       
   );

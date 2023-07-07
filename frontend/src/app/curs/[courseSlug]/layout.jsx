@@ -8,9 +8,9 @@ export const metadata = {
 
 const singleCourseLayout = ({children}) => {
   return (
-    <NoClickContainer>
+    
       <>{children}</>
-    </NoClickContainer>
+    
   );
 }
 

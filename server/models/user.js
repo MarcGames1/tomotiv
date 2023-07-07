@@ -40,8 +40,8 @@ const userSchema = new Schema(
     stripeSession: {},
     courses: [{ type: ObjectId, ref: 'Course' }],
     progress: {
-      coursesStatus: [
-        { type: ObjectId, ref: 'CourseStatus' },
+      coursesProgress: [
+        { type: ObjectId, ref: 'CourseProgress' },
       ],
     },
   },

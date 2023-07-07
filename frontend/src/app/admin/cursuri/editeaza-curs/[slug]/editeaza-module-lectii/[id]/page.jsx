@@ -10,15 +10,11 @@ const page = async ({ params: { slug, id } }) => {
  
   return (
     <>
-      <h1>
-        Editeaza Cursul {slug} Modulul {id}
+      <h1 className='text-4xl text-center'>
+        Editeaza Modul
       </h1>
-      <Link href={`/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii/${id}/adauga-lectie`}>Adauga o Lectie Noua</Link>
-      {/* <pre>{JSON.stringify(course, '', 3)}</pre> */}
-
-      {/* <AddLessonForm
-        
-      /> */}
+      <Link className='btn btn-primary m-auto' href={`/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii/${id}/adauga-lectie`}>Adauga o Lectie Noua</Link>
+      
       <ListLessonsInModule slug={slug} id={id} />
     </>
   );
