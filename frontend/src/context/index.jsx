@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 const initialState = {
   user: null,
+  progress: null,
 };
 
 // Create Context
@@ -17,6 +18,8 @@ const rootReducer = (state, action) => {
       return { ...state, user: action.payload };
     case 'LOGOUT':
       return { ...state, user: null };
+    case 'GET_PROGRESS':
+      return {...state, progress: action.payload}
     default:
       return state;
   }
@@ -34,6 +37,7 @@ const Provider = ({ children }) => {
       type: 'LOGIN',
       payload: JSON.parse(window.localStorage.getItem('user')),
     });
+    dispatch({ type: 'GET_PROGRESS', payload: JSON.parse(window.localStorage.getItem('status')) });
   }, []);
 
   axios.interceptors.response.use(

@@ -471,16 +471,15 @@ export const checkEnrollment = async (req, res) => {
     }
     if(await TryGetCourseProgress() === null || undefined ){
       console.log('STATUS is NULL OR UNDEFINED ');
+      const course = await Course.findById(courseId).exec();
+       const progress = course.lessons.map((lesson) => ({
+         lesson: lesson._id,
+         finished: false,
+       }));
       const status = new CourseProgress({
         user: user._id,
         course: course._id,
-        progress: {
-          modules: {
-            allModules: course.modules,
-            finishedModules: [],
-          },
-          lessons: { allLessons: course.lessons, finishedLessons: []},
-        },
+        progress,
       });
       status.save()
     }

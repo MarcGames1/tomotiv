@@ -1,14 +1,18 @@
+import Loading from "@/components/Loading/Loading";
 import { useState, useEffect } from "react";
 
 const SingleLessonElement = ({ lesson, currentLesson, setCurrentLesson }) => {
   const [isActive, setIsActive] = useState(false);
+ 
   useEffect(() => {
-    if (lesson._id === currentLesson._id) {
+    if (lesson && lesson._id === currentLesson._id) {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
-  }, [currentLesson._id]);
+  }, [currentLesson?._id]);
+
+  
   return (
     <li
       key={lesson._id}
