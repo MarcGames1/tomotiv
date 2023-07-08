@@ -1,5 +1,5 @@
 'use client'
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useContext, useEffect, useCallback} from 'react'
 import { FaTruckLoading } from 'react-icons/fa';
 import { Context } from '@/context';
 import axios from 'axios';
@@ -18,17 +18,15 @@ const SingleCourse = ({course}) => {
 
      const { user, progress } = state
 
-     const checkEnrollment = async () => {
-       const { data } = await axios.get(`/api/check-enrollment/${course._id}`);
-       console.log('CHECK ENROLLMENT', data);
-       setEnrolled(data);
-       console.log(data, 'CHECK ENROLLMENT DATA ')
-      const {status} = data
-      localStorage.setItem('status', JSON.stringify(status));
-      dispatch({type: 'GET_PROGRESS', payload: status})
-      
-      
-     };
+  const checkEnrollment = useCallback(async () => {
+    const { data } = await axios.get(`/api/check-enrollment/${course._id}`);
+    console.log('CHECK ENROLLMENT', data);
+    setEnrolled(data);
+    console.log(data, 'CHECK ENROLLMENT DATA ');
+    const { status } = data;
+    localStorage.setItem('status', JSON.stringify(status));
+    dispatch({ type: 'GET_PROGRESS', payload: status });
+  }, [course._id, dispatch, setEnrolled]); 
      useEffect(() => {
        if (user && course) checkEnrollment();
      }, [user, course]);

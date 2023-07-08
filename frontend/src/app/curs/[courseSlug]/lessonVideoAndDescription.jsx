@@ -1,8 +1,12 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactPlayer from 'react-player';
 import { config } from '@/dateStatice';
 import LessonPlayer from './LessonPlayer';
+import { Context } from '@/context';
+import ApiClient from '@/Classes/ApiClient';
+
+const api = new ApiClient(process.env.NEXT_PUBLIC_API)
 
 const LessonVideoAndDescription = ({ currentLesson }) => {
   const [lessonData, setLessonData] = useState(null);
@@ -10,6 +14,25 @@ const LessonVideoAndDescription = ({ currentLesson }) => {
     'https://www.youtube.com/watch?v=3Qyr_0z4Ug4&list=RDAiUVYlhFlW8&index=1'
   );
 
+  const {state, dispatch} = useContext(Context)
+  const {user, status} = state
+
+
+  const handleEndVideo = async () =>{
+    console.log('status ===> ', status)
+    const progress = JSON.parse(localStorage.getItem('status'));
+ const response = await api.put(
+   `/${progress.course}/${user._id}/toggleLessonFinished`,
+   { lessonId: lessonData._id }
+ );
+     localStorage.setItem('status', JSON.stringify(response));
+     dispatch({
+       type: 'GET_PROGRESS',
+       payload: response,
+     });
+
+    
+  }
   useEffect(() => {
     if (
       currentLesson &&
@@ -32,7 +55,7 @@ const LessonVideoAndDescription = ({ currentLesson }) => {
         {lessonData.title}
       </h1>
       <div className="h-[75vh] max-h-3/4">
-        {videoURL ? <LessonPlayer url={videoURL} /> : <></>}
+        {videoURL ? <LessonPlayer handleEndVideo={handleEndVideo} url={videoURL} /> : <></>}
       </div>
       <div
         className="prose m-auto"
