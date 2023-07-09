@@ -19,7 +19,7 @@ const CourseCard = ({ name, description, price, category, paid, image, slug }) =
         <h2 className="card-title">{name}</h2>
         <p>{cleanDescription(description.slice(0, 996) + '...')}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">{price} Lei</button>
+          <span className="btn btn-primary">{price} Lei</span>
           <Link href={`/cursuri/${slug}`} className="btn btn-secondary">Citeste mai mult</Link>
         </div>
       </div>

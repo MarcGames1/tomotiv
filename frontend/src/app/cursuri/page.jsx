@@ -24,10 +24,13 @@ const page = async () => {
      }
   return (
     <Page>
-      <div>Cursuri</div>
+     <h1 className="text-5xl lg:text-7xl font-bold">Cursuri</h1>
+     <div className='w-10/12 m-auto'>
+
       {data && data.map(course =>{
         return <CourseCard key={course._id} {...course} />;
       })}
+      </div>
     </Page>
   );
 };

@@ -27,10 +27,8 @@ const page = async ({params:{slug}}) => {
 
   return (
     <Page>
-      
-      <h1>Cursul {course.name}</h1>
-    <SingleCoursePageContent course={course} />
-      
+      <h1 className="text-5xl lg:text-7xl font-bold">{course.name}</h1>
+      <SingleCoursePageContent course={course} />
     </Page>
   );
 };
