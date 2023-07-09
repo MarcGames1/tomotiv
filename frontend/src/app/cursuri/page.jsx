@@ -24,7 +24,6 @@ const page = async () => {
      }
   return (
     <Page>
-        <pre>{JSON.stringify(data, '', 3)}</pre>
       <div>Cursuri</div>
       {data && data.map(course =>{
         return <CourseCard key={course._id} {...course} />;
