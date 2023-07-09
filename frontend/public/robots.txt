@@ -1,0 +1,99 @@
+# *
+User-agent: *
+Disallow: /admin/*
+
+# DotBot
+User-agent: DotBot
+Disallow: /
+Disallow: /*
+
+# AhrefsBot
+User-agent: AhrefsBot
+Disallow: /
+Disallow: /*
+
+# PetalBot
+User-agent: PetalBot
+Disallow: /
+Disallow: /*
+
+# SEMrushBot
+User-agent: SEMrushBot
+Disallow: /
+Disallow: /*
+
+# Majestic
+User-agent: Majestic
+Disallow: /
+Disallow: /*
+
+# AdsBot-Google-Mobile
+User-agent: AdsBot-Google-Mobile
+Allow: /
+Disallow: /admin/*
+
+# AdsBot-Google
+User-agent: AdsBot-Google
+Allow: /
+Disallow: /admin/*
+
+# Mediapartners-Google
+User-agent: Mediapartners-Google
+Allow: /
+Disallow: /admin/*
+
+# Googlebot-Image
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /admin/*
+
+# Googlebot-Video
+User-agent: Googlebot-Video
+Allow: /
+Disallow: /admin/*
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/*
+
+# Google-Read-Aloud
+User-agent: Google-Read-Aloud
+Allow: /
+Disallow: /admin/*
+
+# Google-Site-Verification
+User-agent: Google-Site-Verification
+Allow: /
+Disallow: /admin/*
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/*
+
+# Slurp
+User-agent: Slurp
+Allow: /
+Disallow: /admin/*
+
+# DuckDuckBot
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin/*
+
+# facebot
+User-agent: facebot
+Allow: /
+Disallow: /admin/*
+
+# Applebot
+User-agent: Applebot
+Allow: /
+Disallow: /admin/*
+
+# Host
+Host: https://tomotiv.ro
+
+# Sitemaps
+Sitemap: https://tomotiv.ro/sitemap.xml
