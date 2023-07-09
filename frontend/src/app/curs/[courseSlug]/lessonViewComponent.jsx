@@ -37,9 +37,9 @@ const LessonViewComponent = ({course}) => {
   return (
     <div
       // onContextMenu={(e) => e.preventDefault()}
-      className=" p-2 flex justify-around w-full"
+      className=" p-2 md:flex lg:flex sm:block sm:flex-row justify-around w-full"
     >
-      <main className="  w-3/4">
+      <main className=" sm:w-full md:w-3/4 lg:w-3/4">
         {currentLesson ? (
           <LessonVideoAndDescription
             course={course}
@@ -52,7 +52,7 @@ const LessonViewComponent = ({course}) => {
           <Placeholder />
         )}
       </main>
-      <aside className="sticky top-10 overflow-y-auto h-[95vh] w-1/4 bg-base-200">
+      <aside className="sticky top-10 overflow-y-auto h-[95vh] w-full md:w-1/4 lg:w-1/4 bg-base-200">
         <LessonModulesSidebar
           course={course}
           currentLesson={currentLesson}
