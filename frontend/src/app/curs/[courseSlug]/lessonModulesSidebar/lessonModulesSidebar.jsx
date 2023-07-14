@@ -11,7 +11,7 @@ const LessonModulesSidebar = ({
 }) => {
   return (
     <div>
-      {modules.map((module) => {
+      {(typeof(modules)==='object') && modules.map((module) => {
         return (
           <SingleModule
             course={course}
