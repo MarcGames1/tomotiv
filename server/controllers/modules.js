@@ -1,7 +1,7 @@
 import Course from '../models/course';
 import Module from '../models/modules'
 import Lesson from '../models/lesson';
-import { removeFromBucket } from './courseUploads';
+import {deleteVideo} from '../utils/fileManager'
 
 // Create a module within a course
 export const createModule = async (req, res) => {
@@ -70,7 +70,7 @@ export const deleteModule = async (req, res) => {
       const lesson = await Lesson.findById(lessonId);
 
       if (lesson && lesson.video) {
-       await removeFromBucket(lesson.video.Key);
+       await deleteVideo(lesson.video.Key);
       }
     }
 

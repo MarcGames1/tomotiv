@@ -10,3 +10,4 @@ server/node_modules/
 server/.env
 frontend/.env
 frontend/.env
+server/uploads/

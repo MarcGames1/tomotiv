@@ -11,7 +11,7 @@ import {
   isAdmin,
 } from '../middlewares';
 
-import { uploadImage, removeObject, uploadVideo } from '../controllers/courseUploads';
+import { uploadImage, removeObject, uploadVideoController } from '../controllers/courseUploads';
 //controllers
 import {
   create,
@@ -52,7 +52,12 @@ router.put('/course/:slug', requireSignin, isInstructor, update);
 router.get( '/course/:slug', read)
 router.delete('/course/:slug', requireSignin, isAdmin, deleteCourse);
 
-router.post('/course/video-upload/:instructorId',requireSignin, formidable(), uploadVideo);
+router.post(
+  '/course/video-upload/:instructorId',
+  requireSignin,
+  formidable(),
+  uploadVideoController
+);
 router.post('/course/video-remove/:instructorId', requireSignin, removeVideo);
 
 

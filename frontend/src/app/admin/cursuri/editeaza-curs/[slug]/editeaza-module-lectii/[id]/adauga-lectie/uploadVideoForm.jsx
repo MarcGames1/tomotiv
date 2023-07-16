@@ -1,11 +1,11 @@
 'use client'
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Context } from '@/context';
 import { FaPlay } from 'react-icons/fa';
-import ReactPlayer from 'react-player';
 import ApiClient from '@/Classes/ApiClient';
 import { config } from '@/dateStatice';
 import { Logout } from '@/helpers/actions';
+import VideoPlayer from '@/components/videoPlayer/VideoPlayer';
 
 
 const api = new ApiClient(process.env.NEXT_PUBLIC_API)
@@ -16,7 +16,7 @@ const videoDeleteRequest = new ApiClient(config.videoApi);
 
 
 // src={`${config.imageApi}/${courseData?.image?.Key}`}
-const UploadVideoForm = ({lessonData, setLessonData}) => {
+const UploadVideoForm = ({lessonData, setLessonData, slug, moduleId}) => {
 
 
 
@@ -31,22 +31,37 @@ const UploadVideoForm = ({lessonData, setLessonData}) => {
   const [progress, setProgress] = useState(0);
 
   const [video, setVideo] = useState(lessonData?.video || undefined);
+  const [videoURL , setVideoURL] = useState('')
+
+  useEffect( () =>{
+    
+    
+    if(video?.Key){
+      
+      setVideoURL(`${process.env.NEXT_PUBLIC_API}/video/?key=${video.Key}`);
+    }
+    return
+  },[video, video?.Key])
+
+
   const handleUpload = async (e) => {
    try {
      const file = e.target.files[0];
      const videoData = new FormData();
      videoData.append('video', file);
+     videoData.append('moduleId',moduleId);
+     videoData.append('slug', slug);
      let video = await api.post(`/course/video-upload/${userId}`, videoData, {
        onUploadProgress: (e) => {
          setProgress(Math.round((100 * e.loaded) / e.total));
-       },
-     });
+        },
+      });
+      
+      // once response is received
+      setLessonData({...lessonData, video: video})
+      setVideo({...video});
+      console.log(video);
 
-     // once response is received
-
-     setLessonData({...lessonData, video: video})
-     setVideo({...video});
-     console.log(video);
 
    } catch (error) {
     console.error(error)
@@ -55,10 +70,13 @@ const UploadVideoForm = ({lessonData, setLessonData}) => {
   };
 
   const handleDeleteVideo = async () => {
+    if(!video && !video.Key){ return}
      try {
-       await videoDeleteRequest.delete(`/${video.Key}`);
+      console.log('DELETE VIDEO KEY? ', video.Key)
+       api.delete(`/video-delete/?key=${video.Key}`);
        setLessonData({ ...lessonData, video: undefined });
        setVideo(undefined);
+       setVideoURL('')
      } catch (error) {
        console.error(error);
      }
@@ -68,10 +86,12 @@ if (!user) {
   Logout();
   return <>Logged Out</>;
 }
+
+console.log('videoStream Data =?>',videoURL);
   return (
     <>
       <div className="artboard artboard-horizontal phone-3">
-        {!video ? (
+        {!videoURL ? (
           <>
             <div
               onClick={() => videoInputRef.current.click()}
@@ -96,17 +116,13 @@ if (!user) {
           </>
         ) : (
           <>
-            <ReactPlayer
-              controls
-              width="100%"
-              height="100%"
-              url={`${config.videoApi}/${video.Key}`}
-            />
+            <VideoPlayer source={videoURL} />
             <button onClick={handleDeleteVideo} className="btn btn-error">
               Sterge Video
             </button>
           </>
         )}
+      
       </div>
     </>
   );

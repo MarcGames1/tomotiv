@@ -4,6 +4,7 @@ import { readdirSync } from 'fs';
 import mongoose from 'mongoose';
 // import csrf from 'csurf';
 import cookieParser from 'cookie-parser';
+import { requireSignin } from './middlewares';
 const morgan = require('morgan');
 require('dotenv').config();
 
@@ -38,6 +39,7 @@ readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)));
 //   res.json({ csrfToken: req.csrfToken() });
 // });
 
+// app.use('/uploads',requireSignin ,express.static('uploads'));
 // port
 const port = process.env.PORT || 8000;
 

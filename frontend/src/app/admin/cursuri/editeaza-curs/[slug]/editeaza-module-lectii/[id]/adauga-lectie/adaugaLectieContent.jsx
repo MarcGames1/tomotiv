@@ -36,6 +36,8 @@ router.push(
         setLessonData={setLessonData}
       >
         <UploadVideoForm
+          slug={slug}
+          moduleId={moduleId}
           lessonData={lessonData}
           setLessonData={setLessonData}
         />

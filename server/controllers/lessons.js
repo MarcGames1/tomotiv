@@ -6,7 +6,7 @@
 import Lesson from '../models/lesson';
 import Course from '../models/course';
 import Module from '../models/modules';
-import { removeFromBucket, removeObject } from './courseUploads';
+import {deleteVideo} from '../utils/fileManager'
 import slugify from 'slugify';
 
 export const createLesson = async (req, res) => {
@@ -68,7 +68,7 @@ try {
     }
 const lesson = await Lesson.findById(lessonId)
 if(lesson.video){
-  removeFromBucket(lesson.video.Key)
+  deleteVideo(lesson.video.Key);
   console.log('Previous video removed from bucket')
   await updateLesson(req, res)
 }
@@ -109,7 +109,7 @@ export const deleteLesson = async (req, res) => {
 try {
   const lesson = await Lesson.findById(lessonId);
   if (lesson && lesson.video) {
-    removeFromBucket(lesson.video.Key);
+    deleteVideo(lesson.video.Key);
   }
   await Lesson.findByIdAndDelete(lessonId);
   // Actualizează documentul course și elimină id-ul lectiei din array-ul modules

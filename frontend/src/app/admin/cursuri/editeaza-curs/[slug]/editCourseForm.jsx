@@ -64,18 +64,18 @@ const EditCourseForm = ({slug}) => {
      // resize
      Resizer.imageFileResizer(file, 720, 500, 'JPEG', 100, 0, async (uri) => {
        try {
-         let data = await api.post('/course/upload-image', {
+         let data = await api.post(`/course/upload-image?slug=${slug}`, {
            image: uri,
          });
 
         
-         const { Bucket, Key } = data;
+         const {  Key } = data;
          await updateImageToServer()
          await saveCourseState({
             ...courseData,
-            image: { Bucket, Key }, // Actualizează cheia image cu obiectul format din Bucket și Key
+            image: {  Key }, // Actualizează cheia image cu obiectul format din Bucket și Key
           });
-          setImage({ Bucket, Key });
+          setImage({  Key });
           getCourseData(slug)
                
           console.log(courseData)
@@ -168,7 +168,7 @@ const EditCourseForm = ({slug}) => {
                   className="m-5"
                   width={300}
                   height={300}
-                  src={`${config.imageApi}/${courseData?.image?.Key}`}
+                  src={`${config.imageApi}/?key=${courseData?.image?.Key}`}
                   alt={courseData?.image?.Key}
                 />
                 <button onClick={handleRemoveImage} className="btn btn-accent">

@@ -11,7 +11,8 @@ import { readFileSync } from 'fs';
 import User from '../models/user';
 import Lesson from '../models/lesson'
 import Module from '../models/modules';
-import { removeFromBucket } from './courseUploads';
+
+import { deleteVideo, deleteImage } from '../utils/fileManager';
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
@@ -32,26 +33,6 @@ const client = new S3Client({
   },
 });
 
-// helper functions
-const deleteVideo = (Bucket, Key) => {
-  try {
-    const params = {
-      Bucket,
-      Key,
-    };
-
-    // upload to s3
-    S3.deleteObject(params, (err, data) => {
-      if (err) {
-        console.log(err);
-        res.sendStatus(400);
-      }
-      console.log('video Deleted => ', data);
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 /// Helper functions END //
 
@@ -176,40 +157,7 @@ export const read = async (req, res) => {
   }
 };
 
-export const uploadVideo = async (req, res) => {
-  try {
-    // console.log("req.auth._id", req.auth._id);
-    // console.log("req.params.instructorId", req.params.instructorId);
-    if (req.auth._id != req.params.instructorId) {
-      return res.status(400).send('Unauthorized');
-    }
 
-    const { video } = req.files;
-    // console.log(video);
-    if (!video) return res.status(400).send('No video');
-
-    // video params
-    const params = {
-      Bucket: 'marwebelearning',
-      Key: `${nanoid()}.${video.type.split('/')[1]}`,
-      Body: readFileSync(video.path),
-      ACL: 'public-read',
-      ContentType: video.type,
-    };
-
-    // upload to s3
-    S3.upload(params, (err, data) => {
-      if (err) {
-        console.log(err);
-        res.sendStatus(400);
-      }
-      console.log(data);
-      res.send(data);
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export const removeVideo = async (req, res) => {
   try {
@@ -217,26 +165,12 @@ export const removeVideo = async (req, res) => {
       return res.status(400).send('Unauthorized');
     }
 
-    const { Bucket, Key } = req.body;
-    // console.log("VIDEO REMOVE =====> ", req.body);
+    const { Key } = req.body;
+    
 
-    deleteVideo(Bucket, Key);
+    deleteVideo(Key);
     res.send({ ok: true });
-    // video params
-    // const params = {
-    //   Bucket,
-    //   Key,
-    // };
-
-    // // upload to s3
-    // S3.deleteObject(params, (err, data) => {
-    //   if (err) {
-    //     console.log(err);
-    //     res.sendStatus(400);
-    //   }
-    //   console.log(data);
-    //   res.send({ ok: true });
-    // });
+   
   } catch (err) {
     console.log(err);
   }
@@ -305,7 +239,7 @@ export const deleteCourse = async (req, res) => {
         if (module.lessons && module.lessons.length >= 1) {
           for (const lesson of module.lessons) {
             if (lesson.video && lesson.video.Key) {
-              await removeFromBucket(lesson.video.Key);
+              await deleteVideo(lesson.video.Key);
             }
 
             await Lesson.findByIdAndDelete(lesson._id);
@@ -318,7 +252,7 @@ export const deleteCourse = async (req, res) => {
     }
 
      if (course.image && course.image.Key) {
-       await removeFromBucket(course.image.Key);
+       await deleteImage(course.image.Key);
      }
     await course.remove();
 
@@ -362,8 +296,8 @@ export const updateLesson = async (req, res) => {
         lesson._id.equals(_id)
       );
 
-      const { Bucket, Key } = lesson.video;
-      deleteVideo(Bucket, Key);
+      const {Key } = lesson.video;
+      deleteVideo(Key);
       console.log(' Lesson =>  ', lesson);
       lesson.video.location == video.location ? true : false;
       res.json(previousCourse);
