@@ -82,7 +82,7 @@ export const createForm = async (req, res) => {
     const emailFormular = createSendEmailCommand(params)
     try {
       const emailSend = await client.send(emailFormular);
-      console.log(emailSent);
+      console.log(emailSend);
       res.json({ ok: true });
     } catch (error) {
       console.error(error.message);

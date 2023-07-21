@@ -50,10 +50,7 @@ const courseSchema = new mongoose.Schema(
       type : ObjectId,
       ref : 'Module',
     }],
-    lessons: [{
-      type : ObjectId,
-      ref : 'Lesson',
-    }],
+   
   },
   { timestamps: true }
 );

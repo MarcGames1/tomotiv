@@ -119,24 +119,6 @@ const FoggotPassword = () => {
                 {...inputArgs}
               />
             </div>
-            {/* <input
-              type="text"
-              className={formStyles.input}
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="Enter secret code"
-              required
-            /> */}
-
-            {/* <input
-              type="password"
-              className={formStyles.input}
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="New Password"
-              autoComplete="off"
-              required
-            /> */}
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Parola </span>
