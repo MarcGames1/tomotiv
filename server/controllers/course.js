@@ -1,13 +1,10 @@
-import AWS from 'aws-sdk'; // de sters\
+
 import {
   PutObjectCommand,
-  DeleteObjectCommand,
-  GetObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
 
 import slugify from 'slugify';
-import { readFileSync } from 'fs';
 import User from '../models/user';
 import Lesson from '../models/lesson'
 import Module from '../models/modules';
@@ -22,8 +19,7 @@ import { nanoid } from 'nanoid';
 
 import { awsConfig } from '../awsConfig/awsConfig';
 import CourseProgress from '../models/courseProgress';
-import course from '../models/course';
-const S3 = new AWS.S3(awsConfig); // de sters pt ca mergem pe sdk v3
+
 
 const client = new S3Client({
   region: 'eu-west-3',
@@ -98,19 +94,7 @@ export const removeImage = async (req, res) => {
   try {
     const { image } = req.body;
     // image params
-    const params = {
-      Bucket: image.Bucket,
-      Key: image.Key,
-    };
-
-    // send remove request to s3
-    S3.deleteObject(params, (err, data) => {
-      if (err) {
-        console.log(err);
-        res.sendStatus(400);
-      }
-      res.send({ ok: true });
-    });
+    
   } catch (err) {
     console.log(err);
   }
