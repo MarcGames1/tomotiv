@@ -48,9 +48,6 @@ export const createLesson = async (req, res) => {
     await module.save();
 
     // Adăugăm lecția în lista de lecții a cursului
-    course.lessons.push(lesson._id);
-    await course.save();
-
     res.status(201).json({ message: 'Lecția a fost creată cu succes.' });
   } catch (error) {
     console.error(error);

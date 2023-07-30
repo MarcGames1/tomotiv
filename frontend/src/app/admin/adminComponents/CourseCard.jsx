@@ -28,12 +28,12 @@ const CourseCard = ({
   }
   return (
     <>
-      <div className="card w-96 bg-base-100 shadow-xl">
+      <div className="card w-96 bg-base-100 shadow-xl m-10">
         {image && (
           
             <img
               className="h-auto m-5"
-              src={`${config.imageApi}/${image.Key}`}
+              src={`${config.imageApi}?key=${image.Key}`}
               alt={image.Key}
               height={300}
               width={300}

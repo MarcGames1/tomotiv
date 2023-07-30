@@ -1,11 +1,9 @@
 // import { S3Client, GetObjectCommand, DeleteObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
-import { awsConfig } from '../awsConfig/awsConfig';
-import { nanoid } from 'nanoid';
-import { readFileSync, statSync, writeFile } from 'fs';
+import { statSync, writeFile } from 'fs';
 import { uploadVideo, deleteVideo } from '../utils/fileManager';
 import path from 'path';
-import {createReadStream} from 'fs'
-
+import { createReadStream } from 'fs';
+import { CheckOrCreateFolder } from '../utils/fileManager';
 
 
 export const getImage = async (req, res) => {
@@ -31,6 +29,7 @@ export const uploadImage = async (req, res) => {
 
    try {
      const { image } = req.body;
+     console.log(image);
 
      if (!image) {
        return res.status(400).send('No Image');
@@ -44,7 +43,16 @@ export const uploadImage = async (req, res) => {
      const type = image.split(';')[0].split('/')[1];
 
      const uploadsFolder = path.join(__dirname, '../uploads');
-     const imagePath = path.join(uploadsFolder, slug,`imagine-${slug}.${type}`);
+     const slugFolder = path.join(uploadsFolder, slug);
+
+     // Check if the 'slug' folder exists, if not, create it
+     CheckOrCreateFolder(slugFolder);
+
+     const imagePath = path.join(
+       uploadsFolder,
+       slug,
+       `imagine-${slug}.${type}`
+     );
 
      writeFile(imagePath, base64Data, 'base64', (err) => {
        if (err) {
@@ -53,10 +61,9 @@ export const uploadImage = async (req, res) => {
        }
 
        console.log(`Image saved successfully: ${imagePath}`);
-      
 
-      const relativePath = path.relative(uploadsFolder, imagePath);
-      res.send({ Key: relativePath });
+       const relativePath = path.relative(uploadsFolder, imagePath);
+       res.send({ Key: relativePath });
      });
    } catch (error) {
      console.error(error);

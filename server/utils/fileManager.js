@@ -104,3 +104,11 @@ export const deleteVideo = (key) => {
 export const deleteImage = (key) => {
   console.log('TODO ')
 }
+
+// verifica un path daca nu exista il creeaza
+export function CheckOrCreateFolder(path) {
+  if (!existsSync(path)) {
+    mkdirSync(path, { recursive: true });
+  }
+}
+
