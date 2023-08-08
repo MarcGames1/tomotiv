@@ -7,8 +7,9 @@ import RootComponent from './rootComponent';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Tomotiv ',
-  description: 'Desriere Meta',
+  title: 'Agentie Marketing Online » Tomotiv',
+  description:
+    'Agentia de marketing digital si online unde gasesti cele mai bune solutii pentru afacerea ta. Dubleaza-ti vanzarile😀',
   robots: 'index, folow',
 };
 

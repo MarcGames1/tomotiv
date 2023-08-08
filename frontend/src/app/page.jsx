@@ -13,6 +13,49 @@ import HeadingAndCta from '@/components/HeadingAndCta/HeadingAndCta';
 import NumbersSection from './NumbersSectoion/NumbersSection';
 import Hands from '@/components/svg/Hands';
 import Mobile2 from '@/components/svg/Mobile2';
+import Grid3x2 from '@/components/Grid3x2';
+import { servicii } from '@/dateStatice';
+
+
+const dateServiciiCard = [
+  {
+    label: 'Servicii SEO',
+    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
+    icon: <BsBuildings className="text-primary" size={'5em'} />,
+    href: '/servicii/servicii-seo/',
+  },
+  {
+    label: 'Promovare Google ADS',
+    p: 'Incepe sa investesti in campanii eficiente, rentabile si inteligent gandite, castigand bani, timp si clienti.',
+    icon: <BsBuildings className="text-primary" size={'5em'} />,
+    href: '/servicii/servicii-seo/',
+  },
+  {
+    label: 'Servicii SEO',
+    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
+    icon: <BsBuildings className="text-primary" size={'5em'} />,
+    href: '/servicii/servicii-seo/',
+  },
+  {
+    label: 'Servicii SEO',
+    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
+    icon: <BsBuildings className="text-primary" size={'5em'} />,
+    href: '/servicii/servicii-seo/',
+  },
+  {
+    label: 'Servicii SEO',
+    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
+    icon: <BsBuildings className="text-primary" size={'5em'} />,
+    href: '/servicii/servicii-seo/',
+  },
+  {
+    label: 'Servicii SEO',
+    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
+    icon: <BsBuildings className="text-primary" size={'5em'} />,
+    href: '/servicii/servicii-seo/',
+  },
+];
+
 export default function Home() {
   return (
     <Page>
@@ -23,16 +66,10 @@ export default function Home() {
         <SectiuneGri>
           <div className="m-10 prose lg:prose-xl prose-lead max-w-none">
             <h2 className="text-center">
-              Primul curs autorizat <span className="text-primary">SEO</span>{' '}
-              din Romania
+              Ce Servicii oferim in cadrul agentiei de marketing digital -
+              Tomotiv?
             </h2>
-            <p>
-              Tomotiv este prima companie care reușește să formeze cursuri de
-              SEO și să ofere acreditare de la Minsiterul Învățăturii prin care
-              orice cursant care termină cursul basic, se poate angaja mai apoi
-              ca specialist SEO. Cu alte cuvinte, grație diplomei recunoscute
-              național veți putea practica fără probleme la orice companie.
-            </p>
+          <Grid3x2 data={servicii} />
           </div>
           <div className="m-10 prose lg:prose-xl prose-lead max-w-none">
             <h2 className="text-center">
@@ -135,8 +172,8 @@ export default function Home() {
         <HeadingAndCta
           heading={
             <>
-              Vocea <span className="text-primary">Tomotiv</span>{' '}
-              sunteți dumneavoastră.
+              Vocea <span className="text-primary">Tomotiv</span> sunteți
+              dumneavoastră.
             </>
           }
           button={<button className="btn btn-primary">Contacteaza-ne</button>}

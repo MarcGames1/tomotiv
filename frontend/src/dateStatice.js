@@ -1,6 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BsBuildings } from 'react-icons/bs';
+import { TbSeo, TbWorldWww } from 'react-icons/tb';
+import { SiGoogleads, SlNotebook } from 'react-icons/si';
+import { IoShareSocial} from 'react-icons/io'
+import {GrBusinessService} from 'react-icons/gr'
+ 
 export const config = {
   imageApi: `${process.env.NEXT_PUBLIC_IMAGES}/image`,
   videoApi: `${process.env.NEXT_PUBLIC_IMAGES}/video`,
@@ -9,12 +15,43 @@ export const config = {
 
 
 export const servicii = [
-  { label: 'Servicii Seo', href: '/servicii/servicii-seo' },
-  { label: 'Promovare Google Ads', href: '/servicii/google-ads' },
-  { label: 'Creare Website', href: '/servicii/creare-website' },
-  { label: 'CopyWriting', href: '/servicii/copywriting' },
-  { label: 'Creare Logo', href: '/servicii/creare-logo' },
-  { label: 'Promovare Social Media', href: '/servicii/promovare-social-media' },
+  {
+    label: 'Servicii SEO',
+    href: '/servicii/servicii-seo',
+    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
+    icon: <TbSeo className="text-primary" size={'5em'} />,
+  },
+  {
+    label: 'Promovare Google Ads',
+    href: '/servicii/google-ads',
+    p: 'Incepe sa investesti in campanii eficiente, rentabile si inteligent gandite, castigand bani, timp si clienti.',
+    icon: <SiGoogleads className="text-primary" size={'5em'} />,
+  },
+
+  {
+    label: 'Creare Website',
+    href: '/servicii/creare-website',
+    p: 'Atrage-ti audienta pritr-un website personalizat, atractiv si perfect functional',
+    icon: <TbWorldWww className="text-primary" size={'5em'} />,
+  },
+  {
+    label: 'Copywriting',
+    href: '/servicii/copywriting',
+    p: 'Dubleaza-ti vanzarile prin intermediul copywritingului adaptat nevoilor tale.',
+    icon: <GrBusinessService className="text-primary" size={'5em'} />,
+  },
+  {
+    label: 'Creare Logo',
+    href: '/servicii/creare-logo',
+    p: 'Ramai memorabil in timp si fa-ti brandul cunoscut prin intermediul unui logo',
+    icon: <GrBusinessService className="text-primary" size={'5em'} />,
+  },
+  {
+    label: 'Promovare Social Media',
+    href: '/servicii/promovare-social-media',
+    p: 'Promoveaza-ti afacerea intr-un mod inteligent, creativ si adaptat pietei',
+    icon: <GrBusinessService className="text-primary" size={'5em'} />,
+  },
 ];
 
 
@@ -22,75 +59,21 @@ export const carouselData = [
   {
     titlu: (
       <>
-        {' '}
-        <h1 className="text-5xl lg:text-7xl font-bold">
+        <h1 className="text-3xl font-semibold	">Agentie Marketing Online</h1>
+        <div className="text-5xl lg:text-7xl font-bold">
           Ai Toate Motivele sa <span className="text-primary">reusesti</span>
-        </h1>
+        </div>
       </>
     ),
     subtitlu: (
       <>
-        <p className="py-6">
-          Nu îți promitem îmbogățiri peste noapte, însă te asigurăm că atât
-          serviciile cât și cursurile noastre te vor face să știi cum să îți
-          monetizezi pasiunile pentru a îți atinge obiectivele.
-        </p>
+        <p className="py-6">Cu ajutorul agentiei noastre de marketing online</p>
       </>
     ),
     svg: (
       <>
         {' '}
         <Image alt="Imagine Carusel 1" fill src={'/svg/carousel1.svg'} />
-      </>
-    ),
-  },
-  {
-    titlu: (
-      <>
-        {' '}
-        <h1 className="md:text-5xl lg:text-7xl font-bold">
-          Ai Toate Motivele sa <span className="text-primary">reusesti</span>
-        </h1>
-      </>
-    ),
-    subtitlu: (
-      <>
-        <p className="py-6">
-          Nu îți promitem îmbogățiri peste noapte, însă te asigurăm că atât
-          serviciile cât și cursurile noastre te vor face să știi cum să îți
-          monetizezi pasiunile pentru a îți atinge obiectivele.
-        </p>
-      </>
-    ),
-    svg: (
-      <>
-        {' '}
-        <Image alt="Imagine Carusel 2" fill src={'/svg/carousel1.svg'} />
-      </>
-    ),
-  },
-  {
-    titlu: (
-      <>
-        {' '}
-        <h1 className="md:text-5xl text-7xl font-bold">
-          Ai Toate Motivele sa <span className="text-primary">reusesti</span>
-        </h1>
-      </>
-    ),
-    subtitlu: (
-      <>
-        <p className="py-6">
-          Nu îți promitem îmbogățiri peste noapte, însă te asigurăm că atât
-          serviciile cât și cursurile noastre te vor face să știi cum să îți
-          monetizezi pasiunile pentru a îți atinge obiectivele.
-        </p>
-      </>
-    ),
-    svg: (
-      <>
-        {' '}
-        <Image alt="Imagine Carusel 3" fill src={'/svg/carousel1.svg'} />
       </>
     ),
   },
