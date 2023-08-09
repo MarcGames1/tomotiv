@@ -1,11 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BsBuildings } from 'react-icons/bs';
-import { TbSeo, TbWorldWww } from 'react-icons/tb';
-import { SiGoogleads, SlNotebook } from 'react-icons/si';
-import { IoShareSocial} from 'react-icons/io'
-import {GrBusinessService} from 'react-icons/gr'
+
  
 export const config = {
   imageApi: `${process.env.NEXT_PUBLIC_IMAGES}/image`,
@@ -19,41 +15,64 @@ export const servicii = [
     label: 'Servicii SEO',
     href: '/servicii/servicii-seo',
     p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
-    icon: <TbSeo className="text-primary" size={'5em'} />,
+    
   },
   {
     label: 'Promovare Google Ads',
     href: '/servicii/google-ads',
     p: 'Incepe sa investesti in campanii eficiente, rentabile si inteligent gandite, castigand bani, timp si clienti.',
-    icon: <SiGoogleads className="text-primary" size={'5em'} />,
+    
   },
 
   {
     label: 'Creare Website',
     href: '/servicii/creare-website',
     p: 'Atrage-ti audienta pritr-un website personalizat, atractiv si perfect functional',
-    icon: <TbWorldWww className="text-primary" size={'5em'} />,
+    
   },
   {
     label: 'Copywriting',
     href: '/servicii/copywriting',
     p: 'Dubleaza-ti vanzarile prin intermediul copywritingului adaptat nevoilor tale.',
-    icon: <GrBusinessService className="text-primary" size={'5em'} />,
+    
   },
   {
     label: 'Creare Logo',
     href: '/servicii/creare-logo',
     p: 'Ramai memorabil in timp si fa-ti brandul cunoscut prin intermediul unui logo',
-    icon: <GrBusinessService className="text-primary" size={'5em'} />,
+   
   },
   {
     label: 'Promovare Social Media',
     href: '/servicii/promovare-social-media',
     p: 'Promoveaza-ti afacerea intr-un mod inteligent, creativ si adaptat pietei',
-    icon: <GrBusinessService className="text-primary" size={'5em'} />,
+    
   },
 ];
 
+export const cumColaboramDate = [
+  {
+    heading: "Facem Cunostinta",
+    description: 'Ne cunoastem si in cadrul intalnirii complet gratuite, analizam obiectivele tale'
+},
+  {
+    heading: "Stabilim Obiective",
+    description: 'Stabilim impreuna obiectivele si dezvoltam o strategie potrivita afacerii tale'
+},
+  {
+    heading: "Te tinem la curent pe tot parcursul colaborarii",
+    description: 'Stii in orice moment statusul proiectului si in ce stadiu suntem cu livrabilele'
+},
+  {
+    heading: "Raportare si Call Periodic",
+    description: 'Stii mereu cum Evolueaza Proiectul De la O luna La Alta'
+},
+  {
+    heading: "Analizam si ne Adaptam",
+    description: 'Analizam Performantele si ne adaptam in functie de nevoi, de concurenta sau de ceea ce este important pentru tine'
+},
+
+]
 
 export const carouselData = [
   {
@@ -82,14 +101,16 @@ export const carouselData = [
 
 export const autori = {
   laura: {
-    poza: '/assets/echipa/Laura_Profil.png',
+    poza: '/echipa/poze profil/profil-laura.jpg',
     nume: 'Iaurum',
     prenume: 'Laura',
-    functie: 'Social Media Specialist',
+    specializare:
+      'Specialist marketing online, specializat in Social Media, Expert Branding si identitate Vizuala',
+    functie: 'Co-Fondator Tomotiv',
 
     contact: {
       email: 'laura@tomotiv.ro',
-      linkedin:'',
+      linkedin: '',
       facebook: '',
       instagram: '',
       tikTok: '',
@@ -98,30 +119,31 @@ export const autori = {
   },
 
   alex: {
-    poza: '/assets/echipa/Alex_Profil.png',
+    poza: '/echipa/poze profil/profil-alexandru.webp',
     nume: 'Marcu',
     prenume: 'Alexandru',
-    functie: 'Functie',
+    specializare: 'Programator, Expert in Optimizarea Motoarelor de Cautare, Marketingul Motoarelor de Cautare si PPC ',
+    functie: 'Co-Fondator Tomotiv',
 
     contact: {
       email: 'alexandru@tomotiv.ro',
-      linkedin:'',
+      linkedin: 'https://www.linkedin.com/in/marcualexgeorge/',
       facebook:
         'https://www.facebook.com/people/Marcu-Alexandru-Web-Developer-si-Specialist-SEO/100070084327195/',
       instagram: 'https://www.instagram.com/george.marcu2/',
-      tikTok:'https://www.tiktok.com/@alexandrumarcu912',
+      tikTok: 'https://www.tiktok.com/@alexandrumarcu912',
       website: 'https://marweb.ro/',
     },
   },
 };
 // aici punem linkurile de social media
-export const socialMedia ={
-  instagram: 'https://www.instagram.com',
+export const socialMedia = {
+  instagram: 'https://www.instagram.com/tomotiv.ro/',
   facebook: 'https://www.facebook.com',
-  youtube: 'https://www.youtube.com',
-  tikTok:'https://www.tiktok.com',
+  youtube: 'https://www.youtube.com/@tomotiv',
+  tikTok: 'https://www.tiktok.com',
   linkedin: 'https://www.linkedin.com',
-}
+};
 
 export const dateLegale = {
   brand:'Tomotiv',

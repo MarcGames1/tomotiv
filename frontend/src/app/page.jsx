@@ -14,47 +14,13 @@ import NumbersSection from './NumbersSectoion/NumbersSection';
 import Hands from '@/components/svg/Hands';
 import Mobile2 from '@/components/svg/Mobile2';
 import Grid3x2 from '@/components/Grid3x2';
-import { servicii } from '@/dateStatice';
+import { servicii, cumColaboramDate, autori } from '@/dateStatice';
+import CumVeiColaboraCuNoi from '@/components/Colaborare/CumVeiColaboraCuNoi';
+import Link from 'next/link';
+import Image from 'next/image';
+const {alex, laura} = autori
 
 
-const dateServiciiCard = [
-  {
-    label: 'Servicii SEO',
-    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
-    icon: <BsBuildings className="text-primary" size={'5em'} />,
-    href: '/servicii/servicii-seo/',
-  },
-  {
-    label: 'Promovare Google ADS',
-    p: 'Incepe sa investesti in campanii eficiente, rentabile si inteligent gandite, castigand bani, timp si clienti.',
-    icon: <BsBuildings className="text-primary" size={'5em'} />,
-    href: '/servicii/servicii-seo/',
-  },
-  {
-    label: 'Servicii SEO',
-    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
-    icon: <BsBuildings className="text-primary" size={'5em'} />,
-    href: '/servicii/servicii-seo/',
-  },
-  {
-    label: 'Servicii SEO',
-    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
-    icon: <BsBuildings className="text-primary" size={'5em'} />,
-    href: '/servicii/servicii-seo/',
-  },
-  {
-    label: 'Servicii SEO',
-    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
-    icon: <BsBuildings className="text-primary" size={'5em'} />,
-    href: '/servicii/servicii-seo/',
-  },
-  {
-    label: 'Servicii SEO',
-    p: 'Optimizeaza-ti websiteul cu ajutorul SEO pentru a obtine cea mai buna vizbilitate pentru tine si afacerea ta.',
-    icon: <BsBuildings className="text-primary" size={'5em'} />,
-    href: '/servicii/servicii-seo/',
-  },
-];
 
 export default function Home() {
   return (
@@ -69,22 +35,40 @@ export default function Home() {
               Ce Servicii oferim in cadrul agentiei de marketing digital -
               Tomotiv?
             </h2>
-          <Grid3x2 data={servicii} />
+            <Grid3x2 data={servicii} />
           </div>
           <div className="m-10 prose lg:prose-xl prose-lead max-w-none">
-            <h2 className="text-center">
-              {' '}
-              De ce <span className="text-primary">Tomotiv</span>
-            </h2>
-            <p>
-              Susținem, creștem și încurajăm oamenii să încerce să își dezvolte
-              skilluri prin care fie se pot angaja sau de ce nu, presta servicii
-              de freelancing. Cu ajutorul specialiștilor de la Tomotiv, veți
-              putea nu termina un simplu curs, ci intra într-o comunitate de
-              oameni care iubesc marketingul digital.
-            </p>
+            <CumVeiColaboraCuNoi items={cumColaboramDate} />
           </div>
-          <div className="m-10 prose lg:prose-xl prose-lead max-w-none">
+          <ValorileCompaniei />
+        </SectiuneGri>
+
+<Echipa />
+
+        <HeadingAndCta
+          heading={
+            <>
+              Vocea <span className="text-primary">Tomotiv</span> sunteți
+              dumneavoastră.
+            </>
+          }
+          button={
+            <Link href={'/contact'}
+               className="btn btn-primary">Contacteaza-ne
+            </Link>
+          }
+        />
+      </main>
+    </Page>
+  );
+}
+
+
+
+const ValorileCompaniei = () =>{
+  return (
+    <>
+              <div className="m-10 prose lg:prose-xl prose-lead max-w-none">
             <h2 className="prose block m-auto my-10 lead font-bold text-3xl text-center">
               Valorile Companiei
             </h2>
@@ -96,7 +80,7 @@ export default function Home() {
                   'Întotdeauna vom rămâne onești față de dumneavoastră, încercând să livrăm atât cursuri cât și servicii de calitate.'
                 }
                 heading={'Onestitate'}
-              >
+                >
                 <IoIosPeople className="text-primary" size={'5em'} />
               </Card1>
             </CardContainer>
@@ -106,7 +90,7 @@ export default function Home() {
                   ' Dorim să creem relații profesionale bazate pe încredere, prin care să reușim să creem punți de legăture între dumneavoastră și Tomotiv.'
                 }
                 heading={'Încredere'}
-              >
+                >
                 <BsBuildings className="text-primary" size={'5em'} />
               </Card1>
             </CardContainer>
@@ -116,69 +100,83 @@ export default function Home() {
                   ' Scopul nostru este creem medii de lucru sau de învățare bazate pe respect și loialitate.'
                 }
                 heading={'Respect'}
-              >
+                >
                 <Hands
                   className={'text-primary'}
                   width={'5em'}
                   height={'5em'}
-                />
+                  />
               </Card1>
             </CardContainer>
           </Sectiune3Card>
-          <IconAndText
-            icon={<Mobile_Logi />}
-            heading={
-              <>
-                În premieră, <span className="text-primary">primul</span> curs
-                acreditat de SEO în România.
-              </>
-            }
-            p={
-              <p>
-                Împreună cu Ministerul Învățământului, am realizat oficial
-                primul curs de specializat în SEO care promite la finalizarea
-                acestuia, să furnizeze toate informațiile de care aveți nevoie
-                pentru a ajunge un specialist cu informații necesare a vă angaja
-                fie în companiile de pe piață, fie pentru freelancing sau de ce
-                nu, a vă crea propria companie. La finalizarea cursului, veți
-                stăpâni informații extrem de importante în domeniu pe care le
-                veți putea practica chiar din timpul cursului.
-              </p>
-            }
-            button={<button className="btn btn-primary">Afla mai multe</button>}
+                  </>
+  )
+}
+
+
+
+const Echipa = () =>{
+  return (
+    <>
+      <h2 className="prose block m-auto my-10 lead font-bold text-3xl text-center">
+        Fa cunostinta cu echipa din spatele{' '}
+        <span className="text-primary">agentiei de marketing online</span>,
+        Tomotiv
+      </h2>
+
+      <div className="grid lg:grid-flow-col lg:grid-cols-2  items-center justify-items-center w-full h-full ">
+        <MembruEchipa {...laura} />
+        <MembruEchipa {...alex} />
+
+
+        
+      </div>
+    </>
+  );
+}
+
+
+const MembruEchipa = ({nume, prenume, poza, specializare, functie, contact}) =>{
+
+
+
+  return (
+    <>
+      <div className=" w-full justify-center m-auto text-center">
+        <Avatar alt={`poza ${prenume} ${nume} ${functie}`} src={poza} />
+        <div className=" text-center ">
+          <h5 className="text-center font-extrabold my-3 ">
+            {prenume} {nume}
+          </h5>
+          <p className="font-bold my-3">{functie}</p>
+          <p>{specializare}</p>
+          <div className="my-3">
+            <Link
+              href={`/echipa/${prenume.toLowerCase()}-${nume.toLowerCase()}`}
+            >
+              {' '}
+              <button className="btn btn-primary">Afla mai mult</button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+
+const Avatar = ({src, alt}) =>{
+  return (
+    <>
+      <div className="avatar m-auto w-full block">
+        <div className="h-1/2 my-10 w-1/2 m-auto block">
+          <img
+            src={src}
+            style={{ objectFit: 'cover' }}
+            alt={alt}
           />
-          <NumbersSection />
-          <IconAndText
-            icon={<Mobile2 />}
-            heading={
-              <>
-                De ce să alegi <span className="text-primary">cursul</span>{' '}
-                nostru
-              </>
-            }
-            p={
-              <p>
-                Tomotiv s-a născut din dorința de a amprenta viitorul românesc
-                în segmentul online. Tocmai de aceea, cursul basic de SEO nu
-                promite îmbogățiri peste noapte ci garantează calitatea unor
-                informații practice care să ajute orice cursant care se află la
-                început de drum în domeniu, să imerseze, pătrundă și să
-                înțeleagă în profunzime tot ce ține de domeniul acesta.{' '}
-              </p>
-            }
-            button={<button className="btn btn-primary">Inscrie-te</button>}
-          />
-        </SectiuneGri>
-        <HeadingAndCta
-          heading={
-            <>
-              Vocea <span className="text-primary">Tomotiv</span> sunteți
-              dumneavoastră.
-            </>
-          }
-          button={<button className="btn btn-primary">Contacteaza-ne</button>}
-        />
-      </main>
-    </Page>
+        </div>
+      </div>
+    </>
   );
 }

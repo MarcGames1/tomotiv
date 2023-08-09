@@ -8,14 +8,18 @@ const Grid3x2 = ({ data }) => {
   for (let i = 0; i < data.length; i += 3) {
     return (
       <div
-        className="grid grid-cols-3 grid-rows-2 grid-flow-row md:grid-flow-col px-10 gap-5"
+        className="grid items-center sm:grid-cols-1 md:grid-flow-row md:grid-cols-1 lg:grid-cols-3  px-10 gap-5"
         key={i}
       >
         {data.map((item, index) => (
-          <Link key={index} href={item.href} className="no-underline">
+          <Link
+            key={index}
+            href={item.href}
+            className="hover:underline transition-all duration-700 no-underline"
+          >
             <Card1
               small
-              className="bg-white shadow-2xl hover:shadow-lg "
+              className="bg-white transition-all duration-500 shadow-2xl hover:bg-primary hover:shadow-lg "
               key={index}
               heading={item.label}
               p={item.p}
