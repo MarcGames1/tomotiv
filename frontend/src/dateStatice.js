@@ -43,8 +43,8 @@ export const servicii = [
    
   },
   {
-    label: 'Promovare Social Media',
-    href: '/servicii/promovare-social-media',
+    label: 'Servicii Social Media',
+    href: '/servicii/servicii-social-media',
     p: 'Promoveaza-ti afacerea intr-un mod inteligent, creativ si adaptat pietei',
     
   },
