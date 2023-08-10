@@ -4,7 +4,7 @@ function Mobile_Logi() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="300"
+      width="450"
       height="400"
       fill="none"
       viewBox="0 0 308 230"

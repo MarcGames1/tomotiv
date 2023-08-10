@@ -42,6 +42,7 @@ export default function Home() {
           </div>
           <ValorileCompaniei />
         </SectiuneGri>
+        <SectiuneCursSeo />
 
 <Echipa />
 
@@ -127,11 +128,11 @@ const Echipa = () =>{
       <div className="grid lg:grid-flow-col lg:grid-cols-2  items-center justify-items-center w-full h-full ">
         <MembruEchipa {...laura} />
         <MembruEchipa {...alex} />
+      </div>
+    </>
 
 
         
-      </div>
-    </>
   );
 }
 
@@ -177,6 +178,46 @@ const Avatar = ({src, alt}) =>{
           />
         </div>
       </div>
+    </>
+  );
+}
+
+const SectiuneCursSeo = () =>{
+
+  return (
+    <>
+      <IconAndText
+        icon={<Mobile_Logi />}
+        heading={
+          <>
+            În premieră, <span className="text-primary">primul</span> curs
+            de SEO în Cadrul <span className="text-primary">Agentiei de Marketing Online</span> - Tomotiv.
+          </>
+        }
+        p={
+          <>
+            <p>
+              In premiera, lansam cel mai nou si cel mai complex curs de SEO
+              adresat tuturor celor care isi doresc sa invete SEO la un nivel
+              mai mult decat Basic. Ceea ce diferentiaza acest curs de altele,
+              este tocmai expertiza, timpul si informatiile atat de utile pentru
+              toti cei care isi doresc sa invete un skill de la zero.
+            </p>
+            <p>
+              Am alocat toate cunostintele, experientele acumultate de-a lungul
+              timpului si le-am compactat intr-un curs care nu numai ca promite
+              sa te invete SEO #pebune, dar te va ajuta sa devii capabil sa
+              profesezi imediat dupa finalizare, oriunde vrei tu si la orice
+              companie.
+            </p>
+          </>
+        }
+        button={
+          <Link href={'/cursuri/curs-seo'} className="btn btn-primary">
+            Afla mai multe
+          </Link>
+        }
+      />
     </>
   );
 }
