@@ -1,10 +1,17 @@
+import Image from 'next/image';
+
 export const meta = {
   titlu: 'Agentie Social Media Marketing si Management » Tomotiv',
   descriere:
     ' Agentia unde gasesti social media marketing, servicii de social media, promovare social media, consultata si social media management intr-un singur loc',
 };
 export const Sectiunea1 = {
-  heading: <>Agentie Social Media Marketing si Management</>,
+  heading: (
+    <>
+      <span className="text-primary">Agentie Social Media Marketing</span>
+      {" "}si Management
+    </>
+  ),
   paragraf: (
     <>
       Ai toate motivele sa fii cel mai cunoscut in mediul online. Construieste
@@ -120,7 +127,6 @@ export const Sectiunea3 = {
 export const sectiunea3 = {
   heading: <>Cum decurge un proiect de Social Media Management</>,
 };
-
 
 export const sectiunea4 = {
   heading: (

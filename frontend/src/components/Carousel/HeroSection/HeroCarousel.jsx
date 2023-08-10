@@ -3,6 +3,9 @@ import React from 'react';
 import Link from 'next/link';
 import HeroContent from './HeroContent';
 import { carouselData } from '@/dateStatice';
+
+
+
 const HeroCarousel = () => {
   return (
     <>
