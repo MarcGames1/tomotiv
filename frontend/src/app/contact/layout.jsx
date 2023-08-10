@@ -1,9 +1,9 @@
 import React from 'react'
-import { meta } from './texte';
+
 
 export const metadata = {
-  title: meta.titlu,
-  description: meta.descriere,
+  title: 'Contact - Tomotiv ',
+  description: 'Contact Tomotiv',
   robots: 'index, folow',
 };
 const layout = ({children}) => {

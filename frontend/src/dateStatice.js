@@ -115,6 +115,8 @@ export const autori = {
       instagram: '',
       tikTok: '',
       website: 'https://crela.ro/',
+      whatsapp: 'https://wa.me/+40766713369',
+      tel: '0766713369',
     },
   },
 
@@ -122,7 +124,8 @@ export const autori = {
     poza: '/echipa/poze profil/profil-alexandru.webp',
     nume: 'Marcu',
     prenume: 'Alexandru',
-    specializare: 'Programator, Expert in Optimizarea Motoarelor de Cautare, Marketingul Motoarelor de Cautare si PPC ',
+    specializare:
+      'Programator, Expert in Optimizarea Motoarelor de Cautare, Marketingul Motoarelor de Cautare si PPC ',
     functie: 'Co-Fondator Tomotiv',
 
     contact: {
@@ -133,6 +136,8 @@ export const autori = {
       instagram: 'https://www.instagram.com/george.marcu2/',
       tikTok: 'https://www.tiktok.com/@alexandrumarcu912',
       website: 'https://marweb.ro/',
+      whatsapp: 'https://wa.me/+40750472447',
+      tel: '0750472447',
     },
   },
 };
