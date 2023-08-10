@@ -1,49 +1,90 @@
 'use client'
-import React, {useState} from 'react'
-
+import React, {useState, useRef} from 'react'
+import ApiClient from '@/Classes/ApiClient';
+import toast from 'react-hot-toast';
+import Router from 'next/navigation';
+// de facut ty page pt tracking
+const apiPath = process.env.NEXT_PUBLIC_API;
+const api = new ApiClient(apiPath)
 
 const inputClassName = 'input input-bordered';
 const ContactForm = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+  const formRef = useRef(null); // referința către elementul form
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
+    console.log(firstName);
+  };
 
+  const sendData = async () =>{
+    try {
+      const response = await api.post('/form-send', {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        message: message,
+        phone: phone
+      });
+      console.log(response);
+      toast.success(response.message);
+      resetState()
+    } catch (error) {
+      console.log(error);
+      toast.error('Mesajul nu a fost trimis!');
+      resetState();
+    }
+  }
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
+    console.log(lastName);
+  };
 
-     const handleFirstNameChange = (event) => {
-       setFirstName(event.target.value);
-       console.log(firstName);
-     };
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    console.log(email);
+  };
 
-     const handleLastNameChange = (event) => {
-       setLastName(event.target.value);
-       console.log(lastName);
-     };
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
+    console.log(phone);
+  }
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
+    console.log(message);
+  };
 
-     const handleEmailChange = (event) => {
-       setEmail(event.target.value);
-       console.log(email);
-     };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+   sendData()
 
-     const handleMessageChange = (event) => {
-       setMessage(event.target.value);
-       console.log(message);
-     };
+    try {
+      const data = api.post('/form-send', data);
+      console.log(data);
+      toast.success(data.message);
+      resetState();
+    } catch (error) {
+      console.log(error);
+      resetState();
+    }
+  };
 
-     const handleSubmit = (event) => {
-       event.preventDefault();
-       const  data ={ firstName, lastName, email, message };
-
-       console.log(data)
-     };
-
-
-
+  const resetState = () => {
+    setEmail('');
+    setPhone('')
+    setMessage('');
+    setFirstName('');
+    setLastName('');
+    formRef.current.reset();
+  };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form ref={formRef} onSubmit={handleSubmit}>
         <div className=" form-control">
           <input
             className={inputClassName}
@@ -63,6 +104,16 @@ const ContactForm = () => {
             name="email"
             placeholder="Email"
             onInput={handleEmailChange}
+            required
+          />
+          <input
+            placeholder="Telefon format: 123-456-7890"
+            className={inputClassName}
+            type="tel"
+            id="phone"
+            name="phone"
+            onInput={handlePhoneChange}
+            required
           />
         </div>
         <textarea
@@ -70,7 +121,11 @@ const ContactForm = () => {
           className="textarea textarea-bordered textarea-lg w-full "
           onInput={handleMessageChange}
         ></textarea>
-        <button className="btn btn-primary" type="submit">
+        <button
+          onSubmit={handleSubmit}
+          className="btn btn-primary"
+          type="submit"
+        >
           Trimite
         </button>
       </form>
