@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 
 export const meta = {
   titlu: 'Agentie Social Media Marketing si Management » Tomotiv',
@@ -21,10 +22,15 @@ export const Sectiunea1 = {
 };
 
 export const Sectiunea2 = {
-  heading: <>Servicii promovare social media (Organic )</>,
+  heading: (
+    <>
+      Servicii <span className='text-primary'>promovare social media</span> (Organic )
+    </>
+  ),
   platforme: [
     {
       heading: <>Facebook</>,
+      imagine: <FaFacebook color="#51b14d" size={'4em'} />,
       descriere: (
         <>
           Tinteste-ti clientii cu ajutorul continutului organic si eficient in
@@ -35,6 +41,7 @@ export const Sectiunea2 = {
     },
     {
       heading: <>{'Instagram'}</>,
+      imagine: <FaInstagram color="#51b14d" size={'4em'} />,
       descriere: (
         <>
           {
@@ -45,8 +52,10 @@ export const Sectiunea2 = {
       ),
       tip_Continut: ['Image', 'Video', 'Carousel', 'Story', 'Reels'],
     },
+
     {
       heading: <>{'Tiktok'}</>,
+      imagine: <FaTiktok color="#51b14d" size={'4em'} />,
       descriere: (
         <>
           {
@@ -63,12 +72,14 @@ export const Sectiunea2 = {
 export const Sectiunea3 = {
   heading: (
     <>
-      heading: <>Servicii promovare social media ( Ads )</>,
+      Servicii <span className="text-primary">promovare social media</span> (
+      Ads )
     </>
   ),
   platforme: [
     {
       heading: <>{'Facebook'}</>,
+      imagine: <FaFacebook color="#51b14d" size={'4em'} />,
       descriere: (
         <>
           {'Tinteste publicul tinta cu ajutorul reclamelor performante de tip '}
@@ -77,7 +88,7 @@ export const Sectiunea3 = {
           }
         </>
       ),
-      tip_Reclame: [
+      tip_Continut: [
         'Image Ads',
         'Video Ads',
         'Carousel Ads',
@@ -88,6 +99,7 @@ export const Sectiunea3 = {
     },
     {
       heading: <>{'Instagram'}</>,
+      imagine: <FaInstagram color="#51b14d" size={'4em'} />,
       descriere: (
         <>
           {
@@ -98,7 +110,7 @@ export const Sectiunea3 = {
           }
         </>
       ),
-      tip_Reclame: [
+      tip_Continut: [
         'Image Ads',
         'Video Ads',
         'Carousel Ads',
@@ -109,6 +121,7 @@ export const Sectiunea3 = {
     },
     {
       heading: <>{'Tiktok'}</>,
+      imagine: <FaTiktok color="#51b14d" size={'4em'} />,
       descriere: (
         <>
           {
@@ -119,19 +132,19 @@ export const Sectiunea3 = {
           }
         </>
       ),
-      tip_Reclame: ['Video'],
+      tip_Continut: ['Video'],
     },
   ],
 };
 
-export const sectiunea3 = {
+export const Sectiunea4 = {
   heading: <>Cum decurge un proiect de Social Media Management</>,
 };
 
-export const sectiunea4 = {
+export const Sectiunea5 = {
   heading: (
     <>
-      Conecteaza-te la un alt nivel cu un specialist in Social Media Management
+      Conecteaza-te la un alt nivel cu un <span className='text-primary'>specialist in Social Media Management</span>
     </>
   ),
   descriere: (
