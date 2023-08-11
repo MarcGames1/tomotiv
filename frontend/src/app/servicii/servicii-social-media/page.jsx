@@ -50,10 +50,10 @@ export default page
 const Sectiunea2Component = ({heading =<></>, platforme = [{heading:null, imagine:null, descriere:<></>, tip_continut: [""]}]}) =>{
   return (
     <>
-      <h2 className="prose block  m-10 lead font-bold text-3xl text-center">
+      <h2 className=" block  m-10 lead font-bold text-3xl text-center">
         {heading}
       </h2>
-      <div className={'flex flex-col lg:flex-row  gap-5 p-5'}>
+      <div className={'flex flex-col lg:flex-row justify-center  gap-5 p-5'}>
         {platforme.map((platforma, idx) => {
           return (
             <>
