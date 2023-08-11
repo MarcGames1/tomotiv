@@ -35,7 +35,7 @@ export default function Home() {
               Ce Servicii oferim in cadrul agentiei de marketing digital -
               Tomotiv?
             </h2>
-            <Grid3x2 data={servicii} />
+            <Grid3x2 hover data={servicii} />
           </div>
           <div className="m-10 prose lg:prose-xl prose-lead max-w-none">
             <CumVeiColaboraCuNoi items={cumColaboramDate} />

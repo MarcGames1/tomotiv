@@ -1,9 +1,9 @@
 import React from 'react'
-
+import { Meta } from './texte';
 
 export const metadata = {
-  title: 'Termene si Conditii - Tomotiv ',
-  description: 'Desriere Meta',
+  title: Meta.titlu,
+  description: Meta.descriere,
   robots: 'index, folow',
 };
 const layout = ({children}) => {

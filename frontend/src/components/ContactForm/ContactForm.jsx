@@ -7,7 +7,7 @@ import Router from 'next/navigation';
 const apiPath = process.env.NEXT_PUBLIC_API;
 const api = new ApiClient(apiPath)
 
-const inputClassName = 'input input-bordered';
+const inputClassName = 'input input-bordered m-1';
 const ContactForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -117,6 +117,7 @@ const ContactForm = () => {
           />
         </div>
         <textarea
+          rows="6"
           placeholder="Lasa-ne un mesaj si te contactam noi "
           className="textarea textarea-bordered textarea-lg w-full "
           onInput={handleMessageChange}

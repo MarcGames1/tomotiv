@@ -2,7 +2,7 @@ import React from 'react';
 import Card1 from '../LayoutComponents/cardSectionComponents/Card1/Card1';
 import Link from 'next/link';
 
-const Grid3x2 = ({ data }) => {
+const Grid3x2 = ({ data, hover, noLink = false }) => {
   const sections = [];
 
   for (let i = 0; i < data.length; i += 3) {
@@ -15,7 +15,7 @@ const Grid3x2 = ({ data }) => {
           <Link
             key={index}
             href={item.href}
-            className="hover:underline transition-all duration-700 no-underline"
+            className={`${hover ? 'hover:underline' : null} transition-all duration-700 no-underline`}
           >
             <Card1
               small
@@ -33,3 +33,5 @@ const Grid3x2 = ({ data }) => {
   }
 };
 export default Grid3x2;
+
+

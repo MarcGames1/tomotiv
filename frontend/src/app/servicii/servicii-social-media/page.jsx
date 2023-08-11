@@ -1,13 +1,9 @@
 'use client'
-import Link from 'next/link';
 import React from 'react'
-import Image from 'next/image';
 import Page from '@/app/PageLayout';
-import HeroContent from '@/components/Carousel/HeroSection/HeroContent';
 import { Sectiunea1, Sectiunea2, Sectiunea3, Sectiunea5, sectiunea4 } from './texte';
 import Carousel1 from './carousel1.svg'
-import ContactForm from '@/components/ContactForm/ContactForm';
-import Avatar from '@/components/Avatar/Avatar';
+import Sectiunea1Component from '../componenteServicii/Sectiunea1Component';
 import { autori } from '@/dateStatice';
 import CTAComponent from '../componenteServicii/CTA/CtaComponent';
 const {laura} = autori
@@ -15,29 +11,14 @@ const {laura} = autori
 const page = () => {
   return (
     <Page>
-      <HeroContent
-        titlu={
-          <h1 className={'text-5xl lg:text-7xl font-bold'}>
-            {Sectiunea1.heading}
-          </h1>
-        }
-        subtitlu={<p className="py-6 prose prose-p">{Sectiunea1.paragraf}</p>}
-        svg={
-          <Image
-            alt="Imagine Carusel 1"
-            width={300}
-            height={600}
-            src={Carousel1}
-          />
-        }
-      />
+      <Sectiunea1Component poza={Carousel1} {...Sectiunea1} />
       <Sectiunea2Component {...Sectiunea2} />
       <Sectiunea2Component {...Sectiunea3} />
       <Sectiunea4Component {...sectiunea4} />
 
       {/* CTA */}
 
-      <CTAComponent {...Sectiunea5 }  />
+      <CTAComponent {...Sectiunea5} />
     </Page>
   );
 }
