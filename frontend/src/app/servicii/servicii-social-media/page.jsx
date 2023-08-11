@@ -9,7 +9,7 @@ import Carousel1 from './carousel1.svg'
 import ContactForm from '@/components/ContactForm/ContactForm';
 import Avatar from '@/components/Avatar/Avatar';
 import { autori } from '@/dateStatice';
-import CTAComponent from '../componenteServicii/CTA/CtaComponentLaura';
+import CTAComponent from '../componenteServicii/CTA/CtaComponent';
 const {laura} = autori
 
 const page = () => {
