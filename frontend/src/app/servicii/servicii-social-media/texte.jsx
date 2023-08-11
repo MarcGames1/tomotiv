@@ -72,8 +72,7 @@ export const Sectiunea2 = {
 export const Sectiunea3 = {
   heading: (
     <>
-      Servicii <span className="text-primary">promovare social media</span> (
-      Ads )
+      Servicii <span className="text-primary">promovare social media</span> (Ads)
     </>
   ),
   platforme: [
@@ -144,7 +143,10 @@ export const Sectiunea4 = {
 export const Sectiunea5 = {
   heading: (
     <>
-      Conecteaza-te la un alt nivel cu un <span className='text-primary'>specialist in Social Media Management</span>
+      Conecteaza-te la un alt nivel cu un{' '}
+      <span className="text-primary">
+        specialist in Social Media Management
+      </span>
     </>
   ),
   descriere: (
@@ -155,4 +157,5 @@ export const Sectiunea5 = {
       ta.
     </>
   ),
+
 };

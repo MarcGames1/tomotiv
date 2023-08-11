@@ -7,9 +7,9 @@ import HeroContent from '@/components/Carousel/HeroSection/HeroContent';
 import { Sectiunea1, Sectiunea2, Sectiunea3, Sectiunea5, sectiunea4 } from './texte';
 import Carousel1 from './carousel1.svg'
 import ContactForm from '@/components/ContactForm/ContactForm';
-import { Avatar } from 'react-daisyui';
+import Avatar from '@/components/Avatar/Avatar';
 import { autori } from '@/dateStatice';
-
+import CTAComponent from '../componenteServicii/CTA/CtaComponentLaura';
 const {laura} = autori
 
 const page = () => {
@@ -37,7 +37,7 @@ const page = () => {
 
       {/* CTA */}
 
-      <CTAComponent {...Sectiunea5 } {...laura} />
+      <CTAComponent {...Sectiunea5 }  />
     </Page>
   );
 }
@@ -50,10 +50,10 @@ export default page
 const Sectiunea2Component = ({heading =<></>, platforme = [{heading:null, imagine:null, descriere:<></>, tip_continut: [""]}]}) =>{
   return (
     <>
-      <h2 className="prose block m-auto my-10 lead font-bold text-3xl text-center">
+      <h2 className="prose block  m-10 lead font-bold text-3xl text-center">
         {heading}
       </h2>
-      <div className={'flex flex-col lg:flex-row justify-center gap-5 p-5'}>
+      <div className={'flex flex-col lg:flex-row  gap-5 p-5'}>
         {platforme.map((platforma, idx) => {
           return (
             <>
@@ -101,20 +101,3 @@ const Sectiunea4Component = ({ heading }) => {
   );
 };
 
-const CTAComponent = ({ heading, prenume,nume,functie,poza, descriere }) => {
-  return (
-    <>
-      <h2 className="text-center my-10 lead font-bold text-3xl">{heading}</h2>
-      <div className="grid grid-rows-2 lg:grid-cols-2 gap-5 p-5">
-        <div className=" shadow-xl bg-base-100 rounded-md p-5">
-          <ContactForm />
-        </div>
-        <div className="flex  flex-col items-center gap-5">
-          <img className='h-1/2' alt={`poza ${prenume} ${nume} ${functie}`} src={poza} />
-
-          {descriere}
-        </div>
-      </div>
-    </>
-  );
-};
