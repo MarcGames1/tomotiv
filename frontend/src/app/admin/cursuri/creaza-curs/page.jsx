@@ -46,28 +46,7 @@ const initialState = {
      console.log(values);
   };
 
-  const handleImage = (e) => {
-    let file = e.target.files[0];
-    setPreview(window.URL.createObjectURL(file));
-    setUploadButtonText(file.name);
-    setValues({ ...values, loading: true });
-    // Restul codului pentru încărcarea și redimensionarea imaginii
-  };
 
-  const handleImageRemove = async () => {
-    try {
-      setValues({ ...values, loading: true });
-      const res = await axios.post('/api/course/remove-image', { image });
-      setImage({});
-      setPreview('');
-      setUploadButtonText('Upload Image');
-      setValues({ ...values, loading: false });
-    } catch (err) {
-      console.log(err);
-      setValues({ ...values, loading: false });
-      toast('Image upload failed. Try later.');
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

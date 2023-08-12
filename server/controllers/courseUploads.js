@@ -94,7 +94,8 @@ export const uploadVideoController = async (req, res) => {
     }
 
     // Apelarea funcției uploadVideo pentru a salva videoclipul
-    await uploadVideo(req, res);
+    const video = await uploadVideo(req, res);
+    res.send({...video})
 
     
   } catch (error) {

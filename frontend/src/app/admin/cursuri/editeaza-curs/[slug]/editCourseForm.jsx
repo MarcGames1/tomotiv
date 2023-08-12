@@ -153,6 +153,7 @@ const EditCourseForm = ({slug}) => {
                 <input
                   type="file"
                   name="file"
+                  accept="image/*"
                   ref={imageUploadInputRef}
                   onChange={handleAddImage}
                   className="file-input file-input-bordered w-full max-w-xs"

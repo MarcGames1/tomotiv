@@ -12,7 +12,6 @@ const api = new ApiClient(process.env.NEXT_PUBLIC_API)
 
 
 
-const videoDeleteRequest = new ApiClient(config.videoApi);
 
 
 // src={`${config.imageApi}/${courseData?.image?.Key}`}
