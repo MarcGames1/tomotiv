@@ -13,9 +13,11 @@ const ProAndContraComponent = ({ heading, pro, contra }) => {
           <ul>
             {pro.args.map((arg, i) => {
               return (
-                <li className="alert font-bold alert-success my-5" key={i}>
+                <li className="alert alert-success font-bold  my-5" key={i}>
                   {arg}
-                  <HiBadgeCheck color="currentColor" size={'3em'} />
+                  <div className="alert-success rounded-full">
+                    <HiBadgeCheck color="currentColor" size={'3rem'} />
+                  </div>
                 </li>
               );
             })}
@@ -28,7 +30,9 @@ const ProAndContraComponent = ({ heading, pro, contra }) => {
               return (
                 <li className="alert alert-error font-bold my-5" key={i}>
                   {arg}
-                  <HiBan color="currentColor" size={'3em'} />
+                  <div className="alert-error rounded-full">
+                    <HiBan color="currentColor" size={'3rem'} />
+                  </div>
                 </li>
               );
             })}

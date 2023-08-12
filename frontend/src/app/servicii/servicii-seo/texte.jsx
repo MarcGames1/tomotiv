@@ -155,7 +155,7 @@ export const Sectiunea3 = {
 
 export const Sectiunea4 = {
   heading: <h2 className=" m-10 lead font-bold text-3xl text-center">Cum Te ajuta o Agentie SEO</h2>,
-};
+}; 
 
 
 export const Sectiunea5 = {
