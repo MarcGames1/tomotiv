@@ -27,17 +27,16 @@ const initialState = {
   name: '', // titlu curs
   description: '', // descriere cu suneditor
   price: '3000', // numar
-  uploading: false,
   paid: true,
-  category: '', // sa ma gandesc daca fac crud pt categorii
-  loading: false,
-  modules: [], // modulele contin lectiile de curs + status finished sau in progress
+ 
+
 };
 
   const [values, setValues] = useState({ ...initialState });
-  const [image, setImage] = useState({});
-  const [preview, setPreview] = useState('');
-  const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
+  const [content, setContent] =useState('')
+  
+
+
 
   const router = useRouter();
 
@@ -46,6 +45,12 @@ const initialState = {
      console.log(values);
   };
 
+  const handle ={
+    name:(e) =>{ setValues({ ...values, name: e.target.value})},
+    price:(e) =>{setValues({ ...values, price: e.target.value });},
+    paid:(e) =>{setValues({ ...values, paid: e.target.checked });},
+  }
+   
 
 
   const handleSubmit = async (e) => {
@@ -53,10 +58,10 @@ const initialState = {
     try {
       const { data } = await axios.post('/api/course', {
         ...values,
-        image,
+        description: content,
       });
       setValues({ ...initialState });
-      toast('Great! Now you can start adding lessons');
+      toast('Cursul A Fost Creat!');
       router.push('/admin/cursuri');
     } catch (err) {
       toast(err.message);
@@ -67,7 +72,8 @@ const initialState = {
     <>
       <div className="p-10">
         <h1>Crează un curs nou</h1>
-        <form onSubmit={handleSubmit}>
+        <pre> {JSON.stringify({ ...values, content }, '', 3)}</pre>
+        <div>
           <div className="form-control	">
             <label className="label" htmlFor="name">
               Nume curs:
@@ -76,7 +82,7 @@ const initialState = {
               className="input"
               type="text"
               id="name"
-              onInput={handleChange}
+              onInput={handle.name}
               value={values.name}
               name="name"
               required
@@ -89,17 +95,18 @@ const initialState = {
 
             <SunEditor
               setOptions={{
-                height: 200,
+                height: '50vh',
                 buttonList, // Or Array of button list, eg. [['font', 'align'], ['image']]
                 // plugins: [font] set plugins, all plugins are set by default
                 // Other option
               }}
-              height="50%"
+              height="50vh"
               lang={'ro'}
               setContents={values.description}
-              onChange={(content) =>
-                setValues({ ...values, description: content })
-              }
+              onChange={(content) => {
+                setContent(content);
+                
+              }}
             />
           </div>
           <div className="form-control">
@@ -107,8 +114,8 @@ const initialState = {
               <span className="label-text">Platit</span>
               <input
                 type="checkbox"
-                checked="checked"
-                onChange={handleChange}
+                checked={values.paid}
+                onChange={handle.paid}
                 className="checkbox"
               />
             </label>
@@ -121,15 +128,19 @@ const initialState = {
               id="price"
               name="price"
               value={values.price}
-              onChange={handleChange}
+              onInput={handle.price}
               required
             />
           </div>
 
-          <button className="btn btn-primary" type="submit">
+          <button
+            onClick={handleSubmit}
+            className="btn btn-primary mt-5"
+            
+          >
             Crează cursul
           </button>
-        </form>
+        </div>
       </div>
     </>
   );

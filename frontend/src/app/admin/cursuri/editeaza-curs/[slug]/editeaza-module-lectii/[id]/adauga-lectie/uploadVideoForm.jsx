@@ -108,6 +108,7 @@ console.log('videoStream Data =?>',videoURL);
             </div>
             <input
               type="file"
+              accept="video/*"
               ref={videoInputRef}
               className="file-input w-full max-w-xs"
               onChange={handleUpload}
@@ -121,7 +122,6 @@ console.log('videoStream Data =?>',videoURL);
             </button>
           </>
         )}
-      
       </div>
     </>
   );

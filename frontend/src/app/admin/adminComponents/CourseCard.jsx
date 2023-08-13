@@ -35,8 +35,8 @@ const CourseCard = ({
               className="h-auto m-5"
               src={`${config.imageApi}?key=${image.Key}`}
               alt={image.Key}
-              height={300}
-              width={300}
+              height={50}
+              width={150}
             />
           
         )}

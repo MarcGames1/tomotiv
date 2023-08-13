@@ -50,8 +50,8 @@ const EditLessonContent = ({ slug, id, lessonId }) => {
   if (isLoading) return <>Loading . . .</>;
   return (
     <div className="m-10 ">
-      {/* <pre>{JSON.stringify({ slug, id, lessonId }, '', 3)}</pre>
-      <pre>{JSON.stringify({ lesson }, '', 3)}</pre> */}
+      <pre>{JSON.stringify({ slug, id, lessonId }, '', 3)}</pre>
+      <pre>{JSON.stringify({ lesson }, '', 3)}</pre>
 
       <h1 className="">{lesson.title}</h1>
       <UploadVideoForm lessonData={lesson} setLessonData={setLesson} />
