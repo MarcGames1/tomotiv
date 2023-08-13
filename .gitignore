@@ -11,3 +11,4 @@ server/.env
 frontend/.env
 frontend/.env
 server/uploads/
+frontend/public/sitemap-0.xml
