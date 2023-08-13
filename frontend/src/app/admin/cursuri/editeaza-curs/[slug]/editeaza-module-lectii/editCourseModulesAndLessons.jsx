@@ -41,15 +41,41 @@ const EditCourseModulesAndLessons = ({slug}) => {
   };
 
 
+  const handleDrag =(e, index) =>{
+    // console.log('ONDRAG ', index)
+    e.dataTransfer.setData('itemIndex', index)
+  }
+
+  const handleDrop = (e, index) => {
+// console.log('onDrop ', index);
+  const movingItemIndex = e.dataTransfer.getData('itemIndex')
+  const targetItemIndex = index
+
+  let allModules = currentModules
+
+  let movingItem = allModules[movingItemIndex]; // dragged item to be rearanged
+
+  allModules.splice(movingItemIndex, 1)  // remove 1 item from the index
+  allModules.splice(targetItemIndex,0, movingItem) //pushItem after target Item index
+    saveCourseState({...courseData, modules: [...allModules]})
+
+  };
+
 if (isLoading || error) {
   return <>...</>;
 }
   return (
-    <>
+    <div onDragOver={(e) => e.preventDefault()}>
       <pre>{JSON.stringify(courseData, '', 3)}</pre>
-    <ModuleInput handleAddModule={handleAddModule}/>
+      <ModuleInput handleAddModule={handleAddModule} />
       {currentModules.map((module, index) => (
-        <div key={index} className="flex items-center mb-4">
+        <div
+          draggable
+          onDragStart={(e) => {handleDrag(e, index)}}
+          onDrop={(e) => {handleDrop(e, index)}}
+          key={index}
+          className="flex items-center mb-4"
+        >
           <div className="mr-2">
             <AiOutlineBook size={20} />
           </div>
@@ -72,7 +98,7 @@ if (isLoading || error) {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
