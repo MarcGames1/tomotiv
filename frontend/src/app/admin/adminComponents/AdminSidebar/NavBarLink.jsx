@@ -1,5 +1,7 @@
 import React from 'react'
 import Link from 'next/link';
+
+
 const NavBarLink = ({ href = '#', icon = <></>, text = '' }) => {
   return (
     <Link
