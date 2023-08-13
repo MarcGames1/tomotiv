@@ -89,7 +89,7 @@ if (!user) {
 console.log('videoStream Data =?>',videoURL);
   return (
     <>
-      <div className="artboard artboard-horizontal phone-3">
+      <div className="h-[50vh]">
         {!videoURL ? (
           <>
             <div

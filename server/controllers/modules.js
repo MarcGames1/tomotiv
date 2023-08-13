@@ -31,22 +31,26 @@ export const updateModule = async (req, res) => {
   try {
     const { slug, moduleId } = req.params;
     const { title, lessons } = req.body;
-
+    
+console.log(moduleId)
     const course = await Course.findOne({ slug });
 
     if (!course) {
-      return res.status(404).json({ error: 'Course not found' });
+      return res.status(501).json({ error: 'Course not found' });
     }
 
-    const module = course.modules.id(moduleId);
-
+    const module = await Module.findOneAndUpdate(
+      { _id: moduleId },
+      { ...req.body }
+    ).exec();
+      console.log(module)
     if (!module) {
-      return res.status(404).json({ error: 'Module not found' });
+      return res.status(501).json({ error: 'Module not found' });
     }
 
     module.title = title;
     module.lessons = lessons;
-    await course.save();
+    await module.save();
 
     res.json(module);
   } catch (error) {

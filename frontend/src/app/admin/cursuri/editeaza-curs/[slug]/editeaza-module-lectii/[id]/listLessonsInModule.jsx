@@ -28,10 +28,12 @@ useEffect(() => {
 
       }
     }, []);
- const handleEditLesson = (lessonId) => {
-   // Implementați funcționalitatea pentru editarea unei lecții
-   console.log(`Edit lesson ${lessonId}`);
- };
+
+  const updateModule = async (data) => {
+   const res = await api.put(`/courses/${slug}/modules/${id}`, data);
+  //  fetchModuleData()
+  //  return res
+  }
 
  const handleDeleteLesson = async (lessonId) => {
    // Implementați funcționalitatea pentru ștergerea unei lecții
@@ -39,6 +41,27 @@ useEffect(() => {
    const res = await api.delete(`/${slug}/${id}/lessons/${lessonId}`)
    fetchModuleData()
    console.log(res);
+ };
+
+ const handleDrag = (e, index) => {
+   // console.log('ONDRAG ', index)
+   e.dataTransfer.setData('itemIndex', index);
+ };
+
+ const handleDrop = (e, index) => {
+   // console.log('onDrop ', index);
+   const movingItemIndex = e.dataTransfer.getData('itemIndex');
+   const targetItemIndex = index;
+
+   let allLessons = moduleData.lessons;
+
+   let movingItem = allLessons[movingItemIndex]; // dragged item to be rearanged
+
+   allLessons.splice(movingItemIndex, 1); // remove 1 item from the index
+   allLessons.splice(targetItemIndex, 0, movingItem); //pushItem after target Item index
+   setModuleData({...moduleData, lessons: [...allLessons]});
+   updateModule({ ...moduleData, lessons: [...allLessons] });
+  //  saveCourseState({ ...courseData, modules: [...allModules] });
  };
 
    if (isLoading) return <p>Loading...</p>;
@@ -50,10 +73,20 @@ useEffect(() => {
           <pre>{JSON.stringify(moduleData, '', 3)}</pre>
           <h1>{moduleData.title}</h1>
 
-          <ul>
-            {moduleData.lessons.map((lesson) => (
-              <li key={lesson._id}>
-                {lesson.title} LESSON ID {lesson._id}
+          <ul onDragOver={(e) => e.preventDefault()}>
+            {moduleData.lessons.map((lesson, index) => (
+              <li
+                draggable
+                onDragStart={(e) => {
+                  handleDrag(e, index);
+                }}
+                onDrop={(e) => {
+                  handleDrop(e, index);
+                }}
+                key={lesson._id}
+                className='alert px-5 my-5'
+              >
+                {lesson.title} 
                 <Link
                   href={`/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii/${id}/editeaza-lectie/${lesson._id}`}
                   className="btn btn-info"
