@@ -64,8 +64,8 @@ const saveVideo = async (videoFile, slug, moduleId) => {
   }
   const fileName = slugify(videoFile.name, { lower: true, strict: true });
 
-  const fileExt = path.extname(videoFile.name);
-  const newFileName = `${fileName}${fileExt}`;
+  
+  const newFileName = `${fileName}`;
   const videoPath = path.join(moduleFolder, newFileName);
   const readStream = createReadStream(videoFile.path);
   const writeStream = createWriteStream(videoPath);
