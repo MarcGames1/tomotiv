@@ -259,6 +259,8 @@ const EditCourseForm = ({slug}) => {
                 ...courseData,
                 descrirption: currentDescription,
               });
+              //redirect /admin/cursuri
+              router.push('/admin/cursuri');
             }}
           >
             Salveaza Cursul

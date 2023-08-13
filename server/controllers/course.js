@@ -37,12 +37,12 @@ export const create = async (req, res) => {
   // return;
   try {
     const alreadyExist = await Course.findOne({
-      slug: slugify(req.body.name.toLowerCase()),
+      slug: slugify(req.body.name),
     });
     if (alreadyExist) return res.status(400).send('Title is taken');
 
     const course = await new Course({
-      slug: slugify(req.body.name),
+      slug: slugify(req.body.name.toLowerCase()),
       instructor: req.auth._id,
       ...req.body,
     }).save();
@@ -130,7 +130,7 @@ export const update = async (req, res) => {
 
     const updated = await Course.findOneAndUpdate(
       { slug },
-      { slug: slugify(req.body.name), ...req.body },
+      { ...req.body, slug: slugify(req.body.name.toLowerCase()) },
       {
         new: true,
       }
