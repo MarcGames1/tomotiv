@@ -12,6 +12,7 @@ const useCourseData = (slug) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const data = await getCourseData(slug);
         saveCourseState(data);
         setIsLoading(false);

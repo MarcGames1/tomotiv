@@ -18,7 +18,7 @@ import {
   read,
   deleteCourse,
   removeVideo,
-  addLesson,
+  // addLesson, 
   update,
   removeLesson,
   updateLesson,
@@ -71,9 +71,9 @@ router.put(
 router.put('/course/unpublish/:courseId', requireSignin, isInstructor, unpublishCourse);
 
 // `/api/course/lesson/${slug}/${course.instructor._id}`,
-router.post("/course/lesson/:slug/:instructorId", requireSignin,isInstructor, addLesson);
-router.put("/course/lesson/:slug/:instructorId", requireSignin,isInstructor, updateLesson);
-router.put('/course/:slug/:lessonId', requireSignin, isInstructor, removeLesson);
+// router.post("/course/lesson/:slug/:instructorId", requireSignin,isInstructor, addLesson);
+// router.put("/course/lesson/:slug/:instructorId", requireSignin,isInstructor, updateLesson);
+// router.put('/course/:slug/:lessonId', requireSignin, isInstructor, removeLesson);
 
 
 

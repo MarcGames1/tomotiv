@@ -21,7 +21,7 @@ const EditCourseForm = ({slug}) => {
      
    );
 
-
+    const [currentDescription, setCurrentDescription]=useState('')
    const [preview, setPreview] = useState('');
    const [isImageUploading, setIsImageUploading] = useState(false);
    const [loading, setLoading] = useState(false)
@@ -201,9 +201,7 @@ const EditCourseForm = ({slug}) => {
           </div>
         </div>
         <CourseDescriptionEditor
-          onChange={(content) =>
-            saveCourseState({ ...courseData, description: content })
-          }
+          onChange={(content) => setCurrentDescription(content)}
           content={courseData.description}
         />
 
@@ -252,24 +250,29 @@ const EditCourseForm = ({slug}) => {
           </label>
         </div>
 
-        <button
-          className="btn btn-primary"
-          onClick={(e) => {
-            e.preventDefault();
-            saveCourseState(courseData);
-          }}
-        >
-          Salveaza Cursul
-        </button>
-        <button
-          className="btn btn-outline btn-error"
-          onClick={(e) => {
-            e.preventDefault();
-            handleDeleteCourse();
-          }}
-        >
-          Sterge Cursul
-        </button>
+        <div className="flex py-5	flex-wrap justify-around">
+          <button
+            className="btn btn-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              saveCourseState({
+                ...courseData,
+                descrirption: currentDescription,
+              });
+            }}
+          >
+            Salveaza Cursul
+          </button>
+          <button
+            className="btn btn-outline btn-error"
+            onClick={(e) => {
+              e.preventDefault();
+              handleDeleteCourse();
+            }}
+          >
+            Sterge Cursul
+          </button>
+        </div>
       </form>
     </>
   );
