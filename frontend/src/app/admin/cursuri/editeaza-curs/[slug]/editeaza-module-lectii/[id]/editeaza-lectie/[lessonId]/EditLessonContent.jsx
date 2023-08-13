@@ -41,7 +41,7 @@ const EditLessonContent = ({ slug, id, lessonId }) => {
       await api.put(`${slug}/modules/lessons/${lessonId}`);
       toast.success('Lecția a fost salvată cu succes!');
       router.push(
-        `http://localhost:3000/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii/${id}`
+        `/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii/${id}`
       );
     } catch (error) {
       toast.error('Eroare la salvarea lecției!');
@@ -49,9 +49,9 @@ const EditLessonContent = ({ slug, id, lessonId }) => {
   };
   if (isLoading) return <>Loading . . .</>;
   return (
-    <div className="m-10 prose">
-      <pre>{JSON.stringify({ slug, id, lessonId }, '', 3)}</pre>
-      <pre>{JSON.stringify({ lesson }, '', 3)}</pre>
+    <div className="m-10 ">
+      {/* <pre>{JSON.stringify({ slug, id, lessonId }, '', 3)}</pre>
+      <pre>{JSON.stringify({ lesson }, '', 3)}</pre> */}
 
       <h1 className="">{lesson.title}</h1>
       <UploadVideoForm lessonData={lesson} setLessonData={setLesson} />
@@ -64,7 +64,7 @@ const EditLessonContent = ({ slug, id, lessonId }) => {
         />
       ) : (
         <div
-          className="prose"
+          className="prose w-full h-full block"
           dangerouslySetInnerHTML={{ __html: lesson.content }}
         />
       )}

@@ -6,7 +6,7 @@ import { AiFillFolder } from 'react-icons/ai';
 const AdminSidebar = () => {
   return (
     <>
-      <div className="sidebar  relative bottom-0 lg:left-0 p-2 h-screen max-w-[300px] overflow-y-auto text-center bg-secondary">
+      <div className="sidebar  relative bottom-0 lg:left-0 p-2 h-full min-h-screen max-w-[300px] overflow-y-auto text-center bg-secondary">
         <div className="text-gray-100 text-xl">
           <div className="p-2.5 mt-1 flex items-center">
             <h1 className="font-bold ml-3">Tomotiv</h1>
