@@ -32,85 +32,17 @@ const client = new S3Client({
 
 /// Helper functions END //
 
-export const uploadImage = async (req, res) => {
-  try {
-    const { image } = req.body;
-    console.log(req.body);
-    if (!image) {
-      return res.status(400).send('No Image');
-    }
-    const base64Data = new Buffer.from(
-      image.replace(/^data:image\/\w+;base64,/, ''),
-      'base64'
-    );
-
-    const type = image.split(';')[0].split('/')[1];
-
-    // image params
-    const params = {
-      Bucket: 'marwebelearning',
-      Key: `${nanoid()}.${type}`,
-      Body: base64Data,
-      ACL: 'private',
-      ContentEncoding: 'base64',
-      ContentType: `image/${type}`,
-    };
-
-    // upload to s3 v2
-    //  S3.upload(params, (err, data) => {
-    //    if (err) {
-    //      console.log(err);
-    //      return res.sendStatus(400);
-    //    }
-    //    console.log(data);
-    //    res.send(data);
-    //  });
-    // Upload to S3 v3
-    const putComand = new PutObjectCommand({...params});
-    
-    try {
-      const response = await client.send(putComand, (err, data) => {
-        if (err){
-           console.log(err);
-           return res.sendStatus(400);
-        }
-
-       if(data.$metadata.httpStatusCode == 200){
-      
-        res.send({ Bucket: params.Bucket, Key: params.Key });
-       }
-        
-        
-      });
-          } catch (err) {
-      console.error(err);
-    }
-  } catch (error) {
-    res.send(error.message);
-  }
-};
-
-export const removeImage = async (req, res) => {
-  try {
-    const { image } = req.body;
-    // image params
-    
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export const create = async (req, res) => {
   // console.log("CREATE COURSE", req.body);
   // return;
   try {
     const alreadyExist = await Course.findOne({
-      slug: slugify(req.body.name.toLowerCase()),
+      slug: slugify(req.body.name),
     });
     if (alreadyExist) return res.status(400).send('Title is taken');
 
     const course = await new Course({
-      slug: slugify(req.body.name),
+      slug: slugify(req.body.name.toLowerCase()),
       instructor: req.auth._id,
       ...req.body,
     }).save();
@@ -160,30 +92,30 @@ export const removeVideo = async (req, res) => {
   }
 };
 
-export const addLesson = async (req, res) => {
-  try {
-    const { slug, instructorId } = req.params;
-    const { title, content, video } = req.body;
+// export const addLesson = async (req, res) => {
+//   try {
+//     const { slug, instructorId } = req.params;
+//     const { title, content, video } = req.body;
 
-    if (req.auth._id != instructorId) {
-      return res.status(400).send('Unauthorized');
-    }
+//     if (req.auth._id != instructorId) {
+//       return res.status(400).send('Unauthorized');
+//     }
 
-    const updated = await Course.findOneAndUpdate(
-      { slug },
-      {
-        $push: { lessons: { title, content, video, slug: slugify(title) } },
-      },
-      { new: true }
-    )
-      .populate('instructor', '_id name')
-      .exec();
-    res.json(updated);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).send('Add lesson failed');
-  }
-};
+//     const updated = await Course.findOneAndUpdate(
+//       { slug },
+//       {
+//         $push: { lessons: { title, content, video, slug: slugify(title) } },
+//       },
+//       { new: true }
+//     )
+//       .populate('instructor', '_id name')
+//       .exec();
+//     res.json(updated);
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(400).send('Add lesson failed');
+//   }
+// };
 
 export const update = async (req, res) => {
   try {
@@ -196,9 +128,13 @@ export const update = async (req, res) => {
       return res.status(400).send('Unauthorized');
     }
 
-    const updated = await Course.findOneAndUpdate({ slug }, req.body, {
-      new: true,
-    }).exec();
+    const updated = await Course.findOneAndUpdate(
+      { slug },
+      { ...req.body, slug: slugify(req.body.name.toLowerCase()) },
+      {
+        new: true,
+      }
+    ).exec();
     console.log('UPDATED COURSE ', updated);
     res.json(updated);
   } catch (err) {

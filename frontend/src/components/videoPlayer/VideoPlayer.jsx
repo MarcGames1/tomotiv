@@ -1,5 +1,7 @@
 'use client'
 import React, { useRef, useEffect } from 'react';
+import ReactPlayer from 'react-player';
+
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 
@@ -11,15 +13,14 @@ const VideoPlayer = ({ source }) => {
 
   return (
     <div>
-      <video
-        ref={videoRef}
-        className="w-full"
+      <ReactPlayer
         controls
         playsInline
         controlsList="nodownload"
-      >
-        <source src={source} type="video/mp4" />
-      </video>
+        pip
+        url={source}
+      />
+     
     </div>
   );
 };

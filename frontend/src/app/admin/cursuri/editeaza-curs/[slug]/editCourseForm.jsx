@@ -21,16 +21,16 @@ const EditCourseForm = ({slug}) => {
      
    );
 
-
+    const [currentDescription, setCurrentDescription]=useState('')
    const [preview, setPreview] = useState('');
-   const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
+   const [isImageUploading, setIsImageUploading] = useState(false);
    const [loading, setLoading] = useState(false)
    const router = useRouter()
 
    const updateImageToServer = async () =>{
    return await api.put(`/course/${slug}`, courseData);
+  }
    
-   }
 
   
 
@@ -153,6 +153,7 @@ const EditCourseForm = ({slug}) => {
                 <input
                   type="file"
                   name="file"
+                  accept="image/*"
                   ref={imageUploadInputRef}
                   onChange={handleAddImage}
                   className="file-input file-input-bordered w-full max-w-xs"
@@ -200,9 +201,7 @@ const EditCourseForm = ({slug}) => {
           </div>
         </div>
         <CourseDescriptionEditor
-          onChange={(content) =>
-            saveCourseState({ ...courseData, description: content })
-          }
+          onChange={(content) => setCurrentDescription(content)}
           content={courseData.description}
         />
 
@@ -251,24 +250,31 @@ const EditCourseForm = ({slug}) => {
           </label>
         </div>
 
-        <button
-          className="btn btn-primary"
-          onClick={(e) => {
-            e.preventDefault();
-            saveCourseState(courseData);
-          }}
-        >
-          Salveaza Cursul
-        </button>
-        <button
-          className="btn btn-outline btn-error"
-          onClick={(e) => {
-            e.preventDefault();
-            handleDeleteCourse();
-          }}
-        >
-          Sterge Cursul
-        </button>
+        <div className="flex py-5	flex-wrap justify-around">
+          <button
+            className="btn btn-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              saveCourseState({
+                ...courseData,
+                descrirption: currentDescription,
+              });
+              //redirect /admin/cursuri
+              router.push('/admin/cursuri');
+            }}
+          >
+            Salveaza Cursul
+          </button>
+          <button
+            className="btn btn-outline btn-error"
+            onClick={(e) => {
+              e.preventDefault();
+              handleDeleteCourse();
+            }}
+          >
+            Sterge Cursul
+          </button>
+        </div>
       </form>
     </>
   );

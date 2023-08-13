@@ -1,9 +1,13 @@
 'use client';
+// import NavBarLink from './adminComponents/AdminSidebar/NavBarLink';
 import useUserRole from '@/hooks/useUserRole';
 import { useRouter } from 'next/navigation';
-import AdminNavbar from './adminComponents/Navbar';
+import Page from '../PageLayout';
 import React from 'react'
 
+import Link from 'next/link'
+
+import AdminSidebar from './adminComponents/AdminSidebar/AdminSidebar';
 
 const AdminRoute = ({ children }) => {
   const { ok, data, loading } = useUserRole('Admin');
@@ -26,10 +30,15 @@ const AdminRoute = ({ children }) => {
     console.log(ok, data, loading);
     return (
       <>
-      
-        <AdminNavbar />
-        {children}
-      
+        <Page>
+          <div className="flex">
+            <div className="w-1/5">
+              <AdminSidebar />
+              
+            </div>
+            <main className="w-4/5">{children}</main>
+          </div>
+        </Page>
       </>
     );
 
@@ -37,3 +46,11 @@ const AdminRoute = ({ children }) => {
 };
 
 export default AdminRoute
+
+
+
+
+
+
+
+

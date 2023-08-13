@@ -34,7 +34,7 @@ export const uploadVideo = async (req, res) => {
   try {
     const videoPath = await saveVideo(video, slug, moduleId);
 
-    res.send({ Key: videoPath });
+    return({ Key: videoPath });
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');

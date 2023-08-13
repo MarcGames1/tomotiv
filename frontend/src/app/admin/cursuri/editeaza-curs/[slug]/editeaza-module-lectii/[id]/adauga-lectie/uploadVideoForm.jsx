@@ -12,7 +12,6 @@ const api = new ApiClient(process.env.NEXT_PUBLIC_API)
 
 
 
-const videoDeleteRequest = new ApiClient(config.videoApi);
 
 
 // src={`${config.imageApi}/${courseData?.image?.Key}`}
@@ -90,7 +89,7 @@ if (!user) {
 console.log('videoStream Data =?>',videoURL);
   return (
     <>
-      <div className="artboard artboard-horizontal phone-3">
+      <div className="h-[50vh]">
         {!videoURL ? (
           <>
             <div
@@ -109,6 +108,7 @@ console.log('videoStream Data =?>',videoURL);
             </div>
             <input
               type="file"
+              accept="video/*"
               ref={videoInputRef}
               className="file-input w-full max-w-xs"
               onChange={handleUpload}
@@ -122,7 +122,6 @@ console.log('videoStream Data =?>',videoURL);
             </button>
           </>
         )}
-      
       </div>
     </>
   );
