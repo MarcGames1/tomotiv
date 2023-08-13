@@ -35,9 +35,10 @@ const CoursesCardsLoader =  () => {
 
 
       return (
-        <>
+       <div className="flex 	flex-wrap justify-center gap-3">
           {courses.map((c) => {
             console.log(c);
+            
             return (
               <CourseCard
                 key={c._id}
@@ -49,7 +50,7 @@ const CoursesCardsLoader =  () => {
               />
             );
           })}
-        </>
+        </div>
       );
   
 }

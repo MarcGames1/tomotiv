@@ -2,6 +2,7 @@
 import NavBarLink from "./NavBarLink";
 import { BiX, BiHomeAlt, BiSolidUserRectangle } from 'react-icons/bi';
 import { FaScroll, FaUser } from 'react-icons/fa';
+import {GiScrollQuill} from 'react-icons/gi'
 import { AiFillFolder } from 'react-icons/ai';
 const AdminSidebar = () => {
   return (
@@ -26,12 +27,18 @@ const AdminSidebar = () => {
             </>
           }
         />
-        {/* <BiSolidUserRectangle />  De schimbat*/}
         <NavBarLink
-          href="/admin/users"
-          text="Useri"
-          icon={<FaUser />}
+        secondary
+          href="/admin/cursuri/creaza-curs"
+          text="Creaza Curs"
+          icon={
+            <>
+              <GiScrollQuill />
+            </>
+          }
         />
+        {/* <BiSolidUserRectangle />  De schimbat*/}
+        <NavBarLink href="/admin/users" text="Useri" icon={<FaUser />} />
         {/* <AiFillFolder /> */}
         <NavBarLink
           href="/admin/uploads"
@@ -57,3 +64,6 @@ const AdminSidebar = () => {
 };
 
 export default AdminSidebar
+
+
+//http://localhost:3000/admin/cursuri/creaza-curs

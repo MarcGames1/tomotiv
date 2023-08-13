@@ -23,14 +23,14 @@ const EditCourseForm = ({slug}) => {
 
 
    const [preview, setPreview] = useState('');
-   const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
+   const [isImageUploading, setIsImageUploading] = useState(false);
    const [loading, setLoading] = useState(false)
    const router = useRouter()
 
    const updateImageToServer = async () =>{
    return await api.put(`/course/${slug}`, courseData);
+  }
    
-   }
 
   
 

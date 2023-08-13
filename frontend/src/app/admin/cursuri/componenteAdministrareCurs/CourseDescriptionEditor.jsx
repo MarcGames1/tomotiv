@@ -23,7 +23,7 @@ const CourseDescriptionEditor = ({ content, onChange }) => {
           buttonList,
           defaultStyle: 'font-family: Inter; font-size:20px;'
         }}
-        height="100%"
+        height="50vh"
         lang={'ro'}
         setContents={content}
         onChange={onChange}
