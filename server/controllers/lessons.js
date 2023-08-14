@@ -9,6 +9,9 @@ import Module from '../models/modules';
 import {deleteVideo} from '../utils/fileManager'
 import slugify from 'slugify';
 
+
+import { isAdmin } from '../middlewares';
+
 export const createLesson = async (req, res) => {
   try {
     const { courseSlug, moduleId } = req.params;
@@ -58,28 +61,35 @@ export const createLesson = async (req, res) => {
 export const updateLesson = async (req, res) => {
 try {
     const {courseSlug, moduleId, lessonId } = req.params
-  const {title, content, video} = req.body
-  const course = await Course.findOne({ slug }).select('instructor').exec();
-  if (req.auth._id != course.instructor) {
-      return res.status(400).send('Unauthorized');
-    }
-const lesson = await Lesson.findById(lessonId)
-if(lesson.video){
-  deleteVideo(lesson.video.Key);
-  console.log('Previous video removed from bucket')
-  await updateLesson(req, res)
-}
-  const updated = await Lesson.findByIdAndUpdate(lessonId,{
-      title,
-      slug: slugify(title.toLowerCase()),
-      content,
-      video,
-      free_preview,}, {new: true}).exec()
+  const {title, content} = req.body
+  const course = await Course.findOne({ courseSlug })
+    .select('instructor')
+    .exec();
+    const lessonUpdate = async () =>{
+      const updated = await Lesson.findByIdAndUpdate(
+        lessonId,
+        {
+          title,
+          slug: slugify(title.toLowerCase()),
+          content,
+        },
+        { new: true }
+      ).exec();
 
-  res.json(updated);
+     res.json(updated);
+    }
+  if (req.auth._id != course.instructor ) {
+      return res.status(400).send('Unauthorized');
+      isAdmin(req, res, lessonUpdate)
+    }
+
+
+   lessonUpdate()
+
+ 
 } catch (error) {
-    console.log(err);
-    return res.status(400).send(err.message);
+    console.log(error);
+    return res.status(400).send(error.message);
 }
 };
 export const getLesson = async (req, res) => {

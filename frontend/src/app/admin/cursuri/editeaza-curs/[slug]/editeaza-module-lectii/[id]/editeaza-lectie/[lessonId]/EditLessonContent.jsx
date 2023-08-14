@@ -38,7 +38,10 @@ const EditLessonContent = ({ slug, id, lessonId }) => {
 
   const saveLessonHandler = async () => {
     try {
-      await api.put(`${slug}/modules/lessons/${lessonId}`);
+      await api.put(`/${slug}/modules/${id}/lessons/${lessonId}`, {
+        title: currentTitle,
+        content: currentContent,
+      });
       toast.success('Lecția a fost salvată cu succes!');
       router.push(
         `/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii/${id}`
@@ -54,18 +57,20 @@ const EditLessonContent = ({ slug, id, lessonId }) => {
       <pre>{JSON.stringify({ lesson }, '', 3)}</pre>
 
       <h1 className="">{lesson.title}</h1>
-      <UploadVideoForm lessonData={lesson} setLessonData={setLesson} />
-      {isEditingContent ? (
+      <UploadVideoForm slug={slug} moduleId={id} lessonData={lesson} setLessonData={setLesson} />
+      {isEditingContent ? (<>
+      <input type='text' onInput={(e)=>{setCurrentTitle(e.target.value)}} value={currentTitle} /> 
         <CourseDescriptionEditor
           onChange={(content) => {
             setCurrentContent(content);
           }}
           content={lesson.content}
-        />
+          />
+          </>
       ) : (
         <div
-          className="prose w-full h-full block"
-          dangerouslySetInnerHTML={{ __html: lesson.content }}
+          className="prose w-full min-h-[50vh] h-full block"
+          dangerouslySetInnerHTML={{ __html: currentContent   }}
         />
       )}
       <div className="btn-group">

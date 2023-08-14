@@ -71,8 +71,10 @@ const initialState = {
   return (
     <>
       <div className="p-10">
-        <h1>Crează un curs nou</h1>
-        <pre> {JSON.stringify({ ...values, content }, '', 3)}</pre>
+        <h1 className="m-10 lead font-bold text-3xl text-center">
+          Crează un curs nou
+        </h1>
+
         <div>
           <div className="form-control	">
             <label className="label" htmlFor="name">
@@ -105,7 +107,6 @@ const initialState = {
               setContents={values.description}
               onChange={(content) => {
                 setContent(content);
-                
               }}
             />
           </div>
@@ -133,11 +134,7 @@ const initialState = {
             />
           </div>
 
-          <button
-            onClick={handleSubmit}
-            className="btn btn-primary mt-5"
-            
-          >
+          <button onClick={handleSubmit} className="btn btn-primary mt-5">
             Crează cursul
           </button>
         </div>

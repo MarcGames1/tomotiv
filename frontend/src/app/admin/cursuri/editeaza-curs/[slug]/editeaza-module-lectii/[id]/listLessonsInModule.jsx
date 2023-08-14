@@ -70,8 +70,9 @@ useEffect(() => {
     <div>
       {moduleData && (
         <div>
-          <pre>{JSON.stringify(moduleData, '', 3)}</pre>
-          <h1>{moduleData.title}</h1>
+          <h1 className="m-10 lead font-bold text-3xl text-center">
+            {moduleData.title}
+          </h1>
 
           <ul onDragOver={(e) => e.preventDefault()}>
             {moduleData.lessons.map((lesson, index) => (
@@ -84,9 +85,9 @@ useEffect(() => {
                   handleDrop(e, index);
                 }}
                 key={lesson._id}
-                className='alert px-5 my-5'
+                className="alert px-5 my-5"
               >
-                {lesson.title} 
+                {lesson.title}
                 <Link
                   href={`/admin/cursuri/editeaza-curs/${slug}/editeaza-module-lectii/${id}/editeaza-lectie/${lesson._id}`}
                   className="btn btn-info"

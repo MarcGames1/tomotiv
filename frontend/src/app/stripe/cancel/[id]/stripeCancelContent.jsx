@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-const StripeSuccess = ({id}) => {
+const StripeCancel = ({id}) => {
   // router
   const router = useRouter();
   
@@ -25,8 +25,8 @@ const StripeSuccess = ({id}) => {
       <div className="row text-center">
         <div className="col-md-9 pb-5">
           <div className="flex prose justify-center p-5">
-           <h1>Iti multumim pentru ca ai cumparat cursul nostru</h1>
-           <p></p>
+           <h1>Plata s-a anulat</h1>
+           <p>Nu vei fi taxat</p>
 
           </div>
         </div>
@@ -36,4 +36,4 @@ const StripeSuccess = ({id}) => {
   );
 };
 
-export default StripeSuccess;
+export default StripeCancel;

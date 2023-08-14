@@ -108,7 +108,7 @@ const EditCourseForm = ({slug}) => {
 
   return (
     <>
-      <pre>{JSON.stringify(courseData, '', 3)} </pre>
+     
       <form>
         <div className="form-control">
           <label className="label">

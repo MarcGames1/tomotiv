@@ -65,8 +65,8 @@ if (isLoading || error) {
   return <>...</>;
 }
   return (
-    <div onDragOver={(e) => e.preventDefault()}>
-      <pre>{JSON.stringify(courseData, '', 3)}</pre>
+    <div className='' onDragOver={(e) => e.preventDefault()}>
+      
       <ModuleInput handleAddModule={handleAddModule} />
       {currentModules.map((module, index) => (
         <div
@@ -74,7 +74,7 @@ if (isLoading || error) {
           onDragStart={(e) => {handleDrag(e, index)}}
           onDrop={(e) => {handleDrop(e, index)}}
           key={index}
-          className="flex items-center mb-4"
+          className="flex items-center my-4 alert"
         >
           <div className="mr-2">
             <AiOutlineBook size={20} />

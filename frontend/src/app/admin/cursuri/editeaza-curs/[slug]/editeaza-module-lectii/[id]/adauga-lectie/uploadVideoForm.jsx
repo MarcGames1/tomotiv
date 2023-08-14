@@ -86,7 +86,7 @@ if (!user) {
   return <>Logged Out</>;
 }
 
-console.log('videoStream Data =?>',videoURL);
+
   return (
     <>
       <div className="h-[50vh]">
