@@ -29,11 +29,13 @@ export const createFolder = (uploadsFolder, router) => {
 
 export const uploadVideo = async (req, res) => {
   const { video } = req.files;
+  console.log('vvideo => ' ,video)
+ 
   const { slug, moduleId, title } = req.fields;
   
  
   try {
-    const videoPath = await saveVideo(video, slug, moduleId);
+    const videoPath = await saveVideo(video[0], slug, moduleId);
     console.log(videoPath, "Video Path, ")
 
     if(!videoPath ) {
@@ -62,6 +64,8 @@ export const uploadVideo = async (req, res) => {
 };
 
 const saveVideo = async (videoFile, slug, moduleId) => {
+
+  console.log("VideoFIle =>>> ",videoFile )
   if (!videoFile) {
     throw new Error('No video file');
   }
@@ -83,18 +87,19 @@ const saveVideo = async (videoFile, slug, moduleId) => {
     mkdirSync(moduleFolder);
   }
 
-  const originalFileName = videoFile.name;
-  const fileNameWithoutExtension = path.parse(originalFileName).name;
+  const originalFileName = videoFile.originalFilename;
+  console.log("originalFileName", originalFileName)
+  
   const extension = path.parse(originalFileName).ext;
 
   
- const newFileName = `${slugify(fileNameWithoutExtension, {
+ const newFileName = `${slugify(originalFileName, {
    lower: true,
    strict: true,
  })}${extension}`;
 
   const videoPath = path.join(moduleFolder, newFileName);
-  const readStream = createReadStream(videoFile.path);
+  const readStream = createReadStream(videoFile.filepath);
   const writeStream = createWriteStream(videoPath);
 
   // Transmită videoclipul în bucăți către fișierul de ieșire

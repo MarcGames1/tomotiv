@@ -17,14 +17,18 @@
     "dotenv": "^16.0.3",
     "esm": "^3.2.25",
     "express": "^4.18.2",
-    "express-formidable": "^1.2.0",
     "express-jwt": "^8.4.1",
+    "formidable": "^3.5.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.11.4",
     "morgan": "^1.10.0",
     "nanoid": "^3.0.0",
+    
     "query-string": "^5.1.1",
     "slugify": "^1.6.6",
     "stripe": "^11.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.0"
   }
 }

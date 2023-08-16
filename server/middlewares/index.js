@@ -1,4 +1,7 @@
 require('dotenv/config');
+import express from 'express';
+import formidable from 'formidable';
+
 import { expressjwt } from 'express-jwt';
 
 import User from '../models/user';
@@ -91,3 +94,27 @@ export const checkAllowedHostNames = async (req, res, next) => {
 
   next();
 };
+
+export const formidableMiddleware = (req, res, next) => {
+   const form = formidable({ maxFileSize: 1 * 1024 * 1024 * 1024});
+   form.parse(req, (err, fields, files) => {
+     if (err) {
+       next(err);
+       return;
+     }
+     req.files = { ...files };
+     // Convert fields array to object
+     const convertedFields = {};
+     for (const key in fields) {
+       if (fields.hasOwnProperty(key)) {
+         convertedFields[key] = fields[key][0];
+       }
+     }
+
+     req.fields = convertedFields;
+
+     console.log(req.fields, 'Fields ===> ');
+     next();
+   });
+}
+

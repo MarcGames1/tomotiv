@@ -1,5 +1,6 @@
 import express from 'express';
-import formidable from 'express-formidable'
+// import formidable from 'express-formidable'
+import formidable from 'formidable';
 
 const router = express.Router();
 
@@ -9,6 +10,7 @@ import {
   requireSignin,
   isEnrolled,
   isAdmin,
+  formidableMiddleware,
 } from '../middlewares';
 
 import { uploadImage, removeVideoController, uploadVideoController } from '../controllers/fileManager';
@@ -53,7 +55,8 @@ router.delete('/course/:slug', requireSignin, isAdmin, deleteCourse);
 router.post(
   '/course/video-upload/:instructorId/:moduleId',
   requireSignin,
-  formidable(),
+  // formidable(),
+  formidableMiddleware,
   uploadVideoController
 );
 
