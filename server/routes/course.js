@@ -11,17 +11,15 @@ import {
   isAdmin,
 } from '../middlewares';
 
-import { uploadImage, removeObject, uploadVideoController } from '../controllers/courseUploads';
+import { uploadImage, removeVideoController, uploadVideoController } from '../controllers/fileManager';
 //controllers
 import {
   create,
   read,
   deleteCourse,
-  removeVideo,
-  // addLesson, 
+ 
   update,
-  removeLesson,
-  updateLesson,
+  
   publishCourse,
   unpublishCourse,
   courses,
@@ -42,7 +40,7 @@ router.get('/publishedCourses', publishedCourses);
 
 //images
 router.post('/course/upload-image',requireSignin, isInstructor, uploadImage);
-router.post('/course/remove-image', requireSignin, isInstructor, removeObject);
+router.post('/course/remove-image', requireSignin, isInstructor) // remove image);
 
 
 //course routes
@@ -53,12 +51,12 @@ router.get( '/course/:slug', read)
 router.delete('/course/:slug', requireSignin, isAdmin, deleteCourse);
 
 router.post(
-  '/course/video-upload/:instructorId',
+  '/course/video-upload/:instructorId/:moduleId',
   requireSignin,
   formidable(),
   uploadVideoController
 );
-router.post('/course/video-remove/:instructorId', requireSignin, removeVideo);
+
 
 
 // publish unpublish

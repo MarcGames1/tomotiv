@@ -1,6 +1,7 @@
-import express from 'express';
+import express, { json } from 'express';
 import slugify from 'slugify';
-
+import Video from '../models/video';
+import Lesson from '../models/lesson';
 import {
   mkdirSync,
   existsSync,
@@ -28,16 +29,35 @@ export const createFolder = (uploadsFolder, router) => {
 
 export const uploadVideo = async (req, res) => {
   const { video } = req.files;
-  const { slug, moduleId } = req.fields;
-
-  console.log('Incoming VIdeo =>> ', video);
+  const { slug, moduleId, title } = req.fields;
+  
+ 
   try {
     const videoPath = await saveVideo(video, slug, moduleId);
+    console.log(videoPath, "Video Path, ")
 
-    return({ Key: videoPath });
+    if(!videoPath ) {
+      console.log("No Video Path")
+      uploadVideo(req);
+  }
+    const uploadedVideo = await new Video({
+      title,
+      module: moduleId,
+      path: videoPath,
+    }).save();
+
+      const extractedVideoData = {
+        title: uploadedVideo.title,
+        module: uploadedVideo.lesson,
+        path: uploadedVideo.path,
+        _id: uploadedVideo._id,
+        createdAt: uploadedVideo.createdAt,
+        updatedAt: uploadedVideo.updatedAt,
+      };
+    return extractedVideoData;
   } catch (err) {
     console.error(err);
-    res.status(500).send('Internal Server Error');
+   return  {...err}
   }
 };
 
@@ -62,10 +82,17 @@ const saveVideo = async (videoFile, slug, moduleId) => {
   if (!existsSync(moduleFolder)) {
     mkdirSync(moduleFolder);
   }
-  const fileName = slugify(videoFile.name, { lower: true, strict: true });
+
+  const originalFileName = videoFile.name;
+  const fileNameWithoutExtension = path.parse(originalFileName).name;
+  const extension = path.parse(originalFileName).ext;
 
   
-  const newFileName = `${fileName}`;
+ const newFileName = `${slugify(fileNameWithoutExtension, {
+   lower: true,
+   strict: true,
+ })}${extension}`;
+
   const videoPath = path.join(moduleFolder, newFileName);
   const readStream = createReadStream(videoFile.path);
   const writeStream = createWriteStream(videoPath);
@@ -83,28 +110,40 @@ const saveVideo = async (videoFile, slug, moduleId) => {
       const relativePath = path.relative(uploadsFolder, videoPath);
 
       resolve(relativePath);
+      console.log('RELATIVE PATH ======>>>> ', relativePath) 
+      return relativePath
     });
   });
 };
 
-export const deleteVideo = (key) => {
+export const deleteVideo = async (id) => {
+  const video = await Video.findById({ _id: id }).exec();
+  console.log("VIDEO IN DELETEVIDEO ===>>>> ... >>> .>>",video)
   // Definirea caii către fișierul video pe baza cheii
-  const videoPath = path.join(__dirname, '../uploads', key);
+  const videoPath = path.join(__dirname, '../uploads', video.path);
 
   // Verifică existența fișierului video
   if (existsSync(videoPath)) {
     // Șterge fișierul video
     unlinkSync(videoPath);
-    console.log(`Video ${key} deleted successfully.`);
+    console.log(`Video ${id} deleted successfully.`);
+    await video.remove()
   } else {
-    console.log(`Video ${key} does not exist.`);
+    console.log(`Video ${id} does not exist.`);
   }
 };
 
-export const deleteImage = (key) => {
-  console.log('TODO ')
-}
+export const deleteImage = async (key, next) => {
+  console.log("THIS IS DELETE IMAGE, \n KEY = ", key);
+  const imagePath = path.join(__dirname, '../uploads', key);
+   if (existsSync(imagePath)) {
+    // Șterge fișierul video
+    await unlinkSync(imagePath);
+    console.log(`Image  ${imagePath} deleted successfully.`);
+    next()
 
+}
+}
 // verifica un path daca nu exista il creeaza
 export function CheckOrCreateFolder(path) {
   if (!existsSync(path)) {

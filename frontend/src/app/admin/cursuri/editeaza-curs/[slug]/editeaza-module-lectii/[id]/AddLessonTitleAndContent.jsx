@@ -23,7 +23,7 @@ const AddLessonTitleAndContent = ({ lessonData, setLessonData, children }) => {
   return (
     <>
       <input
-        onChange={handleTitleChange}
+        onInput={handleTitleChange}
         type="text"
         placeholder="Titlu Lectie"
         className="input w-full max-w-xs"

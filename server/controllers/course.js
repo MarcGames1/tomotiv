@@ -1,8 +1,4 @@
 
-import {
-  PutObjectCommand,
-  S3Client,
-} from '@aws-sdk/client-s3';
 
 import slugify from 'slugify';
 import User from '../models/user';
@@ -15,22 +11,15 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 import Course from '../models/course';
 
-import { nanoid } from 'nanoid';
 
-import { awsConfig } from '../awsConfig/awsConfig';
+
+
 import CourseProgress from '../models/courseProgress';
 
 
-const client = new S3Client({
-  region: 'eu-west-3',
-  credentials: {
-    accessKeyId: awsConfig.accessKeyId,
-    secretAccessKey: awsConfig.secretAccessKey,
-  },
-});
 
 
-/// Helper functions END //
+
 
 export const create = async (req, res) => {
   // console.log("CREATE COURSE", req.body);
@@ -75,47 +64,7 @@ export const read = async (req, res) => {
 
 
 
-export const removeVideo = async (req, res) => {
-  try {
-    if (req.auth._id != req.params.instructorId) {
-      return res.status(400).send('Unauthorized');
-    }
 
-    const { Key } = req.body;
-    
-
-    deleteVideo(Key);
-    res.send({ ok: true });
-   
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-// export const addLesson = async (req, res) => {
-//   try {
-//     const { slug, instructorId } = req.params;
-//     const { title, content, video } = req.body;
-
-//     if (req.auth._id != instructorId) {
-//       return res.status(400).send('Unauthorized');
-//     }
-
-//     const updated = await Course.findOneAndUpdate(
-//       { slug },
-//       {
-//         $push: { lessons: { title, content, video, slug: slugify(title) } },
-//       },
-//       { new: true }
-//     )
-//       .populate('instructor', '_id name')
-//       .exec();
-//     res.json(updated);
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(400).send('Add lesson failed');
-//   }
-// };
 
 export const update = async (req, res) => {
   try {
@@ -123,7 +72,7 @@ export const update = async (req, res) => {
     const { slug } = req.params;
     console.log("IMAGE receved in body",req.body.image);
     const course = await Course.findOne({ slug }).exec();
-    console.log('COURSE FOUND => ', course);
+    
     if (req.auth._id != course.instructor) {
       return res.status(400).send('Unauthorized');
     }
@@ -135,7 +84,7 @@ export const update = async (req, res) => {
         new: true,
       }
     ).exec();
-    console.log('UPDATED COURSE ', updated);
+    
     res.json(updated);
   } catch (err) {
     console.log(err);
@@ -158,8 +107,8 @@ export const deleteCourse = async (req, res) => {
       for (const module of course.modules) {
         if (module.lessons && module.lessons.length >= 1) {
           for (const lesson of module.lessons) {
-            if (lesson.video && lesson.video.Key) {
-              await deleteVideo(lesson.video.Key);
+            if (lesson.video && lesson.video._id) {
+              await deleteVideo(lesson.video._id);
             }
 
             await Lesson.findByIdAndDelete(lesson._id);
@@ -185,64 +134,7 @@ export const deleteCourse = async (req, res) => {
   }
 };
 
-export const removeLesson = async (req, res) => {
-  const { slug, lessonId } = req.params;
-  const course = await Course.findOne({ slug }).exec();
-  if (req.auth._id != course.instructor) {
-    return res.status(400).send('Unauthorized');
-  }
 
-  const deletedLesson = await Course.findByIdAndUpdate(course._id, {
-    $pull: { lessons: { _id: lessonId } },
-  }).exec();
-
-  res.json({ ok: true });
-};
-
-export const updateLesson = async (req, res) => {
-  try {
-    // console.log("UPDATE LESSON", req.body);
-    const { slug } = req.params;
-    const { _id, title, content, video, free_preview } = req.body;
-    const course = await Course.findOne({ slug }).select('instructor').exec();
-
-    if (course.instructor._id != req.auth._id) {
-      return res.status(400).send('Unauthorized');
-    }
-    // Daca exista un video in acea lectie inainte de a face update stergem acel video
-    if (video) {
-      const previousCourse = await Course.findOne({ 'lessons._id': _id });
-      const lesson = previousCourse.lessons.find((lesson) =>
-        lesson._id.equals(_id)
-      );
-
-      const {Key } = lesson.video;
-      deleteVideo(Key);
-      console.log(' Lesson =>  ', lesson);
-      lesson.video.location == video.location ? true : false;
-      res.json(previousCourse);
-      return;
-    }
-    const updated = await Course.updateOne(
-      { 'lessons._id': _id },
-      {
-        $set: {
-          'lessons.$.title': title,
-          'lessons.$.content': content,
-          'lessons.$.video': video,
-          'lessons.$.free_preview': free_preview,
-        },
-      },
-      { new: true }
-    ).exec();
-
-    // console.log("updated", updated);
-    res.json({ ok: true });
-  } catch (err) {
-    console.log(err);
-    return res.status(400).send('Update lesson failed');
-  }
-};
 
 export const publishCourse = async (req, res) => {
   try {

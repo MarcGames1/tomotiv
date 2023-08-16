@@ -91,12 +91,13 @@ const EditCourseForm = ({slug}) => {
   const handleRemoveImage = async (e) => {
     e.preventDefault()
  try {
+   await imageDeleteRequest.delete(`/?key=${courseData.image.Key}`);
+
    setImage({});
    saveCourseState({
      ...courseData,
-     image: {},
+     image: {Key: undefined},
    });
-    await imageDeleteRequest.delete(`/${image.Key}`);
     await updateImageToServer()
      imageUploadInputRef.current.file = ''
  } catch (error) {

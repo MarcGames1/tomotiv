@@ -35,12 +35,12 @@ const LessonVideoAndDescription = ({ currentLesson }) => {
     if (
       currentLesson &&
       currentLesson.video &&
-      currentLesson.video.Key &&
+      currentLesson.video._id &&
       currentLesson.content
     ) {
       setLessonData(currentLesson);
       setVideoURL(
-        `${process.env.NEXT_PUBLIC_API}/video/?key=${currentLesson.video.Key}`
+        `${process.env.NEXT_PUBLIC_API}/video/?id=${currentLesson.video._id}`
       );
     }
   }, [currentLesson]);

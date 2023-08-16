@@ -18,7 +18,10 @@ const lessonSchema = new mongoose.Schema(
       type: String,
     },
       
-    video: {},
+    video: {
+      type:ObjectId,
+      ref: 'Video',
+    },
     free_preview: {
       type: Boolean,
       default: false,

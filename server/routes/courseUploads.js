@@ -3,9 +3,14 @@ import express from 'express';
 import { checkAllowedHostNames, isAdmin, isInstructor, requireSignin } from '../middlewares';
 import path from 'path';
 
-import { getImage, getVideo, removeObject } from '../controllers/courseUploads';
+import {
+  getImage,
+  getVideo,
+  removeVideoController,
+} from '../controllers/fileManager';
+  
 
-import { createFolder } from '../utils/fileManager';
+import { createFolder, deleteImage } from '../utils/fileManager';
 const router = express.Router();
 
 
@@ -14,8 +19,14 @@ router.get(
   checkAllowedHostNames,
   getImage
 );
-router.delete('/image/', checkAllowedHostNames, requireSignin, isInstructor, removeObject);
-router.delete('/video-delete/', checkAllowedHostNames, requireSignin, isInstructor, removeObject);
+router.delete(
+  '/image/',
+  checkAllowedHostNames,
+  requireSignin,
+  isInstructor,
+  deleteImage
+);
+router.delete('/video-delete/', checkAllowedHostNames, requireSignin, isInstructor, removeVideoController);
 
 router.get(
   '/video/',

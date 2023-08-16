@@ -5,6 +5,8 @@ import path from 'path';
 import { createReadStream } from 'fs';
 import { CheckOrCreateFolder } from '../utils/fileManager';
 
+import Video from '../models/video';
+
 
 export const getImage = async (req, res) => {
   try {
@@ -71,12 +73,12 @@ export const uploadImage = async (req, res) => {
    }
 };
 
-
-export const removeObject = async (req, res) => {
+// o s-o rescriu deocamdata e doar la remove poza reprezentativa curs
+export const removeVideoController = async (req, res) => {
   try {
-    const { key } = req.query;
+    const { id } = req.query;
    
-   deleteVideo(key);
+   deleteVideo(id);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
@@ -110,10 +112,10 @@ export const removeVideo = async (req, res) => {
       return res.status(400).send('Unauthorized');
     }
 
-    const { Key } = req.query;
+    const { id } = req.query;
    
 
-    deleteVideo(Key);
+    deleteVideo(id);
     res.send({ ok: true });
    
   } catch (err) {
@@ -124,7 +126,7 @@ export const removeVideo = async (req, res) => {
 
 
 export const getVideo = async (req, res) => {
- console.log(req.headers)
+
  
   const range = req.headers.range
   if(!range) return res.status(400).send('Range is Required');
@@ -132,13 +134,14 @@ export const getVideo = async (req, res) => {
      // Verifică permisiunile și alte condiții specifice pentru a permite accesul la videoclip
 
      // Obține cheia videoclipului din parametrii cererii
-     const { key } = req.query;
-      console.log(key);
+     const { id } = req.query;
+      console.log(id);
      // Verifică existența și alte condiții specifice pentru a valida cheia videoclipului
-
+    const video = await Video.findById(id);
+     
      // Definirea caii către videoclipul dorit
      const uploadsFolder = path.join(__dirname, '../uploads');
-     const videoPath = path.join(uploadsFolder, key);
+     const videoPath = path.join(uploadsFolder, video.path);
      console.log(videoPath)
     const videoSize = statSync(videoPath).size
     const CHUNK_SIZE = 10 ** 6 

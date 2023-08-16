@@ -38,7 +38,7 @@ useEffect(() => {
  const handleDeleteLesson = async (lessonId) => {
    // Implementați funcționalitatea pentru ștergerea unei lecții
    console.log(`Delete lesson ${lessonId}`);
-   const res = await api.delete(`/${slug}/${id}/lessons/${lessonId}`)
+   const res = await api.delete(`/${slug}/${id}/npm start/${lessonId}`)
    fetchModuleData()
    console.log(res);
  };

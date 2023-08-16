@@ -45,7 +45,7 @@ export const createLesson = async (req, res) => {
 
     // Salvăm lecția în baza de date
     await lesson.save();
-
+    
     // Adăugăm lecția în lista de lecții a modulului
     module.lessons.push(lesson._id);
     await module.save();
@@ -95,7 +95,7 @@ try {
 export const getLesson = async (req, res) => {
   try {
     const { lessonId } = req.params;
-    const lesson = await Lesson.findById(lessonId);
+    const lesson = await Lesson.findById(lessonId).populate('video');
 
     if (!lesson) {
       return res.status(404).json({ message: 'Lesson not found' });
@@ -116,7 +116,7 @@ export const deleteLesson = async (req, res) => {
 try {
   const lesson = await Lesson.findById(lessonId);
   if (lesson && lesson.video) {
-    deleteVideo(lesson.video.Key);
+    deleteVideo(lesson.video._id);
   }
   await Lesson.findByIdAndDelete(lessonId);
   // Actualizează documentul course și elimină id-ul lectiei din array-ul modules
