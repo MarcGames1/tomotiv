@@ -5,7 +5,9 @@ const SingleLessonElement = ({ lesson, currentLesson, setCurrentLesson }) => {
   const [isActive, setIsActive] = useState(false);
  
   useEffect(() => {
-    if (lesson && lesson._id === currentLesson._id) {
+    console.log("CURRENT LESSON")
+    console.table({currentLesson})
+    if (lesson && lesson._id === currentLesson?._id) {
       setIsActive(true);
     } else {
       setIsActive(false);
