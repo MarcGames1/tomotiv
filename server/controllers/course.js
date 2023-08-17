@@ -52,6 +52,9 @@ export const read = async (req, res) => {
         path: 'modules',
         populate: {
           path: 'lessons',
+          populate: {
+            path: 'video',
+          },
         },
       })
       // .populate('lessons') // Populează câmpul 'lessons'
@@ -253,8 +256,18 @@ const status  = await TryGetCourseProgress()
 console.log('STATUS',status)
   return res.json({
     status: ids.includes(courseId),
-    course: await Course.findById(courseId).exec(),
-    status
+    course: await Course.findById(courseId)
+      .populate({
+        path: 'modules',
+        populate: {
+          path: 'lessons',
+          populate: {
+            path: 'video',
+          },
+        },
+      })
+      .exec(),
+    status,
   });
 };
 
