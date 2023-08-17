@@ -217,11 +217,28 @@ export const checkEnrollment = async (req, res) => {
     }
     if(await TryGetCourseProgress() === null || undefined ){
       console.log('STATUS is NULL OR UNDEFINED ');
-      const course = await Course.findById(courseId).exec();
-       const progress = course.lessons.map((lesson) => ({
-         lesson: lesson._id,
-         finished: false,
-       }));
+      // return
+      // todo refa logica de courseStatus
+      const course = await Course.findById(courseId)
+        .populate({
+          path: 'modules',
+          populate: {
+            path: 'lessons',
+          },
+        })
+        .exec();
+      console.log(course)
+      const progress = course.modules.forEach((module) =>
+        module.lessons.map((lesson) => ({
+          lesson: lesson._id,
+          finished: false,
+        }))
+      );
+      
+      //  const progress = course.lessons.map((lesson) => ({
+      //    lesson: lesson._id,
+      //    finished: false,
+      //  }));
       const status = new CourseProgress({
         user: user._id,
         course: course._id,
