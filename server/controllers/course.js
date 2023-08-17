@@ -224,6 +224,9 @@ export const checkEnrollment = async (req, res) => {
           path: 'modules',
           populate: {
             path: 'lessons',
+            populate: {
+              path: 'video',
+            },
           },
         })
         .exec();

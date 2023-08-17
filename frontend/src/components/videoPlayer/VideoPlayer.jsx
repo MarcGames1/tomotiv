@@ -1,8 +1,8 @@
 'use client'
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import ReactPlayer from 'react-player';
 
-import videojs from 'video.js';
+
 import 'video.js/dist/video-js.css';
 
 const VideoPlayer = ({ source }) => {

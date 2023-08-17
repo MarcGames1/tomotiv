@@ -28,7 +28,7 @@ const LessonPlayer = ({ url, handleEndVideo = () => {} }) => {
         onContextMenu={(e) => e.preventDefault()}
         onEnded={handleEndVideo}
         onProgress={(progress) => {
-          setPlayed(progress.playedSeconds);
+        setPlayed(progress.playedSeconds);
         }}
       />
     </>
