@@ -1,0 +1,25 @@
+flow pentru cursanti inscrisi
+
+1. Administratorul va porni inscrierile pentru curs in platforma va adauga un grup de facebook  o data limita si un numar maxim de cursanti. 
+
+Daca inscrierile nu sunt pornite cursantul va intra pe o lista de asteptare, va putea plati cursul in avans  pentru a rezerva un loc la urmatoarea editie
+ 
+2. Pretul sa se modifice automat in functie de cati membri s-au inscris la curs
+3. Flow de vanzare ceva webinar cu voucere de reduceri suplimentare - ??? 
+
+4. Cronometru pana cand se opresc inscrierile cu pret full taiat si discount.
+5. Discount pentru primii inscrisi si pentru ultimii
+6. Odata inscrisi modulele se vor debloca progresiv automat sau manual de administrator (saptamanal pentru a putea parcurge materialele in acelasi ritm)
+7. Lansare editia 2 cu alt grup de facebook alte preturi si fara a bloca accesul la curs sau module celor inscrisi in editia 1
+
+
+Perioada ( cat dureaza cursul )
+
+
+
+Pentru Emailuri - facem asa:
+
+1. CRUD USERI
+ Gestionam userii -> Vezi toti userii in functie de anumite criterii
+2. Creaza / UPDATE READ DELETE  Liste Email
+3. CRUD EMAIL TEMPLATES

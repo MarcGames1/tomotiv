@@ -18,7 +18,7 @@ import { awsConfig } from "../awsConfig/awsConfig";
 export const register = async (req, res) => {
 try{
    
-    const { nume, email, password } = req.body
+    const { nume, preNume, email, password } = req.body
 
     // validation 
 
@@ -33,6 +33,7 @@ try{
     const lowercaseEmail = email.toLowerCase();
     const user = new User({
       nume,
+      preNume,
       email: lowercaseEmail,
       password: hashedPassword,
     });
@@ -61,7 +62,7 @@ export const login = async (req, res) => {
         // Creaza JWT
         try {
           const token = jwt.sign({ _id: user.id }, process.env.JWT_SECRET, {
-            expiresIn: '7d',
+            expiresIn: '2 days',
           });
           console.log('TOKEN CREAT', token);
           //send token in cookie\

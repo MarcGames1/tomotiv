@@ -3,7 +3,7 @@ import NavBarLink from "./NavBarLink";
 import { BiX, BiHomeAlt, BiSolidUserRectangle } from 'react-icons/bi';
 import { FaScroll, FaUser } from 'react-icons/fa';
 import {GiScrollQuill} from 'react-icons/gi'
-import { AiFillFolder } from 'react-icons/ai';
+import { AiFillFolder, AiOutlineMail } from 'react-icons/ai';
 const AdminSidebar = () => {
   return (
     <>
@@ -28,7 +28,7 @@ const AdminSidebar = () => {
           }
         />
         <NavBarLink
-        secondary
+          secondary
           href="/admin/cursuri/creaza-curs"
           text="Creaza Curs"
           icon={
@@ -46,6 +46,15 @@ const AdminSidebar = () => {
           icon={
             <>
               <AiFillFolder />
+            </>
+          }
+        />
+        <NavBarLink
+          href="/admin/email"
+          text="Email Marketing"
+          icon={
+            <>
+              <AiOutlineMail />
             </>
           }
         />

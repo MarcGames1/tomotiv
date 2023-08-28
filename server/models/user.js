@@ -9,6 +9,11 @@ const userSchema = new Schema(
       trim: true,
       required: true,
     },
+    preNume: {
+      type: String,
+      trim: true,
+      
+    },
     email: {
       type: String,
       trim: true,
