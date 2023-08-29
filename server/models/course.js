@@ -12,21 +12,30 @@ const courseSchema = new mongoose.Schema(
       maxlength: 320,
       required: true,
     },
-      deschisInscrieri: {
-        type: Boolean,
-        default: false,
-      },
-      stopInscrieri: {
-        type: Date,
-      },
-      dataIncepereCurs: {
-        type: Date,
-      },
-      dataFinalCurs: {
-        type: Date,
-        
-      },
-    
+    deschisInscrieri: {
+      type: Boolean,
+      default: false,
+    },
+    stopInscrieri: {
+      type: Date,
+    },
+    dataIncepereCurs: {
+      type: Date,
+    },
+    dataFinalCurs: {
+      type: Date,
+    },
+
+    locuriDisponibile: {
+      type: Number,
+      default: 30,
+    },
+
+    inscrisiEditiaCurenta: {
+      type: Number,
+      default: 0,
+    },
+
     facebookGroup: {
       type: String,
       trim: true,

@@ -10,6 +10,7 @@ import { config } from '@/dateStatice';
 import { useRouter } from 'next/navigation';
 const api = new ApiClient(process.env.NEXT_PUBLIC_API )
 const imageDeleteRequest = new ApiClient(config.imageApi);
+import { formatDate } from '@/helpers/helpers';
 
 
 const EditCourseForm = ({slug}) => {
@@ -32,14 +33,14 @@ const EditCourseForm = ({slug}) => {
   }
    
 
-  const formatDate = (dateString) =>  {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('ro-RO', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
-  }
+  // const formatDate = (dateString) =>  {
+  //   const date = new Date(dateString);
+  //   return date.toLocaleDateString('ro-RO', {
+  //     day: 'numeric',
+  //     month: 'long',
+  //     year: 'numeric',
+  //   });
+  // }
   const imageUploadInputRef = useRef()
   
  const handleDeleteCourse = async () =>{

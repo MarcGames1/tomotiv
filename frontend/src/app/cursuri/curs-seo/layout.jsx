@@ -1,5 +1,10 @@
+
 import React from 'react';
-import UserRoute from '@/app/userRoutes/userRoutes';
+
+export const metadata = {
+  title: 'Curs SEO Tomotiv',
+  description: '...',
+};
 
 const layout = ({ children }) => {
   return (

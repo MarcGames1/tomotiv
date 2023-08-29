@@ -2,10 +2,17 @@ import React from 'react';
 
 const DateTimeDisplay = ({ value, type, isDanger }) => {
   return (
-    <div className={isDanger ? 'text-danger' : 'text-primary'}>
-      <p>{value}</p>
-      <span>{type}</span>
-    </div>
+     <div>
+
+    <span
+      className={`countdown font-mono text-4xl ${
+        isDanger ? 'text-danger' : 'text-secondary'
+      }`}
+      >
+      <span style={{ '--value': value }}> </span>
+      {type}
+    </span>
+      </div>
   );
 };
 
