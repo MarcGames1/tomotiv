@@ -9,15 +9,16 @@ const VideoPlayer = ({ source }) => {
  
 
   return (
-    <div className='w-full'>
+    <div className="m-10 p-5">
       <ReactPlayer
+        width={1280}
+        height={720}
         controls
         playsInline
         controlsList="nodownload"
         pip
         url={source}
       />
-     
     </div>
   );
 };
