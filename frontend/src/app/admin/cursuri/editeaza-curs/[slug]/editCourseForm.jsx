@@ -21,21 +21,27 @@ const EditCourseForm = ({slug}) => {
      
    );
 
-    const [currentDescription, setCurrentDescription]=useState('')
-   const [preview, setPreview] = useState('');
-   const [isImageUploading, setIsImageUploading] = useState(false);
-   const [loading, setLoading] = useState(false)
-   const router = useRouter()
+  const [currentDescription, setCurrentDescription]=useState('')
+  const [preview, setPreview] = useState('');
+  const [isImageUploading, setIsImageUploading] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
    const updateImageToServer = async () =>{
    return await api.put(`/course/${slug}`, courseData);
   }
    
 
-  
-
+  const formatDate = (dateString) =>  {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ro-RO', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  }
   const imageUploadInputRef = useRef()
-
+  
  const handleDeleteCourse = async () =>{
   try{
     const res = await api.delete(`/course/${slug}`)
@@ -55,6 +61,9 @@ const EditCourseForm = ({slug}) => {
     saveCourseState({ ...courseData, paid: e.target.checked });
   };
 
+  const handleDeschisInscrieri = (e) => {
+    saveCourseState({ ...courseData, deschisInscrieri: e.target.checked });
+  };
   
   const handleAddImage = async (e) => {
     e.preventDefault()
@@ -109,7 +118,7 @@ const EditCourseForm = ({slug}) => {
 
   return (
     <>
-     
+      <pre>{JSON.stringify(courseData, '', 3)}</pre>
       <form>
         <div className="form-control">
           <label className="label">
@@ -128,7 +137,7 @@ const EditCourseForm = ({slug}) => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Titlu Curs</span>
+            <span className="label-text">Facebook</span>
           </label>
           <label className="input-group">
             <span>Link Grup Facebook</span>
@@ -235,21 +244,66 @@ const EditCourseForm = ({slug}) => {
             </label>
           </div>
         )}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Categorie</span>
-          </label>
-          <label className="input-group">
-            <span>Categorie</span>
-            <input
-              type="text"
-              name="category"
-              value={courseData.category}
-              onChange={handleChange}
-              className="input input-bordered"
-            />
-          </label>
-        </div>
+
+        <section>
+          <h2 className="text-secondary text-center text-3xl">
+            Course Timeline
+          </h2>
+          <div className="form-control flex flex-row gap-5 ">
+            <label className="input-group">
+              <span>Stop Inscrieri</span>
+              <input
+                type="date"
+                name="stopInscrieri"
+                value={courseData.stopInscrieri}
+                onChange={handleChange}
+                className="input input-bordered"
+                data-date-format="DD MMMM YYYY"
+              />
+              <span>{formatDate(courseData.stopInscrieri)}</span>
+            </label>
+            <label className="input-group">
+              <span>Data Incepere Curs</span>
+              <input
+                type="date"
+                name="dataIncepereCurs"
+                value={courseData.dataIncepereCurs}
+                onChange={handleChange}
+                className="input input-bordered"
+                data-date-format="DD MMMM YYYY"
+              />
+              <span>{formatDate(courseData.dataIncepereCurs)}</span>
+            </label>
+            <label className="input-group">
+              <span>Data Final Curs</span>
+              <input
+                
+                data-date-format="DD MMMM YYYY"
+                type="date"
+                name="dataFinalCurs"
+                value={formatDate(courseData.dataFinalCurs)}
+                onChange={handleChange}
+                className="input input-bordered"
+              />
+              <span >
+                {formatDate(courseData.dataFinalCurs)}
+              </span>
+            </label>
+
+            <div className="flex flex-row items-center w-auto h-auto">
+              <label className="label cursor-pointer input-group ">
+                <span className="label-text ">Deschis Inscrieri </span>
+                <input
+                  type="checkbox"
+                  name="deschisInscrieri"
+                  checked={courseData.deschisInscrieri}
+                  onChange={handleDeschisInscrieri}
+                  className="checkbox"
+                />
+              </label>
+            </div>
+          </div>
+        </section>
 
         <div className="flex py-5	flex-wrap justify-around">
           <button

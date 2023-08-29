@@ -12,7 +12,21 @@ const courseSchema = new mongoose.Schema(
       maxlength: 320,
       required: true,
     },
-  
+      deschisInscrieri: {
+        type: Boolean,
+        default: false,
+      },
+      stopInscrieri: {
+        type: Date,
+      },
+      dataIncepereCurs: {
+        type: Date,
+      },
+      dataFinalCurs: {
+        type: Date,
+        
+      },
+    
     facebookGroup: {
       type: String,
       trim: true,
@@ -46,11 +60,12 @@ const courseSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    modules: [{
-      type : ObjectId,
-      ref : 'Module',
-    }],
-   
+    modules: [
+      {
+        type: ObjectId,
+        ref: 'Module',
+      },
+    ],
   },
   { timestamps: true }
 );

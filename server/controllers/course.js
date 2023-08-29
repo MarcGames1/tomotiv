@@ -7,7 +7,9 @@ import Module from '../models/modules';
 
 import { deleteVideo, deleteImage } from '../utils/fileManager';
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const stripe = require('stripe')(
+  process.env.STRIPE_SECRET
+);
 
 import Course from '../models/course';
 
@@ -22,6 +24,8 @@ import CourseProgress from '../models/courseProgress';
 
 
 export const create = async (req, res) => {
+
+  console.log(process.env.STRIPE_SECRET);
   // console.log("CREATE COURSE", req.body);
   // return;
   try {
@@ -35,6 +39,7 @@ export const create = async (req, res) => {
       instructor: req.auth._id,
       ...req.body,
     }).save();
+    
 
     res.json(course);
   } catch (err) {
@@ -326,16 +331,7 @@ export const paidEnrollment = async (req, res) => {
       tax_id_collection: {
         enabled: true,
       },
-      // aici trebuie sa verific daca instructorul este extern sau din cadrul firmei
-      // Daca instructorul este extern vom opri fee-ul platformei si ii vom transfera partea lui
-      // charge buyer and transfer remaining balance to seller (after fee)
-      // payment_intent_data: {
-      //   application_fee_amount: Math.round(fee.toFixed(2) * 100),
-      //   transfer_data: {
-      //     destination: course.instructor.stripe_account_id,
-      //   },
-      // },
-      // redirect url after successful payment
+     
       success_url: `${process.env.STRIPE_SUCCESS_URL}/${course._id}`,
       cancel_url: process.env.STRIPE_CANCEL_URL,
     });
