@@ -1,4 +1,4 @@
-
+'use client'
 import React from 'react'
 
 import Carousel1 from './carousel1.svg';
@@ -22,7 +22,7 @@ import ContactForm from '@/components/ContactForm/ContactForm';
 
 
 
-const page = () => {
+const GoogleAdsPage = () => {
   return (
     <Page>
       <Sectiunea1Component poza={Carousel1} {...Sectiunea1} />
@@ -56,4 +56,4 @@ const page = () => {
   );
 }
 
-export default page
+export default GoogleAdsPage

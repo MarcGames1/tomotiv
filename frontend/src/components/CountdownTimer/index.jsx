@@ -15,13 +15,13 @@ const ExpiredNotice = () => {
 
 const ShowCounter = ({ days, hours, minutes, seconds }) => {
   return (
-    <div className="flex gap-5 m-10 p-5 alert bg-error">
+    <div className="flex gap-5 m-10 p-5 alert bg-gradient-to-b from-rose-400 to-red-500  ">
       <DateTimeDisplay value={days} type={'Zile'} isDanger={days <= 3} />
-     
+
       <DateTimeDisplay value={hours} type={'ore'} isDanger={false} />
-    
+
       <DateTimeDisplay value={minutes} type={'Minute'} isDanger={false} />
-     
+
       <DateTimeDisplay value={seconds} type={'Secunde'} isDanger={false} />
     </div>
   );

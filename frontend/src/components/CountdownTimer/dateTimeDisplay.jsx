@@ -5,9 +5,7 @@ const DateTimeDisplay = ({ value, type, isDanger }) => {
      <div>
 
     <span
-      className={`countdown font-mono text-4xl ${
-        isDanger ? 'text-danger' : 'text-secondary'
-      }`}
+      className={`countdown font-mono text-4xl text-white`}
       >
       <span style={{ '--value': value }}> </span>
       {type}

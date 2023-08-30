@@ -6,11 +6,15 @@ module.exports = {
     'node_modules/react-daisyui/dist/**/*.js',
   ],
   darkMode: 'class',
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
-  theme:{
-   fontFamily: {
-    'sans': [ 'Inter', 'sans-serif']
-   }
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('daisyui'),
+    require('tailwindcss-animated'),
+  ],
+  theme: {
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+    },
   },
   daisyui: {
     themes: [
