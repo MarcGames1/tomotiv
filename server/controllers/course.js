@@ -444,3 +444,52 @@ export const markIncomplete = async (req, res) => {
     console.log(err);
   }
 };
+
+
+export const getCoursePublicData = async (req, res) => {
+  const { slug } = req.params
+  console.log("SLUG ",slug);
+  try {
+    const course = await Course.findOne({slug})
+  const {
+    deschisInscrieri,
+    dataIncepereCurs,
+    dataFinalCurs,
+    inscrisiEditiaCurenta,
+    locuriDisponibile,
+    stopInscrieri,
+    price,
+    discountedPrice,
+  } = course;
+     if (stopInscrieri < new Date()) {
+       // Setam deschisInscrieri la False
+       course.deschisInscrieri = false;
+
+       // Salvam cursul
+       await course.save();
+     }
+
+ 
+    res.send({
+      deschisInscrieri,
+      stopInscrieri,
+      dataIncepereCurs,
+      dataFinalCurs,
+      inscrisiEditiaCurenta,
+      locuriDisponibile,
+      price,
+      discountedPrice,
+    });
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({ error})
+  }
+};
+
+
+// "deschisInscrieri": true,
+//   "stopInscrieri": "2023-08-31T09:59:00.000Z",
+//   "dataIncepereCurs": "2023-09-10T00:00:00.000Z",
+//   "dataFinalCurs": "2023-09-27T00:00:00.000Z",
+//   "inscrisiEditiaCurenta": 0,
+//   "locuriDisponibile": 30

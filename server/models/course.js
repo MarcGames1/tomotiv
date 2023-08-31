@@ -54,6 +54,10 @@ const courseSchema = new mongoose.Schema(
       type: Number,
       default: 3000,
     },
+    discountedPrice: {
+      type: Number,
+      default: 3000,
+    },
     image: {},
     category: String,
     published: {

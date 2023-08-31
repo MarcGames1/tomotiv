@@ -5,11 +5,12 @@ class ApiClient {
     this.baseUrl = baseUrl;
   }
 
-  get(url, config = {}) {
+  get(url ,config = {}) {
     return this.request({
       ...config,
       method: 'get',
       url: this.baseUrl + url,
+      
     });
   }
 
