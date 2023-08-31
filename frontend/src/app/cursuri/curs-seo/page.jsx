@@ -6,12 +6,14 @@ import useCourseData from '@/app/admin/adminHooks/useCourseData';
 import { formatDate, calculateWeeksBetweenDates } from '@/helpers/helpers';
 import CardList6 from '@/app/servicii/componenteServicii/CardList6';
 
-
+// import { FcBusiness } from 'react-icons/fc';
 import {ImCheckmark} from 'react-icons/im'
-import {BiTimer} from 'react-icons/bi'
+import { BiTimer } from 'react-icons/bi';
 import {BsGraphUpArrow} from 'react-icons/bs'
-
 import Mesajelement from '@/components/MesajElement/MesajElement';
+import Link from 'next/link';
+
+
 
 const beneficii = {
   heading: (
@@ -52,7 +54,59 @@ const beneficii = {
 };
 
 
-
+const estePtMine = {
+  heading: (
+    <h2 className="m-10 lead font-bold text-3xl text-center">
+      <span className="text-primary">
+        Cursul SEO{' '}
+        <span className="underline decoration-double	">Seotropolis</span>{' '}
+      </span>
+      este pentru tine dacă...{' '}
+    </h2>
+  ),
+  elemente: [
+    {
+      heading: <h3 className="font-bold text-primary">Ești începător</h3>,
+      descriere: (
+        <p>
+          Indiferent că ai la acest moment un job sau nu, acest curs este pentru
+          tine dacă vrei să înveți un skill nou. O abilitate extrem de cerută în
+          întreaga lume care îți poate asigura nu numai “pâinea”de mâine, ci
+          soluții concrete pentru a îți face prorpiile fabrici.
+        </p>
+      ),
+      // icon: <FaBookOpenReader size={'3em'} />,
+    },
+    {
+      heading: <h3 className="font-bold text-primary">Ești antreprenor</h3>,
+      descriere: (
+        <p>
+          Start-up sau cu ani experiență în spate? Acest curs ți se adresează
+          dacă dorești să îțo optimizezi singur afacerea sau să știi cu
+          exactitate ce fac specialiștii tăi în spate. Pentru antreprenori,
+          acest curs le poate oferi șansa de a comunica mai bine cu specialiștii
+          SEO.
+        </p>
+      ),
+      // icon: <FcBusiness size={'3em'} />,
+    },
+    {
+      heading: (
+        <h3 className="font-bold text-primary">
+          Ești proprietar de magazin online
+        </h3>
+      ),
+      descriere: (
+        <p>
+          Prin vastitatea informației și aplicabilitatea acesteia, cursul oferă
+          șansa tuturor magazinelor online de a își transforma websiteurile în
+          magenți pentru clienți și profit.{' '}
+        </p>
+      ),
+      // icon: <GrCart size={'3em'} />,
+    },
+  ],
+};
 
 const CursSeoSellPage = () => {
 
@@ -289,6 +343,14 @@ const handleAction = () =>{
 
 
        }, courseData);
+
+       const DurataCursSapt = () =>{
+        return <span>
+          {formatDate(dataIncepereCurs)} - {formatDate(dataFinalCurs)} -{' '}
+          {calculateWeeksBetweenDates(new Date(dataFinalCurs), new Date())}{' '}
+          saptamani
+        </span>
+       }
   return (
     <Page>
       <div className="w-full h-[5rem] bg-secondary flex items-center flex-row gap-5 justify-around px-5 my-5">
@@ -348,11 +410,7 @@ const handleAction = () =>{
         <p className="text-lg font-semibold	">
           {' '}
           Desfășurare online -{' '}
-          <span>
-            {formatDate(dataIncepereCurs)} - {formatDate(dataFinalCurs)} -{' '}
-            {calculateWeeksBetweenDates(new Date(dataFinalCurs), new Date())}{' '}
-            saptamani
-          </span>
+         <DurataCursSapt />
         </p>
         <div className="container border-8 border-base-300/100">
           <Mesajelement
@@ -386,7 +444,7 @@ const handleAction = () =>{
         <div className="leading-9 prose">
           <p className="text-center text-lg tracking-wide">
             Perioadă în care primești feedback personalizat de la mentori este
-            de 6 săptămâni, dar ai acces la acest curs pe viață, cu toate
+            de <DurataCursSapt />, dar ai acces la acest curs pe viață, cu toate
             actualizările lui, și îl poți parcurge oricând în ritmul tău.
           </p>
           <p className="text-center text-lg tracking-wide">
@@ -431,12 +489,115 @@ const handleAction = () =>{
       <section>
         <div className=" text-center my-10 p-10 bg-gradient-to-bl from-transparent via-base-300 to-transparent">
           <h2 className="m-10 lead font-bold text-3xl text-center">
-            Primești <span className='text-primary'>feedback personalizat</span> de la un mentor
+            Primești <span className="text-primary">feedback personalizat</span>
+             de la un mentor
           </h2>
-          <p className='lead-9 text-lg'>
+          <p className="lead-9 text-lg">
             Astfel încât să fii sigur că te afli tot timpul pe drumul cel bun în
             procesul de învățare.
           </p>
+        </div>
+      </section>
+      <section>
+        <div className="container grid grid-flow-row md:grid-flow-col lg:grid-flow-col align-middle justify-center justify-items-center gap-3  relative">
+          <img
+            className="self-center w-[100%]  mask mask-squircle "
+            src={'/png/SEO.jpg'}
+            alt="seo image"
+            width={300}
+            height={600}
+          />
+
+          <div className="prose">
+            <h2 className="m-10 lead font-bold text-3xl text-center">
+              <span className="text-primary">Peste 90% din antreprenori </span>
+              nu reușesc să facă profit pentru că au un website prost optimizat
+            </h2>
+            <div className="flex flex-col items-center prose">
+              <p>
+                Foarte mulți antreprenori și-au deschis websiteuri,
+                <span className="font-bold">
+                  {' '}
+                  însă majoritatea nu știu să îl optimizeze pentru a apărea în
+                  prima căutare pe Google
+                </span>{' '}
+                ceea ce le poate scade atât profitul, vânzările cât și traficul
+                pe website.
+              </p>
+
+              <p className="lead text-xl">
+                Totul se rezumă la: optimizare și iarăși optimizare.
+              </p>
+              <p>
+                Dacă vrei ca clienții tăi să te găsească în prima căutare, este
+                important să înveți să îți optimizezi websiteul cum trebuie.
+              </p>
+              <p>
+                Dacă nu știi ce să faci, ce să aplici, cum să aplici și de unde
+                să o apuci, clienții vor fugi de tine și nu vor mai intra
+                niciodată pe websiteul tău.
+              </p>
+              <p>
+                Antreprenorii care nu înțeleg importanța unui website bine
+                optimizat din punct de vedere SEO, vor ajunge la pagina 5 din
+                Google, ceea ce înseamnă că nu vor fi găsiți în veci de către
+                clienți.
+              </p>
+              <p>
+                Pe de altă parte, sunt afaceri care au prins din zbor sau
+                înțeleg cât de cât cum să își optimizeze websiteurile și reușesc
+                să își aducă paginile în primele căutări. 
+              </p>
+              <p>
+                Acești antreprenori nu stau cu grija zilei de mâine: să nu cumva
+                să le pice websiteul pe poziția 7 din Google. Acești oameni,
+                știu exact ce și când să facă astfel încât să remedieze orice
+                problemă și să rămână în topul căutărilor.
+              </p>
+              <p>
+                În cursul{' '}
+                <span className="italic underline font-semibold">
+                  „Seotropolis 1.0”
+                </span>
+                  înveți de la{' '}
+                <Link href="/echipa/alexandru-marcu">Alexandru Marcu</Link> și{' '}
+                <Link href={'/echipa/laura-iaurum'}>Laura Iaurum</Link> co-
+                fondatori Tomotiv România, tehnici avansate de optimizare în SEO
+                pe care le poți aplica imediat pentru a-ți crește afacerea.
+              </p>
+              <p>Credeai că am încheiat?</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <CardList6 {...estePtMine} />
+      </section>
+      <section>
+        <div className="container grid grid-flow-row md:grid-flow-col lg:grid-flow-col align-middle justify-center justify-items-center gap-3  relative">
+          <img
+            className="self-center w-[100%]  mask mask-squircle "
+            src={'/png/SEO.jpg'}
+            alt="seo image"
+            width={300}
+            height={600}
+          />
+
+          <div className="container flex flex-col self-center gap-5">
+            {' '}
+            <div className="prose">
+              <p>
+                Locurile sunt limitate grație intruirii 1:1 permanente pe timpul
+                celor <DurataCursSapt dataFinalCurs={dataFinalCurs} dataIncepereCurs={dataIncepereCurs} /> ai tuturor cursanților. Fiecare elev
+                beneficiază de atenție și intruire.
+              </p>
+            </div>
+            <CTABTN
+              handleAction={handleAction}
+              setCtaMessage={setCtaMessage}
+              lg
+            />
+          </div>
         </div>
       </section>
       Cursul incepe pe data de {formatDate(dataIncepereCurs)}
