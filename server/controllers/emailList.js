@@ -41,3 +41,26 @@ export const Unsubscribe = async (req, res) => {
   }
 };
 
+export const InscriereListaAsteptareCurs = async (req, res) =>{
+    const { name, email, numeCurs } = req.body;
+
+     let newsletterList = await EmailList.findOne({
+       name: numeCurs,
+     });
+
+  // Dacă nu există o listă de e-mailuri, o creăm
+  if (!newsletterList) {
+    newsletterList = new EmailList({ name: numeCurs  });
+  }
+
+  // Adăugăm adresa de e-mail în listă
+  newsletterList.emailEntries.push({ name, email });
+
+  // Salvam lista de e-mailuri
+  await newsletterList.save();
+
+  // Răspundem cu succes
+  res.status(200).send();
+}
+
+// Modal cu inscriere pe lista de asteptare,
