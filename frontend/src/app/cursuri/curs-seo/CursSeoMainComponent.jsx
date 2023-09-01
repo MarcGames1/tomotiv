@@ -15,7 +15,7 @@ import { autori} from '@/dateStatice';
 import Mesajelement from '@/components/MesajElement/MesajElement';
 
 import { formatDate, calculateWeeksBetweenDates } from '@/helpers/helpers';
-import {estePtMine, beneficii, DeCeSaTeInscrii, styles, cumFunctioneaza, structuraCurs} from './texte'
+import {estePtMine, beneficii, DeCeSaTeInscrii, styles, cumFunctioneaza, structuraCurs, beneficii2} from './texte'
 
 const CursSeoMainComponent = ({
   deschisInscrieri,
@@ -24,6 +24,8 @@ const CursSeoMainComponent = ({
   inscrisiEditiaCurenta,
   locuriDisponibile,
   stopInscrieri,
+  price,
+  discountedPrice,
 }) => {
   const router = useRouter();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -117,19 +119,17 @@ const CursSeoMainComponent = ({
       },
       {
         heading: (
-          <h3 className="font-bold text-primary">
-            „Ultimul, dar și cel dintâi”{' '}
-          </h3>
+          <h3 className="font-bold text-primary">Google Compania Mea</h3>
         ),
         descriere: (
-          <div className="prose">
-            <p>
-              un workshop de aproape 2 ore în care îți explic procesul prin care
-              poate trece un website care este la început de drum dar care își
-              dorește să ajungă primul pe Google.
-            </p>
-          </div>
+          <>
+            <ul className="list-none">
+              <li>Cum gestionezi un profil de Google Compania mea</li>
+              <li>Cum Creezi un cont de Google Compania Mea</li>
+            </ul>
+          </>
         ),
+        // icon: <GrCart size={'3em'} />,
       },
       {
         heading: (
@@ -190,6 +190,23 @@ const CursSeoMainComponent = ({
       },
     ],
   };
+
+  const DesfasurareCurs = () =>{
+    return <div className=" text-center leading-9">
+       <p>
+         {<br />}Cursul se desfasoara online in perioada{' '}
+         <DurataCursSapt
+           dataFinalCurs={dataFinalCurs}
+           dataIncepereCurs={dataIncepereCurs}
+         />{' '}
+       </p>
+       <p>
+         Lecții video și text | Feedback personalizat | Grup privat Facebook |
+         Tehnici și secrete testate | Înveți research, SEO și bazele
+         marketingului digital
+       </p>
+     </div>;
+  }
 
   const handleAction = () => {
     const handleInscriere = () => {
@@ -313,9 +330,7 @@ const CursSeoMainComponent = ({
           <Mesajelement
             animation="animate-fade-right "
             delay={'animate-delay-100'}
-            text={
-              <> Înveți research, copywriting și bazele marketingului digital</>
-            }
+            text={<> Înveți research, SEO și bazele marketingului digital</>}
           />
         </div>
         <div className="leading-9 prose">
@@ -492,20 +507,7 @@ const CursSeoMainComponent = ({
               </span>
             )}
             <CountdownTimer targetDate={stopInscrieri} />
-            <div className=" text-center leading-9">
-              <p>
-                {<br />}Cursul se desfasoara online in perioada{' '}
-                <DurataCursSapt
-                  dataFinalCurs={dataFinalCurs}
-                  dataIncepereCurs={dataIncepereCurs}
-                />{' '}
-              </p>
-              <p>
-                Lecții video și text | Feedback personalizat | Grup privat
-                Facebook | Tehnici și secrete testate | Înveți research,
-                copywriting și bazele marketingului digital
-              </p>
-            </div>
+            <DesfasurareCurs />
           </div>
         </div>
       </section>
@@ -557,7 +559,7 @@ const CursSeoMainComponent = ({
           </div>
         </div>
       </section>
-      <section className='bg-gradient-to-bl py-5 my-5 from-transparent via-base-200 to-transparent'>
+      <section className="bg-gradient-to-bl py-5 my-5 from-transparent via-base-200 to-transparent">
         <CardList6 {...cumFunctioneaza} />
         <div className="flex items-center justify-center">
           <div className="prose m-5">
@@ -577,9 +579,124 @@ const CursSeoMainComponent = ({
         </div>
       </section>
       <section>
-        <CardList6 {...structuraCurs}/>
+        <CardList6 numbered {...structuraCurs} />
       </section>
-      Cursul se incheie pe data de {formatDate(dataFinalCurs)}
+      <section>
+        <CardList6 {...beneficii2} />
+        <div className="flex m-5 p-5 flex-col bg-gradient-to-bl items-center from-green-300 via-green-50 to-green-300">
+          <h2 className={styles.h2}>
+            Înscrie-te în <span className="text-primary">SEOtropolis 1.0 </span>
+            imbogateste-ti cunostintele, bucură-te de vânzări nelimitate{' '}
+          </h2>
+          <CTABTN
+            handleAction={handleAction}
+            setCtaMessage={setCtaMessage}
+            lg
+          />
+        </div>
+      </section>
+      <section>
+        <h2 className={styles.h2}>Dacă nu acum, atunci când?</h2>
+        <div className="flex items-center flex-col m-5 p-5 ">
+          <div className="prose">
+            <p>
+              <span className="font-bold"> “Acum” deja a trecut.</span> Și așa
+              va trece și următorul moment și tot așa. Se vor așterne anii și te
+              vei umple de regret. Oare ce era mai bine? Să-ncerci sau să îți
+              pară rău tot restul vieții că nu ai încercat?
+            </p>
+            <p>
+              Timul nu așteaptă pe nimeni. Timpul trece peste toți. Să trăiești
+              cu sentimentul că ai fi putut face mai mult, este calea cea mai
+              bună înspre a suferi.
+            </p>
+            <p>
+              <span className="font-bold">Curaj! Ce mai aștepți?</span> Nu, nu
+              s-a născut nimeni învățat sau mai deștept. Singura diferență
+              dintre tine și altcineva este ca acel cineva a încercat. Acorzi și
+              tu o șansă?{' '}
+            </p>
+            <p>
+              Dacă încerci pe pietea ta și-ți place? Dacă peste un an de-acum,
+              ești omul căruia nici măcar tu nu-i dădeai o șansă? Omul care a
+              devenit împlinit și care face profit.
+            </p>
+            <h3 className="h3">
+              Nu rata și înscrie-te și asigură-ți locul în{' '}
+              <span className="text-primary">SEOtropolis 1.0!</span>
+            </h3>
+          </div>
+        </div>
+        <div className="flex m-5 p-5 flex-col bg-gradient-to-bl items-center from-green-300 via-green-50 to-green-300">
+          <CTABTN
+            handleAction={handleAction}
+            setCtaMessage={setCtaMessage}
+            lg
+          />
+          <h3>Preț pentru această serie: </h3>
+          <GetPrice price={price} discountedPrice={discountedPrice} />
+        </div>
+        <DesfasurareCurs />
+      </section>
+      <section className="bg-base-200 p-5 my-5">
+        <h2 className={styles.h2}>
+          <span className="text-primary">SEOtropolis </span>este singurul curs
+          din România care pune accent pe cursant. Cursul făcut de oameni pentru
+          oameni. Care te învață SEO #pebune și care-și dorește să-și vadă cu
+          adevărat toți cursanții specialiști de TOP!{' '}
+        </h2>
+        <div className="flex flex-col gap-10 items-center  justify-center ">
+          <div className="prose">
+            <p className="leading-10 italic font-semibold">
+              Înveți direct de la experți: tehnici de optimizare, secrete SEO și
+              strategii SEO, șabloane și multe altele. Tot ce trebuie să faci
+              este să faci este să apeși pe log in!
+            </p>
+          </div>
+        <CTABTN handleAction={handleAction} setCtaMessage={setCtaMessage} lg />
+        </div>
+      </section>
+      <section className='py-5 m-5'>
+        <h2 className={styles.h2}>Garanția ZERO riscuri asigurată!</h2>
+        <h3 className={styles.h2}>
+          Ai 14 zile în care poți cere banii înapoi dacă SEOtropolis  nu e
+          pentru tine. 
+        </h3>
+        <div className="flex justify-center">
+          <div className="prose">
+            <p>
+              Odată ce ai intrat în curs ai destul de mult timp să-ți dai seama
+              dacă SEOtropolis  este pentru tine. În aceste 14 zile de garanție
+              vei învăța tehnici avansate de SEO studiate, aplicate și testate
+              de noi Vei învăța bazele marketingului online și concepte avansate
+              precum pâlnii de vânzare, sofisticarea pieței sau călătoria
+              clientului.
+            </p>
+            <p>
+              Totuși, dacă ți se pare că acest curs nu e pentru tine, ne poți
+              trimite un email la contact@tomotiv.ro în termen de 14 zile de la
+              începerea oficială a cursului și-ți vom înapoia toți banii, fără
+              să fii nevoit să dai vreo explicație. E atât de simplu!
+            </p>
+          </div>
+        </div>
+      </section>
+      <div className="flex justify-center">
+        <div className="p-10 bg-secondary text-white">
+          <p>
+            Disclaimer: Rezultatele diferă de la persoană la persoană, în
+            funcție de determinarea fiecăreia de a învăța și de experiența
+            fiecăreia în ceea ce privește marketingul și antreprenoriatul.
+            Aceasta nu este o schemă de îmbogățire peste noapte, ci un curs de
+            pregătire profesională care are puterea de a schimba viziunea despre
+            vânzări a cursantului. Multe informații sunt revelatoare, dar ca
+            acestea să funcționeze e nevoie să fie puse în practică. Vei putea
+            obține maximul din acest curs dacă ești deschis la noi perspective,
+            determinat să înveți, pui întrebări și lămurești nedumeririle ce pot
+            apărea și aplici cât mai repede ceea ce înveți.
+          </p>
+        </div>
+      </div>
     </Page>
   );
 };
@@ -595,4 +712,28 @@ const CTABTN = ({ handleAction, setCtaMessage, lg = false }) => {
       {setCtaMessage()}
     </button>
   );
+};
+
+
+const GetPrice = ({ price = 3000, discountedPrice = 0 }) => {
+  // Verificați condițiile pentru afișarea prețurilor
+  if (price === discountedPrice) {
+    return <span className="text-xl font-semibold">{price} lei</span>;
+  } else if (price > discountedPrice) {
+    const discountPercentage = ((price - discountedPrice) / price) * 100;
+
+    return (
+      <div className="relative">
+        <span className="text-xl line-through text-gray-500">{price} lei</span>
+        <span className="text-xl font-semibold ml-2">
+          {discountedPrice} lei
+        </span>
+        <span className="badge bg-red-500 text-white rounded-full mx2 px-2 py-1">
+          {Math.round(discountPercentage)}%
+        </span>
+      </div>
+    );
+  } else {
+    return <span className="text-xl  font-semibold">{price} lei</span>;
+  }
 };

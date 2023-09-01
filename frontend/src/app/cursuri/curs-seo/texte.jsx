@@ -2,6 +2,8 @@ import { ImCheckmark } from 'react-icons/im';
 import { BiTimer } from 'react-icons/bi';
 import { BsGraphUpArrow } from 'react-icons/bs';
 import {FcCheckmark} from 'react-icons/fc'
+import { FaBullseye, FaUserFriends, FaRocket } from 'react-icons/fa'; 
+
 export const styles = {
   h2: 'lg:m-10 lead font-bold text-xl  md:text-3xl text-center',
 };
@@ -200,7 +202,7 @@ export const structuraCurs = {
     {
       heading: (
         <h3 className="font-bold text-primary">
-          Modulul 1 – Introducere in SEO
+          Introducere in SEO
         </h3>
       ),
       descriere: (
@@ -266,8 +268,116 @@ export const structuraCurs = {
       ),
       // icon: <GrCart size={'3em'} />,
     },
+    {
+      heading: <h3 className="font-bold text-primary">Link Building</h3>,
+      descriere: (
+        <>
+         
+          <ul className="list-none">
+            <LE>Vom vedea cand e nevoie sa facem link building</LE>
+            <LE>Ce tipuri de Ancore sa folosesti</LE>
+            <LE>Cum sa studiezi concurenta si cum sa iti adaptezi strategia de link building</LE>
+            <LE>De unde cumperi backlinkuri</LE>
+            <LE>Tool-uri pe care le folosesc eu pentru link building</LE>
+          </ul>
+        </>
+      ),
+      // icon: <GrCart size={'3em'} />,
+    },
+    {
+      heading: <h3 className="font-bold text-primary">SEO Tehnic</h3>,
+      descriere: (
+        <>
+         
+          <ul className="list-none">
+            <p>La sfarsitul acestui modul iti promit ca vei cunoaste toti acesti termeni si nu numai</p>
+            <LE>Vom invata despre indexabilitate</LE>
+            <LE>Cum indexezi un site?</LE>
+            <LE>Cum vedem si cum rezolvam erorile de indexabilitate</LE>
+            <LE>robots.txt</LE>
+            <LE>sitemap</LE>
+            <LE>schema sau ce sunt datele structurate</LE>
+            <LE>Taguri html in SEO</LE>
+            <LE>Vom invata cum sa folosim Screaming Frog un tool foarte complex pentru SEO in general</LE>
+            <LE>Ce este Canibalizarea si cum scapam de ea</LE>
+            <LE>Cum detectam continutul duplicat</LE>
+            <LE>Viteza de incarcare si cum sa imbunatatim viteza de incarcare a site-ului</LE>
+          </ul>
+        </>
+      ),
+      // icon: <GrCart size={'3em'} />,
+    },
+    {
+      heading: <h3 className="font-bold text-primary">EEAT si Blog</h3>,
+      descriere: (
+        <>
+         
+            
+          <ul className="list-none">
+            <LE>Vom invata desre cum sa prezinti incredere prin site-ul tau</LE>
+            <LE>Ce inseamna continut de calitate in SEO</LE>
+            <LE>Cum sa gasesti subiecte pentru sectiunea de blog</LE>
+            <LE>Cum sa vinzi prin articole de blog</LE>
+            <LE>Cum sa atragi mai mult trafic pe site-ul tau si cum sa ai mai multe vanzari</LE>
+          </ul>
+            
+        </>
+      ),
+      // icon: <GrCart size={'3em'} />,
+    },
+    
   ],
 };
 
 
 
+export const beneficii2 = {
+  heading: (
+    <h2 className={styles.h2}>Încă nu te-ai convins? Aruncă o privire...</h2>
+  ),
+  elemente: [
+    {
+      heading: (
+        <h3 className="font-bold text-primary">
+          Cum se simte să fii ultimul pe Google?
+        </h3>
+      ),
+      descriere: (
+        <p>
+          Cum e fii disperat și să nu știi ce să mai faci pentru că indiferent
+          de ce faci, websiteul tău cade de pe-o zi pe alta tot mai jos în
+          poziția din Google? Cât te-ar costa să remediezi o astfel de paguba?
+          Dar să pierzi clienții noi care nu te găsesc niciodată?
+        </p>
+      ),
+      icon: <FaUserFriends size={'3em'} />,
+    },
+    {
+      heading: <h3 className="font-bold text-primary">Cât timp ai?</h3>,
+      descriere: (
+        <p>
+          Să cauți de unul singur, să înțelegi, să aplici și să și funcționeze
+          din prima?Totul fără a avea un mentor care să îți simplifice lucurile,
+          să îți explice și să te lămurească rapid ceea ce trebuie să faci și
+          ceea ce nu.
+        </p>
+      ),
+      icon: <FaBullseye size={'3em'} />,
+    },
+    {
+      heading: (
+        <h3 className="font-bold text-primary">De ce să te înscrii acum?</h3>
+      ),
+      descriere: (
+        <p>
+          Ne dorim să ne focusăm pe fiecare cursant în parte. Să putem să ne
+          mândrim la scurt timp că acel specialist ne-a onorat cu prezența la
+          acest scrut.Oamenii de succes își schimbă viața chiar și învățând un
+          skil nou. Oamenii de 10 iau atitudine și ies din mulțime. Oamenii
+          curajoși devin specialiștii de top de mâine.
+        </p>
+      ),
+      icon: <FaRocket size={'3em'} />,
+    },
+  ],
+};
