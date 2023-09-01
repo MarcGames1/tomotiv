@@ -467,7 +467,13 @@ export const getCoursePublicData = async (req, res) => {
 
        // Salvam cursul
        await course.save();
+     } else {
+        course.deschisInscrieri = true;
+
+        // Salvam cursul
+        await course.save();
      }
+     
 
  
     res.send({

@@ -1,20 +1,52 @@
 'use client';
-import React, {useState} from 'react';
-import Page from '@/app/PageLayout';
-import CountdownTimer from '@/components/CountdownTimer';
-import { formatDate, calculateWeeksBetweenDates } from '@/helpers/helpers';
-import CardList6 from '@/app/servicii/componenteServicii/CardList6';
-
-// import { FcBusiness } from 'react-icons/fc';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { Modal } from 'react-daisyui';
 import { ImCheckmark } from 'react-icons/im';
 import { BiTimer } from 'react-icons/bi';
 import { BsGraphUpArrow } from 'react-icons/bs';
-import Mesajelement from '@/components/MesajElement/MesajElement';
-import Link from 'next/link';
-import {Modal} from 'react-daisyui'
+
+import Page from '@/app/PageLayout';
+import CountdownTimer from '@/components/CountdownTimer';
 import ListaAsteptareCurs from '@/components/FormulareNewsletter/ListaAsteptareCurs';
+import CardList6 from '@/app/servicii/componenteServicii/CardList6';
+import PasiNumerotatiCuHeading from '@/app/servicii/componenteServicii/PasiNumerotatiCuHeading';
+import Mesajelement from '@/components/MesajElement/MesajElement';
+
+import { formatDate, calculateWeeksBetweenDates } from '@/helpers/helpers';
+
 const styles = {
   h2: 'lg:m-10 lead font-bold text-xl  md:text-3xl text-center',
+};
+
+const DeCeSaTeInscrii = {
+  heading: (
+    <h2 className=" m-10 lead font-bold text-3xl text-center">
+      10 motive pentru care să te înscrii în SEOtropolis 1.0
+    </h2>
+  ),
+  etape: [
+    `Te învățăm să devii specialist în SEO. Îți vei pune bazele corect, consolidându-ți cunoștințele prin teme aplicate.`,
+    'Cu ajutorul cursului nostru, oricine își poate optimiza singur websiteul fără să depindă de cineva. Cursul este pe înțelesul tuturor fiind ușor de asimilat într-un timp scurt.',
+    'Este acel curs de SEO în care vei primi feedback personalizat, adecvat ție fără să îți faci griji că nu te bagă nimeni în seamă. Ești tot timpul analizat astfel încât să faci lucrurile corect.',
+    'Doar curs de SEO? Nu chiar! Înveți SEO Tehnic, noțiuni de Google Ads, marketing și ești tot timpul susținut să continui să înveți atât la curs cât și în afara lui.',
+    ' Nu, nu este un curs oarecare de SEO. Este un curs care te învață cum să fii autodidact, perfecționându-te mereu indiferent de stadiul de învățare la care ești.',
+    `SEO din 2000 este total diferit de SEO din ziua de astăzi. Predăm
+după documentație actualizată, modernă și suntem mereu
+în pas cu tot ce se întâmplă în online.`,
+    `Tu vei avea oprotunitatea să fii printre acei oameni care știu ce
+să facă cu websiteul lor. Vei fi cel care vei știi dacă ceva merge 
+bine sau nu pentru că TU ești cel care își cunoaște cel mai bine
+websiteul.`,
+    `Un număr foarte mare de cursanți spun că acest curs merită 
+să fie mai “discutat” decât este. Mai popular ca oricând.`,
+    `Cu doar un click obții acces pe viață la curs, dar și la bonusuri +
+și update-urile, beneficiile în plus și cadourile de la ediție la ediție.`,
+    `Ai 30 zile garanție, timp în care primești +10 lecții. Tocmai pentru 
+te lămuri concrect dacă acest curs este potrivit pentru tine și
+nevoile tale.`,
+  ],
 };
 
 const beneficii = {
@@ -117,8 +149,8 @@ const CursSeoMainComponent = ({
   locuriDisponibile,
   stopInscrieri,
 }) => {
- 
-  const [isModalVisible, setIsModalVisible] = useState (false);
+  const router = useRouter();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const bonusuri = {
     heading: (
@@ -283,15 +315,14 @@ const CursSeoMainComponent = ({
     ],
   };
 
-
   const handleAction = () => {
     const handleInscriere = () => {
-      console.log('HandleInscriere');
+      router.push('/comanda/curs-seo'); // TODO
     };
 
     const handleAsteapta = () => {
       console.log('HandleAsteapta');
-      setIsModalVisible(!isModalVisible)
+      setIsModalVisible(!isModalVisible);
     };
     // router.post('/newsletter-subscribe', NewSletterSubscribe);
     deschisInscrieri ? handleInscriere() : handleAsteapta();
@@ -302,7 +333,6 @@ const CursSeoMainComponent = ({
       ? 'Inscrie-te Acum!'
       : 'Intra pe lista de asteptare';
   };
-
 
   const DurataCursSapt = () => {
     return (
@@ -317,14 +347,8 @@ const CursSeoMainComponent = ({
     );
   };
 
-
-
-
-
-
-
   return (
-    <Page >
+    <Page>
       <Modal
         open={isModalVisible}
         onClickBackdrop={() => setIsModalVisible(false)}
@@ -551,7 +575,7 @@ const CursSeoMainComponent = ({
         <CardList6 {...estePtMine} />
       </section>
       <section>
-        <div className="container grid grid-flow-row md:grid-flow-col lg:grid-flow-col align-middle justify-center justify-items-center gap-3  relative">
+        <div className="container m-5 grid grid-flow-row md:grid-flow-col lg:grid-flow-col align-middle justify-center justify-items-center gap-3  relative">
           <img
             className="self-center w-[100%] drop-shadow-xl  mask mask-hexagon-2	m-10 "
             src={'/png/tutorial.jpg'}
@@ -560,7 +584,7 @@ const CursSeoMainComponent = ({
             height={600}
           />
 
-          <div className="container mx-5 flex flex-col self-center gap-5">
+          <div className="container mx-5 flex flex-col items-center gap-5">
             {' '}
             <div className="prose leading-9 text-xl drop-shadow-xl">
               <p className="mx-5">
@@ -581,10 +605,72 @@ const CursSeoMainComponent = ({
               setCtaMessage={setCtaMessage}
               lg
             />
+            {deschisInscrieri ? (
+              <span className="strong text-xl text-center">
+                Înscrie-te înainte să expire cronometrul
+              </span>
+            ) : (
+              <span className="strong text-xl text-center">
+                Inscrierile au luat sfarsit dar te putem anunta cand va avea loc
+                urmatoarea editie
+              </span>
+            )}
+            <CountdownTimer targetDate={stopInscrieri} />
+            <div className=" text-center leading-9">
+              <p>
+                {<br />}Cursul se desfasoara online in perioada{' '}
+                <DurataCursSapt
+                  dataFinalCurs={dataFinalCurs}
+                  dataIncepereCurs={dataIncepereCurs}
+                />{' '}
+              </p>
+              <p>
+                Lecții video și text | Feedback personalizat | Grup privat
+                Facebook | Tehnici și secrete testate | Înveți research,
+                copywriting și bazele marketingului digital
+              </p>
+            </div>
           </div>
         </div>
       </section>
-      Cursul incepe pe data de {formatDate(dataIncepereCurs)}
+      <section className="bg-gradient-to-bl from-transparent via-green-100 to-transparent">
+        <PasiNumerotatiCuHeading {...DeCeSaTeInscrii} />
+      </section>
+      <section>
+        <div>date autor</div>
+        <div>
+          <p>
+            E umilitor să ai doua facultăți, si ca junior sa gasesti joburi
+            platite mai prost ca un necalificat in firme cu “echipa tanara si
+            dinamica”
+          </p>
+          <p>
+            După multe căutări, am reuști să mă specializez în SEO, să îmi
+            dezvolt pe lângă și alte abilități precum programarea și să pot
+            spune că am luat cele mai bune decizii din viața mea!{' '}
+          </p>
+          <p>
+            După terminarea facultății de actorie și a celei de economie, am
+            crezut ca toți ceilalți că voi muta munții din loc. Asta am și
+            făcut, însă pe atunci nu știam de asta. Pe atunci credeam că nu am
+            nici o șansă, că m-am pierdut și că nu reușesc să îmi găsesc drumul.
+          </p>
+          <p>
+            Poate suna clișeic, însă curajul de a face altceva și de a încerca,
+            m-a adus în punctul în care sunt astăzi.
+          </p>
+          <p>
+            Am ajutat peste 300 de afaceri să își dubleze vânzările, să își
+            crească semnificativ profitul și să își mărească numărul de clienți.{' '}
+          </p>
+          <p>
+            Sunt mai mult decât încântat să pun la dispoziție toată experiența
+            mea, să pot ajuta la fructificarea talentelor și să mă pot mândri cu
+            viitorii mei colegi de breaslă că-au reușit să ajungă în topul celor
+            mai buni specialiști!
+          </p>
+        </div>
+      </section>
       Cursul se incheie pe data de {formatDate(dataFinalCurs)}
     </Page>
   );
