@@ -12,6 +12,8 @@ import CountdownTimer from '@/components/CountdownTimer';
 import ListaAsteptareCurs from '@/components/FormulareNewsletter/ListaAsteptareCurs';
 import CardList6 from '@/app/servicii/componenteServicii/CardList6';
 import PasiNumerotatiCuHeading from '@/app/servicii/componenteServicii/PasiNumerotatiCuHeading';
+import AuthorWidget from './authorWidget';
+import { autori} from '@/dateStatice';
 import Mesajelement from '@/components/MesajElement/MesajElement';
 
 import { formatDate, calculateWeeksBetweenDates } from '@/helpers/helpers';
@@ -636,39 +638,50 @@ const CursSeoMainComponent = ({
       <section className="bg-gradient-to-bl from-transparent via-green-100 to-transparent">
         <PasiNumerotatiCuHeading {...DeCeSaTeInscrii} />
       </section>
-      <section>
-        <div>date autor</div>
-        <div>
-          <p>
-            E umilitor să ai doua facultăți, si ca junior sa gasesti joburi
-            platite mai prost ca un necalificat in firme cu “echipa tanara si
-            dinamica”
-          </p>
-          <p>
-            După multe căutări, am reuști să mă specializez în SEO, să îmi
-            dezvolt pe lângă și alte abilități precum programarea și să pot
-            spune că am luat cele mai bune decizii din viața mea!{' '}
-          </p>
-          <p>
-            După terminarea facultății de actorie și a celei de economie, am
-            crezut ca toți ceilalți că voi muta munții din loc. Asta am și
-            făcut, însă pe atunci nu știam de asta. Pe atunci credeam că nu am
-            nici o șansă, că m-am pierdut și că nu reușesc să îmi găsesc drumul.
-          </p>
-          <p>
-            Poate suna clișeic, însă curajul de a face altceva și de a încerca,
-            m-a adus în punctul în care sunt astăzi.
-          </p>
-          <p>
-            Am ajutat peste 300 de afaceri să își dubleze vânzările, să își
-            crească semnificativ profitul și să își mărească numărul de clienți.{' '}
-          </p>
-          <p>
-            Sunt mai mult decât încântat să pun la dispoziție toată experiența
-            mea, să pot ajuta la fructificarea talentelor și să mă pot mândri cu
-            viitorii mei colegi de breaslă că-au reușit să ajungă în topul celor
-            mai buni specialiști!
-          </p>
+      <section className="">
+        <h2 className={styles.h2}>
+         
+          Cum am ajuns din șofer de UBER în specialist SEO, sigur te va
+          determina să iei o decizie!
+        </h2>
+        <div className="grid grid-flow-row items-center justify-items-center md:grid-flow-col lg:grid-flow-col">
+          <div>
+            <AuthorWidget author={autori.alex} />
+          </div>
+          <div className="prose">
+            <p className="leading-10 text-xl text-primary font-semibold">
+              E umilitor să ai doua facultăți, si ca junior sa gasesti joburi
+              platite mai prost ca un necalificat in firme cu “echipa tanara si
+              dinamica”
+            </p>
+            <p className='font-semibold italic'>
+              După multe căutări, am reuști să mă specializez în SEO, să îmi
+              dezvolt pe lângă și alte abilități precum programarea și să pot
+              spune că am luat cele mai bune decizii din viața mea!{' '}
+            </p>
+            <p className='font-semibold italic'>
+              După terminarea facultății de actorie și a celei de economie, am
+              crezut ca toți ceilalți că voi muta munții din loc. Asta am și
+              făcut, însă pe atunci nu știam de asta. Pe atunci credeam că nu am
+              nici o șansă, că m-am pierdut și că nu reușesc să îmi găsesc
+              drumul.
+            </p>
+            <p className='font-semibold italic'>
+              Poate suna clișeic, însă curajul de a face altceva și de a
+              încerca, m-a adus în punctul în care sunt astăzi.
+            </p>
+            <p className='font-semibold italic'>
+              Am ajutat peste 300 de afaceri să își dubleze vânzările, să își
+              crească semnificativ profitul și să își mărească numărul de
+              clienți.{' '}
+            </p>
+            <p className='font-semibold italic'>
+              Sunt mai mult decât încântat să pun la dispoziție toată experiența
+              mea, să pot ajuta la fructificarea talentelor și să mă pot mândri
+              cu viitorii mei colegi de breaslă că-au reușit să ajungă în topul
+              celor mai buni specialiști!
+            </p>
+          </div>
         </div>
       </section>
       Cursul se incheie pe data de {formatDate(dataFinalCurs)}
