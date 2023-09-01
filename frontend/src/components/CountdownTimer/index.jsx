@@ -2,24 +2,36 @@
 
 import React from 'react';
 import { useCountdown } from '@/hooks/useCountDown';
-import DateTimeDisplay from './dateTimeDisplay';
-
+import { Countdown, Alert } from 'react-daisyui';
 const ExpiredNotice = () => {
   return (
-    null
+   <Alert status='error'>Timpul A Expirat, Inscrierile pentru aceasta editie s-au incheiat dar te poti inscrie pe lista de asteptare pentru editia urmatoare</Alert>
   );
 };
 
 const ShowCounter = ({ days, hours, minutes, seconds }) => {
+  const styles = {
+    container: 'flex flex-col p-2 bg-red-200 rounded-box text-neutral-content',
+    countdown: 'font-mono text-5xl',
+  };
   return (
-    <div className="flex gap-5 lg:m-10 p-5 alert bg-gradient-to-b from-rose-400 to-red-500  ">
-      <DateTimeDisplay value={days} type={'Zile'} isDanger={days <= 3} />
-
-      <DateTimeDisplay value={hours} type={'ore'} isDanger={false} />
-
-      <DateTimeDisplay value={minutes} type={'Minute'} isDanger={false} />
-
-      <DateTimeDisplay value={seconds} type={'Secunde'} isDanger={false} />
+    <div className="grid grid-flow-col gap-5 text-center items-center justify-center auto-cols-max">
+      <div className={styles.container}>
+        <Countdown className={styles.countdown} value={days} />
+        zie
+      </div>
+      <div className={styles.container}>
+        <Countdown className={styles.countdown} value={hours} />
+        ore
+      </div>
+      <div className={styles.container}>
+        <Countdown className={styles.countdown} value={minutes} />
+        minute
+      </div>
+      <div className={styles.container}>
+        <Countdown className={styles.countdown} value={seconds} />
+        secunde
+      </div>
     </div>
   );
 };

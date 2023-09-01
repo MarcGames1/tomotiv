@@ -3,9 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Modal } from 'react-daisyui';
-import { ImCheckmark } from 'react-icons/im';
-import { BiTimer } from 'react-icons/bi';
-import { BsGraphUpArrow } from 'react-icons/bs';
+
 
 import Page from '@/app/PageLayout';
 import CountdownTimer from '@/components/CountdownTimer';
@@ -17,131 +15,7 @@ import { autori} from '@/dateStatice';
 import Mesajelement from '@/components/MesajElement/MesajElement';
 
 import { formatDate, calculateWeeksBetweenDates } from '@/helpers/helpers';
-
-const styles = {
-  h2: 'lg:m-10 lead font-bold text-xl  md:text-3xl text-center',
-};
-
-const DeCeSaTeInscrii = {
-  heading: (
-    <h2 className=" m-10 lead font-bold text-3xl text-center">
-      10 motive pentru care să te înscrii în SEOtropolis 1.0
-    </h2>
-  ),
-  etape: [
-    `Te învățăm să devii specialist în SEO. Îți vei pune bazele corect, consolidându-ți cunoștințele prin teme aplicate.`,
-    'Cu ajutorul cursului nostru, oricine își poate optimiza singur websiteul fără să depindă de cineva. Cursul este pe înțelesul tuturor fiind ușor de asimilat într-un timp scurt.',
-    'Este acel curs de SEO în care vei primi feedback personalizat, adecvat ție fără să îți faci griji că nu te bagă nimeni în seamă. Ești tot timpul analizat astfel încât să faci lucrurile corect.',
-    'Doar curs de SEO? Nu chiar! Înveți SEO Tehnic, noțiuni de Google Ads, marketing și ești tot timpul susținut să continui să înveți atât la curs cât și în afara lui.',
-    ' Nu, nu este un curs oarecare de SEO. Este un curs care te învață cum să fii autodidact, perfecționându-te mereu indiferent de stadiul de învățare la care ești.',
-    `SEO din 2000 este total diferit de SEO din ziua de astăzi. Predăm
-după documentație actualizată, modernă și suntem mereu
-în pas cu tot ce se întâmplă în online.`,
-    `Tu vei avea oprotunitatea să fii printre acei oameni care știu ce
-să facă cu websiteul lor. Vei fi cel care vei știi dacă ceva merge 
-bine sau nu pentru că TU ești cel care își cunoaște cel mai bine
-websiteul.`,
-    `Un număr foarte mare de cursanți spun că acest curs merită 
-să fie mai “discutat” decât este. Mai popular ca oricând.`,
-    `Cu doar un click obții acces pe viață la curs, dar și la bonusuri +
-și update-urile, beneficiile în plus și cadourile de la ediție la ediție.`,
-    `Ai 30 zile garanție, timp în care primești +10 lecții. Tocmai pentru 
-te lămuri concrect dacă acest curs este potrivit pentru tine și
-nevoile tale.`,
-  ],
-};
-
-const beneficii = {
-  heading: (
-    <h2 className={styles.h2}>
-      <span className="text-primary">Curs SEO</span> care Te ajuta sa aduci
-      site-uri in primele 3 rezultate organice{' '}
-    </h2>
-  ),
-  elemente: [
-    {
-      heading: <h3 className="font-bold text-primary">Ușor</h3>,
-      descriere: (
-        <p>
-          Curs complet de SEO organizat și pe înțelesul tuturor (timp de studiu
-          și execuție aprox. 1 - 3 ore/zi).
-        </p>
-      ),
-      icon: <ImCheckmark size={'3em'} />,
-    },
-    {
-      heading: <h3 className="font-bold text-primary">Rapid</h3>,
-      descriere: (
-        <p>
-          În 7 săptămâni înveți o abilitate care-ți va permite să te angajezi
-          oriunde sau să îți deschizi firmă
-        </p>
-      ),
-      icon: <BiTimer size={'3em'} />,
-    },
-    {
-      heading: <h3 className="font-bold text-primary">Eficient</h3>,
-      descriere: (
-        <p>Încă din prima zi de curs vei putea înțelege cu ce se mănâncă SEO</p>
-      ),
-      icon: <BsGraphUpArrow size={'3em'} />,
-    },
-  ],
-};
-
-const estePtMine = {
-  heading: (
-    <h2 className="m-10 lead font-bold text-3xl text-center">
-      <span className="text-primary">
-        Cursul SEO{' '}
-        <span className="underline decoration-double	">Seotropolis</span>{' '}
-      </span>
-      este pentru tine dacă...{' '}
-    </h2>
-  ),
-  elemente: [
-    {
-      heading: <h3 className="font-bold text-primary">Ești începător</h3>,
-      descriere: (
-        <p>
-          Indiferent că ai la acest moment un job sau nu, acest curs este pentru
-          tine dacă vrei să înveți un skill nou. O abilitate extrem de cerută în
-          întreaga lume care îți poate asigura nu numai “pâinea”de mâine, ci
-          soluții concrete pentru a îți face prorpiile fabrici.
-        </p>
-      ),
-      // icon: <FaBookOpenReader size={'3em'} />,
-    },
-    {
-      heading: <h3 className="font-bold text-primary">Ești antreprenor</h3>,
-      descriere: (
-        <p>
-          Start-up sau cu ani experiență în spate? Acest curs ți se adresează
-          dacă dorești să îțo optimizezi singur afacerea sau să știi cu
-          exactitate ce fac specialiștii tăi în spate. Pentru antreprenori,
-          acest curs le poate oferi șansa de a comunica mai bine cu specialiștii
-          SEO.
-        </p>
-      ),
-      // icon: <FcBusiness size={'3em'} />,
-    },
-    {
-      heading: (
-        <h3 className="font-bold text-primary">
-          Ești proprietar de magazin online
-        </h3>
-      ),
-      descriere: (
-        <p>
-          Prin vastitatea informației și aplicabilitatea acesteia, cursul oferă
-          șansa tuturor magazinelor online de a își transforma websiteurile în
-          magenți pentru clienți și profit.{' '}
-        </p>
-      ),
-      // icon: <GrCart size={'3em'} />,
-    },
-  ],
-};
+import {estePtMine, beneficii, DeCeSaTeInscrii, styles, cumFunctioneaza, structuraCurs} from './texte'
 
 const CursSeoMainComponent = ({
   deschisInscrieri,
@@ -640,7 +514,6 @@ const CursSeoMainComponent = ({
       </section>
       <section className="">
         <h2 className={styles.h2}>
-         
           Cum am ajuns din șofer de UBER în specialist SEO, sigur te va
           determina să iei o decizie!
         </h2>
@@ -654,28 +527,28 @@ const CursSeoMainComponent = ({
               platite mai prost ca un necalificat in firme cu “echipa tanara si
               dinamica”
             </p>
-            <p className='font-semibold italic'>
+            <p className="font-semibold italic">
               După multe căutări, am reuști să mă specializez în SEO, să îmi
               dezvolt pe lângă și alte abilități precum programarea și să pot
               spune că am luat cele mai bune decizii din viața mea!{' '}
             </p>
-            <p className='font-semibold italic'>
+            <p className="font-semibold italic">
               După terminarea facultății de actorie și a celei de economie, am
               crezut ca toți ceilalți că voi muta munții din loc. Asta am și
               făcut, însă pe atunci nu știam de asta. Pe atunci credeam că nu am
               nici o șansă, că m-am pierdut și că nu reușesc să îmi găsesc
               drumul.
             </p>
-            <p className='font-semibold italic'>
+            <p className="font-semibold italic">
               Poate suna clișeic, însă curajul de a face altceva și de a
               încerca, m-a adus în punctul în care sunt astăzi.
             </p>
-            <p className='font-semibold italic'>
+            <p className="font-semibold italic">
               Am ajutat peste 300 de afaceri să își dubleze vânzările, să își
               crească semnificativ profitul și să își mărească numărul de
               clienți.{' '}
             </p>
-            <p className='font-semibold italic'>
+            <p className="font-semibold italic">
               Sunt mai mult decât încântat să pun la dispoziție toată experiența
               mea, să pot ajuta la fructificarea talentelor și să mă pot mândri
               cu viitorii mei colegi de breaslă că-au reușit să ajungă în topul
@@ -683,6 +556,28 @@ const CursSeoMainComponent = ({
             </p>
           </div>
         </div>
+      </section>
+      <section className='bg-gradient-to-bl py-5 my-5 from-transparent via-base-200 to-transparent'>
+        <CardList6 {...cumFunctioneaza} />
+        <div className="flex items-center justify-center">
+          <div className="prose m-5">
+            <p className="leading-10	 tracking-widest font-semibold	text-xl">
+              Poți parcurge lecțiile când vrei tu și în ritmul tău.
+            </p>
+            <p className="font-bold italic ">
+              Lecțiile sunt deblocate zilnic. Le poți parcurge oricând și-ți
+              poți face temele și-n următoarele zile, însă îți recomandăm să ții
+              pasul cu ritmul cursului. 
+            </p>
+            <p className="italic">
+              Vei avea acces pe viață la lecțiile cursului, dar vei primi
+              feedback la teme doar pe perioada desfășurării.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <CardList6 {...structuraCurs}/>
       </section>
       Cursul se incheie pe data de {formatDate(dataFinalCurs)}
     </Page>
