@@ -6,8 +6,8 @@ const EmailListSchema = new mongoose.Schema(
     name: {
       type: String,
       trim: true,
-      unique: true,
       required: true,
+      unique: true,
     },
     emailEntries: [
       {
@@ -16,7 +16,6 @@ const EmailListSchema = new mongoose.Schema(
           type: String,
           trim: true,
           lowercase: true,
-          unique: true,
           required: 'Email address is required',
           match: [
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,

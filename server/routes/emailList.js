@@ -1,10 +1,25 @@
 import express from 'express';
-import { NewSletterSubscribe , Unsubscribe} from '../controllers/emailList';
+import {
+  NewSletterSubscribe,
+  InscriereNewsLetterMiddleware,
+  InscriereListaAsteptareCurs,
+  Unsubscribe,
+} from '../controllers/emailList';
 
 
 const router = express.Router();
-
-router.post('/newsletter-subscribe', NewSletterSubscribe);
+//asteptare curs
+router.post(
+  '/newsletter-subscribe/curs',
+  InscriereNewsLetterMiddleware,
+  InscriereListaAsteptareCurs
+);
+// newsletter general
+router.post(
+  '/newsletter-subscribe',
+  InscriereNewsLetterMiddleware,
+  NewSletterSubscribe
+);
 // Ruta pentru a se dezabona de la o listă de e-mailuri
 router.post('/newsletter-unsubscribe/:emailListID/:emailID', Unsubscribe);
 

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, {useState} from 'react';
 import Page from '@/app/PageLayout';
 import CountdownTimer from '@/components/CountdownTimer';
 import { formatDate, calculateWeeksBetweenDates } from '@/helpers/helpers';
@@ -11,7 +11,8 @@ import { BiTimer } from 'react-icons/bi';
 import { BsGraphUpArrow } from 'react-icons/bs';
 import Mesajelement from '@/components/MesajElement/MesajElement';
 import Link from 'next/link';
-
+import {Modal} from 'react-daisyui'
+import ListaAsteptareCurs from '@/components/FormulareNewsletter/ListaAsteptareCurs';
 const styles = {
   h2: 'lg:m-10 lead font-bold text-xl  md:text-3xl text-center',
 };
@@ -117,6 +118,7 @@ const CursSeoMainComponent = ({
   stopInscrieri,
 }) => {
  
+  const [isModalVisible, setIsModalVisible] = useState (false);
 
   const bonusuri = {
     heading: (
@@ -289,8 +291,9 @@ const CursSeoMainComponent = ({
 
     const handleAsteapta = () => {
       console.log('HandleAsteapta');
+      setIsModalVisible(!isModalVisible)
     };
-
+    // router.post('/newsletter-subscribe', NewSletterSubscribe);
     deschisInscrieri ? handleInscriere() : handleAsteapta();
   };
 
@@ -313,8 +316,21 @@ const CursSeoMainComponent = ({
       </>
     );
   };
+
+
+
+
+
+
+
   return (
-    <Page>
+    <Page >
+      <Modal
+        open={isModalVisible}
+        onClickBackdrop={() => setIsModalVisible(false)}
+      >
+        <ListaAsteptareCurs numeCurs={'Curs Seo'} />
+      </Modal>
       <div className="w-full h-[5rem] bg-secondary flex items-center flex-row gap-5 justify-around px-5 my-5">
         <span className="text-center text-base-100 text-xl ">
           Înscrie-te până pe {formatDate(stopInscrieri)}!
