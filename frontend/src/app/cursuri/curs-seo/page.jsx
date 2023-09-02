@@ -1,7 +1,6 @@
 import React from 'react'
 import CursSeoMainComponent from './CursSeoMainComponent'
 import ApiClient from '@/Classes/ApiClient';
-import axios from 'axios';
 
 
 const api = new ApiClient(process.env.API)

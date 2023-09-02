@@ -5,6 +5,8 @@ export const metadata = {
   robots: 'noindex, folow',
 };
 
+
+
 const singleCourseLayout = ({ children }) => {
   return <>{children}</>;
 };
