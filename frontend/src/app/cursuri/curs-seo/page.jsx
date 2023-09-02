@@ -17,6 +17,9 @@ async function getData() {
   return res
 }
 
+
+export const revalidate = 36000;
+
 const VanzareCurs = async () => {
 
    const data = await getData();
