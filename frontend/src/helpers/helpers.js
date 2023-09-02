@@ -15,7 +15,7 @@ export function calculateWeeksBetweenDates(startDate, endDate) {
   const endDateTime = new Date(endDate).getTime(); // Data de sfârșit în milisecunde
 
   const timeDifference = Math.abs(endDateTime - startDateTime); // Diferența în milisecunde
-  const weeksDifference = Math.floor(timeDifference / oneWeekInMilliseconds); // Diferența în săptămâni
+  const weeksDifference = Math.round(timeDifference / oneWeekInMilliseconds); // Diferența în săptămâni
 
   return weeksDifference;
 }

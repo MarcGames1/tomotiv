@@ -233,7 +233,10 @@ const CursSeoMainComponent = ({
         <br />
         <span className="text-underline text-primary underline font-semibold">
           {formatDate(dataIncepereCurs)} - {formatDate(dataFinalCurs)} -{' '}
-          {calculateWeeksBetweenDates(new Date(dataFinalCurs), new Date())}{' '}
+          {calculateWeeksBetweenDates(
+            new Date(dataFinalCurs),
+            new Date(dataIncepereCurs)
+          )}{' '}
           saptamani
         </span>
       </>

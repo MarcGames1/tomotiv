@@ -1,3 +1,4 @@
+
 import React from 'react'
 import CursSeoMainComponent from './CursSeoMainComponent'
 import ApiClient from '@/Classes/ApiClient';
@@ -18,7 +19,7 @@ async function getData() {
 }
 
 
-export const revalidate = 36000;
+export const revalidate = 3600;
 
 const VanzareCurs = async () => {
 
