@@ -1,4 +1,5 @@
 import React from 'react';
+import Page from '@/app/PageLayout';
 export const metadata = {
   title: 'Comanda Curs',
   description: 'Tomotiv ',
@@ -7,8 +8,12 @@ export const metadata = {
 
 
 
-const singleCourseLayout = ({ children }) => {
-  return <>{children}</>;
+const ComandaCursLayout = ({ children }) => {
+  return (
+    <Page>
+      <main>{children}</main>;
+    </Page>
+  );
 };
 
-export default singleCourseLayout;
+export default ComandaCursLayout;

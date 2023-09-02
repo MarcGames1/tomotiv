@@ -1,7 +1,6 @@
+
 import React from 'react'
 import Page from '@/app/PageLayout';
-
-
 
 
 
@@ -10,9 +9,10 @@ import Page from '@/app/PageLayout';
 const page = () => {
   return (
     <Page>
-   CopyWriting
-   </Page>
-
+      <main className="h-screen flex items-center justify-center">
+        
+      </main>
+    </Page>
   );
 }
 

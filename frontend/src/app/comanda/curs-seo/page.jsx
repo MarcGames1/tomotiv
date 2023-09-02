@@ -1,4 +1,4 @@
-import Page from '@/app/PageLayout';
+
 
 
 
@@ -37,9 +37,9 @@ const ComandaCursSeo = async () => {
 
 const ComandaCursSeoPage = () =>{
   return<>
-  <Page>
+  
     <ComandaCursSeo />
-  </Page>
+  
   </>
 }
 

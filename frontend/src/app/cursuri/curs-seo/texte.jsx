@@ -4,10 +4,10 @@ import { BsGraphUpArrow } from 'react-icons/bs';
 import {FcCheckmark} from 'react-icons/fc'
 import { FaBullseye, FaUserFriends, FaRocket } from 'react-icons/fa'; 
 
+
 export const styles = {
   h2: 'lg:m-10 lead font-bold text-xl  md:text-3xl text-center',
 };
-
 
 const LE = ({ children }) => {
   return <li>✅ {children}</li>;
@@ -381,3 +381,4 @@ export const beneficii2 = {
     },
   ],
 };
+
