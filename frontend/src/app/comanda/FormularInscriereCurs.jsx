@@ -3,11 +3,13 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import ApiClient from '@/Classes/ApiClient';
-import { Input } from 'react-daisyui';
+import { Alert, Button, Input, Tabs } from 'react-daisyui';
 import { toast } from 'react-hot-toast';
 import { Context } from '@/context';
-
+import SignInForm from '../inregistrare/forms/SignInForm';
 import { loadStripe } from '@stripe/stripe-js';
+
+import { MetodaPlata, SigUpForm } from './ComponenteFormularInscriereCurs';
 const FormularInscriereCurs = () => {
 
      const inputArgs = {
@@ -18,10 +20,14 @@ const FormularInscriereCurs = () => {
 
      const [nume, setNume] = useState('');
      const [preNume, setpreNume] = useState('');
-     const [password, setPassword] = useState('');
+     const [password, setPassword] = useState(undefined);
      const [email, setEmail] = useState('');
-     const [metoda_plata, setMetodaPlata] =useState('')
+     const [metoda_plata, setMetoda_Plata] =useState('')
      const [loading, setLoading] = useState(false);
+     const [emailExists, setEmailExists] = useState(false)
+     const [userExists, setUserExists] = useState(false)
+     const [action, setAction] = useState('signup')
+
        const {
          state: { user },
        } = useContext(Context);
@@ -35,7 +41,6 @@ const FormularInscriereCurs = () => {
           console.log(user);
         }
       }, [user]);
- const router = useRouter();
 
  const formRef = useRef(null);
 
@@ -67,6 +72,7 @@ const FormularInscriereCurs = () => {
        preNume,
        password,
        email,
+       metoda_plata
      });
 
      console.log('res => ', res);
@@ -74,12 +80,13 @@ const FormularInscriereCurs = () => {
 
      return res;
    },
+
    submit: async (e) => {
      e.preventDefault();
      const data = await formHandler.sendData();
      try {
        setLoading(true);
-       await console.log(data);
+     
        if (data?.message) {
          toast.error(data.message);
          formHandler.reset();
@@ -99,7 +106,8 @@ const FormularInscriereCurs = () => {
  };
 
   return (
-    <div>
+    <div className="m-5 p-5 flex flex-col gap-5">
+      <pre>{JSON.stringify({nume, preNume, metoda_plata, email, password},"", 2)}</pre>
       {user ? (
         <>
           Multumim, {user.nume} {user.prenume} pentru increderea pe care o ai in
@@ -108,91 +116,50 @@ const FormularInscriereCurs = () => {
       ) : (
         <p>
           Ești clientul nostru și te întorci?? Fă clic{' '}
-          <Link className="link" href={'/login'}>
+          <span
+            onClick={() => {
+              setAction('login');
+            }}
+            className="link link-primary"
+          >
             aici
-          </Link>{' '}
+          </span>{' '}
           pentru autentificare.
         </p>
       )}
-      {user ? null : <h3>Date de utilizator:</h3>}
-      {user ? null : (
+
+      {user ? (
+        <MetodaPlata
+          metoda_plata={metoda_plata}
+          setMetoda_Plata={setMetoda_Plata}
+        />
+      ) : (
         <span>
           Vom iti vom cere datele de facturare in pasul urmator, acestea sunt
           datele cu care te vei autentifica in platforma
         </span>
       )}
 
-      <form
-        onSubmit={formHandler.submit}
-        ref={formRef}
-        className="flex flex-col items-center"
-      >
-        {user ? (
-          <></>
-        ) : (
-          <>
-            {' '}
-            <div className="form-control w-full max-w-xs">
-              <label className="label">
-                <span className="label-text">Numele tau</span>
-              </label>
-              <Input
-                onInput={formHandler.nume}
-                name="nume"
-                type="text"
-                {...inputArgs}
-              />
-            </div>
-            <div className="form-control w-full max-w-xs">
-              <label className="label">
-                <span className="label-text">Prenume</span>
-              </label>
-              <Input
-                onInput={formHandler.preNume}
-                name="prenume"
-                type="text"
-                {...inputArgs}
-              />
-            </div>
-            <div className="form-control w-full max-w-xs">
-              <label className="label">
-                <span className="label-text">Adresa de Email</span>
-              </label>
-              <Input
-                onInput={formHandler.email}
-                name="email"
-                type="email"
-                {...inputArgs}
-              />
-            </div>
-            <div className="form-control w-full max-w-xs">
-              <label className="label">
-                <span className="label-text">Parola </span>
-              </label>
-              <Input
-                onInput={formHandler.parola}
-                name="password"
-                type="password"
-                {...inputArgs}
-              />
-            </div>
-          </>
-        )}
-        <button
-          onSubmit={formHandler.submit}
-          type="submit"
-          className="btn btn-primary text-base-100 m-5"
-        >
-          Inregistreaza-te!
-        </button>
+      {action === 'signup' ? (
+        <SigUpForm
 
-        <div className="block m-auto prose  text-secondary">
-          Ai deja cont? Logeaza-te{' '}
-          <Link className="link link-primary" href={'/login'}>
-            aici
-          </Link>{' '}
-        </div>
-      </form>
+          metoda_plata={metoda_plata}
+          formHandler={formHandler}
+          setMetoda_Plata={setMetoda_Plata}
+          formRef={formRef}
+          user={user}
+          inputArgs={inputArgs}
+          setAction={setAction}
+          loading={loading}
+        />
+      ) : (
+        <SignInForm
+          redirect={false}
+          callback={() => {
+            setAction('signup');
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -202,156 +169,6 @@ export default FormularInscriereCurs
 
 
 
-const SignUpForm = () => {
-  const [nume, setNume] = useState('');
-  const [preNume, setpreNume] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const {
-    state: { user },
-  } = useContext(Context);
-
-  const router = useRouter();
-
-  const formRef = useRef(null);
-
-  const api = new ApiClient(process.env.NEXT_PUBLIC_API);
-  const formHandler = {
-    nume: (e) => {
-      setNume(e.target.value);
-    },
-    preNume: (e) => {setpreNume(e.target.value);},
-    parola: (e) => {
-      setPassword(e.target.value);
-    },
-    email: (e) => {
-      setEmail(e.target.value);
-    },
-    reset: () => {
-      setNume(null);
-      setEmail(null);
-      setPassword(null);
-      setLoading(false);
-      formRef.current.reset();
-    },
-    
-    sendData: async () => {
-      
-    
-      const res = await api.post(`/register`, {
-        nume,
-        preNume,
-        password,
-        email,
-      });
-
-      console.log('res => ', res);
-      console.log('caught:::', JSON.stringify(res, null, 2));
-      
-      return res;
-    },
-    submit: async (e) => {
-      e.preventDefault();
-      const data = await formHandler.sendData();
-      try {
-        setLoading(true);
-        await console.log(data);
-        if(data?.message){
-
-          toast.error(data.message)
-          formHandler.reset()
-          throw new Error(data.message)
-        } else{
-          toast.success('te-ai inregistrat cu succes');
-          setLoading(false);
-          formHandler.reset();
-        }
-
-      } catch (error) {
-        if (error) {
-          toast.error(error.message);
-        }
-        formHandler.reset();
-      }
-    },
-  };
-
- 
-
-   useEffect(() => {
-     if (user !== null) {
-       router.push('/');
-     }
-   }, [user]);
-
-  return (
-    <>
-      <form
-        onSubmit={formHandler.submit}
-        ref={formRef}
-        className="flex flex-col items-center"
-      >
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Numele tau</span>
-          </label>
-          <Input
-            onInput={formHandler.nume}
-            name="nume"
-            type="text"
-            {...inputArgs}
-          />
-        </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Prenume</span>
-          </label>
-          <Input
-            onInput={formHandler.preNume}
-            name="prenume"
-            type="text"
-            {...inputArgs}
-          />
-        </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Adresa de Email</span>
-          </label>
-          <Input onInput={formHandler.email} name="email" type="email" {...inputArgs} />
-        </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Parola </span>
-          </label>
-          <Input
-            onInput={formHandler.parola}
-            name="password"
-            type="password"
-            {...inputArgs}
-          />
-        </div>
-        <button
-          onSubmit={formHandler.submit}
-          type="submit"
-          className="btn btn-primary text-base-100 m-5"
-        >
-          Inregistreaza-te!
-        </button>
-
-        <div className="block m-auto prose  text-secondary">
-          Ai deja cont? Logeaza-te{' '}
-          <Link className="link link-primary" href={'/login'}>
-            aici
-          </Link>{' '}
-        </div>
-      </form>
-    </>
-  );
-};
-
-
 
 
 
@@ -359,3 +176,6 @@ const SignUpForm = () => {
 
 //   const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 //   stripe.redirectToCheckout({ sessionId: data });
+
+
+

@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { Input } from 'react-daisyui';
 import { Context } from '@/context';
-
+import {Button} from 'react-daisyui';
 
 import Link from 'next/link';
 import { Login } from '@/helpers/actions';
@@ -14,7 +14,7 @@ import { Login } from '@/helpers/actions';
 
 
 
-const SignInForm = () => {
+const SignInForm = ({callback = () =>{}, redirect=true}) => {
   const router = useRouter();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -71,8 +71,12 @@ const SignInForm = () => {
             
             // save in localstorage
             window.localStorage.setItem('user', JSON.stringify(data));
-            // redirect
-            router.push('/');
+            // redirect or callback
+            if(redirect){
+              router.push('/');
+            } else {
+              callback()
+            }
             
             toast.success('Te-ai logat cu succes');
             setLoading(false);
@@ -133,13 +137,14 @@ const SignInForm = () => {
             {...inputArgs}
           />
         </div>
-        <button
+        <Button
+          loading={loading}
           onSubmit={formHandler.submit}
           type="submit"
           className="btn btn-primary text-base-100 m-5"
         >
           Logheaza-te!
-        </button>
+        </Button>
 
         <div className="block m-auto prose  text-secondary">
           Nu ai cont?{' '}

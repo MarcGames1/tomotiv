@@ -1,7 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react'
 import FormularInscriereCurs from '../FormularInscriereCurs';
+
 
 
 const Alert = ({children}) =>{
@@ -47,11 +46,13 @@ const ComandaCursSeoMainComponent = () => {
           </p>
         </div>
       </div>
-      <div className="container  m-auto grid md:grid-flow-col grid-flow-row items-center justify-items-center">
-        <div className="flex">
+      <div className="container  m-auto grid md:grid-flow-col grid-flow-row items-start justify-items-center">
+        <div className="flex m-5 p-5 lg:p-0 lg:m-0">
           <div className="prose">
-            <h3>Să recapitulăm ce îți oferă cursul</h3>
-            <div className="flex flex-col gap-5">
+            <h3 className="font-bold text-secondary text-center">
+              Să recapitulăm ce îți oferă cursul
+            </h3>
+            <div className="flex flex-col gap-5 m-5 p-5">
               {' '}
               <Alert>
                 6 săptămâni de lecții practice - Împărțite pe module super ușor
@@ -86,7 +87,7 @@ const ComandaCursSeoMainComponent = () => {
               <img
                 src="/png/MBG.jpg"
                 alt="money back guarantee image"
-                width={600}
+                width={300}
                 height={600}
               />
               <h3> GARANȚIA ZERO RISCURI ASIGURATĂ!</h3>
@@ -105,8 +106,7 @@ const ComandaCursSeoMainComponent = () => {
           </div>
         </div>
 
-        <div className="flex flex-col">
-        
+        <div className="flex  m-5 p-5 lg:p-0 lg:m-0 flex-col">
           <FormularInscriereCurs />
         </div>
       </div>
