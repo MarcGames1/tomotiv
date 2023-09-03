@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Modal } from 'react-daisyui';
-
+import GetPrice from '@/components/GetPrice';
 
 import Page from '@/app/PageLayout';
 import CountdownTimer from '@/components/CountdownTimer';
@@ -639,6 +639,7 @@ const CursSeoMainComponent = ({
           <h3>Preț pentru această serie: </h3>
           <GetPrice price={price} discountedPrice={discountedPrice} />
         </div>
+        
         <DesfasurareCurs />
       </section>
       <section className="bg-base-200 p-5 my-5">
