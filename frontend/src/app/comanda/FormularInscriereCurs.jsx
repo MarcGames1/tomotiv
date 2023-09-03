@@ -10,7 +10,7 @@ import SignInForm from '../inregistrare/forms/SignInForm';
 import { loadStripe } from '@stripe/stripe-js';
 
 import { MetodaPlata, SigUpForm } from './ComponenteFormularInscriereCurs';
-const FormularInscriereCurs = () => {
+const FormularInscriereCurs = ({data}) => {
 
      const inputArgs = {
        className: 'w-full max-w-xs',
@@ -142,7 +142,7 @@ const FormularInscriereCurs = () => {
 
       {action === 'signup' ? (
         <SigUpForm
-
+          data={data}
           metoda_plata={metoda_plata}
           formHandler={formHandler}
           setMetoda_Plata={setMetoda_Plata}

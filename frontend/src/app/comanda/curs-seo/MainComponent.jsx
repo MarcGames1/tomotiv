@@ -26,7 +26,7 @@ const Alert = ({children}) =>{
   );
 }
 
-const ComandaCursSeoMainComponent = () => {
+const ComandaCursSeoMainComponent = ({data}) => {
   return (
     <>
       <div className="flex flex-col m-5 p-5 items-center justify-items-center">
@@ -107,7 +107,7 @@ const ComandaCursSeoMainComponent = () => {
         </div>
 
         <div className="flex  m-5 p-5 lg:p-0 lg:m-0 flex-col">
-          <FormularInscriereCurs />
+          <FormularInscriereCurs data={data} />
         </div>
       </div>
     </>

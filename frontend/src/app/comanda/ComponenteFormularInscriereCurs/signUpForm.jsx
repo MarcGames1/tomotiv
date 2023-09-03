@@ -10,6 +10,7 @@ const SigUpForm = ({
   loading,
   metoda_plata,
   setMetoda_Plata,
+  data
 }) => {
   return (
     <form
@@ -69,6 +70,7 @@ const SigUpForm = ({
           <MetodaPlata
             metoda_plata={metoda_plata}
             setMetoda_Plata={setMetoda_Plata}
+            data={data}
           />
         </>
       )}

@@ -21,10 +21,11 @@ async function getData() {
 
 const ComandaCursSeo = async () => {
   const data = await getData();
-  if (data && data.deschisInscrieri) {
+  if (data && data.deschisInscrieri ) {
+    console.log("DATA +>",data)
     return (
       <>
-        <ComandaCursSeoMainComponent />
+        <ComandaCursSeoMainComponent data={data} />
       </>
     );
   }

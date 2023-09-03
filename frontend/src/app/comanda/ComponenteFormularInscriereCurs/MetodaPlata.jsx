@@ -1,29 +1,5 @@
-const OptiunePlata = ({
-  label,
-  description,
-  value,
-  metoda_plata,
-  handleOptionChange,
-}) => {
-  return (
-    <div className="form-control w-full max-w-xs flex flex-row gap-5">
-      <input
-        type="radio"
-        id={value}
-        name="metodaPlata"
-        value={value}
-        checked={metoda_plata === value}
-        onChange={handleOptionChange}
-      />
-      <div className="radio-content">
-        <div className="font-bold">{label}</div>
-        <div className="text-sm text-gray-500">{description}</div>
-      </div>
-    </div>
-  );
-};
-
-const MetodaPlata = ({ metoda_plata, setMetoda_Plata, inputArgs }) => {
+import OptiunePlata from "./obtiunePlata";
+const MetodaPlata = ({ metoda_plata, setMetoda_Plata, data }) => {
   const handleOptionChange = (e) => {
     setMetoda_Plata(e.target.value);
   };
@@ -39,6 +15,8 @@ const MetodaPlata = ({ metoda_plata, setMetoda_Plata, inputArgs }) => {
           value="plataOData"
           metoda_plata={metoda_plata}
           handleOptionChange={handleOptionChange}
+          price={data.price}
+          discountedPrice={data.discountedPrice}
         />
 
         <OptiunePlata
@@ -47,6 +25,8 @@ const MetodaPlata = ({ metoda_plata, setMetoda_Plata, inputArgs }) => {
           value="plataIn2Rate"
           metoda_plata={metoda_plata}
           handleOptionChange={handleOptionChange}
+          price={data.price}
+          discountedPrice={data.discountedPrice}
         />
 
         <OptiunePlata
@@ -55,6 +35,8 @@ const MetodaPlata = ({ metoda_plata, setMetoda_Plata, inputArgs }) => {
           value="plataIn6Rate"
           metoda_plata={metoda_plata}
           handleOptionChange={handleOptionChange}
+          price={data.price}
+          discountedPrice={data.discountedPrice}
         />
       </div>
     </>

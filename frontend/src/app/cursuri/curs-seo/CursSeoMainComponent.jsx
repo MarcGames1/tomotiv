@@ -718,25 +718,3 @@ const CTABTN = ({ handleAction, setCtaMessage, lg = false }) => {
 };
 
 
-const GetPrice = ({ price = 3000, discountedPrice = 0 }) => {
-  // Verificați condițiile pentru afișarea prețurilor
-  if (price === discountedPrice) {
-    return <span className="text-xl font-semibold">{price} lei</span>;
-  } else if (price > discountedPrice) {
-    const discountPercentage = ((price - discountedPrice) / price) * 100;
-
-    return (
-      <div className="relative">
-        <span className="text-xl line-through text-gray-500">{price} lei</span>
-        <span className="text-xl font-semibold ml-2">
-          {discountedPrice} lei
-        </span>
-        <span className="badge bg-red-500 text-white rounded-full mx2 px-2 py-1">
-          {Math.round(discountPercentage)}%
-        </span>
-      </div>
-    );
-  } else {
-    return <span className="text-xl  font-semibold">{price} lei</span>;
-  }
-};
