@@ -12,6 +12,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { MetodaPlata, SigUpForm } from './ComponenteFormularInscriereCurs';
 const FormularInscriereCurs = ({data}) => {
 
+  const slug= 'curs-seo/'
      const inputArgs = {
        className: 'w-full max-w-xs',
        bordered: true,
@@ -27,6 +28,8 @@ const FormularInscriereCurs = ({data}) => {
      const [emailExists, setEmailExists] = useState(false)
      const [userExists, setUserExists] = useState(false)
      const [action, setAction] = useState('signup')
+     const [price, setPrice] = useState(undefined)
+     const [discountedPrice, setDiscountedPrice] = useState(undefined)
 
        const {
          state: { user },
@@ -37,10 +40,15 @@ const FormularInscriereCurs = ({data}) => {
           setNume(user.nume);
           setpreNume(user.preNume);
           setEmail(user.email);
-          
           console.log(user);
         }
-      }, [user]);
+        if(data && data.price && data.discountedPrice){
+          setDiscountedPrice(data.discountedPrice);
+          setPrice(data.price);
+        }
+
+        
+      }, [user, data]);
 
  const formRef = useRef(null);
 
@@ -83,6 +91,10 @@ const FormularInscriereCurs = ({data}) => {
 
    submit: async (e) => {
      e.preventDefault();
+    if(!nume && !preNume && !email && !metoda_plata) {
+      toast.error("Completeaza toate datele si alege o metoda de plata!")
+      return;
+    }
      const data = await formHandler.sendData();
      try {
        setLoading(true);
@@ -107,7 +119,13 @@ const FormularInscriereCurs = ({data}) => {
 
   return (
     <div className="m-5 p-5 flex flex-col gap-5">
-      <pre>{JSON.stringify({nume, preNume, metoda_plata, email, password},"", 2)}</pre>
+      <pre>
+        {JSON.stringify(
+          { nume, preNume, metoda_plata, email, password },
+          '',
+          2
+        )}
+      </pre>
       {user ? (
         <>
           Multumim, {user.nume} {user.prenume} pentru increderea pe care o ai in
@@ -130,8 +148,10 @@ const FormularInscriereCurs = ({data}) => {
 
       {user ? (
         <MetodaPlata
-          metoda_plata={metoda_plata}
+          price={price}
+          discountedPrice={discountedPrice}
           setMetoda_Plata={setMetoda_Plata}
+          metoda_plata={metoda_plata}
         />
       ) : (
         <span>
@@ -151,14 +171,25 @@ const FormularInscriereCurs = ({data}) => {
           inputArgs={inputArgs}
           setAction={setAction}
           loading={loading}
-        />
+        >
+          <div className="self-center flex flex-col gap-5">
+            <MetodaPlata
+              price={price}
+              discountedPrice={discountedPrice}
+              setMetoda_Plata={setMetoda_Plata}
+              metoda_plata={metoda_plata}
+            />
+          </div>
+        </SigUpForm>
       ) : (
-        <SignInForm
-          redirect={false}
-          callback={() => {
-            setAction('signup');
-          }}
-        />
+        <>
+          <SignInForm
+            redirect={false}
+            callback={() => {
+              setAction('signup');
+            }}
+          />
+        </>
       )}
     </div>
   );

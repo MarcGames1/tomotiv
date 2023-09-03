@@ -8,9 +8,7 @@ const SigUpForm = ({
   inputArgs,
   setAction,
   loading,
-  metoda_plata,
-  setMetoda_Plata,
-  data
+children
 }) => {
   return (
     <form
@@ -67,11 +65,7 @@ const SigUpForm = ({
               {...inputArgs}
             />
           </div>
-          <MetodaPlata
-            metoda_plata={metoda_plata}
-            setMetoda_Plata={setMetoda_Plata}
-            data={data}
-          />
+          {children}
         </>
       )}
       <Button

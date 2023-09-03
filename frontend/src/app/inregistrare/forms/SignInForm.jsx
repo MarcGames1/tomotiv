@@ -14,7 +14,7 @@ import { Login } from '@/helpers/actions';
 
 
 
-const SignInForm = ({callback = () =>{}, redirect=true}) => {
+const SignInForm = ({callback = () =>{}, redirect=true, children}) => {
   const router = useRouter();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -136,6 +136,7 @@ const SignInForm = ({callback = () =>{}, redirect=true}) => {
             type="password"
             {...inputArgs}
           />
+          
         </div>
         <Button
           loading={loading}
