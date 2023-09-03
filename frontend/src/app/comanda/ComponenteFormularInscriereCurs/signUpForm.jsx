@@ -1,5 +1,4 @@
 
-import { MetodaPlata } from ".";
 import { Input, Button } from "react-daisyui";
 const SigUpForm = ({
   formHandler,
@@ -29,6 +28,7 @@ children
               onInput={formHandler.nume}
               name="nume"
               type="text"
+              required
               {...inputArgs}
             />
           </div>
@@ -40,6 +40,7 @@ children
               onInput={formHandler.preNume}
               name="prenume"
               type="text"
+              required
               {...inputArgs}
             />
           </div>
@@ -51,6 +52,7 @@ children
               onInput={formHandler.email}
               name="email"
               type="email"
+              required
               {...inputArgs}
             />
           </div>
@@ -62,6 +64,7 @@ children
               onInput={formHandler.parola}
               name="password"
               type="password"
+              required
               {...inputArgs}
             />
           </div>
