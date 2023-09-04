@@ -34,6 +34,7 @@ import {
   markIncomplete,
   getCoursePublicData
 } from '../controllers/course';
+import { handleCheckEnrollment, handlePaidEnrollment, handleUserRegistration } from '../controllers/paymentHandler';
   
 
 
@@ -95,10 +96,7 @@ router.get("/user/course/:slug", requireSignin, isEnrolled, read); // Verifica d
 // router.post("/list-completed", requireSignin, listCompleted);
 // router.post("/mark-incomplete", requireSignin, markIncomplete);
 
-router.post('/v2/comanda/:slug', (req, res)=>{
-  console.log(req.body)
-  res.send(req.body);
-});
+router.post('/v2/comanda/:slug', handleUserRegistration, handleCheckEnrollment , handlePaidEnrollment)
 // timeline
 router.get('/course-data/:slug', getCoursePublicData)
 module.exports = router;

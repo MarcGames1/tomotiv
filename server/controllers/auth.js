@@ -10,42 +10,75 @@ import { createSendEmailCommand, getParams } from '../AwsEmailHelper/Index';
 import { awsConfig } from "../awsConfig/awsConfig";
 
 
+const client = new SESClient(awsConfig);
 
 
+ /**
+   * Funcția `registerUser` se ocupă de procesul de înregistrare a unui utilizator.
+   *
+   * @param {string} nume - Numele utilizatorului.
+   * @param {string} preNume - Prenumele utilizatorului.
+   * @param {string} email - Adresa de email a utilizatorului.
+   * @param {string} password - Parola utilizatorului.
+   *
+   * @throws {Error} - Aruncă erori în cazul unor condiții de validare sau în cazul în care există deja un utilizator cu aceeași adresă de email.
+   *
+   * @returns {boolean} - Returnează true dacă înregistrarea a fost realizată cu succes, altfel aruncă o excepție cu eroarea corespunzătoare.
+   */
+export const registerUser = async (nume, preNume, email, password) => {
+ 
+  try {
+    // Validare
+    if (!nume) throw new Error('Numele este obligatoriu');
+    if (!password || password.length < 6)
+      throw new Error('Parola trebuie să aibă cel puțin 6 caractere');
 
- const client = new SESClient(awsConfig);
+    let userExist = await User.findOne({ email }).exec();
+    if (userExist) throw new Error('Există deja un utilizator cu acest email');
 
-export const register = async (req, res) => {
-try{
-   
-    const { nume, preNume, email, password } = req.body
-
-    // validation 
-
-    if(!nume) return res.status(400).send("Numele este obligatoriu")
-    if(!password || password.length < 6 ) 
-        return res.status(400).send("Parola trebuie sa aiba cel putin 6 caractere")
-    let userExist = await User.findOne({ email}).exec();
-    if (userExist) return res.status(400).send("Exista un utilizator cu acest Email")
-
-    //hash password
+    // Hash parola
     const hashedPassword = await hashPassword(password);
     const lowercaseEmail = email.toLowerCase();
+
     const user = new User({
       nume,
       preNume,
       email: lowercaseEmail,
       password: hashedPassword,
     });
-    await user.save();
 
-    console.log('saved USER', user)
-    res.status(200).json({ok : true})
-} catch(err) {
-    console.log(err);
-    res.status(400).send(err)
-}
+    await user.save();
+    console.log('Utilizator salvat', user);
+    // de trimis email cu AWS SES
+    return true; // Înregistrarea a reușit
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };
+
+
+
+export const register = async (req, res) => {
+  const { nume, preNume, email, password } = req.body;
+
+  try {
+    const registrationResult = await registerUser(
+      nume,
+      preNume,
+      email,
+      password
+    );
+    if (registrationResult) {
+      res.status(200).json({ ok: true });
+    } else {
+      res.status(400).json({ ok: false, error: 'Înregistrarea a eșuat' });
+    }
+  } catch (error) {
+    res.status(400).json({ ok: false, error: error.message });
+  }
+};
+
 
 
 export const login = async (req, res) => {
@@ -129,7 +162,7 @@ export const forgotPassword =async (req, res) =>{
         const shortCode = nanoid(6).toUpperCase()
         const user = await User.findOneAndUpdate({email}, {passwordResetCode: shortCode});
         if (!user) return res.status(401).send("Nu s-a gasit utilizatorul")
-        // trimitem email
+       
         const params = getParams(
           [email],
           'Codul de Resetare a Parolei',
