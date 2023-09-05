@@ -34,7 +34,12 @@ import {
   markIncomplete,
   getCoursePublicData
 } from '../controllers/course';
-import { handleCheckEnrollment, handlePaidEnrollment, handleUserRegistration } from '../controllers/paymentHandler';
+import {
+  handleCheckEnrollment,
+  handlePaidEnrollment,
+  handleUserRegistration,
+  stripeSuccessNoUser,
+} from '../controllers/paymentHandler';
   
 
 
@@ -97,6 +102,7 @@ router.get("/user/course/:slug", requireSignin, isEnrolled, read); // Verifica d
 // router.post("/mark-incomplete", requireSignin, markIncomplete);
 
 router.post('/v2/comanda/:slug', handleUserRegistration, handleCheckEnrollment , handlePaidEnrollment)
+router.get('/v2/stripe-success/:courseId', stripeSuccessNoUser);
 // timeline
 router.get('/course-data/:slug', getCoursePublicData)
 module.exports = router;

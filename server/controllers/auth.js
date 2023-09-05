@@ -34,7 +34,10 @@ export const registerUser = async (nume, preNume, email, password) => {
       throw new Error('Parola trebuie să aibă cel puțin 6 caractere');
 
     let userExist = await User.findOne({ email }).exec();
-    if (userExist) throw new Error('Există deja un utilizator cu acest email');
+    if (userExist) {
+      throw new Error('Există deja un utilizator cu acest email');
+      return
+    }
 
     // Hash parola
     const hashedPassword = await hashPassword(password);

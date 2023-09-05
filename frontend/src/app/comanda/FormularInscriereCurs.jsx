@@ -82,7 +82,7 @@ const FormularInscriereCurs = ({data}) => {
        email,
        metoda_plata
      });
-
+ 
      console.log('res => ', res);
      console.log('caught:::', JSON.stringify(res, null, 2));
 
@@ -98,7 +98,9 @@ const FormularInscriereCurs = ({data}) => {
      const data = await formHandler.sendData();
      try {
        setLoading(true);
-     
+     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
+     console.log(data)
+     stripe.redirectToCheckout({ sessionId: data.session.id });
        if (data?.message) {
          toast.error(data.message);
          formHandler.reset();

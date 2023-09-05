@@ -347,32 +347,49 @@ export const paidEnrollment = async (req, res) => {
   }
 };
 
+/**
+ * Gestionarea succesului plății cu Stripe.
+ *
+ * @param {Object} req - Obiectul cererii HTTP.
+ * @param {Object} res - Obiectul răspunsului HTTP.
+ * @returns {JSON} - Un răspuns JSON care indică succesul sau eșecul plății.
+ */
 export const stripeSuccess = async (req, res) => {
   try {
-    // find course
+    // Găsirea cursului
     const course = await Course.findById(req.params.courseId).exec();
-    // get user from db to get stripe session id
+    
+    // Obținerea utilizatorului din baza de date pentru a obține ID-ul sesiunii Stripe
     const user = await User.findById(req.auth._id).exec();
-    // if no stripe session return
+
+    // Dacă nu există o sesiune Stripe, returnează eroare
     if (!user.stripeSession.id) return res.sendStatus(400);
-    // retrieve stripe session
+    
+    // Obținerea informațiilor despre sesiunea Stripe
     const session = await stripe.checkout.sessions.retrieve(
       user.stripeSession.id
     );
+    
     console.log('STRIPE SUCCESS', session);
-    // if session payment status is paid, push course to user's course []
+
+    // Dacă statusul de plată al sesiunii este "paid", adaugă cursul la lista de cursuri a utilizatorului
     if (session.payment_status === 'paid') {
       await User.findByIdAndUpdate(user._id, {
         $addToSet: { courses: course._id },
         $set: { stripeSession: {} },
       }).exec();
     }
+
+    // Răspuns JSON indicând succesul plății și cursul achiziționat
     res.json({ success: true, course });
   } catch (err) {
     console.log('STRIPE SUCCESS ERR', err);
+
+    // Răspuns JSON indicând eșecul plății
     res.json({ success: false });
   }
 };
+
 
 export const userCourses = async (req, res) => {
   const user = await User.findById(req.auth._id).exec();
