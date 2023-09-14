@@ -146,7 +146,7 @@ export const socialMedia = {
   instagram: 'https://www.instagram.com/tomotiv.ro/',
   facebook: 'https://www.facebook.com',
   youtube: 'https://www.youtube.com/@tomotiv',
-  tikTok: 'https://www.tiktok.com',
+  tikTok: 'https://www.tiktok.com/@tomotiv',
   linkedin: 'https://www.linkedin.com',
 };
 

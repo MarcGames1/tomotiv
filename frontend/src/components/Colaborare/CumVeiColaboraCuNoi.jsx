@@ -8,7 +8,7 @@ const CumVeiColaboraCuNoi = ({items = [{heading:<></>, description:<></>}]}) => 
       <h2 className="text-center"> CUM VEI COLABORA CU NOI</h2>
       {items.map((item, idx) => (
         <div
-          className="alert m-10 p-5 shadow-lg flex flex-col lg:flex-row "
+          className="alert cd  shadow-lg flex flex-col lg:flex-row "
           key={idx}
         >
           {' '}

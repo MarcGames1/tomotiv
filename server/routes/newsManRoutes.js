@@ -1,10 +1,7 @@
 import express from 'express';
 import {
-  NewSletterSubscribe,
-  InscriereNewsLetterMiddleware,
-  InscriereListaAsteptareCurs,
-  Unsubscribe,
-} from '../controllers/emailList';
+ 
+} from '../controllers/newsManController';
 
 
 const router = express.Router();
@@ -22,6 +19,9 @@ router.post(
 );
 // Ruta pentru a se dezabona de la o listă de e-mailuri
 router.post('/newsletter-unsubscribe/:emailListID/:emailID', Unsubscribe);
+
+
+
 
 module.exports = router;
 

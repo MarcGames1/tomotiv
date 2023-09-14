@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <Page>
       <main className="">
-        <SectiuneAlba margin="mr-20 ml-10">
+        <SectiuneAlba margin="">
           <HeroCarousel />
         </SectiuneAlba>
         <SectiuneGri>
@@ -44,18 +44,17 @@ export default function Home() {
         </SectiuneGri>
         <SectiuneCursSeo />
 
-<Echipa />
+        <Echipa />
 
         <HeadingAndCta
           heading={
             <>
-              Vocea <span className="text-primary">Tomotiv</span> esti
-              tu.
+              Vocea <span className="text-primary">Tomotiv</span> esti tu.
             </>
           }
           button={
-            <Link href={'/contact'}
-               className="btn btn-primary">Contacteaza-ne
+            <Link href={'/contact'} className="btn btn-primary">
+              Contacteaza-ne
             </Link>
           }
         />
