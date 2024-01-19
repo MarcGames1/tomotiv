@@ -6,19 +6,19 @@ import {
 
 const router = express.Router();
 //asteptare curs
-router.post(
-  '/newsletter-subscribe/curs',
-  InscriereNewsLetterMiddleware,
-  InscriereListaAsteptareCurs
-);
+// router.post(
+//   '/newsletter-subscribe/curs',
+//   InscriereNewsLetterMiddleware,
+//   InscriereListaAsteptareCurs
+// );
 // newsletter general
-router.post(
-  '/newsletter-subscribe',
-  InscriereNewsLetterMiddleware,
-  NewSletterSubscribe
-);
+// router.post(
+//   '/newsletter-subscribe',
+//   InscriereNewsLetterMiddleware,
+//   NewSletterSubscribe
+// );
 // Ruta pentru a se dezabona de la o listă de e-mailuri
-router.post('/newsletter-unsubscribe/:emailListID/:emailID', Unsubscribe);
+// router.post('/newsletter-unsubscribe/:emailListID/:emailID', Unsubscribe);
 
 
 
